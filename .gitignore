@@ -131,3 +131,4 @@ dmypy.json
 # Project
 conf.py
 test_data
+test_output
