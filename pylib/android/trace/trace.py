@@ -1,26 +1,7 @@
 
-
-
 # https://limboy.me/t/chrome-trace-viewer/30
 
-# https://github.com/catapult-project/catapult/blob/master/tracing/tracing/base/color_scheme.html
-
 # https://github.com/catapult-project/catapult/tree/master/tracing/tracing_build
-
-# {
-#   "name": "myName", // 事件名，会展示在 timeline 上
-#   "cat": "category,list", // 事件分类，类似 Tag，但 UI 上不支持选择 Tag
-#   "ph": "B", // phase，后面着重会讲到
-#   "ts": 12345, // 事件发生时的时间戳，以微秒表示
-#   "pid": 123, // 进程名
-#   "tid": 456, // 线程名
-#   "args": { // 额外参数，当选中某个 event 后，会在底部的面板展示
-#     "someArg": 1,
-#     "anotherArg": {
-#       "value": "my value"
-#     }
-#   }
-# }
 
 # ph B/E // 正常的开始/结束事件，最常见，也可以用 X + dur 来表示
 # ph M // Metadata 用来对一类 Event 附加更详细的信息，可以带来 UI 上的变化
@@ -34,7 +15,8 @@ import json
 def _new(task, sub_task, event, phase, ts, more=None, cat=None, args=None):
     ret = {}
     ret['pid'] = task
-    ret['tid'] = sub_task
+    if sub_task is not None:
+        ret['tid'] = sub_task
     ret['name'] = event # 事件名
     if cat is not None:
         ret['cat'] = cat
@@ -66,28 +48,33 @@ def load_file(path):
 
 class Trace():
     def __init__(self):
-        self.events = []
+        self.traces = []
+        self.events = {}
         pass
 
-    def new_event(self, task, sub_task, event):
-        event = Event(task, sub_task, event)
-        event.set_trace(self)
+    def get_event(self, name, task='default', sub_task=None):
+        if name in self.events:
+            event = self.events[name]
+        else:
+            event = Event(name, task, sub_task)
+            event.set_trace(self)
+            self.events[name] = event
         return event
 
     
     def append(self, event):
-        self.events.append(event)
+        self.traces.append(event)
 
 
     def save(self, path):
-        to_file(self.events, path)
+        to_file(self.traces, path)
 
 
 class Event():
-    def __init__(self, task, sub_task, event):
+    def __init__(self, name, task='default', sub_task=None):
         self.task = task
         self.sub_task = sub_task
-        self.event = event
+        self.name = name
         
         self.trace = None
 
@@ -95,39 +82,96 @@ class Event():
     def set_trace(self, trace):
         self.trace = trace
 
+    # good: new tr.b.Color(0, 125, 0),
+    # bad: new tr.b.Color(180, 125, 0),
+    # terrible: new tr.b.Color(180, 0, 0),
 
-    def begin(self, ts):
-        e = _new(self.task, self.sub_task, self.event, 'B', ts)
+    # black: new tr.b.Color(0, 0, 0),
+    # grey: new tr.b.Color(221, 221, 221),
+    # white: new tr.b.Color(255, 255, 255),
+    # yellow: new tr.b.Color(255, 255, 0),
+    # olive: new tr.b.Color(100, 100, 0),
+    # # https://github.com/catapult-project/catapult/blob/master/tracing/tracing/base/color_scheme.html
+    def set_color(self, color):
+        self.color = color
+
+
+    def _default_task(self, task, sub_task):
+        if task is None:
+            task = self.task
+            if sub_task is None:
+                sub_task = self.sub_task
+
+        if sub_task is None:
+            sub_task = task
+
+        return task, sub_task
+
+
+    def begin(self, ts, task=None, sub_task=None, args=None):
+        task, sub_task = self._default_task(task, sub_task)
+
+        e = _new(task, sub_task, self.name, 'B', ts, args=args)
         if self.trace is not None:
             self.trace.append(e)
         return e
 
 
-    def end(self, ts):
-        e = _new(self.task, self.sub_task, self.event, 'E', ts)
+    def end(self, ts, task=None, sub_task=None):
+        task, sub_task = self._default_task(task, sub_task)
+
+        e = _new(task, sub_task, self.name, 'E', ts)
         if self.trace is not None:
             self.trace.append(e)
         return e
 
 
-    def dur(self, ts, dur):
-        e = _new(self.task, self.sub_task, self.event, 'X', ts, more={'dur': dur})
+    def dur(self, ts, dur=0, task=None, sub_task=None, args=None):
+        task, sub_task = self._default_task(task, sub_task)
+
+        if dur != 0:
+            e = _new(task, sub_task, self.name, 'X', ts, more={'dur': dur}, args=args)
+        else:
+            e = _new(task, sub_task, self.name, 'I', ts, args=args) 
+        if self.trace is not None:
+            self.trace.append(e)
+        return e
+
+    def snapshot(self, ts, task=None):
+        task, _ = self._default_task(task, None)
+
+        e = _new(task, None, self.name, 'O', ts, more={'id': self.name}, args={"snapshot": self.name}) 
         if self.trace is not None:
             self.trace.append(e)
         return e
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': # for test
     t = Trace()
-    e1 = t.new_event('T1', 'TS1', 'E1')
-    e2 = t.new_event('T1', 'TS2', 'E2')
-    e3 = t.new_event('T2', 'TS3', 'E3')
+    e1 = t.get_event('E1','T1')
+    e2 = t.get_event('E2', 'T1', 'T2')
+    e3 = t.get_event('E3', 'T2')
+    s3 = t.get_event('S3', 'T3')
+    i3 = t.get_event('I3', 'T3')
+
+    s3.snapshot(40)
+
+    i3.dur(50)
 
     e1.begin(0)
     e1.end(100)
 
-    e1.begin(300)
-    e1.end(500)
+    s3.snapshot(120)
+
+    s3.snapshot(180, 'T2')
+
+    s3.snapshot(210, 'T2')
+
+    e1.begin(10)
+    e1.end(50)
+
+    e1.begin(300, 'T2')
+    e1.end(500, 'T2')
 
     e2.begin(1000)
     e2.end(1100)
@@ -137,6 +181,5 @@ if __name__ == '__main__':
 
     e1.dur(1200, 300)
 
-
-    t.save('output')
+    t.save('test_output')
 

@@ -14,14 +14,14 @@ def _to_value(log):
 
 
 def str2time(time_str):
-    m = re.match('(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2}).(\d{3,6})', time_str)
+    m = re.match(r'(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2}).(\d{3,6})', time_str)
     return (((((int(m.group(1))-1) * 31 + (int(m.group(2)))-1) * 24 + int(m.group(3))) * 60 + int(m.group(4))) * 60 + int(m.group(5))) * 1000000 + int(m.group(6))
 
 
 event_boot = event_log.EventLog('test_data/android/log/events_log')
 r = event_boot.find(lambda log: log.tag == 'am_proc_start' or log.tag == 'am_proc_died', _to_value)
 
-t = trace.Trace()
+tc = trace.Trace()
 time_start = None
 for _, log in r.iterrows():
     if log.tag == 'am_proc_start':
@@ -34,8 +34,8 @@ for _, log in r.iterrows():
         if time_start is None:
             time_start = time
 
-        e = t.new_event(package, pid, package)
-        e.begin(time - time_start)
+        e = tc.get_event(package)
+        e.begin(time - time_start, package, pid, args={'reason': reason})
         print('am_proc_start', package)
 
     elif log.tag == 'am_proc_died':
@@ -46,12 +46,12 @@ for _, log in r.iterrows():
         if time_start is None:
             time_start = time
 
-        e = t.new_event(package, pid, package)
-        e.end(time - time_start)
+        e = tc.get_event(package)
+        e.end(time - time_start, package, pid)
         print('am_proc_died', package)
 
 
-t.save('test_output')
+tc.save('test_output')
 
 
 
