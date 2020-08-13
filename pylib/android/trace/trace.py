@@ -12,7 +12,7 @@
 
 import json
 
-def _new(task, sub_task, event, phase, ts, more=None, cat=None, args=None):
+def _new(task, sub_task, event, phase, ts, more=None, color=None, cat=None, args=None):
     ret = {}
     ret['pid'] = task
     if sub_task is not None:
@@ -22,6 +22,9 @@ def _new(task, sub_task, event, phase, ts, more=None, cat=None, args=None):
         ret['cat'] = cat
     ret['ph'] = phase
     ret['ts'] = ts
+
+    if color is not None:
+        ret['cname'] = color
 
     if more is not None:
         for key in more:
@@ -75,6 +78,8 @@ class Event():
         self.task = task
         self.sub_task = sub_task
         self.name = name
+
+        self.color = None
         
         self.trace = None
 
@@ -120,7 +125,7 @@ class Event():
     def end(self, ts, task=None, sub_task=None):
         task, sub_task = self._default_task(task, sub_task)
 
-        e = _new(task, sub_task, self.name, 'E', ts)
+        e = _new(task, sub_task, self.name, 'E', ts, color=self.color)
         if self.trace is not None:
             self.trace.append(e)
         return e
@@ -130,17 +135,18 @@ class Event():
         task, sub_task = self._default_task(task, sub_task)
 
         if dur != 0:
-            e = _new(task, sub_task, self.name, 'X', ts, more={'dur': dur}, args=args)
+            e = _new(task, sub_task, self.name, 'X', ts, color=self.color, more={'dur': dur}, args=args)
         else:
-            e = _new(task, sub_task, self.name, 'I', ts, args=args) 
+            e = _new(task, sub_task, self.name, 'I', ts, color=self.color, args=args) 
         if self.trace is not None:
             self.trace.append(e)
         return e
 
+
     def snapshot(self, ts, task=None):
         task, _ = self._default_task(task, None)
 
-        e = _new(task, None, self.name, 'O', ts, more={'id': self.name}, args={"snapshot": self.name}) 
+        e = _new(task, None, self.name, 'O', ts, more={'id': self.name}, args={"snapshot": self.name}, color=self.color) 
         if self.trace is not None:
             self.trace.append(e)
         return e
@@ -150,6 +156,8 @@ if __name__ == '__main__': # for test
     t = Trace()
     e1 = t.get_event('E1','T1')
     e2 = t.get_event('E2', 'T1', 'T2')
+    e2.set_color('yellow')
+
     e3 = t.get_event('E3', 'T2')
     s3 = t.get_event('S3', 'T3')
     i3 = t.get_event('I3', 'T3')
