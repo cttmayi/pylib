@@ -151,7 +151,7 @@ class Event():
             self.trace.append(e)
         return e
 
-
+# chrome://tracing/
 if __name__ == '__main__': # for test
     t = Trace()
     e1 = t.get_event('E1','T1')
