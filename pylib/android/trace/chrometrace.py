@@ -1,6 +1,4 @@
 
-# https://limboy.me/t/chrome-trace-viewer/30
-
 # https://github.com/catapult-project/catapult/tree/master/tracing/tracing_build
 
 # ph B/E // 正常的开始/结束事件，最常见，也可以用 X + dur 来表示
@@ -9,6 +7,7 @@
 # ph s/e // 异步事件，表示自定义的一个事件，表现上跟正常事件会有区别
 # ph s/f // Flow 事件，会出现箭头，要通过 ts 匹配最近的 event，结束要使用 bp: e
 # ph O // Snapshot，表现上是一个醒目的圆点，可以在 `args.snapshot` 里放任意数据
+# ph C // Counter Events
 
 import json
 
@@ -146,7 +145,15 @@ class Event():
     def snapshot(self, ts, task=None):
         task, _ = self._default_task(task, None)
 
-        e = _new(task, None, self.name, 'O', ts, more={'id': self.name}, args={"snapshot": self.name}, color=self.color) 
+        e = _new(task, None, self.name, 'O', ts, more={'id': self.name, 'cat': 'cat'}, args={"snapshot": {'cat': self.name}}, color=self.color) 
+        if self.trace is not None:
+            self.trace.append(e)
+        return e
+
+    def counter(self, ts, dict_value, task=None):
+        task, _ = self._default_task(task, None)
+
+        e = _new(task, None, self.name, 'C', ts, color=self.color, args=dict_value)
         if self.trace is not None:
             self.trace.append(e)
         return e
@@ -162,9 +169,15 @@ if __name__ == '__main__': # for test
     s3 = t.get_event('S3', 'T3')
     i3 = t.get_event('I3', 'T3')
 
+    c1 = t.get_event('C', 'T1')
+
     s3.snapshot(40)
 
+    c1.counter(40, {'T':5, 'T2': 1})
+
     i3.dur(50)
+
+    c1.counter(70, {'T':1, 'T2': 2})
 
     e1.begin(0)
     e1.end(100)
@@ -188,6 +201,9 @@ if __name__ == '__main__': # for test
     e3.end(1300)
 
     e1.dur(1200, 300)
+
+    c1.counter(1200, {'T':1, 'T2': 2})
+
 
     t.save('test_output')
 
