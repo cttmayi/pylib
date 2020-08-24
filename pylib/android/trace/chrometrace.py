@@ -37,6 +37,7 @@ def _new(task, sub_task, event, phase, ts, more=None, color=None, cat=None, args
 
 def to_file(data, path):
     f = open(path,'w',encoding='utf-8')
+    # json.dump(data, f, ensure_ascii=False, indent=4, separators=(',', ':'))
     json.dump(data, f, ensure_ascii=False)
     f.close()
 
