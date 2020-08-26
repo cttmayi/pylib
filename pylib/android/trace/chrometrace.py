@@ -9,6 +9,15 @@
 # ph O // Snapshot，表现上是一个醒目的圆点，可以在 `args.snapshot` 里放任意数据
 # ph C // Counter Events
 
+    # "stackFrames":
+    # {
+    #     "5": { "name": "F_A" },
+    #     "7": { "name": "F_B", "parent": "5" },
+    #     "9": { "name": "F_C", "parent": "5" }
+    # }
+
+
+
 import json
 
 def _new(task, sub_task, event, phase, ts, more=None, color=None, cat=None, args=None):
@@ -37,8 +46,8 @@ def _new(task, sub_task, event, phase, ts, more=None, color=None, cat=None, args
 
 def to_file(data, path):
     f = open(path,'w',encoding='utf-8')
-    # json.dump(data, f, ensure_ascii=False, indent=4, separators=(',', ':'))
-    json.dump(data, f, ensure_ascii=False)
+    json.dump(data, f, ensure_ascii=False, indent=4, separators=(',', ':'))
+    # json.dump(data, f, ensure_ascii=False)
     f.close()
 
 
@@ -50,27 +59,34 @@ def load_file(path):
 
 
 class Trace():
-    def __init__(self):
+    def __init__(self, time_unit='ms'):
         self.traces = []
         self.events = {}
-        pass
+        self.display_time_unit = time_unit
+
 
     def get_event(self, name, task='default', sub_task=None):
         if name in self.events:
             event = self.events[name]
+            assert(event.task == task)
+            assert(event.sub_task == sub_task)
         else:
             event = Event(name, task, sub_task)
             event.set_trace(self)
             self.events[name] = event
         return event
 
-    
+
     def append(self, event):
         self.traces.append(event)
 
 
     def save(self, path):
-        to_file(self.traces, path)
+        out = {
+            'traceEvents': self.traces,
+            'displayTimeUnit': self.display_time_unit,
+        }
+        to_file(out, path)
 
 
 class Event():
@@ -80,12 +96,12 @@ class Event():
         self.name = name
 
         self.color = None
-        
         self.trace = None
 
     
     def set_trace(self, trace):
         self.trace = trace
+
 
     # good: new tr.b.Color(0, 125, 0),
     # bad: new tr.b.Color(180, 125, 0),
@@ -162,7 +178,7 @@ class Event():
 # chrome://tracing/
 if __name__ == '__main__': # for test
     t = Trace()
-    e1 = t.get_event('E1','T1')
+    e1 = t.get_event('E1', 'T1')
     e2 = t.get_event('E2', 'T1', 'T2')
     e2.set_color('yellow')
 
