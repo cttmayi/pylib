@@ -3,7 +3,7 @@ import re
 
 from pylib.android.log import log
 from pylib.android.log import event_log
-from pylib.android.trace import trace
+from pylib.android.trace import chrometrace as trace
 
 def _to_value(log):
     if log.msg[0] == '[' and log.msg[-1] == ']':
