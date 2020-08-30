@@ -3,7 +3,7 @@ import re
 
 from pylib.android.log import log
 from pylib.android.log import event_log
-from pylib.android.trace import chrometrace as trace
+from pylib.android.trace import chrometracing as trace
 
 def _to_value(log):
     if log.msg[0] == '[' and log.msg[-1] == ']':
@@ -34,8 +34,11 @@ for _, log in r.iterrows():
         if time_start is None:
             time_start = time
 
-        e = tc.get_event(package)
-        e.begin(time - time_start, package, pid, args={'reason': reason})
+        tc.begin(name=package,
+            pid=pid, tid=pid,
+            ts=time-time_start,
+            args={'reason': reason}
+        )
         print('am_proc_start', package)
 
     elif log.tag == 'am_proc_died':
@@ -46,8 +49,10 @@ for _, log in r.iterrows():
         if time_start is None:
             time_start = time
 
-        e = tc.get_event(package)
-        e.end(time - time_start, package, pid)
+        tc.end(
+            pid=pid, tid=pid,
+            ts=time - time_start
+        )
         print('am_proc_died', package)
 
 

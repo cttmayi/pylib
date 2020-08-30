@@ -16,93 +16,7 @@
     #     "9": { "name": "F_C", "parent": "5" }
     # }
 
-
-
-import json
-
-def _new(task, sub_task, event, phase, ts, more=None, color=None, cat=None, args=None):
-    ret = {}
-    ret['pid'] = task
-    if sub_task is not None:
-        ret['tid'] = sub_task
-    ret['name'] = event # 事件名
-    if cat is not None:
-        ret['cat'] = cat
-    ret['ph'] = phase
-    ret['ts'] = ts
-
-    if color is not None:
-        ret['cname'] = color
-
-    if more is not None:
-        for key in more:
-            ret[key] = more[key]
-
-    if args is not None:
-        ret['args'] = args
-
-    return ret
-
-
-def to_file(data, path):
-    f = open(path,'w',encoding='utf-8')
-    json.dump(data, f, ensure_ascii=False, indent=4, separators=(',', ':'))
-    # json.dump(data, f, ensure_ascii=False)
-    f.close()
-
-
-def load_file(path):
-    f = open(path,'r',encoding='utf-8')
-    data = json.load(f)
-    f.close()
-    return data
-
-
-class Trace():
-    def __init__(self, time_unit='ms'):
-        self.traces = []
-        self.events = {}
-        self.display_time_unit = time_unit
-
-
-    def get_event(self, name, task='default', sub_task=None):
-        if name in self.events:
-            event = self.events[name]
-            assert(event.task == task)
-            assert(event.sub_task == sub_task)
-        else:
-            event = Event(name, task, sub_task)
-            event.set_trace(self)
-            self.events[name] = event
-        return event
-
-
-    def append(self, event):
-        self.traces.append(event)
-
-
-    def save(self, path):
-        out = {
-            'traceEvents': self.traces,
-            'displayTimeUnit': self.display_time_unit,
-        }
-        to_file(out, path)
-
-
-class Event():
-    def __init__(self, name, task='default', sub_task=None):
-        self.task = task
-        self.sub_task = sub_task
-        self.name = name
-
-        self.color = None
-        self.trace = None
-
-    
-    def set_trace(self, trace):
-        self.trace = trace
-
-
+# cname
     # good: new tr.b.Color(0, 125, 0),
     # bad: new tr.b.Color(180, 125, 0),
     # terrible: new tr.b.Color(180, 0, 0),
@@ -113,113 +27,251 @@ class Event():
     # yellow: new tr.b.Color(255, 255, 0),
     # olive: new tr.b.Color(100, 100, 0),
     # # https://github.com/catapult-project/catapult/blob/master/tracing/tracing/base/color_scheme.html
-    def set_color(self, color):
-        self.color = color
 
 
-    def _default_task(self, task, sub_task):
-        if task is None:
-            task = self.task
-            if sub_task is None:
-                sub_task = self.sub_task
 
-        if sub_task is None:
-            sub_task = task
-
-        return task, sub_task
+debug = True
 
 
-    def begin(self, ts, task=None, sub_task=None, args=None):
-        task, sub_task = self._default_task(task, sub_task)
+import json
 
-        e = _new(task, sub_task, self.name, 'B', ts, args=args)
-        if self.trace is not None:
-            self.trace.append(e)
-        return e
+def _new(pid, tid, name, phase, ts, more=None, args=None, default=None):
+    ret = {}
+    ret['pid'] = pid
+    if tid is not None:
+        ret['tid'] = tid
+    if name is not None:
+        ret['name'] = name # 事件名
+
+    ret['ph'] = phase
+    ret['ts'] = ts
+
+    if more is not None:
+        for key in more:
+            ret[key] = more[key]
+
+    if args is not None:
+        ret['args'] = args
+
+    if default is not None:
+        color = default.get('color', None)
+        if color is not None:
+            ret['cname'] = color
+        category = default.get('category', None)    
+        if category is not None:
+            ret['cat'] = category
+
+    return ret
 
 
-    def end(self, ts, task=None, sub_task=None):
-        task, sub_task = self._default_task(task, sub_task)
+def _to_file(data, path):
+    f = open(path,'w', encoding='utf-8')
+    if debug:
+        json.dump(data, f, ensure_ascii=False, indent=4, separators=(',', ':'))
+    else:
+        json.dump(data, f, ensure_ascii=False)
+    f.close()
 
-        e = _new(task, sub_task, self.name, 'E', ts, color=self.color)
-        if self.trace is not None:
-            self.trace.append(e)
-        return e
+
+def _load_file(path):
+    f = open(path,'r', encoding='utf-8', errors='ignore')
+    data = json.load(f)
+    f.close()
+    return data
 
 
-    def dur(self, ts, dur=0, task=None, sub_task=None, args=None):
-        task, sub_task = self._default_task(task, sub_task)
+class Trace():
+    def __init__(self, time_unit='ms', ending=False):
+        self.traces = []
+        self.flows = set()
+        self.display_time_unit = time_unit
 
-        if dur != 0:
-            e = _new(task, sub_task, self.name, 'X', ts, color=self.color, more={'dur': dur}, args=args)
+        self.ending = ending
+        self.ends = {}
+        self.endtime = 0
+
+    _PROCESS = 'process_name'
+    _THREAD = 'thread_name'
+
+    def set_metadata_process(self, pid, name):
+        e = _new(pid, 0, self._PROCESS, 'M', 0, args={'name': name})
+        self.traces.append(e)
+
+
+    def set_metadata_thread(self, pid, tid, name):
+        e = _new(pid, tid, self._THREAD, 'M', 0, args={'name': name})
+        self.traces.append(e)
+
+
+    def _end(self, pid, tid, value=1):
+        if pid not in self.ends:
+            self.ends[pid] = {}
+        if tid not in self.ends[pid]:
+            self.ends[pid][tid] = 0
+        
+        if self.ends[pid][tid] + value > 0:
+            self.ends[pid][tid] = self.ends[pid][tid] + value
         else:
-            e = _new(task, sub_task, self.name, 'I', ts, color=self.color, args=args) 
-        if self.trace is not None:
-            self.trace.append(e)
-        return e
+            self.ends[pid][tid] = 0
 
 
-    def snapshot(self, ts, task=None):
-        task, _ = self._default_task(task, None)
 
-        e = _new(task, None, self.name, 'O', ts, more={'id': self.name, 'cat': 'cat'}, args={"snapshot": {'cat': self.name}}, color=self.color) 
-        if self.trace is not None:
-            self.trace.append(e)
-        return e
+    def begin(self, name, pid, tid, ts, args=None, default=None):
+        e = _new(pid, tid, name, 'B', ts, args=args, default=default)
+        self.traces.append(e)
 
-    def counter(self, ts, dict_value, task=None):
-        task, _ = self._default_task(task, None)
+        if self.ending:
+            self._end(pid, tid, 1)
+            if self.endtime < ts:
+                self.endtime = ts
 
-        e = _new(task, None, self.name, 'C', ts, color=self.color, args=dict_value)
-        if self.trace is not None:
-            self.trace.append(e)
-        return e
+
+    def end(self, pid, tid, ts, default=None):
+        e = _new(pid, tid, None, 'E', ts, default=default)
+        self.traces.append(e)
+
+        if self.ending:
+            self._end(pid, tid, -1)
+            if self.endtime < ts:
+                self.endtime = ts
+
+    def dur(self, name, pid, tid, ts, dur=0, bind_id=None, args=None, default=None):
+        if dur != 0:
+            if bind_id is None:
+                e = _new(pid, tid, name, 'X', ts, more={'dur': dur}, args=args, default=default)
+            else:
+                if bind_id in self.flows:
+                    e = _new(pid, tid, name, 'X', ts, 
+                        more={'dur': dur, 'bind_id': bind_id, "flow_in":True,"flow_out":True},
+                        args=args,
+                        default=default
+                    )
+                else:
+                    self.flows.add(bind_id)
+                    e = _new(pid, tid, name, 'X', ts, 
+                        more={'dur': dur, 'bind_id': bind_id, "flow_out":True},
+                        args=args,
+                        default=default
+                    )
+        else:
+            e = _new(pid, tid, name, 'I', ts, args=args, default=default) 
+        self.traces.append(e)
+
+        if self.ending:
+            if self.endtime < ts + dur:
+                self.endtime = ts + dur
+
+
+    def snapshot(self, name, pid, ts, default=None):
+        e = _new(pid, None, name, 'O', ts, more={'id': name, 'cat': 'cat'}, args={"snapshot": {'cat': name}}, default=default) 
+        self.traces.append(e)
+
+
+    def counter(self, name, pid, ts, args, default=None):
+        e = _new(pid, None, name, 'C', ts, args=args, default=default)
+        self.traces.append(e)
+
+
+    def scheduler_running(self, pid, tid, ts, cpu):
+        e = _new(pid, tid, 'Scheduler', 'S', ts, more={'id2': {'local': cpu}, 'cat': 'CPU'}, args={'name': 'Running'}) 
+        self.traces.append(e)
+
+    def scheduler_sleep(self, pid, tid, ts, cpu):
+        e = _new(pid, tid, 'Scheduler', 'F', ts, more={'id2': {'local': cpu}, 'cat': 'CPU'})
+        self.traces.append(e)
+
+
+    # state = STATE_DROPPED
+    # def frame_begin(self, name, pid, tid, ts, id, state=''):
+    #     e = _new(pid, tid, name, 'b', ts,
+    #         args={"chrome_frame_reporter":{"frame_sequence":id, "frame_source":0, "state":state}},
+    #         more={'id': '0x1000', 'cat': 'Frame'},
+    #     )
+    #     self.traces.append(e)
+        
+
+    # def frame_end(self, name, pid, tid, ts):
+    #     e = _new(pid, tid, name, 'e', ts,
+    #         more={'id': '0x1000', 'cat': 'Frame'},
+    #     )
+    #     self.traces.append(e)
+
+
+    def save(self, path):
+        for pid in self.ends:
+            for tid in self.ends[pid]:
+                for _ in range(self.ends[pid][tid]):
+                    self.end(pid, tid, self.endtime)
+
+        out = {
+            'traceEvents': self.traces,
+            'displayTimeUnit': self.display_time_unit,
+        }
+        _to_file(out, path)
+
 
 # chrome://tracing/
 if __name__ == '__main__': # for test
-    t = Trace()
-    e1 = t.get_event('E1', 'T1')
-    e2 = t.get_event('E2', 'T1', 'T2')
-    e2.set_color('yellow')
+    t = Trace(ending=True)
 
-    e3 = t.get_event('E3', 'T2')
-    s3 = t.get_event('S3', 'T3')
-    i3 = t.get_event('I3', 'T3')
+    pid_main = 100
+    tid_main = 100
+    tid_show = 101
 
-    c1 = t.get_event('C', 'T1')
+    t.set_metadata_process(pid_main, 'APP')
+    t.set_metadata_thread(pid_main, tid_main, 'MAIN')
 
-    s3.snapshot(40)
+    t.snapshot('SNAPSHOT', 
+        pid=pid_main, 
+        ts=40
+    )
 
-    c1.counter(40, {'T':5, 'T2': 1})
+    t.counter('COUNTER', 
+        pid=pid_main, 
+        ts=10, 
+        args={'T':5, 'T2': 1}
+    )
+    t.counter('COUNTER', 
+        pid=pid_main, 
+        ts=70, 
+        args={'T':1, 'T2': 2}
+    )
 
-    i3.dur(50)
+    t.begin('FUNCTION', 
+        pid=pid_main, tid=tid_main, 
+        ts=0
+    )
+    t.dur('DUR', 
+        pid=pid_main, 
+        tid=tid_main, 
+        ts=50, dur=100, 
+        bind_id='0x1000'
+    )
+    t.dur('FUNCTION', 
+        pid=pid_main, tid=tid_show, 
+        ts=70, dur=70
+    )
+    t.end(pid=pid_main, tid=tid_main, ts=200)
+    t.dur('DUR', 
+        pid=pid_main, tid=tid_main, 
+        ts=250, dur=700, 
+        bind_id='0x1000'
+    )
 
-    c1.counter(70, {'T':1, 'T2': 2})
+    t.begin('FUNCTION', 
+        pid=pid_main, tid=tid_show, 
+        ts=300)
+    t.begin('FUNCTION', 
+        pid=pid_main, tid=tid_show, 
+        ts=350)
+    t.end(pid=pid_main, tid=tid_show, ts=800)
 
-    e1.begin(0)
-    e1.end(100)
+    t.scheduler_running(pid=pid_main, tid=tid_main, ts=100, cpu=1)
+    t.scheduler_sleep(pid=pid_main, tid=tid_show, ts=120, cpu=1)
 
-    s3.snapshot(120)
 
-    s3.snapshot(180, 'T2')
-
-    s3.snapshot(210, 'T2')
-
-    e1.begin(10)
-    e1.end(50)
-
-    e1.begin(300, 'T2')
-    e1.end(500, 'T2')
-
-    e2.begin(1000)
-    e2.end(1100)
-
-    e3.begin(1200)
-    e3.end(1300)
-
-    e1.dur(1200, 300)
-
-    c1.counter(1200, {'T':1, 'T2': 2})
+    # t.frame_begin('Frame', pid_main+100, tid_main+100, 400, 0, 'STATE_DROPPED')
+    # t.frame_end('Frame', pid_main+100, tid_main+100, 500)
 
 
     t.save('test_output')
