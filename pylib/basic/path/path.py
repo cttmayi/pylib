@@ -37,3 +37,4 @@ def find_basepath(fstr, path):
 if __name__ == '__main__':
     print(find_executable('adb'))
     print(find_basepath('pylib', __file__))
+
