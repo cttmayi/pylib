@@ -14,8 +14,26 @@ def find_executable(executable):
     return None
 
 
+def find_basepath(fstr, path):
+    path = os.path.abspath(path)
+
+    if os.path.isfile(path):
+        path = os.path.dirname(path)
+
+    basepath = None
+    temp = path
+    while(True):
+        if fstr == os.path.basename(path):
+            basepath = temp
+            break
+        temp = os.path.dirname(path)
+        if temp == path:
+            break
+        path = temp
+
+    return basepath
 
 
 if __name__ == '__main__':
     print(find_executable('adb'))
-    print(__file__)
+    print(find_basepath('pylib', __file__))
