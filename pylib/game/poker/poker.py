@@ -13,16 +13,13 @@ class Card:
     RANKS = ['2', '3', '4', '5', '6', '7', '8',
                 '9', '10', 'J', 'Q', 'K', 'A']
 
-
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
         pass
 
-
     def eq(self, card):
         return self.suit == card.suit and self.rank == card.rank
-
 
     def __str__(self):
         return  '%s-%s' % (self.SUITS[self.suit],  self.RANKS[self.rank])
@@ -41,7 +38,6 @@ class Poker:
             card = Card(suit, rank)
             self.cards.append(card)
 
-
     def shuffle(self):
         for index in range(52):
             rnd = random.randint(0, 51)
@@ -53,25 +49,18 @@ class Poker:
         return card
 
 
-    
-
-
 class CardGroup:
     def __init__(self):
         self.cards = []
 
-    
     def append(self, card):
         self.cards.append(card)
-
 
     def extend(self, cardgroup):
         self.cards.extend(cardgroup.get())
 
-
     def len(self):
         return len(self.cards)
-
 
     def is_req(self, cardgroup):
         for card in self.cards:
@@ -84,10 +73,8 @@ class CardGroup:
     def _card_key(e):
         return e.rank * 10 + 10 - e.suit
 
-
     def sort(self):
         self.cards.sort(key=self._card_key, reverse=True)
-
 
     def get(self, index= None):
         if index is None:
@@ -95,31 +82,44 @@ class CardGroup:
 
         return self.cards[index]
 
-    def show(self):
+    def show(self, msg=None):
+        self.sort()
+
+        if msg:
+            print(msg, end=': ')
+
         for card in self.cards:
             print(card, end=', ')
         print()
 
 
-class Player:
-    def __init__(self, id):
-        self._id = id
-        self.cardgroup = CardGroup()
-        # self.cards = []
 
-    
+class Player:
+    def __init__(self, _id, score=0):
+        self._id = _id
+        self.score = score
+        self.clear()
+
+    def clear(self):
+        self.cardgroup = CardGroup()
+
     def append(self, card):
         self.cardgroup.append(card)
-
 
     def get_cardgroup(self):
         self.cardgroup.sort()
         return self.cardgroup
 
-
     def show(self):
         print('Player', self._id, end=': ')
         self.cardgroup.show()
+
+    def step(self):
+        pass
+
+    def show_status(self):
+        print('Player', self._id, end=': \n')
+        print('\tScore:', self.score)
 
 
 if __name__ == '__main__':

@@ -7,10 +7,8 @@ from poker import Player
 
 
 class TexasHoldem:
-    def __init__(self, poker, players):
-        self.poker = poker
+    def __init__(self, players):
         self.players = players
-        self.pool = CardGroup()
 
     Royal_flush = 9 * 10000
     Straight_flush = 9 * 10000
@@ -106,6 +104,7 @@ class TexasHoldem:
 
     @staticmethod
     def max_value(player_cardgroup_2, pool):
+        pool.sort()
         max_value = 0
         max_cardgroup = None
         for li in TexasHoldem.to3(pool.len()):
@@ -145,87 +144,120 @@ class TexasHoldem:
         return win_times, times
 
 
-    @staticmethod
-    def rates(player_cardgroup_2, pool):
+    # @staticmethod
+    # def rates(player_cardgroup_2, pool):
+    #     poker = Poker(1)
+    #     l = 5 - pool.len()
+    #     if l == 0:
+    #         return TexasHoldem.rate(player_cardgroup_2, pool)
+    #     elif l == 2:
+    #         for li in TexasHoldem.to2(52):
+    #             cardgroup = CardGroup()
+    #             for i, v in enumerate(li):
+    #                 if v:
+    #                     cardgroup.append(poker.cards[i])
+    #             if not cardgroup.is_req(pool) and cardgroup.is_req(player_cardgroup_2):
+    #                 cardgroup.extend(pool)
+    #                 w, a = TexasHoldem.rate(player_cardgroup_2, cardgroup)
+    #                 print(w, a, w/a)
+    #         return 1,1
+
+
+    def game(self, debug=False):
+        # print('Game #############')
         poker = Poker(1)
-        l = 5 - pool.len()
-        if l == 0:
-            return TexasHoldem.rate(player_cardgroup_2, pool)
-        elif l == 2:
-            for li in TexasHoldem.to2(52):
-                cardgroup = CardGroup()
-                for i, v in enumerate(li):
-                    if v:
-                        cardgroup.append(poker.cards[i])
-                if not cardgroup.is_req(pool) and cardgroup.is_req(player_cardgroup_2):
-                    cardgroup.extend(pool)
-                    w, a = TexasHoldem.rate(player_cardgroup_2, cardgroup)
-                    print(w, a, w/a)
-            return 1,1
+        poker.shuffle()
 
+        pool = CardGroup()
+        for player in self.players:
+            player.clear()
 
-    def looper(self):
-        poker = self.poker
         for _ in range(2):
             for player in self.players:
                 player.append(poker.pop())
 
-        for _ in range(5):
-            self.pool.append(poker.pop())
+        for _ in range(2):
+            pool.append(poker.pop())
 
-        print('#####################################')
-        self.pool.sort()
-        self.pool.show()
+        scores = {}
         for player in self.players:
-            player.show()
+            scores[player] = 0
 
-            max_value, max_cardgroup = self.max_value(player.get_cardgroup(), self.pool)
+        for _ in range(3):
+            pool.append(poker.pop())
+            values = {}
+            values['min_score'] = 0
+            for player in self.players:
+                score = player.step(values)
 
-            max_cardgroup.show()
-            print('Value:', max_value)
+                if score > values['min_score']:
+                    scores[player] += score
+                    values['min_score'] = score
+                elif score == values['min_score']:
+                    scores[player] += score
 
+        win_player = None
+        win_value = 0
+        for player in self.players:
+            max_value, _ = self.max_value(player.get_cardgroup(), pool)
+            if win_value < max_value:
+                win_player = player
+                win_value = max_value
+
+        win_player.win(sum(scores.values()))
+
+        # print('Winner:')
+        # win_player.show()
+        # pool.show('Pool')
+        # win_cardgroup.show('Max')
+        # print('Win:', sum(scores.values()))
+
+    def show_status(self):
+        print('Status:')
+        for player in self.players:
+            player.show_status()
+            pass
+
+
+class PlayerAI(Player):
+    def __init__(self, _id):
+        super().__init__(_id, 1000)
+ 
+    def step(self, values):
+        value = 10
+        if self.score < value:
+            value = self.score
+        self.score -= value
+        return value
+
+    def win(self, score):
+        self.score += score
+
+
+class PlayerAI2(Player):
+    def __init__(self, _id):
+        super().__init__(_id, 1000)
+ 
+    def step(self, values):
+        value = 10
+        if self.score < value:
+            value = self.score
+        self.score -= value
+        return value
+
+    def win(self, score):
+        self.score += score
 
 if __name__ == '__main__':
 
+    players = []
+    players.append(PlayerAI(1))
+    players.append(PlayerAI(2))
+
+    texas = TexasHoldem(players)
+    for _ in range(1000):
+        texas.game()
 
 
-    # poker = Poker(1)
-    # poker.shuffle()
-
-    # players = []
-    # players.append(Player(1))
-    # players.append(Player(2))
-
-    # texas = TexasHoldem(poker, players)
-    # texas.looper()
-
-
-
-
-    poker = Poker(1)
-    poker.shuffle()
-
-    player_cardgroup_2 = CardGroup()
-    player_cardgroup_2.append(poker.pop())
-    player_cardgroup_2.append(poker.pop())
-
-    pool = CardGroup()
-    pool.append(poker.pop())
-    pool.append(poker.pop())
-    pool.append(poker.pop())
-
-    player_cardgroup_2.show()
-    pool.show()
-    w,t = TexasHoldem.rates(player_cardgroup_2, pool)
-    print(w,t,w/t)
-
-    # pool.append(poker.pop())
-    # pool.show()
-    # w,t = TexasHoldem.rate(player_cardgroup_2, pool)
-    # print(w,t,w/t)
-
-    # pool.append(poker.pop())
-    # pool.show()
-    # w,t = TexasHoldem.rate(player_cardgroup_2, pool)
-    # print(w,t,w/t)
+    texas.show_status()
 
