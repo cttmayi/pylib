@@ -142,7 +142,7 @@ class Excel:
         self.wb.close()
 
 if __name__ == '__main__':
-    e = Excel('test_file.xlsx')
+    e = Excel('test_data_file.xlsx')
     sheet = e.sheet('A')
 
     row, col = sheet.find_value('TAB', 200, 2)

@@ -43,7 +43,6 @@ class Poker:
             rnd = random.randint(0, 51)
             self.cards[index], self.cards[rnd] = self.cards[rnd], self.cards[index]
 
-
     def pop(self):
         card = self.cards.pop()
         return card
