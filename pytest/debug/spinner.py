@@ -16,10 +16,11 @@ class Spinner:
     def spin(self):
         """Spin the spinner"""
         while self.running:
+            sys.stdout.write('\033[K')
             sys.stdout.write(f"{next(self.spinner)} {self.message}\r")
             sys.stdout.flush()
             time.sleep(self.delay)
-            sys.stdout.write(f"\r{' ' * (len(self.message) + 2)}\r")
+            
 
     def __enter__(self):
         """Start the spinner"""

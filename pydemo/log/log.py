@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime
 
 
-class Log():
+class LogParser():
     def __init__(self, path=None):
         self.logs:pd.DataFrame = None
         if path is not None:
@@ -25,20 +25,12 @@ class Log():
                 self.logs['msg'] = r[1].str[:-1]
 
 
-    def get_logs(self):
-        return self.logs
-
-
-    def find(self, ffilter, fmatch=None, start=0, end=None, revert=False):
-        revert = -1 if revert else 1
-        logs:pd.DataFrame = self.logs[start:end:revert]
-        logs = logs[logs.apply(ffilter, axis=1)]
-
-        #if fmatch is not None:
-        #    logs['match'] = logs.apply(fmatch, axis=1)
-
+    def get(self, ffilter=None):
+        if ffilter is None:
+            logs = self.logs.copy()
+        else:
+            logs = self.logs[self.logs.apply(ffilter, axis=1)]
         return logs
-
 
     def merge(self, logs, sort='datetime'):
         if self.logs is not None:
