@@ -135,3 +135,5 @@ test_output
 test_data_*
 tensorboard/
 model/
+
+*.db
