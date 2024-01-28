@@ -1,0 +1,4 @@
+sentencepiece==0.1.99
+adapter_transformers==3.2.1
+torch==2.1.0
+transformers==4.29.1
