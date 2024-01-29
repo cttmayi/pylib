@@ -30,9 +30,16 @@ class LogAnalysis:
 
     def _analysis(self, record):
         for id in range(len(self.func)):
+            ret = None
             if id not in self.func_id:
-                ret = self.func[id](record)
-                if ret:
+                try:
+                    func = self.func[id]
+                    if func is not None:
+                        ret = func(record)
+                except Exception as e:
+                    print(f'[Error]Analysis func error, id={id}')
+                    self.func[id] = None
+                if ret is not None:
                     self.func_id.append(id)
                     return self.comments[id](record)
         return None

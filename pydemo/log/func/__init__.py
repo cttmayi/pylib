@@ -3,7 +3,7 @@ import pandas as pd
 
 from pprint import pprint as print
 
-from env import l_status
+from env import l_status, l_status_once
 
 import utils
 import os
@@ -31,9 +31,11 @@ class LogFunc:
 
     def _func(self, log):
         if log.tag in self.tag_func.keys():
+            l_status_once = {}
             func = self.tag_func[log.tag]
             func(log)
-            self.logs_record.append(l_status.copy())
+            status = dict(l_status, **l_status_once)
+            self.logs_record.append(status)
 
     def func(self):
         self.df.apply(self._func, axis=1)

@@ -6,23 +6,29 @@ from datetime import datetime
 
 
 class LogParser():
-    def __init__(self, path=None):
+    def __init__(self, path, type='android'):
         self.logs:pd.DataFrame = None
-        if path is not None:
-            with open(path) as fp:
-                lines = fp.readlines()
-                s = pd.Series(lines)
-                self.logs = s.str.split(expand=True, n=5)
-                self.logs.rename(
-                    columns={0:'date', 1:'time', 2:'pid', 3:'tid', 4:'level', 5:'tag_msg'},
-                    inplace=True)
 
-                self.logs.drop(self.logs[self.logs.tag_msg.isna()].index, inplace=True) # 删除异常行, 比如第一行"-----timezone: GMT"
+        with open(path, errors='ignore') as fp:
+            lines = fp.readlines()
+            if type == 'android':
+                self.logs = self._parser_android(lines)
 
-                self.logs['datetime'] = self.logs['date'] + ' ' + self.logs['time']
-                r = self.logs['tag_msg'].str.split(': ', expand=True, n=1)
-                self.logs['tag'] = r[0].str.strip()
-                self.logs['msg'] = r[1].str[:-1]
+
+    def _parser_android(self, lines):
+        s = pd.Series(lines)
+        logs = s.str.split(expand=True, n=5)
+        logs.rename(
+            columns={0:'date', 1:'time', 2:'pid', 3:'tid', 4:'level', 5:'tag_msg'},
+            inplace=True)
+
+        logs.drop(logs[logs.tag_msg.isna()].index, inplace=True) # 删除异常行, 比如第一行"-----timezone: GMT"
+
+        logs['datetime'] = logs['date'] + ' ' + logs['time']
+        r = logs['tag_msg'].str.split(': ', expand=True, n=1)
+        logs['tag'] = r[0].str.strip()
+        logs['msg'] = r[1].str[:-1]
+        return logs
 
 
     def get(self, ffilter=None):

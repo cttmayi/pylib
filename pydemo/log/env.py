@@ -1,7 +1,9 @@
 import pandas as pd
 
 l_status = {}
-l_status_temp = {}
+l_status_once = {}
+
+_l_status_internal = {}
 
 
 def status_set(id, status):
@@ -17,8 +19,8 @@ def status_freq(id, time):
     now = pd.to_datetime('2023-' + time)
     millis:pd.Timestamp = now.timestamp() * 1000
     
-    if id in l_status_temp.keys():
-        millis_ = l_status_temp[id]
+    if id in _l_status_internal.keys():
+        millis_ = _l_status_internal[id]
         l_status[id] = millis - millis_
 
-    l_status_temp[id] = millis
+    _l_status_internal[id] = millis
