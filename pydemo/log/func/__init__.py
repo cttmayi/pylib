@@ -3,7 +3,7 @@ import pandas as pd
 
 from pprint import pprint as print
 
-from env import l_status, l_status_once
+from env import Env
 
 import utils
 import os
@@ -13,6 +13,7 @@ class LogFunc:
         self.df:pd.DataFrame = df
         self.logs_record = []
         self.init_func(tags)
+        self.env:Env = Env()
 
     def init_func(self, tags):
         self.tag_func = {}
@@ -31,10 +32,10 @@ class LogFunc:
 
     def _func(self, log):
         if log.tag in self.tag_func.keys():
-            l_status_once = {}
+            self.env.reset(log)
             func = self.tag_func[log.tag]
-            func(log)
-            status = dict(l_status, **l_status_once)
+            func(self.env, log)
+            status = self.env.get_status()
             self.logs_record.append(status)
 
     def func(self):

@@ -1,7 +1,7 @@
 
-from env import *
+from env import Env
 
 
-def func(log):
-    status_inc("proc", -1)
+def func(env:Env, log):
+    env.state_inc("proc", -1)
 

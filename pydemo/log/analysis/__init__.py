@@ -4,10 +4,10 @@ import os
 import utils
 
 
+
 class LogAnalysis:
     def __init__(self, df):
         self.df:pd.DataFrame = df
-
         self.init_analysis()
 
     def init_analysis(self):
@@ -20,9 +20,7 @@ class LogAnalysis:
 
         for module_name in modules:
             module = utils.import_module(module_name, package_name)
-
             self.set_analysis(module.get('func'), module.get('comments'))
-
 
     def set_analysis(self, func, comments):
         self.func.append(func)
@@ -41,7 +39,7 @@ class LogAnalysis:
                     self.func[id] = None
                 if ret is not None:
                     self.func_id.append(id)
-                    return self.comments[id](record)
+                    return ret
         return None
 
     def analysis(self):

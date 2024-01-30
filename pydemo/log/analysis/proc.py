@@ -1,8 +1,9 @@
 
 
-def comments(record):
-    return f"进程数量异常(={record.proc})"
 
 
-def func(record):
-    return record.proc > 5
+
+
+def func(state):
+    if state.proc > 5:
+        return f"进程数量异常(={state.proc})"

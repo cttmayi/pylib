@@ -1,6 +1,6 @@
 from env import *
 
 
-def func(log):
-    status_freq("freq", log.datetime)
+def func(env:Env, log):
+    env.state_freq("freq")
 
