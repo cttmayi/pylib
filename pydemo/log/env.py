@@ -14,16 +14,23 @@ class Env:
     def reset(self, log):
         self._state_once = {}
         self.log = log
-        self.state_set('datetime', log.time)
+        self._state['datetime'] = log.time
 
     def state_set(self, id, state):
+        self._state['pre_', id] = self._state.get(id, None)
         self._state[id] = state
+
+    def state_get(self, id):
+        return self._state.get(id, None)
 
     def state_inc(self, id, inc):
         if id in self._state.keys():
             self._state[id] += inc
         else:
-            self._state[id] = inc
+            self._state[id] = inc if inc > 0 else 0
+
+    def flow_set(self, id, flow):
+        pass
 
     def state_freq(self, id):
         now = self.log.datetime
