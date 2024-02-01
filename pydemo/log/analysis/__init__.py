@@ -3,7 +3,7 @@ import os
 
 import utils
 
-
+from env import *
 
 class LogAnalysis:
     def __init__(self, df):
@@ -26,17 +26,20 @@ class LogAnalysis:
         self.func.append(func)
         self.comments.append(comments)
 
-    def _analysis(self, record):
+    def _analysis(self, state):
+        state = State(state)
         for id in range(len(self.func)):
             ret = None
             if id not in self.func_id:
                 try:
                     func = self.func[id]
                     if func is not None:
-                        ret = func(record)
+                        ret = func(state)
+
                 except Exception as e:
-                    print(f'[Error]Analysis func error, id={id}')
-                    self.func[id] = None
+                    if str(e) != 'Ignore':
+                        print(f'[Error]Analysis func error, id={id}')
+                        self.func[id] = None
                 if ret is not None:
                     self.func_id.append(id)
                     return ret

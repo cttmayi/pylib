@@ -2,5 +2,8 @@
 
 
 def func(state):
-    if state.freq < 50000:
+    # v = state.get('freq')
+
+    if state.time('freq', 'TE') < 50000:
         return f"创建频繁"
+    return None

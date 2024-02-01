@@ -5,5 +5,6 @@
 
 
 def func(state):
-    if state.proc > 5:
-        return f"进程数量异常(={state.proc})"
+    if state.time('am_proc', 'start', 'died') > 5000:
+        return f"进程数量异常"
+    return None
