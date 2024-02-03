@@ -5,8 +5,8 @@ def func(env:Env, log):
     if log.msg.startswith('TE'):
         env.state_set(TE, 'T')
     elif log.msg.startswith('FRAME START'):
-        env.state_set(FRAME, 'START')
+        env.state_set(FRAME, FRAME_START)
     elif log.msg.startswith('FRAME DONE'):
-        env.state_set(FRAME, 'DONE')
+        env.state_set(FRAME, FRAME_DONE)
 
 

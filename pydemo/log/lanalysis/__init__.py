@@ -21,11 +21,17 @@ class LogAnalysis:
         modules = utils.get_modules(package_path)
 
         for module_name in modules:
-            module = utils.import_module(module_name, package_name)
-            self.set_analysis(module_name, module.get('func'))
+            func = utils.import_module(module_name, package_name)
+
+            analysis_func = []
+            for f in func.keys():
+                if f.startswith('func_'):
+                    analysis_func.append(func.get(f))
+
+            self.set_analysis(module_name, analysis_func)
 
     def set_analysis(self, id, func):
-        self.func[id] = (func)
+        self.func[id] = func
 
     def _analysis(self, status):
         obj_status = Status(status)
@@ -33,19 +39,24 @@ class LogAnalysis:
         ret = []
         if key in self.func.keys():
             try:
-                func = self.func[key]
-                r = func(obj_status)
-                if r is not None:
-                    ret.append(r)
+                funcs = self.func[key]
+                for func in funcs:
+                    r = func(obj_status)
+                    if r is not None:
+                        ret.append(r)
 
+                timers = []
                 for sid in range(len(self._timers)):
                     id, state, timeout, comment = self._timers[sid]
-                    # print('Timer', obj_status.get_action_millis(), sid, state, timeout, comment)
+                    # print('Timer', obj_status.op_millis(), sid, state, timeout, comment)
                     if timeout < obj_status.op_millis():
                         ret.append(comment)
-                        del self._timers[sid]
                     elif id == obj_status.op_id() and state == obj_status.op_state():
-                        del self._timers[sid]
+                        pass
+                    else:
+                        timers.append(self._timers[sid])
+
+                self._timers = timers
                 self._timers.extend(obj_status.get_timers())
             
             except KeyError as e:
