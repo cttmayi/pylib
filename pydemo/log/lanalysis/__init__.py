@@ -4,7 +4,7 @@ import os
 import utils
 import traceback
 
-from env import *
+from env import Status
 
 class LogAnalysis:
     def __init__(self, df):
@@ -29,7 +29,7 @@ class LogAnalysis:
 
     def _analysis(self, status):
         obj_status = Status(status)
-        key = obj_status.get_op_id()
+        key = obj_status.op_id()
         ret = []
         if key in self.func.keys():
             try:
@@ -41,10 +41,10 @@ class LogAnalysis:
                 for sid in range(len(self._timers)):
                     id, state, timeout, comment = self._timers[sid]
                     # print('Timer', obj_status.get_action_millis(), sid, state, timeout, comment)
-                    if timeout < obj_status.get_op_millis():
+                    if timeout < obj_status.op_millis():
                         ret.append(comment)
                         del self._timers[sid]
-                    elif id == obj_status.get_op_id() and state == obj_status.get_op_state():
+                    elif id == obj_status.op_id() and state == obj_status.op_state():
                         del self._timers[sid]
                 self._timers.extend(obj_status.get_timers())
             

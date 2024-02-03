@@ -3,9 +3,9 @@ import sys
 # sys.path.append(os.path.join(os.getcwd()))
 sys.path.append(os.path.dirname(__file__[0]))
 
-from logparser import LogParser
-from func import LogFunc
-from analysis import LogAnalysis
+from lparser import LogParser
+from lfunc import LogFunc
+from lanalysis import LogAnalysis
 
 
 if __name__ == '__main__':
