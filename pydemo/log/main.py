@@ -9,7 +9,7 @@ from analysis import LogAnalysis
 
 
 if __name__ == '__main__':
-    lp:LogParser = LogParser('dataset/android_event.log', 'main')
+    lp:LogParser = LogParser('dataset/simple.log', 'main')
     logs = lp.get()
 
     lf = LogFunc(logs)
@@ -20,9 +20,3 @@ if __name__ == '__main__':
     la = LogAnalysis(df)
     r = la.analysis()
     print(r)
-
-
-
-
-
-
