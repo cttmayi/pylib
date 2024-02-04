@@ -33,7 +33,7 @@ class LogAnalysis:
     def set_analysis(self, id, func):
         self.func[id] = func
 
-    def _analysis(self, status):
+    def do_analysis(self, status):
         obj_status = Status(status)
         key = obj_status.op_id()
         ret = []
@@ -74,7 +74,7 @@ class LogAnalysis:
         return ret if len(ret) > 0 else None
 
     def analysis(self):
-        self.df['result'] = self.df.apply(self._analysis, axis=1)
+        self.df['result'] = self.df.apply(self.do_analysis, axis=1)
         return self.df[self.df['result'].notnull()]
 
 

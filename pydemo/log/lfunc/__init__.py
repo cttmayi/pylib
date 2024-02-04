@@ -36,6 +36,8 @@ class LogFunc:
             func = self.tag_func[log.tag]
             func(self.env, log)
             status = self.env.get_status()
+
+            
             self.logs_record.extend(status)
 
     def func(self):

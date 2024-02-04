@@ -1,5 +1,6 @@
 
 OP_ID = '_OP_ID'
+OP_OBJ = '_OP_OBJ'
 OP_STATE = '_OP_STATE'
 OP_MILLIS = '_OP_MILLIS'
 TIME  = '_TIME'
@@ -18,20 +19,21 @@ class Env:
         self.log = log
         self._op[TIME] = log.time
 
-    def state_set(self, id, state):
+    def state_set(self, id, state, obj=None):
         self._op[OP_ID] = id
         self._op[OP_STATE] = state
         self._op[OP_MILLIS] = self.log.millis
+        if obj is not None:
+            self._op[OP_OBJ] = obj
         self._status.append(dict(self._state, **self._op))
-        # self._state[S(id)] = state
-        # self._state[ST(id)] = self.log.millis
-        self._state[id] = (state, self.log.millis)
 
-    def state_inc(self, id, inc):
-        if id in self._state.keys():
-            self._state[id] += inc
+        if obj is not None:
+            if id not in self._state.keys():
+                self._state[id] = {}
+            self._state[id][obj] = (state, self.log.millis)
         else:
-            self._state[id] = inc if inc > 0 else 0
+            self._state[id] = (state, self.log.millis)
+
 
 
 class Status:
@@ -39,13 +41,17 @@ class Status:
         self._state = state
         self._timers = []
 
-    def state(self, id):
-        # return self._state[S(id)]
-        return self._state[id][0]
+    def state(self, id, obj=None):
+        if obj is not None:
+            return self._state[id][obj]
+        else:
+            return self._state[id][0]
 
-    def millis(self, id):
-        # return self._state[ST(id)]
-        return self._state[id][1]
+    def millis(self, id, obj=None):
+        if obj is not None:
+            return self._state[id][obj]
+        else:
+            return self._state[id][0]
 
     def op_millis(self):
         return self._state[OP_MILLIS]

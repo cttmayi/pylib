@@ -13,7 +13,6 @@ if __name__ == '__main__':
     logs = lp.get()
 
     lf = LogFunc(logs)
-
     df = lf.func()
     print(df)
 
