@@ -51,7 +51,7 @@ class Status:
         if obj is not None:
             return self._state[id][obj]
         else:
-            return self._state[id][0]
+            return self._state[id][1]
 
     def op_millis(self):
         return self._state[OP_MILLIS]
