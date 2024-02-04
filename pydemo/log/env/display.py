@@ -1,0 +1,6 @@
+
+
+TE = 'TE'
+FRAME = 'FRAME'
+FRAME_START = 'START'
+FRAME_DONE = 'DONE'
