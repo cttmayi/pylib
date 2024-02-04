@@ -5,34 +5,38 @@ OP_STATE = '_OP_STATE'
 OP_MILLIS = '_OP_MILLIS'
 TIME  = '_TIME'
 
+from lanalysis import LogAnalysis
+
 class Env:
-    def __init__(self):
+    def __init__(self, la):
         self._state = {}
         self._op = {}
+        self.la:LogAnalysis = la
 
-    def get_status(self):
-        return self._status
+    def get_result(self):
+        return self._result
 
     def reset(self, log):
-        self._status = []
+        self._result = []
         self._op = {}
         self.log = log
         self._op[TIME] = log.time
 
-    def state_set(self, id, state, obj=None):
+    def state_set(self, id, state, obj=''):
         self._op[OP_ID] = id
         self._op[OP_STATE] = state
         self._op[OP_MILLIS] = self.log.millis
-        if obj is not None:
-            self._op[OP_OBJ] = obj
-        self._status.append(dict(self._state, **self._op))
 
-        if obj is not None:
-            if id not in self._state.keys():
-                self._state[id] = {}
-            self._state[id][obj] = (state, self.log.millis)
-        else:
-            self._state[id] = (state, self.log.millis)
+        self._op[OP_OBJ] = obj
+
+        status = Status(dict(self._state, **self._op))
+        r = self.la.do_analysis(status)
+        if r is not None:
+            self._result.append(dict(self._op, RESULT=r))
+
+        if id not in self._state.keys():
+            self._state[id] = {}
+        self._state[id][obj] = (state, self.log.millis)
 
 
 
@@ -41,17 +45,13 @@ class Status:
         self._state = state
         self._timers = []
 
-    def state(self, id, obj=None):
-        if obj is not None:
-            return self._state[id][obj]
-        else:
-            return self._state[id][0]
+    def state(self, id, obj=''):
+        return self._state[id][obj][0]
 
-    def millis(self, id, obj=None):
-        if obj is not None:
-            return self._state[id][obj]
-        else:
-            return self._state[id][1]
+
+    def millis(self, id, obj=''):
+        return self._state[id][obj][1]
+
 
     def op_millis(self):
         return self._state[OP_MILLIS]

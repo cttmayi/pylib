@@ -9,13 +9,10 @@ from lanalysis import LogAnalysis
 
 
 if __name__ == '__main__':
+    la = LogAnalysis()
     lp:LogParser = LogParser('dataset/simple.log', 'main')
     logs = lp.get()
 
-    lf = LogFunc(logs)
-    df = lf.func()
+    lf = LogFunc(logs, la)
+    df = lf.do_func()
     print(df)
-
-    la = LogAnalysis(df)
-    r = la.analysis()
-    print(r)

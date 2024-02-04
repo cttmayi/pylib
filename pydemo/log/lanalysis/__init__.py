@@ -4,11 +4,10 @@ import os
 import utils
 import traceback
 
-from env import Status
+# from env import Status
 
 class LogAnalysis:
-    def __init__(self, df):
-        self.df:pd.DataFrame = df
+    def __init__(self):
         self.init_analysis()
 
         self._timers = []
@@ -34,14 +33,14 @@ class LogAnalysis:
         self.func[id] = func
 
     def do_analysis(self, status):
-        obj_status = Status(status)
-        key = obj_status.op_id()
+        # status = Status(status)
+        key = status.op_id()
         ret = []
         if key in self.func.keys():
             try:
                 funcs = self.func[key]
                 for func in funcs:
-                    r = func(obj_status)
+                    r = func(status)
                     if r is not None:
                         ret.append(r)
 
@@ -49,15 +48,15 @@ class LogAnalysis:
                 for sid in range(len(self._timers)):
                     id, state, timeout, comment = self._timers[sid]
                     # print('Timer', obj_status.op_millis(), sid, state, timeout, comment)
-                    if timeout < obj_status.op_millis():
+                    if timeout < status.op_millis():
                         ret.append(comment)
-                    elif id == obj_status.op_id() and state == obj_status.op_state():
+                    elif id == status.op_id() and state == status.op_state():
                         pass
                     else:
                         timers.append(self._timers[sid])
 
                 self._timers = timers
-                self._timers.extend(obj_status.get_timers())
+                self._timers.extend(status.get_timers())
             
             except KeyError as e:
                 # print(e.__class__.__name__)
@@ -73,9 +72,6 @@ class LogAnalysis:
 
         return ret if len(ret) > 0 else None
 
-    def analysis(self):
-        self.df['result'] = self.df.apply(self.do_analysis, axis=1)
-        return self.df[self.df['result'].notnull()]
 
 
 

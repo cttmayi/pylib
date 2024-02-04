@@ -9,11 +9,11 @@ import utils
 import os
 
 class LogFunc:
-    def __init__(self, df, tags = None):
+    def __init__(self, df, la, tags = None):
         self.df:pd.DataFrame = df
-        self.logs_record = []
+        self.result = []
         self.init_func(tags)
-        self.env:Env = Env()
+        self.env:Env = Env(la)
 
     def init_func(self, tags):
         self.tag_func = {}
@@ -35,14 +35,12 @@ class LogFunc:
             self.env.reset(log)
             func = self.tag_func[log.tag]
             func(self.env, log)
-            status = self.env.get_status()
+            status = self.env.get_result()
+            self.result.extend(status)
 
-            
-            self.logs_record.extend(status)
-
-    def func(self):
+    def do_func(self):
         self.df.apply(self._func, axis=1)
-        df = pd.DataFrame(self.logs_record)
+        df = pd.DataFrame(self.result)
         return df
 
 
