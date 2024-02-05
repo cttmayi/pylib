@@ -2,8 +2,8 @@
 TE 稳定相关
 '''
 
-from env import Status
-from env.display import *
+from lenv import Status
+from lenv.display import *
 
 def func_TE_frame(status:Status):
     if status.state(FRAME) == FRAME_START:

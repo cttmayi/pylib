@@ -5,13 +5,13 @@ OP_STATE = '_OP_STATE'
 OP_MILLIS = '_OP_MILLIS'
 TIME  = '_TIME'
 
-from lanalysis import LogAnalysis
+# from lanalysis import LogAnalysis
 
 class Env:
     def __init__(self, la):
         self._state = {}
         self._op = {}
-        self.la:LogAnalysis = la
+        self.la = la # LogAnalysis
 
     def get_result(self):
         return self._result
@@ -37,7 +37,6 @@ class Env:
         if id not in self._state.keys():
             self._state[id] = {}
         self._state[id][obj] = (state, self.log.millis)
-
 
 
 class Status:

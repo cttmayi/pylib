@@ -4,7 +4,7 @@ import pandas as pd
 T = None
 
 # 11-25 19:41:19.813  1153  1153 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 1153 (init), pid 1153 (init)
-def parser(lines):
+def _parser(lines):
     s = pd.Series(lines)
     logs = s.str.split(expand=True, n=5)
     logs.rename(

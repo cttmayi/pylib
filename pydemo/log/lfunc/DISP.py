@@ -1,5 +1,5 @@
-from env import Env
-from env.display import *
+from lenv import Env
+from lenv.display import *
 
 def func(env:Env, log):
     if log.msg.startswith('TE'):

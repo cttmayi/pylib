@@ -10,7 +10,8 @@ from lanalysis import LogAnalysis
 
 if __name__ == '__main__':
     la = LogAnalysis()
-    lp:LogParser = LogParser('dataset/simple.log', 'main')
+    # lp:LogParser = LogParser('dataset/simple.log', 'main')
+    lp:LogParser = LogParser(sys.argv[1], sys.argv[2])
     logs = lp.get()
 
     lf = LogFunc(logs, la)
