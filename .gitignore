@@ -130,11 +130,10 @@ dmypy.json
 
 # Project
 conf.py
-test_data
-test_output
-test_data_*
 tensorboard/
 model/
+OAI_CONFIG_LIST
+OLLAMA_CONFIG_LIST
 
 *.db
 .vscode
