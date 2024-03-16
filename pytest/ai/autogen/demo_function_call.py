@@ -8,7 +8,7 @@ import autogen
 from autogen.cache import Cache
 
 config_list = autogen.config_list_from_json(
-    "config/gen/OAI_CONFIG_LIST",
+    "OAI_CONFIG_LIST",
     filter_dict={
         "model": ["gpt-4", "gpt-3.5-turbo", "gpt-3.5-turbo-16k"],
     },
@@ -55,17 +55,17 @@ def exec_python(cell: Annotated[str, "Valid Python cell to execute."]) -> str:
 
 
 # another way of registering functions is to use the register_function
-def exec_sh(script: Annotated[str, "Valid Python cell to execute."]) -> str:
-    return user_proxy.execute_code_blocks([("sh", script)])
+# def exec_sh(script: Annotated[str, "Valid Python cell to execute."]) -> str:
+#     return user_proxy.execute_code_blocks([("sh", script)])
 
 
-autogen.agentchat.register_function(
-    exec_python,
-    caller=chatbot,
-    executor=user_proxy,
-    name="sh",
-    description="run a shell script and return the execution result.",
-)
+# autogen.agentchat.register_function(
+#     exec_python,
+#     caller=chatbot,
+#     executor=user_proxy,
+#     name="sh",
+#     description="run a shell script and return the execution result.",
+# )
 
 with Cache.disk() as cache:
     # start the conversation

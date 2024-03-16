@@ -134,6 +134,7 @@ tensorboard/
 model/
 OAI_CONFIG_LIST
 OLLAMA_CONFIG_LIST
+work_dir/
 
 *.db
 .vscode
