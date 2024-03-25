@@ -30,9 +30,11 @@ prompt = PromptTemplate(
     
 )
 
+print(parser.get_format_instructions())
+
 # And a query intended to prompt a language model to populate the data structure.
 prompt_and_model = prompt | model
-prompt_and_model_parser = prompt | model | parser
+prompt_and_model_parser = prompt | model
 # output = prompt_and_model.invoke({"query": "Tell me a joke."})
 # ret = parser.invoke(output)
 #print('----------')

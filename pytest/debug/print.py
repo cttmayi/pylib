@@ -1,4 +1,4 @@
-from colorama import Fore
+from colorama import Fore, init
 
 print("NORMAL")
 print(Fore.GREEN + "GREEN")
