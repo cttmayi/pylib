@@ -12,7 +12,8 @@ from autogen.coding.embedded_ipython_code_executor import EmbeddedIPythonCodeExe
 config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
     filter_dict={
-        "model": ["gpt-4", "gpt-3.5-turbo", "gpt-3.5-turbo-16k"],
+        # "model": ["gpt-4", "gpt-3.5-turbo", "gpt-3.5-turbo-16k"],
+        "model": ["gpt-4"],
     },
 )
 
@@ -50,11 +51,9 @@ user_proxy = autogen.UserProxyAgent(
 
 with Cache.disk() as cache:
 
-
-
     user_proxy.initiate_chat(
         chatbot,
-        message="把Autogen是一个好框架的消息邮件给Ling Yuan",
+        message="总结arXiv的最新的5篇文章",
         cache=cache,
     )
 
