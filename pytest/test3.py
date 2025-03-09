@@ -1,20 +1,26 @@
 class AssignMonitor:
+
+    def __init__(self, status):
+        self.status = status
+
     def __enter__(self):
-        self._original_setattr = object.__setattr__
-        print('object', object)
-        object.__setattr__ = self.custom_setattr
+        print('enter', )
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        object.__setattr__ = self._original_setattr
+        print('exit_type', exc_type)
+        print('exit_val', exc_val)
+        print('exit_tb', exc_tb)
 
-    def custom_setattr(self, obj, name, value):
-        print(f"Assigning {value} to {name}")
-        self._original_setattr(obj, name, value)
+class MyClass:
+    pass
 
-with AssignMonitor():
-    class MyClass:
-        pass
+class Status:
+    pass
 
+s = Status()
+
+with AssignMonitor(s) as monitor:
     obj = MyClass()
     obj.x = 10  # 输出：Assigning 10 to x
+    obj.x = obj.y 

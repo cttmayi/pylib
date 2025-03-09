@@ -1,151 +1,157 @@
+import conf
+import traceback
 
 class Error:
-    def __init__(self, line, msg):
-        self.line = line
-        self.msg = msg
-        self.related_lines = set()
-        self.related_lines.add(line)
+    CRITICAL = 'Critical'
+    ERROR = 'Error'
+    WARNING = 'Warning'
+    INFO = 'Info'
+    LEVELS = [CRITICAL, ERROR, WARNING, INFO]
 
+    def __init__(self, status, msg, level=ERROR):
+        self._status = status
+        self.line = status.LINE
+        self.msg = msg
+        self.level = level
+        self.related_lines = set()
+        self.related_lines.add(self.line)
+
+    def __enter__(self):
+        self._status.set_trace_error(self)
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self._status.set_trace_error(None)
+        if conf.DEBUG and exc_type is not None:
+            print('Type Error:', exc_val)
+            print('Traceback (most recent call last):')
+            for trace in traceback.format_tb(exc_tb):
+                print(trace)
+        return True
 
     def add_related_line(self, line):
         if isinstance(line, int):
             self.related_lines.add(line)
 
     def __str__(self):
-        return f'Error at line {self.line}: {self.msg}'
+        return self.get_error_msg()
 
     def get_error_msg(self, log_df = None):
         related_lines = sorted(self.related_lines)
         related_lines = [line for line in related_lines if line >= 0]
         if log_df is not None:
-            return f'Error at line {self.line}: {self.msg}\nRelated lines:\n{log_df.loc[related_lines]}'
+            return f'====== {self.level} at line {self.line}: {self.msg} ======\n{log_df.loc[related_lines]}'
         else:
-            return f'Error at line {self.line}: {self.msg}\nRelated lines: {related_lines}'
+            return f'====== {self.level} at line {self.line}: {self.msg} ======\nRelated lines: {related_lines}\n'
 
 class Value:
-    def __init__(self, status, value=None, millis=0, line=-1):
+    def __init__(self, status, value=None):
         self._status = status  # 存储status属性
         self.value = value      # 存储任意类型的值
-        # self.millis = self.object(value, millis)    # 存储millis属性
-        # self.line = self.object(value, line)      # 存储line属性
-
-        self.millis = millis    # 存储millis属性
-        self.line = line      # 存储line属性
-
-    # def object(self, val, default=None):
-    #     if isinstance(val, dict):
-    #         return {k: default for k in val}
-    #     elif isinstance(val, (list, tuple)):
-    #         return type(val)([default] * len(val))
-    #     else:
-    #         return default
-
-    def __is__(self, other):
-        return self.value is other
+        self.timestamp = status.TIMESTAMP    # 存储timestamp属性
+        self.line = status.LINE      # 存储line属性
     
+    def _add_related_line(self, line):
+        if self._status.error_monitor is not None:
+            self._status.error_monitor.add_related_line(line)
+
     def __hash__(self):
         return hash(self.value)
     
     def __bool__(self):
+        if self._status.error is not None:
+            self._status.error.add_related_line(self.line)
         return bool(self.value)
 
     def __set__(self, key, value):
-        print(f'Setting {key} to {value}')
         self.value[key] = value
 
-
     def __eq__(self, other):
-        # 如果对方是 TEValue 实例，则比较其 value；否则直接比较 value 和 other
+        self._add_related_line(self.line)
         if isinstance(other, Value):
             return self.value == other.value
         return self.value == other
 
     def __ne__(self, other):
+        self._add_related_line(self.line)
         return not (self == other)
 
-    
     def __ge__(self, other):
+        self._add_related_line(self.line)
         if isinstance(other, Value):
             return self.value >= other.value
         return self.value >= other
 
     def __le__(self, other):
+        self._add_related_line(self.line)
         if isinstance(other, Value):
             return self.value <= other.value
         return self.value <= other
 
     def __gt__(self, other):
+        self._add_related_line(self.line)
         if isinstance(other, Value):
             return self.value > other.value
         return self.value > other
 
     def __lt__(self, other):
+        self._add_related_line(self.line)
         if isinstance(other, Value):
             return self.value < other.value
         return self.value < other
     
     def __add__(self, other):
-        self.millis = self._status.current_millis
-        self.line = self._status.current_line
-        return self.value + other
+        return Value(self._status, self.value + other)
 
     __radd__ = __add__  # 支持反向加法（如 other + self.value）
 
     def __sub__(self, other):
-        self.millis = self._status.current_millis
-        self.line = self._status.current_line
-        return self.value - other
+        return Value(self._status, self.value - other)
 
     __rsub__ = __sub__  # 支持反向减法（如 other - self.value）
 
     # 代理容器操作（如字典/列表的下标访问）
     def __getitem__(self, key):
+        self._add_related_line(self.line)
         return self.value[key]
-
-    # def __setitem__(self, key, value):
-    #     self.millis = self._status.current_millis
-    #     self.line = self._status.current_line
-    #     self.value[key] = value
-
-    # def __delitem__(self, key):
-    #     del self.millis[key]
-    #     del self.line[key]
-    #     del self.value[key]
-
-    # def append(self, item):
-    #     self.millis.append(self._status.current_millis)
-    #     self.line.append(self._status.current_line)
-    #     self.value.append(item)
 
     # 代理其他常见容器方法（可选）
     def __iter__(self):
         return iter(self.value)
 
     def __len__(self):
+        self._add_related_line(self.line)
         return len(self.value)
 
     def __contains__(self, item):
+        self._add_related_line(self.line)
         return item in self.value
 
     def __repr__(self):
+        self._add_related_line(self.line)
         return repr(self.value)  # 直接返回 value 的表示
 
     def __str__(self):
+        self._add_related_line(self.line)
         return str(self.value)
 
     # 动态代理未定义的操作到 self.value（例如属性访问、方法调用）
     def __getattr__(self, name):
+        self._add_related_line(self.line)
         return getattr(self.value, name)
-
 
 
 class Status:
     def __init__(self):
-        self.value_list = set()
-        self.current_millis = 0
-        self.current_line = 0
+        self._value_list = set()
+        self._current_timestamp = 0
+        self._current_line = -1
         self.__setattr_func__ = None
         self.__getattribute_func__ = None
+
+        self.error_monitor:Error = None
+        self.error_recoder = []
+        self._golbal_status:Status = None
 
         self.enable_attribute__mode()
         self.init_attribute()
@@ -154,30 +160,84 @@ class Status:
     def init_attribute(self):
         raise NotImplementedError
 
-    def set_current_info(self, millis, line_number):
-        self.current_millis = millis
-        self.current_line = line_number
+    def end_checker(self) -> Error:
+        return None
 
-    def get_status(self, value_list):
+    def raise_error(self, error:Error=None):
+        if error is None:
+            error = self.error_monitor
+        self.error_recoder.append(error)
+
+    def get_error(self):
+        return self.error_recoder
+
+    def reset_error(self):
+        self.error_recoder = []
+
+    def set_global_status(self, global_status):
+        self._golbal_status = global_status
+
+    def set_trace_error(self, error):
+        self.error_monitor = error
+        if self._golbal_status is not None:
+            self._golbal_status.set_trace_error(error)
+
+    def set_current_info(self, timestamp, line_number):
+        self._current_timestamp = timestamp
+        self._current_line = line_number
+
+    def __getattr__(self, name):
+        if self._golbal_status is not None and  name in self._golbal_status.__dict__:
+            return getattr(self._golbal_status, name)
+        raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+
+    def get_status(self, value_list, dict_or_list, name=None):
         values = {}
-        millis = {}
+        timestamp = {}
         for key in value_list:
-            if isinstance(self.__dict__[key], Value):
-                values[key] = self.__dict__[key].value
-                millis[key] = self.__dict__[key].millis
-            elif isinstance(self.__dict__[key], list) or isinstance(self.__dict__[key], dict):
-                v, m = self.get_status(self.__dict__[key])
-                values.extend(v)
-                millis.extend(m)
+            new_name = [name, str(key)] if name else [str(key)]
+            new_name = '.'.join(new_name)
+            if isinstance(dict_or_list[key], Value):
+                values[new_name] = dict_or_list[key].value
+                timestamp[new_name] = dict_or_list[key].timestamp
+            elif isinstance(dict_or_list[key], dict):
+                v, m = self.get_status(dict_or_list[key].keys(), dict_or_list[key], new_name)
+                values.update(v)
+                timestamp.update(m)
+            elif isinstance(dict_or_list[key], list):
+                v, m = self.get_status(range(len(dict_or_list[key])), dict_or_list[key], new_name)
+                values.update(v)
+                timestamp.update(m)
             else:
-                values[key] = self.__dict__[key]
-        return values, millis
+                values[new_name] = dict_or_list[key]
+        return values, timestamp
 
 
     def get_all_status(self):
-        values, millis = self.get_status(self.value_list)        
-        return {'values': values, 'millis': millis}
+        values, timestamp = self.get_status(self._value_list, self.__dict__)        
+        # return {'values': values, 'timestamp': timestamp}
+        return {'values': values}
 
+######################################################################
+    @property
+    def TIMESTAMP(self):
+        return self._current_timestamp
+
+    @property
+    def LINE(self):
+        return self._current_line
+    
+    def DURATION(self, value:Value):
+        if isinstance(value, Value):
+            if self.error_monitor is not None:
+                self.error_monitor.add_related_line(value.line)
+                self.error_monitor.add_related_line(self.LINE)
+            ret = self._current_timestamp - value.timestamp
+        else:
+            ret = self._current_timestamp
+        return ret
+
+#####################################################################
     def enable_attribute__mode(self):
         self.__setattr_func__ = self.__attribute_setattr__
 
@@ -192,56 +252,67 @@ class Status:
             super().__setattr__(name, value)
 
     def __attribute_setattr__(self, name, value):
-        #if key not in self.__dict__ and isinstance(value, Value):
-        self.value_list.add(name)
+        if name not in self.__dict__:
+            self._value_list.add(name)
         super().__setattr__(name, value)
 
     def __protected_setattr__(self, name, value):
-        if name not in self.__dict__:
-            raise AttributeError(f"Cannot set new attribute '{name}' dynamically")
-        if name in self.value_list:
-            self.__dict__[name] = Value(self, value, self.current_millis, self.current_line)
-        else:
-            super().__setattr__(name, value)
+        # if name not in self.__dict__:
+        #     raise AttributeError(f"Cannot set new attribute '{name}' dynamically")
+        super().__setattr__(name, value)
 
 if __name__ == '__main__':
-    import sys
-
 
     class OBJ(Status):
         def init_attribute(self):
             self.TE = Value(self)
+            self.TES = {}
     status = OBJ()
     status.set_current_info(10, 1)
     # 初始状态
     assert status.TE == None, f'TE should be None, but got {status.TE}'
     # assert status.TE is None, f'TE should be None, but got {status.TE}'
-    assert status.TE.millis == 0
+    assert status.TE.timestamp == 0
+
+    status.TES['ab'] = Value(status, 1)
+    status.TES['cd'] = 2
 
     # 修改 TE 为 数字
     status.set_current_info(20, 2)
-    status.TE = 1
+    status.TE = Value(status, 1)
     assert(status.TE == 1)
     assert(status.TE < 2)
-    assert(status.TE.millis == 20)
+    assert status.TE.timestamp == 20, f'TE.timestamp should be 20, but got {status.TE.timestamp}'
 
     status.set_current_info(25, 2)
     status.TE += 2
     assert(status.TE == 3)
-    assert(status.TE.millis == 25)
+    assert status.TE.timestamp == 25, f'TE.timestamp should be 25, but got {status.TE.timestamp}'
 
     status.set_current_info(26, 2)
     status.TE -= 3
     assert(status.TE == 0)
-    assert(status.TE.millis == 26)
+    assert(status.TE.timestamp == 26)
 
     # 修改 TE 为字符串
     status.set_current_info(20, 2)
-    status.TE = "obj"
+    status.TE = Value(status, "obj")
     assert(status.TE == "obj") 
     assert(len(status.TE) == 3)
     assert(status.TE[0] == "o")
-    assert(status.TE.millis == 20)
+    assert(status.TE.timestamp == 20)
 
-    print(status.get_all_status())
+    status.TES['ab'] = Value(status, 1)
+    status.TES['cd'] = 2
+
+    v = status.get_all_status()
+    print(v)
+    assert v['values']['TE'] == "obj"
+    assert v['values']['TES.ab'] == 1
+    assert v['values']['TES.cd'] == 2
+    assert v['timestamp']['TE'] == 20
+    assert v['timestamp']['TES.ab'] == 20
+    assert 'TES.cd' not in v['timestamp']
+
+
     print("test pass!")
