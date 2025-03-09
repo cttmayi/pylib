@@ -50,6 +50,8 @@ class EventLog(log.Log):
         for _, log in df.iterrows():
             if log.tag == 'am_proc_start':
                 # am_proc_start: [0,1617,10021,com.android.deskclock,broadcast,com.android.deskclock/.AlarmInitReceiver]
+                # am_proc_start: [0,18013,10402,com.android.rkpdapp,service,{com.android.rkpdapp/androidx.work.impl.background.systemjob.SystemJobService}, {callerPackage = system, calle
+                # print(log.tag_msg)
                 pid = log.match[1]
                 package = log.match[3]
                 time = log.datetime

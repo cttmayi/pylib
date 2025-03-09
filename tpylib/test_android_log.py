@@ -1,4 +1,4 @@
-import conf
+import utils.env
 
 from pylib.android.log import log
 
@@ -10,14 +10,14 @@ from pylib.android.log import event_log
 
 
 
-event = event_log.EventLog('test_data/android/log/events_log')
-event_boot = event_log.EventLog('test_data/android/log/events_log.boot')
+event = event_log.EventLog('log/android_event.log')
+# event_boot = event_log.EventLog('log/events_log.boot')
 
-r_start = event_boot.find(lambda log: log.tag == 'am_proc_start')
-r_died = event_boot.find(lambda log: log.tag == 'am_proc_died')
+r_start = event.find(lambda log: log.tag == 'am_proc_start')
+r_died = event.find(lambda log: log.tag == 'am_proc_died')
 
 r = event_log.EventLog()
-r.merge([event.get_logs(), event_boot.get_logs()], 'index')
+r.merge([event.get_logs(), event.get_logs()], 'index')
 
 print(r.get_logs())
 

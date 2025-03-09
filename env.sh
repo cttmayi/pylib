@@ -6,13 +6,13 @@ current_script=$(realpath "$0")
 # 获取当前脚本所在的目录
 current_dir=$(dirname "$current_script")
 
-pylib_dir=$current_dir/pylib
+# pylib_dir=$current_dir/pylib
 
 
 # HF 镜像
 export HF_ENDPOINT=https://hf-mirror.com
 
-export PYTHONPATH=$pylib_dir:$PYTHONPATH
+export PYTHONPATH=$current_dir:$PYTHONPATH
 
 # 加载.env文件
 while IFS='=' read -r key value || [[ -n "$key" ]]; do

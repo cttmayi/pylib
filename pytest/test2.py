@@ -1,92 +1,42 @@
-import re
-from functools import lru_cache
 
-# 预定义格式符的匹配规则和类型转换器（常量提升到全局）
-FORMAT_PATTERNS = {
-    '%d': {
-        'pattern': r'(-?\d+)',
-        'converter': int
-    },
-    '%s': {
-        'pattern': r'(.+?)',
-        'converter': str
-    },
-    '%l': {
-        'pattern': r'([a-zA-Z]+)',
-        'converter': str
-    }
-}
+class TEValue:
+    def __init__(self, value, millis):
+        self.value = value      # 存储任意类型的值
+        self.millis = millis    # 存储millis属性
 
-@lru_cache(maxsize=128)  # 缓存常见格式模板
-def _compile_format(format_str):
-    """预编译格式字符串为 (正则表达式, 转换器列表)"""
-    parts = re.split(r'(%\w+)', format_str)
-    regex_parts = []
-    converters = []
-    
-    for part in parts:
-        if part in FORMAT_PATTERNS:
-            # 处理已知格式符
-            regex_parts.append(FORMAT_PATTERNS[part]['pattern'])
-            converters.append(FORMAT_PATTERNS[part]['converter'])
-        elif part.startswith('%'):
-            # 遇到未知格式符直接返回错误
-            return None, None  
-        elif part:
-            # 转义静态部分
-            regex_parts.append(re.escape(part))
-    
-    try:
-        # 编译正则（移除DOTALL提升性能，除非需要匹配换行）
-        pattern = re.compile(f'^{"".join(regex_parts)}$') 
-        return pattern, converters
-    except re.error:
-        return None, None
+    def __repr__(self):
+        return repr(self.value)  # 模拟原始值的表现
 
-def re_match(format_str, vars_list, target_str):
-    # Step 1: 获取预编译的正则和转换器
-    pattern, converters = _compile_format(format_str)
-    if not pattern or len(converters) != len(vars_list):
-        return None
-    
-    # Step 2: 快速匹配
-    match = pattern.match(target_str)
-    if not match:
-        return None
-    
-    # Step 3: 类型转换
-    result = {}
-    try:
-        for var, val_str, converter in zip(vars_list, match.groups(), converters):
-            result[var] = converter(val_str)
-    except ValueError:
-        return None
-    
-    return result
+    def __str__(self):
+        return str(self.value)
 
+    # 动态代理所有未定义的操作到 self.value
+    def __getattr__(self, name):
+        return getattr(self.value, name)
 
-import time
-start_time = time.time()
-formats = ["ID: %d, Name: %s", "Code: %l-%d", "Score: %d"]
-data = [
-    ("ID: 123, Name: Alice", ['id', 'name'], {'id': 123, 'name': 'Alice'}),
-    ("Code: XYZ-42", ['code', 'num'], {'code': 'XYZ', 'num': 42}),
-    ("Score: -5", ['score'], {'score': -5})
-] * 100000
+class Status:
+    def __init__(self):
+        self._te = TEValue(1, 10)  # 初始值 TE=1, millis=10
 
+    @property
+    def TE(self):
+        return self._te
 
-for vars_str, vars_list, target_map in data:
-    for format in formats:
-        result = re_match(format, vars_list, vars_str)
-        if result is not None:
-            assert result == target_map
-            break
-    # assert result == target_str
+    @TE.setter
+    def TE(self, value):
+        # 创建新实例时，保留当前millis的值
+        self._te = TEValue(value, self._te.millis)
 
-end_time = time.time()
-print(f"Time taken: {end_time - start_time} seconds")
+status = Status()
 
+# 测试动态修改
+print(status.TE, status.TE.millis)  # 输出: 1 10
 
+status.TE = 3  # 修改TE值，millis保持10
+print(status.TE, status.TE.millis)  # 输出: 3 10
 
-# 优化前: ~12.3 秒
-# 优化后: ~1.8 秒 (6.8倍加速)
+status.TE.millis = 30  # 单独修改millis
+print(status.TE, status.TE.millis)  # 输出: 3 30
+
+status.TE = 5  # 再次修改TE，millis保留30
+print(status.TE, status.TE.millis)  # 输出: 5 30

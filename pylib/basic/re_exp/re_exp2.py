@@ -95,28 +95,39 @@ class FormatMatcher:
                     except ValueError:
                         continue
         return None
-    
-formats = [
-    ["ID: %d, Name: %s", ['id', 'name']],
-    ["Code: %l-%d", ['code', 'num'] ],
-    ["Score: %d", ['score']],
-    ["%d-%s-%l" , ['id', 'text', 'letters']],
-]
 
-matcher = FormatMatcher(formats)
 
-# 测试匹配
-test_cases = [
-    "ID: 123, Name: Alice",
-    "Code: XYZ-42",
-    "Score: -5",
-    "123-hello-World"
-]
+if __name__ == '__main__':
 
-for s in test_cases:
-    result = matcher.match(s)
-    if result:
-        fmt_idx, parsed = result
-        print(f"匹配到格式[{fmt_idx}]: {parsed}")
-    else:
-        print(f"未匹配: {s}")
+    format_number = 100000
+    case_number = 100000
+
+
+    formats = [
+        ["ID: %d, Name: %s", ['id', 'name']],
+        ["Code: %l-%d", ['code', 'num'] ],
+        ["Score: %d", ['score']],
+        # ["%d-%s-%l" , ['id', 'text', 'letters']],
+    ] * format_number
+
+    formats.append(["%d-%s-%l" , ['id', 'text', 'letters']])  # 无静态前缀的格式
+
+    matcher = FormatMatcher(formats)
+
+    # 测试数据
+    test_cases = [
+        ("ID: 123, Name: Alice", (0, {'id': 123, 'name': 'Alice'})),
+        ("Code: XYZ-42", (1, {'code': 'XYZ', 'num': 42})),
+        ("Score: -5", (2, {'score': -5})),
+        ("123-test-ABC", (format_number * 3, {'id': 123, 'text': 'test', 'letters': 'ABC'}))
+    ] * case_number
+
+    import time
+    start_time = time.time()
+
+    for target_str, expected in test_cases:
+        result = matcher.match(target_str)
+        assert result == expected
+
+    end_time = time.time()
+    print(f"Time taken: {end_time - start_time} seconds")
