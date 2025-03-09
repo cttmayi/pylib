@@ -6,10 +6,12 @@ import logging
 
 
 PATH = 'debug'
-os.makedirs(PATH, exist_ok=True)
 
-log_file = os.path.join(PATH, 'debug.log')
-logging.basicConfig(level=logging.DEBUG, filename=log_file, filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
+
+if conf.DEBUG:
+    os.makedirs(PATH, exist_ok=True)
+    log_file = os.path.join(PATH, 'debug.log')
+    logging.basicConfig(level=logging.DEBUG, filename=log_file, filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
 
 def file(value, file_name):
     if conf.DEBUG:
