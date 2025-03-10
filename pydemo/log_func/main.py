@@ -7,11 +7,11 @@ from status import Error
 
 #获取参数
 if conf.DEBUG:
-    path = 'log/simple.txt'
-    type = 'main'
+    path = 'log/simple.log'
+    type = 'debug'
 else:
     import argparse
-    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser = argparse.ArgumentParser(description='Parser for log file')
     parser.add_argument('path', type=str, help='log file path')
     parser.add_argument('type', type=str, help='log type')
     args = parser.parse_args()
@@ -32,4 +32,5 @@ if __name__ == '__main__':
         for error in errors:
             if error.level == level:
                 print(error.get_error_msg(logs), '\n')
+                pass
 

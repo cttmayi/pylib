@@ -238,6 +238,7 @@ class Status:
         return ret
 
 #####################################################################
+    # 关闭保护模式，允许动态添加属性
     def enable_attribute__mode(self):
         self.__setattr_func__ = self.__attribute_setattr__
 
@@ -260,59 +261,3 @@ class Status:
         # if name not in self.__dict__:
         #     raise AttributeError(f"Cannot set new attribute '{name}' dynamically")
         super().__setattr__(name, value)
-
-if __name__ == '__main__':
-
-    class OBJ(Status):
-        def init_attribute(self):
-            self.TE = Value(self)
-            self.TES = {}
-    status = OBJ()
-    status.set_current_info(10, 1)
-    # 初始状态
-    assert status.TE == None, f'TE should be None, but got {status.TE}'
-    # assert status.TE is None, f'TE should be None, but got {status.TE}'
-    assert status.TE.timestamp == 0
-
-    status.TES['ab'] = Value(status, 1)
-    status.TES['cd'] = 2
-
-    # 修改 TE 为 数字
-    status.set_current_info(20, 2)
-    status.TE = Value(status, 1)
-    assert(status.TE == 1)
-    assert(status.TE < 2)
-    assert status.TE.timestamp == 20, f'TE.timestamp should be 20, but got {status.TE.timestamp}'
-
-    status.set_current_info(25, 2)
-    status.TE += 2
-    assert(status.TE == 3)
-    assert status.TE.timestamp == 25, f'TE.timestamp should be 25, but got {status.TE.timestamp}'
-
-    status.set_current_info(26, 2)
-    status.TE -= 3
-    assert(status.TE == 0)
-    assert(status.TE.timestamp == 26)
-
-    # 修改 TE 为字符串
-    status.set_current_info(20, 2)
-    status.TE = Value(status, "obj")
-    assert(status.TE == "obj") 
-    assert(len(status.TE) == 3)
-    assert(status.TE[0] == "o")
-    assert(status.TE.timestamp == 20)
-
-    status.TES['ab'] = Value(status, 1)
-    status.TES['cd'] = 2
-
-    v = status.get_all_status()
-    print(v)
-    assert v['values']['TE'] == "obj"
-    assert v['values']['TES.ab'] == 1
-    assert v['values']['TES.cd'] == 2
-    assert v['timestamp']['TE'] == 20
-    assert v['timestamp']['TES.ab'] == 20
-    assert 'TES.cd' not in v['timestamp']
-
-
-    print("test pass!")

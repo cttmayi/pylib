@@ -129,7 +129,6 @@ dmypy.json
 .pyre/
 
 # Project
-conf.py
 tensorboard/
 model/
 OAI_CONFIG_LIST

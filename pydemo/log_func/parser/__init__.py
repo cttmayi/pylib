@@ -3,10 +3,11 @@ import pylib.basic.re_exp.re_exp2 as re_exp
 from runtime.op import PATTERN_LIST, STATUS_MAP, STATUS_GLOBAL, get_op_func, get_op_name, get_op_func_init
 import logging
 
-PARSER_FORMAT = ['type', 'date', 'time', 'timestamp', 'pid', 'tid', 'level', 'tag', 'msg']
+# PARSER_FORMAT = ['type', 'date', 'time', 'timestamp', 'pid', 'tid', 'level', 'tag', 'msg']
 
-from parser.android import main_parser as main_parser
+from parser.android import main_parser, debug_parser
 PARSER_MAP = {
+    'debug': debug_parser,
     'main':  main_parser,
 }
 
@@ -21,7 +22,7 @@ class LogParser():
 
         with open(path, errors='ignore') as fp:
             lines = fp.readlines()
-            lines = [l.strip() for l in lines]
+            lines = [l.strip() for l in lines] # remove \n
             parser = self._parser[type]
             self.logs = parser(lines)
 
@@ -34,13 +35,37 @@ class LogParser():
 
     def _op_transfer(self, log):
         r = self.matcher.match(log.msg)
+
+        
         if r is not None:
             type = log.type
+            line = log.name
+            timestamp = log.timestamp
             name = get_op_name(type, r[0])
-            self.op_result.append({'type': type, 'line': log.name, 'timestamp': log.timestamp, 'name': name, 'op': r[0], 'args': r[1], })
+            op = r[0]
+            args = r[1]
+            tid = log.tid
 
-    def transfor_to_op(self, log_df):
+            op_f = {'type': type, 'line': line, 'timestamp': timestamp, 'tid': tid,  'name': name, 'op': op, 'args': args, 'n': 1}
+
+            # 通过op_by_tid来缓存的op_f， 延迟放入op_result
+            op_f_last = self.op_by_tid.get(tid)
+            if op_f_last is not None and op_f_last['name'] == name and op_f_last['op'] != op:
+                    new_args = {}
+                    for k in args:
+                        new_args[k + '_' + str(op_f_last['n'])] = args[k]
+                    op_f_last['args'].update(new_args)
+                    op_f_last['n'] += 1
+            else:
+                self.op_by_tid[tid] = op_f
+                self.op_result.append(op_f)            
+
+
+    def transfor_to_op(self, log_df:pd.DataFrame):
+        self.op_by_tid = {}
         log_df.apply(self._op_transfer, axis=1)
+        # for op_pid in self.op_by_tid:
+        #     self.op_result.append(self.op_by_tid[op_pid])
         df = pd.DataFrame(self.op_result)
         return df
 

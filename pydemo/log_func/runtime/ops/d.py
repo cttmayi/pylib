@@ -34,6 +34,10 @@ class DStatus(Status):
 
         if id in self.buffer:
             del self.buffer[id]
+    
+    def DUMP(self, **kwargs):
+        # print(kwargs)
+        pass
 
 STATUS = DStatus()
 
