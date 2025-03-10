@@ -59,8 +59,7 @@ class Value:
         return hash(self.value)
     
     def __bool__(self):
-        if self._status.error is not None:
-            self._status.error.add_related_line(self.line)
+        self._status._add_related_line(self.line)
         return bool(self.value)
 
     def __set__(self, key, value):
@@ -187,7 +186,7 @@ class Status:
         self._current_line = line_number
 
     def __getattr__(self, name):
-        if self._golbal_status is not None and  name in self._golbal_status.__dict__:
+        if self._golbal_status is not None:
             return getattr(self._golbal_status, name)
         raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
 

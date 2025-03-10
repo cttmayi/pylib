@@ -1,4 +1,6 @@
 import os
 from sys import argv
 
-os.chdir(os.path.dirname(argv[0]))
+path = argv[0]
+if path is not None and path != '':
+    os.chdir(os.path.dirname(argv[0]))

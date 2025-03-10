@@ -3,7 +3,7 @@ import unittest
 from parser import LogParser
 from status import Error
 
-class TestStatus(unittest.TestCase):
+class TestParser(unittest.TestCase):
     def setUp(self):
         pass
 
@@ -26,27 +26,32 @@ class TestStatus(unittest.TestCase):
                 return error
         return None
 
-    def test_simple(self):
-        file = 'log/test/simple.log'
-        type = 'debug'
+
+    def verify_error(self, data):
+        file = data['file']
+        type = data['type']
+        errors_verfiy = data['errors']
+
         errors = self.parser(file, type)
-
-        error = self.get_error(errors, 'TE is timeout until end')
-        self.assertIsNotNone(error)
-        self.assertIn(30, error.related_lines)
-
-    def test_file_group(self):
-        file_data = [
-            ['log/test/simple.log' , 'debug', 'TE is timeout until end', 32, [30]]
-        ]
-
-        for file, type, msg, line, related_lines in file_data:
-            errors = self.parser(file, type)
+        for msg, line, related_lines in errors_verfiy:
             error = self.get_error(errors, msg)
             self.assertIsNotNone(error)
             self.assertEqual(error.line, line)
             for line in related_lines:
                 self.assertIn(line, error.related_lines)
+
+    def test_simple(self):
+        data = {
+            'file':'log/test/simple.log',
+            'type': 'debug',
+            'errors': [
+                ['TE is timeout until end', 32, [30]],
+                ['Q is not in BUFFER', 1, [1]],
+                ['TE is timeout', 5, [5]],
+            ]
+        }
+        self.verify_error(data)
+
 
 
 

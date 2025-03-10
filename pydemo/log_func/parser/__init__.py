@@ -1,9 +1,9 @@
 import pandas as pd
 import pylib.basic.re_exp.re_exp2 as re_exp
-from runtime.op import PATTERN_LIST, STATUS_MAP, STATUS_GLOBAL, get_op_func, get_op_name, get_op_func_init
+from runtime.op import PATTERN_LIST, STATUS_MAP, get_op_func, get_op_name, get_op_func_init
 import logging
 
-# PARSER_FORMAT = ['type', 'date', 'time', 'timestamp', 'pid', 'tid', 'level', 'tag', 'msg']
+PARSER_FORMAT = ['type', 'date', 'time', 'timestamp', 'pid', 'tid', 'level', 'tag', 'msg']
 
 from parser.android import main_parser, debug_parser
 PARSER_MAP = {
@@ -15,8 +15,7 @@ class LogParser():
     def __init__(self, path, type=None):
         self.logs:pd.DataFrame = None
         self.op_result = []
-        self.status_list = [STATUS_GLOBAL]
-        self.status_list.extend(STATUS_MAP.values())
+        self.status_list = STATUS_MAP.keys()
         self.matcher = re_exp.FormatMatcher(PATTERN_LIST)
         self._parser = PARSER_MAP
 

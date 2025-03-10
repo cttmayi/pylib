@@ -3,19 +3,19 @@ from status import Status, Value, Error
 
 class TestStatus(unittest.TestCase):
     def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def test_value(self):
         class OBJ(Status):
             def init_attribute(self):
                 self.TE = Value(self)
                 self.TE_MAP = {}
                 self.TE_LIST = []
         status = OBJ()
-        self.status = status
 
-    def tearDown(self):
-        pass
-
-    def test_class(self):
-        status = self.status
         status.set_current_info(10, 1)
         self.assertEqual(status.TE, None)
         self.assertEqual(status.TE.timestamp, 0)
@@ -49,8 +49,6 @@ class TestStatus(unittest.TestCase):
         status.TE_MAP['ab'] = Value(status, 1)
         status.TE_MAP['cd'] = 2
 
-
-
         status.set_current_info(40, 5)
         status.TE_LIST = [Value(status, 1), Value(status, 2)]
         self.assertEqual(status.TE_LIST[0], 1)
@@ -66,3 +64,25 @@ class TestStatus(unittest.TestCase):
         self.assertEqual(v['values']['TE_MAP.cd'], 2)
         self.assertEqual(v['values']['TE_LIST.0'], 1)
         self.assertEqual(v['values']['TE_LIST.1'], 2)
+
+    def test_status(self):
+        class PP(Status):
+            def init_attribute(self):
+                self.pp = Value(self, 1)
+        pp = PP()
+        class P(Status):
+            def init_attribute(self):
+                self.p = Value(self, 2)
+        p = P()
+        p.set_global_status(pp)
+        class C(Status):
+            def init_attribute(self):
+                self.c = Value(self, 3)
+        c = C()
+        c.set_global_status(p)
+
+        self.assertEqual(c.c, 3)
+        self.assertEqual(c.p, 2)
+        self.assertEqual(c.pp,1)
+
+

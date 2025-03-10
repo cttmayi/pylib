@@ -1,11 +1,10 @@
 from runtime.ops.g import STATUS as g
 from runtime.ops.d import STATUS as d
-
-
-STATUS_GLOBAL = g
+from status import Status
 
 STATUS_MAP = {
-    'D': d,
+    g: None,
+    d: g
 }
 
 # NAME, FUNC_INIT, FUNC, ARGUMENTS, PATTERN
@@ -67,8 +66,8 @@ for type, ops in OP_MAPS.items():
         PATTERN_LIST.append([pattern, arguments]) # PATTERN, ARGUMENTS
         # OP_MAP.append([type, name, func_init, func, arguments, pattern]) # TYPE, NAME, FUNC_INIT, FUNC, ARGUMENTS, PATTERN
 
-for status in STATUS_MAP.values():
-    status.set_global_status(STATUS_GLOBAL)
+for status, pstatus in STATUS_MAP.items():
+    status.set_global_status(pstatus)
 
 
 if __name__ == '__main__':

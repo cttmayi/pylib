@@ -9,3 +9,5 @@ PARSER_MAP = {
     'debug': debug_parser,
     'main':  main_parser,
 }
+
+runtime/op.py op 全局定义文件
