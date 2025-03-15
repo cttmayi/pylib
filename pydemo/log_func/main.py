@@ -18,8 +18,8 @@ else:
     path = args.path
     type = args.type
 
-if __name__ == '__main__':
-    lp:LogParser = LogParser(path, type)
+def main(path, type, looper=None):
+    lp:LogParser = LogParser(path, type, looper)
     logs = lp.transfor_to_df()
     debug.file(logs, 'logs')
 
@@ -27,6 +27,11 @@ if __name__ == '__main__':
     debug.file(ops, 'ops')
 
     errors = lp.op_execute(ops)
+    return errors
+
+
+if __name__ == '__main__':
+    errors = main(path, type)
 
     for level in Error.LEVELS:
         for error in errors:
