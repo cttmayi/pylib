@@ -85,7 +85,7 @@ class CodeInterpreter(BaseToolWithFileAccess):
 
     def call(self, params: Union[str, dict], files: List[str] = None, timeout: Optional[int] = 30, **kwargs) -> str:
         super().call(params=params, files=files)  # copy remote files to work_dir
-        print('files:', files)
+
         try:
             params = json5.loads(params)
             code = params['code']
