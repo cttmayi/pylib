@@ -5,7 +5,7 @@ PARSER_FORMAT = ['type', 'date', 'time', 'timestamp', 'pid', 'tid', 'level', 'ta
 
 TIMESTAMP_START = None
 # 11-25 19:41:19.813  1153  1153 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 1153 (init), pid 1153 (init)
-def main_parser(lines, type='main'):
+def _main_parser(lines, type='main'): # no use, just for test
     s = pd.Series(lines)
     logs = s.str.split(expand=True, n=5)
     logs.rename(
@@ -34,6 +34,29 @@ def main_parser(lines, type='main'):
     logs = logs[PARSER_FORMAT]
 
     return logs
+
+
+
+PAESER_MAIN_REGEX = r'(\d+-\d+) (\d+:\d+:\d+\.\d+) (\d+) (\d+) ([A-Z]) ([\w\s]+): (.*)'
+
+# 11-25 19:41:19.813  1153  1153 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 1153 (init), pid 1153 (init)
+def main_parser(lines, type='main'):
+    regex = r'(\d+-\d+) (\d+:\d+:\d+\.\d+) (\d+) (\d+) ([A-Z]) ([\w\s]+): (.*)'
+    logs = pd.Series(lines).str.split(regex, expand=True)
+    logs.rename(columns={1:'date', 2:'time', 3:'pid', 4:'tid', 5:'level', 6:'tag', 7:'msg'}, inplace=True)
+    logs['type'] = type
+
+    def to_timestamp(log):
+        global TIMESTAMP_START
+        now = '1970-' + log.date + ' ' + log.time
+        now = pd.to_datetime(now, format='%Y-%m-%d %H:%M:%S.%f')
+        timestamp = int(ts.ms(now.timestamp()))
+        TIMESTAMP_START = TIMESTAMP_START if TIMESTAMP_START is not None else timestamp
+        return ts.ms(timestamp - TIMESTAMP_START)
+    logs['timestamp'] = logs.apply(to_timestamp, axis=1)
+    logs = logs[PARSER_FORMAT]
+    return logs
+
 
 def debug_parser(lines):
     return main_parser(lines, 'debug')

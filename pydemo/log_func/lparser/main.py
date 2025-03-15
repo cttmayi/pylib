@@ -2,9 +2,11 @@ import lparser.debug as debug
 from lparser.parser import LogParser
 from lparser.status import Error
 
-def tool_main(path, type, looper=None):
+def tool_main(path, type=None, looper=None):
     lp:LogParser = LogParser(path, type, looper)
     logs = lp.transfor_to_df()
+    if logs is None:
+        raise Exception('log格式无法识别')
     debug.file(logs, 'logs')
 
     ops = lp.transfor_to_op(logs)
@@ -20,5 +22,6 @@ def tool_main(path, type, looper=None):
                     pass
 
         return errors, ops, logs
-
+    
+    return None
 

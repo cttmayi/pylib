@@ -6,9 +6,11 @@ from pathlib import Path
 os.environ['QWEN_AGENT_DEFAULT_WORKSPACE'] = 'work_dir'
 from qwen_agent.agents import Assistant
 from lparser.agent.log_parser import CodeInterpreter, SYSTEM_INSTRUCTION_FILE, USER_PICTURE_FILE, AGENT_PICTURE_FILE
-from lparser.agent.op_info import get_op_info
+from lparser.agent.op_info import get_op_infos
 
 PARSER_WORKSPACE = 'work_dir/workspace'
+LOG_FILE = str(Path(__file__).absolute().parent / 'data' / 'log' / 'simple.log')
+
 
 def copy_dir(src_dir):
     dst_dir = os.path.join(PARSER_WORKSPACE, src_dir)
@@ -17,7 +19,6 @@ def copy_dir(src_dir):
 os.makedirs(PARSER_WORKSPACE, exist_ok=True)
 copy_dir('lparser')
 copy_dir('runtime')
-copy_dir('data')
 
 
 # 配置您所使用的 LLM。
@@ -40,13 +41,13 @@ llm_cfg = {
 # 创建一个智能体。这里我们以 `Assistant` 智能体为例，它能够使用工具并读取文件。
 with open(SYSTEM_INSTRUCTION_FILE, 'r') as f:
     system_instruction = f.read()
-    system_instruction = system_instruction.replace('<OP_LIST>', '\n'.join(get_op_info('debug')))
+    system_instruction = system_instruction.replace('### OP_LIST ###', '\n'.join(get_op_infos()))
 
 
 tools = [
     {'name': 'log_parser', 'work_dir': PARSER_WORKSPACE,},
     ]
-# files = ['./op_looper.py']
+
 bot = Assistant(llm=llm_cfg,
                 system_message=system_instruction,
                 function_list=tools,
@@ -54,10 +55,13 @@ bot = Assistant(llm=llm_cfg,
                 description='我是一个日志分析助手',
                 )
 
-
 chatbot_config = {
     'input.placeholder': '请输入需要检查的内容',
-    'prompt.suggestions': ['检查 TE，不应该大于16ms'],
+    'prompt.suggestions': [{
+        'text': '检查 TE，不应该大于16ms',
+        'files': [LOG_FILE],
+        }
+    ],
     'user.avatar': USER_PICTURE_FILE,
     'agent.avatar': AGENT_PICTURE_FILE,
 }

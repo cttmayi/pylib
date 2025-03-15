@@ -30,7 +30,8 @@ app.launch_new_instance()
 """
 
 INIT_CODE_FILE = str(Path(__file__).absolute().parent / 'resource' / 'code_interpreter_init_kernel.py')
-ALIB_FONT_FILE = str(Path(__file__).absolute().parent / 'resource' / 'AlibabaPuHuiTi-3-45-Light.ttf')
+RUN_CODE_FILE = str(Path(__file__).absolute().parent / 'resource' / 'code_interpreter_run_code.py')
+# ALIB_FONT_FILE = str(Path(__file__).absolute().parent / 'resource' / 'AlibabaPuHuiTi-3-45-Light.ttf')
 SYSTEM_INSTRUCTION_FILE = str(Path(__file__).absolute().parent / 'resource' / 'system_instruction.txt')
 USER_PICTURE_FILE = str(Path(__file__).absolute().parent / 'resource' / 'user.jpeg')
 AGENT_PICTURE_FILE = str(Path(__file__).absolute().parent / 'resource' / 'agent.jpeg')
@@ -84,7 +85,7 @@ class CodeInterpreter(BaseToolWithFileAccess):
 
     def call(self, params: Union[str, dict], files: List[str] = None, timeout: Optional[int] = 30, **kwargs) -> str:
         super().call(params=params, files=files)  # copy remote files to work_dir
-
+        print('files:', files)
         try:
             params = json5.loads(params)
             code = params['code']
@@ -103,7 +104,7 @@ class CodeInterpreter(BaseToolWithFileAccess):
             kc, subproc = self._start_kernel(kernel_id)
             with open(INIT_CODE_FILE) as fin:
                 start_code = fin.read()
-                start_code = start_code.replace('{{M6_FONT_PATH}}', repr(ALIB_FONT_FILE)[1:-1])
+                # start_code = start_code.replace('{{M6_FONT_PATH}}', repr(ALIB_FONT_FILE)[1:-1])
                 start_code += '\n%xmode Plain' # Plain mode, Minimal mode, Context mode, Verbose mode
             logger.info(self._execute_code(kc, start_code))
             _KERNEL_CLIENTS[kernel_id] = kc
@@ -112,20 +113,12 @@ class CodeInterpreter(BaseToolWithFileAccess):
         if timeout:
             code = f'_M6CountdownTimer.start({timeout})\n{code}'
 
-        fixed_code = []
-        for line in code.split('\n'):
-            fixed_code.append(line)
-            if line.startswith('sns.set_theme('):
-                fixed_code.append('plt.rcParams["font.family"] = _m6_font_prop.get_name()')
-        
-        fixed_code.append('from lparser.main import tool_main')
-        fixed_code.append("from lparser.conf import DEBUG")
-        fixed_code.append("DEBUG = False")
-        fixed_code.append("tool_main('data/log/simple.log', 'debug', looper)")
-
-        fixed_code = '\n'.join(fixed_code)
-        fixed_code += '\n\n'  # Prevent code not executing in notebook due to no line breaks at the end
-        result = self._execute_code(kc, fixed_code)
+        with open(RUN_CODE_FILE) as fin:
+            run_code = fin.read()
+            run_code = run_code.replace('### <FILES> ###', 'files = ' + str(files))
+            run_code = run_code.replace('### <CODE> ###', code)
+            run_code += '\n\n'  # Prevent code not executing in notebook due to no line breaks at the end
+        result = self._execute_code(kc, run_code)
 
         if timeout:
             self._execute_code(kc, '_M6CountdownTimer.cancel()')
@@ -141,20 +134,6 @@ class CodeInterpreter(BaseToolWithFileAccess):
         if k in _MISC_SUBPROCESSES:
             _MISC_SUBPROCESSES[k].terminate()
             del _MISC_SUBPROCESSES[k]
-
-    def _fix_secure_write_for_code_interpreter(self):
-        if 'linux' in sys.platform.lower():
-            os.makedirs(self.work_dir, exist_ok=True)
-            fname = os.path.join(self.work_dir, f'test_file_permission_{os.getpid()}.txt')
-            if os.path.exists(fname):
-                os.remove(fname)
-            with os.fdopen(os.open(fname, os.O_CREAT | os.O_WRONLY | os.O_TRUNC, 0o0600), 'w') as f:
-                f.write('test')
-            file_mode = stat.S_IMODE(os.stat(fname).st_mode) & 0o6677
-            if file_mode != 0o0600:
-                os.environ['JUPYTER_ALLOW_INSECURE_WRITES'] = '1'
-            if os.path.exists(fname):
-                os.remove(fname)
 
     def _start_kernel(self, kernel_id: str):
         connection_file = os.path.join(self.work_dir, f'kernel_connection_file_{kernel_id}.json')
@@ -174,7 +153,7 @@ class CodeInterpreter(BaseToolWithFileAccess):
                 os.path.abspath(launch_kernel_script),
                 '--IPKernelApp.connection_file',
                 os.path.abspath(connection_file),
-                '--matplotlib=inline',
+                # '--matplotlib=inline',
                 '--quiet',
             ],
             cwd=os.path.abspath(self.work_dir),
@@ -277,37 +256,18 @@ class CodeInterpreter(BaseToolWithFileAccess):
 
 def _check_deps_for_code_interpreter():
     try:
-        import matplotlib  # noqa
-        import matplotlib.pyplot as plt  # noqa
+        # import matplotlib  # noqa
+        # import matplotlib.pyplot as plt  # noqa
         import numpy as np  # noqa
         import pandas as pd  # noqa
-        import PIL.Image  # noqa
-        import seaborn as sns  # noqa
+        # import PIL.Image  # noqa
+        # import seaborn as sns  # noqa
         from jupyter_client import BlockingKernelClient  # noqa
         from sympy import Eq, solve, symbols  # noqa
     except ImportError as e:
         raise ImportError(
             'The dependencies for Code Interpreter support are not installed. '
-            'Please install the required dependencies by running: pip install "qwen-agent[code_interpreter]"') from e
-
-
-def _fix_matplotlib_cjk_font_issue():
-    import matplotlib
-
-    ttf_name = os.path.basename(ALIB_FONT_FILE)
-    local_ttf = os.path.join(os.path.abspath(os.path.join(matplotlib.matplotlib_fname(), os.path.pardir)), 'fonts',
-                             'ttf', ttf_name)
-    if not os.path.exists(local_ttf):
-        try:
-            shutil.copy(ALIB_FONT_FILE, local_ttf)
-            font_list_cache = os.path.join(matplotlib.get_cachedir(), 'fontlist-*.json')
-            for cache_file in glob.glob(font_list_cache):
-                with open(cache_file) as fin:
-                    cache_content = fin.read()
-                if ttf_name not in cache_content:
-                    os.remove(cache_file)
-        except Exception:
-            print_traceback()
+            'Please install the required dependencies by running: pip install *') from e
 
 
 def _escape_ansi(line: str) -> str:

@@ -42,9 +42,3 @@ class _M6CountdownTimer:
             signal.alarm(0)
         except AttributeError:  # windows
             pass
-
-
-sns.set_theme()
-
-_m6_font_prop = FontProperties(fname='{{M6_FONT_PATH}}')
-plt.rcParams['font.family'] = _m6_font_prop.get_name()
