@@ -17,5 +17,5 @@ def looper(name, args, timestamp, line):
     pass
 
 
-from main import main
-main('log/simple.log', 'debug', looper)
+from main import tool_main
+tool_main('log/simple.log', 'debug', looper)

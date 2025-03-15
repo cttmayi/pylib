@@ -1,5 +1,5 @@
 import pandas as pd
-import utils.timestamp as ts
+import lparser.utils.timestamp as ts
 
 PARSER_FORMAT = ['type', 'date', 'time', 'timestamp', 'pid', 'tid', 'level', 'tag', 'msg']
 

@@ -1,9 +1,23 @@
 import utils.env
 import pprint
+import shutil
 import os, sys
+from pathlib import Path
+os.environ['QWEN_AGENT_DEFAULT_WORKSPACE'] = 'work_dir'
 from qwen_agent.agents import Assistant
-from agent.log_parser import CodeInterpreter
-from agent.op_info import get_op_info
+from lparser.agent.log_parser import CodeInterpreter, SYSTEM_INSTRUCTION_FILE, USER_PICTURE_FILE, AGENT_PICTURE_FILE
+from lparser.agent.op_info import get_op_info
+
+PARSER_WORKSPACE = 'work_dir/workspace'
+
+def copy_dir(src_dir):
+    dst_dir = os.path.join(PARSER_WORKSPACE, src_dir)
+    shutil.copytree(src_dir, dst_dir,symlinks=True, ignore=shutil.ignore_patterns('*.pyc', '__pycache__'), dirs_exist_ok=True)
+
+os.makedirs(PARSER_WORKSPACE, exist_ok=True)
+copy_dir('lparser')
+copy_dir('runtime')
+copy_dir('data')
 
 
 # 配置您所使用的 LLM。
@@ -23,52 +37,31 @@ llm_cfg = {
     }
 }
 
-
-system_instruction_before = '''你是一个AI助手。
-请根据用户请求，参考说明书完善looper函数，并生成代码通过log_parser工具执行。
-
-说明书：
-代码会循环调用 op_looper 函数，每次调用都会传入 name, args, timestamp, line 四个参数
-- name: 名称
-- args: 参数，是一个字典
-- timestamp: 时间戳，是一个浮点数，单位是微秒
-- line: 行号，是一个整数
-
-# name 类别
-'''
-
-system_instruction_after = '''
-参考代码如下， 请完善looper函数，并生成代码通过log_parser工具执行。
-···python
-def looper(name, args, timestamp, line):
-    # 请在这里编写代码
-    # ···
-    pass
-
-from main import main，
-main('log/simple.log', 'kernel', looper)。
-···
-你总是用中文回复用户。'''
-
 # 创建一个智能体。这里我们以 `Assistant` 智能体为例，它能够使用工具并读取文件。
-system_instruction = []
-system_instruction.append(system_instruction_before)
-system_instruction.extend(get_op_info('debug'))
-system_instruction.append(system_instruction_after)
-system_instruction = '\n'.join(system_instruction)
-print(system_instruction)
+with open(SYSTEM_INSTRUCTION_FILE, 'r') as f:
+    system_instruction = f.read()
+    system_instruction = system_instruction.replace('<OP_LIST>', '\n'.join(get_op_info('debug')))
 
 
 tools = [
-    {'name': 'log_parser', 'work_dir': '~/temp/workspace',},
+    {'name': 'log_parser', 'work_dir': PARSER_WORKSPACE,},
     ]
-files = ['./op_looper.py']
+# files = ['./op_looper.py']
 bot = Assistant(llm=llm_cfg,
                 system_message=system_instruction,
                 function_list=tools,
-                files=files,
+                # files=files,
+                description='我是一个日志分析助手',
                 )
+
+
+chatbot_config = {
+    'input.placeholder': '请输入需要检查的内容',
+    'prompt.suggestions': ['检查 TE，不应该大于16ms'],
+    'user.avatar': USER_PICTURE_FILE,
+    'agent.avatar': AGENT_PICTURE_FILE,
+}
 
 # 作为聊天机器人运行智能体。
 from qwen_agent.gui import WebUI
-WebUI(bot).run()  # bot is the agent defined in the above code, we do not repeat the definition here for saving space.
+WebUI(bot, chatbot_config).run()  # bot is the agent defined in the above code, we do not repeat the definition here for saving space.

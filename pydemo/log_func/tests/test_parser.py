@@ -1,7 +1,7 @@
 import unittest
 
-from parser import LogParser
-from status import Error
+from lparser.parser import LogParser
+from lparser.status import Error
 
 class TestParser(unittest.TestCase):
     def setUp(self):
@@ -42,7 +42,7 @@ class TestParser(unittest.TestCase):
 
     def test_simple(self):
         data = {
-            'file':'log/test/simple.log',
+            'file':'test_case/data/simple.log',
             'type': 'debug',
             'errors': [
                 ['TE is timeout until end', 32, [30]],

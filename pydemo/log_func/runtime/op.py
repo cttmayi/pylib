@@ -1,6 +1,6 @@
 from runtime.ops.g import STATUS as g
 from runtime.ops.d import STATUS as d
-from status import Status, OP, ARG
+from lparser.status import Status, OP, ARG
 
 STATUS_MAP = {
     g: None,

@@ -1,11 +1,10 @@
-import conf
 import pandas as pd
 import os
 import logging
+import lparser.conf as conf
 
 
-
-PATH = 'debug'
+PATH = 'work_dir/debug'
 
 
 if conf.DEBUG:

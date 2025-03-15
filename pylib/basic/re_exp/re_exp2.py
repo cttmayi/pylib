@@ -4,7 +4,8 @@ from functools import lru_cache
 FORMAT_PATTERNS = {
     '%d': {'pattern': r'(-?\d+)', 'converter': int},
     '%s': {'pattern': r'(.+?)', 'converter': str},
-    '%l': {'pattern': r'([a-zA-Z]+)', 'converter': str}
+    '%f': {'pattern': r'(-?\d+\.\d+)', 'converter': float},
+    '%x': {'pattern': r'([0-9a-fA-F]+)', 'converter': lambda x: int(x, 16)},
 }
 
 class FormatMatcher:
@@ -105,12 +106,10 @@ if __name__ == '__main__':
 
     formats = [
         ["ID: %d, Name: %s", ['id', 'name']],
-        ["Code: %l-%d", ['code', 'num'] ],
+        ["Code: %s-%d", ['code', 'num'] ],
         ["Score: %d", ['score']],
-        # ["%d-%s-%l" , ['id', 'text', 'letters']],
-    ] * format_number
-
-    formats.append(["%d-%s-%l" , ['id', 'text', 'letters']])  # 无静态前缀的格式
+        ["%d-%s-%d" , ['id', 'text', 'letters']],
+    ]
 
     matcher = FormatMatcher(formats)
 
@@ -119,7 +118,7 @@ if __name__ == '__main__':
         ("ID: 123, Name: Alice", (0, {'id': 123, 'name': 'Alice'})),
         ("Code: XYZ-42", (1, {'code': 'XYZ', 'num': 42})),
         ("Score: -5", (2, {'score': -5})),
-        ("123-test-ABC", (format_number * 3, {'id': 123, 'text': 'test', 'letters': 'ABC'}))
+        ("123-test-5", (3, {'id': 123, 'text': 'test', 'letters': 5}))
     ] * case_number
 
     import time
@@ -127,7 +126,7 @@ if __name__ == '__main__':
 
     for target_str, expected in test_cases:
         result = matcher.match(target_str)
-        assert result == expected
+        assert result == expected, f'"{target_str}" failed: {result} != {expected}'
 
     end_time = time.time()
     print(f"Time taken: {end_time - start_time} seconds")

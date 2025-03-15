@@ -1,4 +1,4 @@
-import conf
+import lparser.conf as conf
 import traceback
 
 

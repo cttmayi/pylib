@@ -31,6 +31,9 @@ app.launch_new_instance()
 
 INIT_CODE_FILE = str(Path(__file__).absolute().parent / 'resource' / 'code_interpreter_init_kernel.py')
 ALIB_FONT_FILE = str(Path(__file__).absolute().parent / 'resource' / 'AlibabaPuHuiTi-3-45-Light.ttf')
+SYSTEM_INSTRUCTION_FILE = str(Path(__file__).absolute().parent / 'resource' / 'system_instruction.txt')
+USER_PICTURE_FILE = str(Path(__file__).absolute().parent / 'resource' / 'user.jpeg')
+AGENT_PICTURE_FILE = str(Path(__file__).absolute().parent / 'resource' / 'agent.jpeg')
 
 _KERNEL_CLIENTS: dict = {}
 _MISC_SUBPROCESSES: Dict[str, subprocess.Popen] = {}
@@ -59,8 +62,8 @@ if threading.current_thread() is threading.main_thread():
 
 @register_tool('log_parser')
 class CodeInterpreter(BaseToolWithFileAccess):
-    description = '可用于执行Python代码。'
-    parameters = [{'name': 'code', 'type': 'string', 'description': '待执行的代码', 'required': True}]
+    description = 'looper函数的python执行环境'
+    parameters = [{'name': 'code', 'type': 'string', 'description': '待执行的looper代码', 'required': True}]
 
     def __init__(self, cfg: Optional[Dict] = None):
         super().__init__(cfg)
@@ -95,13 +98,13 @@ class CodeInterpreter(BaseToolWithFileAccess):
         if kernel_id in _KERNEL_CLIENTS:
             kc = _KERNEL_CLIENTS[kernel_id]
         else:
-            _fix_matplotlib_cjk_font_issue()
-            self._fix_secure_write_for_code_interpreter()
+            # _fix_matplotlib_cjk_font_issue()
+            # self._fix_secure_write_for_code_interpreter()
             kc, subproc = self._start_kernel(kernel_id)
             with open(INIT_CODE_FILE) as fin:
                 start_code = fin.read()
                 start_code = start_code.replace('{{M6_FONT_PATH}}', repr(ALIB_FONT_FILE)[1:-1])
-                start_code += '\n%xmode Minimal'
+                start_code += '\n%xmode Plain' # Plain mode, Minimal mode, Context mode, Verbose mode
             logger.info(self._execute_code(kc, start_code))
             _KERNEL_CLIENTS[kernel_id] = kc
             _MISC_SUBPROCESSES[kernel_id] = subproc
@@ -114,6 +117,12 @@ class CodeInterpreter(BaseToolWithFileAccess):
             fixed_code.append(line)
             if line.startswith('sns.set_theme('):
                 fixed_code.append('plt.rcParams["font.family"] = _m6_font_prop.get_name()')
+        
+        fixed_code.append('from lparser.main import tool_main')
+        fixed_code.append("from lparser.conf import DEBUG")
+        fixed_code.append("DEBUG = False")
+        fixed_code.append("tool_main('data/log/simple.log', 'debug', looper)")
+
         fixed_code = '\n'.join(fixed_code)
         fixed_code += '\n\n'  # Prevent code not executing in notebook due to no line breaks at the end
         result = self._execute_code(kc, fixed_code)

@@ -1,5 +1,5 @@
-from status import Status, Value, Error
-from utils.timestamp import s, ms, us
+from lparser.status import Status, Value, Error
+from lparser.utils.timestamp import s, ms, us
 
 
 class DStatus(Status):

@@ -1,5 +1,5 @@
 import unittest
-from status import Status, Value, Error
+from lparser.status import Status, Value, Error
 
 class TestStatus(unittest.TestCase):
     def setUp(self):
