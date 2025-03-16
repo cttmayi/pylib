@@ -6,8 +6,8 @@ from lparser.main import tool_main
 
 def config():
     if conf.DEBUG:
-        path = 'data/log/simple.log'
-        type = 'debug'
+        path = 'data/log/android.log'
+        type = None
     else:
         import argparse
         parser = argparse.ArgumentParser(description='Parser for log file')

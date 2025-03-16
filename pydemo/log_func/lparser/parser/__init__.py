@@ -1,9 +1,9 @@
 import pandas as pd
 import logging
 import re
-import pylib.basic.re_exp.re_exp2 as re_exp
-from runtime.op import PATTERN_LIST, STATUS_MAP, get_op_func, get_op_name, get_op_func_init
+import lparser.utils.re_exp2 as re_exp
 from lparser.parser.android import main_parser, debug_parser, PAESER_MAIN_REGEX
+from runtime.op import STATUS_MAP, get_op_func, get_op_name, get_op_func_init, get_op_arguments, get_op_pattern
 
 PARSER_FORMAT = ['type', 'date', 'time', 'timestamp', 'pid', 'tid', 'level', 'tag', 'msg']
 
@@ -14,17 +14,17 @@ PARSER_MAP = {
 }
 
 class LogParser():
-    def __init__(self, path, type=None, looper=None):
+    def __init__(self, path, op_maps, type=None, looper=None):
         self.path = path
         self.type = type
+        self.op_maps = op_maps
         self.logs:pd.DataFrame = None
         self.op_result = []
         self.status_list = STATUS_MAP.keys()
-        self.matcher = re_exp.FormatMatcher(PATTERN_LIST)
+        # self.matcher = re_exp.FormatMatcher(pattern_list)
         self._parser = { k: p[0] for k, p in PARSER_MAP.items() }
         self._parser_regex = { k: p[1] for k, p in PARSER_MAP.items() }
         self.looper = looper
-
 
 
     def auto_detect_type(self, lines):
@@ -39,6 +39,41 @@ class LogParser():
                         return k
         return None
 
+    def gen_pattern_list(self, op_maps:dict, type_default=None):
+        if isinstance(op_maps, list):
+            op_maps = {type_default: op_maps}
+        elif isinstance(op_maps, dict):
+            if type_default is not None:
+                op_maps = {type_default: op_maps[type_default]}
+
+        names = set()
+        paatterns = set()
+        last_name = None
+        pattern_list = []
+        # OP_MAP = [] # TYPE, NAME, FUNC_INIT, FUNC, ARGUMENTS, PATTERN
+
+        for type, ops in op_maps.items():
+            for op in range(len(ops)):
+                name = get_op_name(type, op, op_maps)
+                pattern = get_op_pattern(type, op, op_maps)
+                arguments = get_op_arguments(type, op, op_maps)
+                # func_init = get_op_func_init(type, op, op_maps)
+                # func = get_op_func(type, op, op_maps)
+
+                if name in names and not name == last_name:
+                    raise Exception(f'OP_MAP NAME 重复: {name}')
+                names.add(name)
+                last_name = name
+
+                if pattern in paatterns:
+                    raise Exception(f'OP_MAP PATTERN 重复: {pattern}' )
+                paatterns.add(pattern)
+
+                pattern_list.append([pattern, arguments]) # PATTERN, ARGUMENTS
+                # OP_MAP.append([type, name, func_init, func, arguments, pattern]) # TYPE, NAME, FUNC_INIT, FUNC, ARGUMENTS, PATTERN
+        return pattern_list
+
+
     def transfor_to_df(self, ffilter=None):
         with open(self.path, errors='ignore') as fp:
             lines = fp.readlines()
@@ -47,6 +82,17 @@ class LogParser():
         type = self.type
         if type is None:
             type = self.auto_detect_type(lines)
+            self.type = type
+
+        op_maps= self.op_maps 
+        if isinstance(op_maps, list):
+            op_maps = {type: op_maps}
+        elif isinstance(op_maps, dict):
+            op_maps = {type: op_maps[type]}
+        self.op_maps = op_maps
+
+        pattern_list = self.gen_pattern_list(self.op_maps)
+        self.matcher = re_exp.FormatMatcher(pattern_list)
 
         if type is None:
             logging.error('can not detect log type')
@@ -69,16 +115,16 @@ class LogParser():
             type = log.type
             line = log.name
             timestamp = log.timestamp
-            name = get_op_name(type, r[0])
+            name = get_op_name(type, r[0], self.op_maps)
             op = r[0]
             args = r[1]
             tid = log.tid
 
-            op_f = {'type': type, 'line': line, 'timestamp': timestamp, 'tid': tid,  'name': name, 'op': op, 'args': args, 'n': 1}
+            op_f = {'type': type, 'line': line, 'timestamp': timestamp, 'tid': tid,  'opname': name, 'op': op, 'args': args, 'n': 1}
 
             # 通过op_by_tid来缓存的op_f， 延迟放入op_result
             op_f_last = self.op_by_tid.get(tid)
-            if op_f_last is not None and op_f_last['name'] == name and op_f_last['op'] != op:
+            if op_f_last is not None and op_f_last['opname'] == name and op_f_last['op'] != op:
                     new_args = {}
                     for k in args:
                         new_args[k + '_' + str(op_f_last['n'])] = args[k]
@@ -103,7 +149,7 @@ class LogParser():
         logging.debug('====== op_execute looper ======')
         for _, row in op_df.iterrows():
             op = row['op']
-            name = row['name']
+            name = row['opname']
             args = row['args']
             type = row['type']
             line = row['line']

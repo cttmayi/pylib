@@ -2,6 +2,7 @@ import unittest
 
 from lparser.parser import LogParser
 from lparser.status import Error
+from runtime.op import OP_MAPS
 
 class TestParser(unittest.TestCase):
     def setUp(self):
@@ -11,7 +12,7 @@ class TestParser(unittest.TestCase):
         pass
 
     def parser(self, file, type):
-        lp:LogParser = LogParser(file, type)
+        lp:LogParser = LogParser(file, OP_MAPS, type)
         logs = lp.transfor_to_df()
         ops = lp.transfor_to_op(logs)
 

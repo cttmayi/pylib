@@ -37,11 +37,11 @@ def _main_parser(lines, type='main'): # no use, just for test
 
 
 
-PAESER_MAIN_REGEX = r'(\d+-\d+) (\d+:\d+:\d+\.\d+) (\d+) (\d+) ([A-Z]) ([\w\s]+): (.*)'
-
+PAESER_MAIN_REGEX = r'(\d+-\d+) (\d+:\d+:\d+\.\d+) +(\d+) +(\d+) ([A-Z]) (.+?): (.*)'
+# 01-27 23:53:12.299   665 12258 W ratelimit: Single process limit 50/s drop 280 lines.
 # 11-25 19:41:19.813  1153  1153 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 1153 (init), pid 1153 (init)
 def main_parser(lines, type='main'):
-    regex = r'(\d+-\d+) (\d+:\d+:\d+\.\d+) (\d+) (\d+) ([A-Z]) ([\w\s]+): (.*)'
+    regex = PAESER_MAIN_REGEX
     logs = pd.Series(lines).str.split(regex, expand=True)
     logs.rename(columns={1:'date', 2:'time', 3:'pid', 4:'tid', 5:'level', 6:'tag', 7:'msg'}, inplace=True)
     logs['type'] = type

@@ -31,51 +31,21 @@ OP_MAPS = {
 
 # =========================================================================
 
-def get_op_name(type ,id):
-    return OP_MAPS[type][id].name
+def get_op_name(type ,id, op_maps):
+    return op_maps[type][id].name
 
-def get_op_pattern(type, id):
-    return OP_MAPS[type][id].pattern
+def get_op_pattern(type, id, op_maps):
+    return op_maps[type][id].pattern
 
-def get_op_arguments(type, id):
-    return OP_MAPS[type][id].arguments
+def get_op_arguments(type, id, op_maps):
+    return op_maps[type][id].arguments
 
-def get_op_func(type, id):
-    return OP_MAPS[type][id].func
+def get_op_func(type, id, op_maps):
+    return op_maps[type][id].func
 
-def get_op_func_init(type, id):
-    return OP_MAPS[type][id].func_init
+def get_op_func_init(type, id, op_maps):
+    return op_maps[type][id].func_init
 
-names = set()
-paatterns = set()
-
-PATTERN_LIST = [] # PATTERN, ARGUMENTS
-
-last_name = None
-# OP_MAP = [] # TYPE, NAME, FUNC_INIT, FUNC, ARGUMENTS, PATTERN
-for type, ops in OP_MAPS.items():
-    for op in range(len(ops)):
-        name = get_op_name(type, op)
-        pattern = get_op_pattern(type, op)
-        arguments = get_op_arguments(type, op)
-        func_init = get_op_func_init(type, op)
-        func = get_op_func(type, op)
-
-        if name in names and not name == last_name:
-            raise Exception(f'OP_MAP NAME 重复: {name}')
-        names.add(name)
-        last_name = name
-
-        if pattern in paatterns:
-            raise Exception(f'OP_MAP PATTERN 重复: {pattern}' )
-        paatterns.add(pattern)
-
-        PATTERN_LIST.append([pattern, arguments]) # PATTERN, ARGUMENTS
-        # OP_MAP.append([type, name, func_init, func, arguments, pattern]) # TYPE, NAME, FUNC_INIT, FUNC, ARGUMENTS, PATTERN
 
 for status, pstatus in STATUS_MAP.items():
     status.set_global_status(pstatus)
-
-
-if __name__ == '__main__':
-    print(PATTERN_LIST)

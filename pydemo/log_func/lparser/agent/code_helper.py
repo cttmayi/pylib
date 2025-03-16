@@ -23,18 +23,19 @@ import json5
 from qwen_agent.log import logger
 from qwen_agent.tools.base import BaseToolWithFileAccess, register_tool
 from qwen_agent.utils.utils import append_signal_handler, extract_code, has_chinese_chars, print_traceback
+from qwen_agent.agents import Assistant
+
+from lparser.agent.op_info import get_op_infos
 
 LAUNCH_KERNEL_PY = """
 from ipykernel import kernelapp as app
 app.launch_new_instance()
 """
 
-INIT_CODE_FILE = str(Path(__file__).absolute().parent / 'resource' / 'code_interpreter_init_kernel.py')
-RUN_CODE_FILE = str(Path(__file__).absolute().parent / 'resource' / 'code_interpreter_run_code.py')
-# ALIB_FONT_FILE = str(Path(__file__).absolute().parent / 'resource' / 'AlibabaPuHuiTi-3-45-Light.ttf')
-SYSTEM_INSTRUCTION_FILE = str(Path(__file__).absolute().parent / 'resource' / 'system_instruction.txt')
-USER_PICTURE_FILE = str(Path(__file__).absolute().parent / 'resource' / 'user.jpeg')
-AGENT_PICTURE_FILE = str(Path(__file__).absolute().parent / 'resource' / 'agent.jpeg')
+INIT_CODE_FILE = str(Path(__file__).absolute().parent / 'resources' / 'code_interpreter_init_kernel.py')
+USER_PICTURE_FILE = str(Path(__file__).absolute().parent / 'resources' / 'user.jpeg')
+AGENT_PICTURE_FILE = str(Path(__file__).absolute().parent / 'resources' / 'agent.jpeg')
+
 
 _KERNEL_CLIENTS: dict = {}
 _MISC_SUBPROCESSES: Dict[str, subprocess.Popen] = {}
@@ -61,17 +62,25 @@ if threading.current_thread() is threading.main_thread():
     append_signal_handler(signal.SIGINT, _kill_kernels_and_subprocesses)
 
 
-@register_tool('log_parser')
-class CodeInterpreter(BaseToolWithFileAccess):
-    description = 'looper函数的python执行环境'
-    parameters = [{'name': 'code', 'type': 'string', 'description': '待执行的looper代码', 'required': True}]
+class PluginAgentHelper(BaseToolWithFileAccess):
+    description = 'python执行环境'
+    parameters = [{'name': 'code', 'type': 'string', 'description': '待执行的代码', 'required': True}]
+
+    SYSTEM_INSTRUCTION_FILE = None
+    TOOL_NAME = None
+    AGENT_NAME = None
+    AGENT_DESCRIPTION = None
+    PROMPT_SUGGESTIONS = None
+    COPY_DIRS = []
+
 
     def __init__(self, cfg: Optional[Dict] = None):
         super().__init__(cfg)
-        self.work_dir: str = os.getenv('M6_CODE_INTERPRETER_WORK_DIR', self.work_dir)
         self.work_dir: str = self.cfg.get('work_dir', self.work_dir)
         self.instance_id: str = str(uuid.uuid4())
         _check_deps_for_code_interpreter()
+        for dir_name in self.COPY_DIRS:
+            self.copy_dir(dir_name)
 
     @property
     def args_format(self) -> str:
@@ -82,6 +91,41 @@ class CodeInterpreter(BaseToolWithFileAccess):
             else:
                 fmt = 'Enclose the code within triple backticks (`) at the beginning and end of the code.'
         return fmt
+
+    def copy_dir(self, src_dir):
+        dst_dir = os.path.join(self.work_dir, src_dir)
+        shutil.copytree(src_dir, dst_dir,symlinks=True, ignore=shutil.ignore_patterns('*.pyc', '__pycache__'), dirs_exist_ok=True)
+
+    @classmethod
+    def create_agent(cls, llm_cfg):
+        with open(cls.SYSTEM_INSTRUCTION_FILE, 'r') as f:
+            system_instruction = f.read()
+            system_instruction = system_instruction.replace('### OP_INFOS ###', '\n'.join(get_op_infos()))
+
+        bot = Assistant(llm=llm_cfg,
+            name=PluginAgentHelper.AGENT_NAME,
+            system_message=system_instruction,
+            function_list=[cls.name],
+            description=cls.AGENT_DESCRIPTION,
+            )
+        
+        chatbot_config = {
+            'input.placeholder': '请输入内容',
+            'user.avatar': USER_PICTURE_FILE,
+            'agent.avatar': AGENT_PICTURE_FILE,
+        }
+        if cls.PROMPT_SUGGESTIONS is not None:
+            chatbot_config['prompt.suggestions'] = cls.PROMPT_SUGGESTIONS
+        return bot, chatbot_config
+
+    def get_init_code(self):
+        with open(INIT_CODE_FILE) as fin:
+            start_code = fin.read()
+            start_code += '\n%xmode Plain' # Plain mode, Minimal mode, Context mode, Verbose mode
+        return start_code
+
+    def get_run_code(self, code, files):
+        return code
 
     def call(self, params: Union[str, dict], files: List[str] = None, timeout: Optional[int] = 30, **kwargs) -> str:
         super().call(params=params, files=files)  # copy remote files to work_dir
@@ -99,13 +143,8 @@ class CodeInterpreter(BaseToolWithFileAccess):
         if kernel_id in _KERNEL_CLIENTS:
             kc = _KERNEL_CLIENTS[kernel_id]
         else:
-            # _fix_matplotlib_cjk_font_issue()
-            # self._fix_secure_write_for_code_interpreter()
             kc, subproc = self._start_kernel(kernel_id)
-            with open(INIT_CODE_FILE) as fin:
-                start_code = fin.read()
-                # start_code = start_code.replace('{{M6_FONT_PATH}}', repr(ALIB_FONT_FILE)[1:-1])
-                start_code += '\n%xmode Plain' # Plain mode, Minimal mode, Context mode, Verbose mode
+            start_code = self.get_init_code()
             logger.info(self._execute_code(kc, start_code))
             _KERNEL_CLIENTS[kernel_id] = kc
             _MISC_SUBPROCESSES[kernel_id] = subproc
@@ -113,11 +152,8 @@ class CodeInterpreter(BaseToolWithFileAccess):
         if timeout:
             code = f'_M6CountdownTimer.start({timeout})\n{code}'
 
-        with open(RUN_CODE_FILE) as fin:
-            run_code = fin.read()
-            run_code = run_code.replace('### <FILES> ###', 'files = ' + str(files))
-            run_code = run_code.replace('### <CODE> ###', code)
-            run_code += '\n\n'  # Prevent code not executing in notebook due to no line breaks at the end
+        run_code = self.get_run_code(code, files)
+        run_code += '\n\n'  # Prevent code not executing in notebook due to no line breaks at the end
         result = self._execute_code(kc, run_code)
 
         if timeout:
