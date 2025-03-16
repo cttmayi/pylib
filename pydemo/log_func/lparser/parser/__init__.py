@@ -24,7 +24,13 @@ class LogParser():
         self.matchers = {}
         self._parser = { k: p[0] for k, p in PARSER_MAP.items() }
         self._parser_regex = { k: p[1] for k, p in PARSER_MAP.items() }
-        self.looper = looper
+        if isinstance(looper, list):
+            self.loopers = looper
+        elif looper is None:
+            self.loopers = None
+        else:
+            self.loopers = [looper]
+
 
         for type, op_map in self.op_maps.items():
             pattern_list = self.gen_pattern_list(op_map)
@@ -144,10 +150,11 @@ class LogParser():
             type = row['type']
             line = row['line']
             timestamp = row['timestamp']
-            self.looper(name, args, timestamp, line)
+            for looper in self.loopers:
+                looper(name, args, timestamp, line)
 
     def op_execute(self, op_df: pd.DataFrame):
-        execute_method = self.op_execute_looper if self.looper is not None else self.op_execute_runtime
+        execute_method = self.op_execute_looper if self.loopers is not None else self.op_execute_runtime
         return execute_method(op_df)
 
     def op_execute_runtime(self, op_df:pd.DataFrame):

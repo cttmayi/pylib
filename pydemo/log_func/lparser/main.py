@@ -1,7 +1,7 @@
 import lparser.debug as debug
 from lparser.parser import LogParser
 from lparser.status import Error
-from runtime.op import OP_MAPS
+from runtime.op import OP_MAPS, get_loopers
 
 def tool_main(path, type=None):
     lp:LogParser = LogParser(path, OP_MAPS, type)
@@ -25,3 +25,14 @@ def tool_main(path, type=None):
 
 
 
+def tool_main_looper(path, type=None):
+
+    loopers = get_loopers()
+
+    lp:LogParser = LogParser(path, OP_MAPS, type=type, looper=loopers)
+    logs = lp.transfor_to_df()
+    if logs is None:
+        raise Exception('log格式无法识别')
+
+    ops = lp.transfor_to_op(logs)
+    lp.op_execute(ops)
