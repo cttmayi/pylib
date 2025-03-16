@@ -21,11 +21,14 @@ class LogParser():
         self.logs:pd.DataFrame = None
         self.op_result = []
         self.status_list = STATUS_MAP.keys()
-        # self.matcher = re_exp.FormatMatcher(pattern_list)
+        self.matchers = {}
         self._parser = { k: p[0] for k, p in PARSER_MAP.items() }
         self._parser_regex = { k: p[1] for k, p in PARSER_MAP.items() }
         self.looper = looper
 
+        for type, op_map in self.op_maps.items():
+            pattern_list = self.gen_pattern_list(op_map)
+            self.matchers[type] = re_exp.FormatMatcher(pattern_list)
 
     def auto_detect_type(self, lines):
         for k in self._parser_regex:
@@ -39,37 +42,27 @@ class LogParser():
                         return k
         return None
 
-    def gen_pattern_list(self, op_maps:dict, type_default=None):
-        if isinstance(op_maps, list):
-            op_maps = {type_default: op_maps}
-        elif isinstance(op_maps, dict):
-            if type_default is not None:
-                op_maps = {type_default: op_maps[type_default]}
-
+    def gen_pattern_list(self, op_map:list, type_default=None):
         names = set()
-        paatterns = set()
+        patterns = set()
         last_name = None
         pattern_list = []
-        # OP_MAP = [] # TYPE, NAME, FUNC_INIT, FUNC, ARGUMENTS, PATTERN
 
-        for type, ops in op_maps.items():
-            for op in range(len(ops)):
-                name = get_op_name(type, op, op_maps)
-                pattern = get_op_pattern(type, op, op_maps)
-                arguments = get_op_arguments(type, op, op_maps)
-                # func_init = get_op_func_init(type, op, op_maps)
-                # func = get_op_func(type, op, op_maps)
+        for opid in range(len(op_map)):
+            name = get_op_name(opid, op_map)
+            pattern = get_op_pattern(opid, op_map)
+            arguments = get_op_arguments(opid, op_map)
 
-                if name in names and not name == last_name:
-                    raise Exception(f'OP_MAP NAME 重复: {name}')
-                names.add(name)
-                last_name = name
+            if name in names and not name == last_name:
+                raise Exception(f'OP_MAP NAME 重复: {name}')
+            names.add(name)
+            last_name = name
 
-                if pattern in paatterns:
-                    raise Exception(f'OP_MAP PATTERN 重复: {pattern}' )
-                paatterns.add(pattern)
+            if pattern in patterns:
+                raise Exception(f'OP_MAP PATTERN 重复: {pattern}' )
+            patterns.add(pattern)
 
-                pattern_list.append([pattern, arguments]) # PATTERN, ARGUMENTS
+            pattern_list.append([pattern, arguments]) # PATTERN, ARGUMENTS
                 # OP_MAP.append([type, name, func_init, func, arguments, pattern]) # TYPE, NAME, FUNC_INIT, FUNC, ARGUMENTS, PATTERN
         return pattern_list
 
@@ -91,9 +84,6 @@ class LogParser():
             op_maps = {type: op_maps[type]}
         self.op_maps = op_maps
 
-        pattern_list = self.gen_pattern_list(self.op_maps)
-        self.matcher = re_exp.FormatMatcher(pattern_list)
-
         if type is None:
             logging.error('can not detect log type')
         else:
@@ -109,13 +99,14 @@ class LogParser():
         return None
 
     def _op_transfer(self, log):
-        r = self.matcher.match(log.msg)
+        matcher = self.matchers[log.type]
+        r = matcher.match(log.msg)
 
         if r is not None:
             type = log.type
             line = log.name
             timestamp = log.timestamp
-            name = get_op_name(type, r[0], self.op_maps)
+            name = get_op_name(r[0], self.op_maps[type])
             op = r[0]
             args = r[1]
             tid = log.tid
@@ -124,10 +115,13 @@ class LogParser():
 
             # 通过op_by_tid来缓存的op_f， 延迟放入op_result
             op_f_last = self.op_by_tid.get(tid)
-            if op_f_last is not None and op_f_last['opname'] == name and op_f_last['op'] != op:
+            if op_f_last is not None and op_f_last['opname'] == name and get_op_func(op, self.op_maps[type]) is None:
                     new_args = {}
                     for k in args:
-                        new_args[k + '_' + str(op_f_last['n'])] = args[k]
+                        if k not in op_f_last['args']:
+                            new_args[k] = args[k]
+                        else:
+                            new_args[k + '_' + str(op_f_last['n'])] = args[k]
                     op_f_last['args'].update(new_args)
                     op_f_last['n'] += 1
             else:
@@ -141,10 +135,6 @@ class LogParser():
         df = pd.DataFrame(self.op_result)
         return df
 
-    def op_execute(self, op_df: pd.DataFrame):
-        execute_method = self.op_execute_looper if self.looper is not None else self.op_execute_runtime
-        return execute_method(op_df)
-
     def op_execute_looper(self, op_df:pd.DataFrame):
         logging.debug('====== op_execute looper ======')
         for _, row in op_df.iterrows():
@@ -156,6 +146,10 @@ class LogParser():
             timestamp = row['timestamp']
             self.looper(name, args, timestamp, line)
 
+    def op_execute(self, op_df: pd.DataFrame):
+        execute_method = self.op_execute_looper if self.looper is not None else self.op_execute_runtime
+        return execute_method(op_df)
+
     def op_execute_runtime(self, op_df:pd.DataFrame):
         logging.debug('====== op_execute init ======')
         for _, row in op_df.iterrows():
@@ -165,7 +159,7 @@ class LogParser():
             args = row['args']
             type = row['type']
 
-            func_inits = get_op_func_init(type, op)
+            func_inits = get_op_func_init(op, self.op_maps[type])
             if func_inits is not None and len(func_inits) > 0:
                 for status in self.status_list:
                     logging.debug('status: %s', status.get_all_status())
@@ -184,7 +178,7 @@ class LogParser():
             for status in self.status_list:
                 status.set_current_info(timestamp, line)
 
-            funcs = get_op_func(type, op)
+            funcs = get_op_func(op, self.op_maps[type])
             if funcs is not None and len(funcs) > 0:
                 for status in self.status_list:
                     logging.debug('status: %s', status.get_all_status())

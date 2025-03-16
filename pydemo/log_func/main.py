@@ -6,7 +6,7 @@ from lparser.main import tool_main
 
 def config():
     if conf.DEBUG:
-        path = 'data/log/android.log'
+        path = 'data/log/simple.log'
         type = None
     else:
         import argparse

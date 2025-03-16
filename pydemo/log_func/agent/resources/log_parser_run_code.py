@@ -1,6 +1,16 @@
 from lparser import conf
 conf.DEBUG = False
-from lparser.main import tool_parser
+from lparser.parser import LogParser
+from runtime.op import OP_MAPS
+
+def tool_parser(path, looper):
+    lp:LogParser = LogParser(path, OP_MAPS, looper=looper)
+    logs = lp.transfor_to_df()
+    if logs is None:
+        raise Exception('log格式无法识别')
+
+    ops = lp.transfor_to_op(logs)
+    lp.op_execute(ops)
 
 files = None
 file = None

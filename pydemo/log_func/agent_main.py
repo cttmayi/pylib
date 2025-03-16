@@ -7,7 +7,7 @@ os.environ['QWEN_AGENT_DEFAULT_WORKSPACE'] = 'work_dir'
 
 from qwen_agent.gui import WebUI
 # from agent.log_regex import PluginAgent
-from agent.log_regex import PluginAgent
+from agent.log_parser import PluginAgent
 
 
 # 配置您所使用的 LLM。
@@ -22,6 +22,9 @@ llm_cfg = {
     }
 }
 
+
+
 if __name__ == '__main__':
+
     bot, chatbot_config = PluginAgent.create_agent(llm_cfg)
     WebUI(bot, chatbot_config).run()  # bot is the agent defined in the above code, we do not repeat the definition here for saving space.

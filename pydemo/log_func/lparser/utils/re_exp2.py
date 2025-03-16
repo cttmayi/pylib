@@ -23,8 +23,8 @@ class FormatMatcher:
             placeholders = parts[1::2]  # 提取占位符列表
             
             # 校验占位符数量与变量名数量一致
-            if len(placeholders) != len(var_names):
-                continue  # 跳过无效格式
+            #if len(placeholders) != len(var_names):
+            #    continue  # 跳过无效格式
             
             # 构建正则表达式
             regex_parts, converters = [], []

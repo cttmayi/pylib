@@ -21,7 +21,7 @@ OP_MAP_DEBUG = [
     OP('DUMP', 'DUMP CMDS',
        func = d.DUMP),
     OP('DUMP', 'REG %d %d %d %d',
-       func = None, args=['v1', 'v2', 'v3', 'v4']), # 同名会自动合并命令， 为保证正确性，必须保证写在一起，且不能有FUNC参数
+       func = None, args=['v1']), # 同名会自动合并命令， 为保证正确性，必须保证写在一起，且不能有FUNC参数
 ]
 
 OP_MAPS = {
@@ -31,20 +31,20 @@ OP_MAPS = {
 
 # =========================================================================
 
-def get_op_name(type ,id, op_maps):
-    return op_maps[type][id].name
+def get_op_name(id, op_map):
+    return op_map[id].name
 
-def get_op_pattern(type, id, op_maps):
-    return op_maps[type][id].pattern
+def get_op_pattern(id, op_map):
+    return op_map[id].pattern
 
-def get_op_arguments(type, id, op_maps):
-    return op_maps[type][id].arguments
+def get_op_arguments(id, op_map):
+    return op_map[id].arguments
 
-def get_op_func(type, id, op_maps):
-    return op_maps[type][id].func
+def get_op_func(id, op_map):
+    return op_map[id].func
 
-def get_op_func_init(type, id, op_maps):
-    return op_maps[type][id].func_init
+def get_op_func_init(id, op_map):
+    return op_map[id].func_init
 
 
 for status, pstatus in STATUS_MAP.items():
