@@ -149,10 +149,10 @@ class PluginAgentHelper(BaseToolWithFileAccess):
             _KERNEL_CLIENTS[kernel_id] = kc
             _MISC_SUBPROCESSES[kernel_id] = subproc
 
-        if timeout:
-            code = f'_M6CountdownTimer.start({timeout})\n{code}'
-
         run_code = self.get_run_code(code, files)
+        if timeout:
+            run_code = f'_M6CountdownTimer.start({timeout})\n{run_code}'
+
         run_code += '\n\n'  # Prevent code not executing in notebook due to no line breaks at the end
         result = self._execute_code(kc, run_code)
 

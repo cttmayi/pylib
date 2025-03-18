@@ -4,6 +4,7 @@ import os, sys
 from pathlib import Path
 
 os.environ['QWEN_AGENT_DEFAULT_WORKSPACE'] = 'work_dir'
+# os.environ['QWEN_AGENT_DEBUG'] = '1'
 
 from qwen_agent.gui import WebUI
 # from agent.log_regex import PluginAgent
@@ -16,6 +17,11 @@ llm_cfg = {
     'model': 'qwen-max',
     'model_server': 'dashscope',
     # 'api_key': 'DASHSCOPE_API_KEY', # 如果这里没有设置 'api_key'，它将读取 `DASHSCOPE_API_KEY` 环境变量。
+
+    # 使用OpenAI,
+    # 'model': 'gpt-4o',
+    # 'model_server': os.environ['OPENAI_API_BASE'],
+    # 'api_key': os.environ['OPENAI_API_KEY'],
 
     'generate_cfg': {
         'top_p': 0.9
