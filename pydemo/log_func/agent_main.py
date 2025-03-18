@@ -28,8 +28,35 @@ llm_cfg = {
     }
 }
 
-
+is_gui = False
 
 if __name__ == '__main__':
     bot, chatbot_config = PluginAgent.create_agent(llm_cfg)
-    WebUI(bot, chatbot_config).run()  # bot is the agent defined in the above code, we do not repeat the definition here for saving space.
+    if is_gui:
+        # GUI
+        WebUI(bot, chatbot_config).run()  # bot is the agent defined in the above code, we do not repeat the definition here for saving space.
+    else:
+        # TUI
+        # 执行Plugin 中定义的范例
+        query = chatbot_config['prompt.suggestions'][0]['text'] # input('user question: ')
+        files = chatbot_config['prompt.suggestions'][0]['files']
+        print('user question:', query, files)
+
+        messages = [{
+                        'role': 'user', 
+                        'content': [{
+                            'file': files[0]
+                        },{
+                            'text': query
+                        },]
+                    }]
+        while True:
+            response = []
+            for response in bot.run(messages=messages):
+                # print('bot response:', response)
+                pass
+            print('bot response:', response)
+            messages.extend(response)
+
+            if True:
+                break

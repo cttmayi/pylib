@@ -98,7 +98,7 @@ class PluginAgentHelper(BaseToolWithFileAccess):
 
     @classmethod
     def create_agent(cls, llm_cfg):
-        with open(cls.SYSTEM_INSTRUCTION_FILE, 'r') as f:
+        with open(cls.SYSTEM_INSTRUCTION_FILE, 'r', encoding='utf-8') as f:
             system_instruction = f.read()
             system_instruction = system_instruction.replace('### OP_INFOS ###', '\n'.join(get_op_infos()))
 
@@ -119,7 +119,7 @@ class PluginAgentHelper(BaseToolWithFileAccess):
         return bot, chatbot_config
 
     def get_init_code(self):
-        with open(INIT_CODE_FILE) as fin:
+        with open(INIT_CODE_FILE, encoding='utf-8') as fin:
             start_code = fin.read()
             start_code += '\n%xmode Plain' # Plain mode, Minimal mode, Context mode, Verbose mode
         return start_code

@@ -27,7 +27,7 @@ class PluginAgent(PluginAgentHelper):
         super().__init__(cfg)
 
     def get_run_code(self, code, files):
-        with open(PluginAgent.RUN_CODE_FILE) as fin:
+        with open(PluginAgent.RUN_CODE_FILE, encoding='utf-8') as fin:
             run_code = fin.read()
             run_code = run_code.replace('### <FILES> ###', 'files = ' + str(files))
             run_code = run_code.replace('### <CODE> ###', code)
