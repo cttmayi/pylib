@@ -1,14 +1,15 @@
 import lparser.utils.env
-import pprint
+from pprint import pprint
 import os, sys
 from pathlib import Path
+from qwen_agent.llm.schema import USER, ContentItem, Message
 
 os.environ['QWEN_AGENT_DEFAULT_WORKSPACE'] = 'work_dir'
 # os.environ['QWEN_AGENT_DEBUG'] = '1'
 
 from qwen_agent.gui import WebUI
-# from agent.log_regex import PluginAgent
-from agent.log_parser import PluginAgent
+from agent.log_regex import PluginAgent
+# from agent.log_parser import PluginAgent
 
 
 # 配置您所使用的 LLM。
@@ -24,11 +25,11 @@ llm_cfg = {
     # 'api_key': os.environ['OPENAI_API_KEY'],
 
     'generate_cfg': {
-        'top_p': 0.9
+        'top_p': 1.0
     }
 }
 
-is_gui = False
+is_gui = True
 
 if __name__ == '__main__':
     bot, chatbot_config = PluginAgent.create_agent(llm_cfg)
@@ -42,20 +43,18 @@ if __name__ == '__main__':
         files = chatbot_config['prompt.suggestions'][0]['files']
         print('user question:', query, files)
 
-        messages = [{
-                        'role': 'user', 
-                        'content': [{
-                            'file': files[0]
-                        },{
-                            'text': query
-                        },]
-                    }]
+        messages = [
+            Message(role=USER, content=
+                    [ContentItem(text=query), ContentItem(file=files[0])]),
+        ]
+
         while True:
             response = []
             for response in bot.run(messages=messages):
-                # print('bot response:', response)
                 pass
-            print('bot response:', response)
+            print('bot response:')
+            pprint(response[-1].role)
+            pprint(response[-1].content)
             messages.extend(response)
 
             if True:

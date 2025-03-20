@@ -24,6 +24,7 @@ from qwen_agent.log import logger
 from qwen_agent.tools.base import BaseToolWithFileAccess, register_tool
 from qwen_agent.utils.utils import append_signal_handler, extract_code, has_chinese_chars, print_traceback
 from qwen_agent.agents import Assistant
+from qwen_agent.agents.fncall_agent import FnCallAgent
 
 from lparser.agent.op_info import get_op_infos
 
@@ -78,6 +79,7 @@ class PluginAgentHelper(BaseToolWithFileAccess):
         super().__init__(cfg)
         self.work_dir: str = self.cfg.get('work_dir', self.work_dir)
         self.instance_id: str = str(uuid.uuid4())
+        self.pid = os.getpid()
         _check_deps_for_code_interpreter()
         for dir_name in self.COPY_DIRS:
             self.copy_dir(dir_name)
@@ -103,7 +105,7 @@ class PluginAgentHelper(BaseToolWithFileAccess):
             system_instruction = system_instruction.replace('### OP_INFOS ###', '\n'.join(get_op_infos()))
 
         bot = Assistant(llm=llm_cfg,
-            name=PluginAgentHelper.AGENT_NAME,
+            name=cls.AGENT_NAME,
             system_message=system_instruction,
             function_list=[cls.name],
             description=cls.AGENT_DESCRIPTION,
@@ -130,16 +132,20 @@ class PluginAgentHelper(BaseToolWithFileAccess):
     def call(self, params: Union[str, dict], files: List[str] = None, timeout: Optional[int] = 30, **kwargs) -> str:
         super().call(params=params, files=files)  # copy remote files to work_dir
 
-        try:
-            params = json5.loads(params)
-            code = params['code']
-        except Exception:
-            code = extract_code(params)
+        # try:
+        #     params = json5.loads(params)
+        #     code = params['code']
+        # except Exception:
+        code = extract_code(params)
 
         if not code.strip():
             return ''
 
-        kernel_id: str = f'{self.instance_id}_{os.getpid()}'
+        # lines = code.split('\n')
+        # if lines[0].strip().startswith('```'): # Remove the markdown code block
+        #     code = '\n'.join(lines[1:-1])
+
+        kernel_id: str = f'{self.instance_id}_{self.pid}'
         if kernel_id in _KERNEL_CLIENTS:
             kc = _KERNEL_CLIENTS[kernel_id]
         else:
@@ -163,11 +169,11 @@ class PluginAgentHelper(BaseToolWithFileAccess):
 
     def __del__(self):
         # Recycle the jupyter subprocess:
-        k: str = f'{self.instance_id}_{os.getpid()}'
-        if k in _KERNEL_CLIENTS:
+        k: str = f'{self.instance_id}_{self.pid}'
+        if _KERNEL_CLIENTS is not None and k in _KERNEL_CLIENTS:
             _KERNEL_CLIENTS[k].shutdown()
             del _KERNEL_CLIENTS[k]
-        if k in _MISC_SUBPROCESSES:
+        if _MISC_SUBPROCESSES is not None and k in _MISC_SUBPROCESSES:
             _MISC_SUBPROCESSES[k].terminate()
             del _MISC_SUBPROCESSES[k]
 

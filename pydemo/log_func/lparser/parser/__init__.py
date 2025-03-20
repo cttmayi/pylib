@@ -31,9 +31,22 @@ class LogParser():
         else:
             self.loopers = [looper]
 
+        with open(self.path, errors='ignore') as fp:
+            lines = fp.readlines()
+            lines = [l.strip() for l in lines] # remove \n
+        self.lines = lines
 
-        for type, op_map in self.op_maps.items():
-            pattern_list = self.gen_pattern_list(op_map)
+        if type is None:
+            type = self.auto_detect_type(lines)
+            if type is None:
+                raise Exception('无法自动检测日志类型')
+        self.type = type
+
+        if isinstance(op_maps, dict) and type in op_maps:
+            pattern_list = self.gen_pattern_list(op_maps[type])
+            self.matchers[type] = re_exp.FormatMatcher(pattern_list)
+        else:
+            pattern_list = self.gen_pattern_list(op_maps)
             self.matchers[type] = re_exp.FormatMatcher(pattern_list)
 
     def auto_detect_type(self, lines):
@@ -74,14 +87,8 @@ class LogParser():
 
 
     def transfor_to_df(self, ffilter=None):
-        with open(self.path, errors='ignore') as fp:
-            lines = fp.readlines()
-            lines = [l.strip() for l in lines] # remove \n
-
+        lines = self.lines
         type = self.type
-        if type is None:
-            type = self.auto_detect_type(lines)
-            self.type = type
 
         op_maps= self.op_maps 
         if isinstance(op_maps, list):
