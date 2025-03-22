@@ -2,14 +2,15 @@ import re
 from functools import lru_cache
 
 FORMAT_PATTERNS = {
+    '%b': {'pattern': r'(true|false|True|False|TRUE|FALSE)', 'converter': lambda x: x.lower() == 'true'},
     '%d': {'pattern': r'(-?\d+)', 'converter': int},
     '%s': {'pattern': r'(.*?)', 'converter': str},
     '%f': {'pattern': r'(-?\d+\.\d+)', 'converter': float},
-    '%x': {'pattern': r'([0-9a-fA-F]+)', 'converter': lambda x: int(x, 16)},
+    '%x': {'pattern': r'(0x[0-9A-Fa-f]+|[0-9A-Fa-f]+h|[0-9A-Fa-f]+)', 'converter': lambda x: int(x, 16)},
 }
 
 class FormatMatcher:
-    def __init__(self, formats):
+    def __init__(self, formats, strict_mode = False):
         """
         :param formats: 格式列表，每个元素为 [模式字符串, 变量名列表]
         示例: [["ID: %d, Name: %s", ['id', 'name']], ...]
@@ -19,12 +20,12 @@ class FormatMatcher:
         
         for fmt_idx, (format_str, var_names) in enumerate(formats):
             # 分割格式字符串
-            parts = re.split(r'(%\w+)', format_str)
+            parts = re.split(r'(%\w{1})', format_str)
             placeholders = parts[1::2]  # 提取占位符列表
             
             # 校验占位符数量与变量名数量一致
-            if len(placeholders) != len(var_names):
-                continue  # 跳过无效格式
+            if strict_mode and len(placeholders) != len(var_names):
+                raise ValueError(f'Format string "{format_str}" has {len(placeholders)} placeholders but {len(var_names)} variable names.')
             
             # 构建正则表达式
             regex_parts, converters = [], []
@@ -106,9 +107,9 @@ if __name__ == '__main__':
 
     formats = [
         ["ID: %d, Name: %s", ['id', 'name']],
-        ["Code: %s-%d", ['code', 'num'] ],
-        ["Score: %d", ['score']],
-        ["%d-%s-%d" , ['id', 'text', 'letters']],
+        ["Code: %s-%fs", ['code', 'num'] ],
+        ["Score: %d, isTrue: %b", ['score', 'is_true']],
+        ["%d-%s-%x" , ['id', 'text', 'letters']],
     ]
 
     matcher = FormatMatcher(formats)
@@ -116,9 +117,9 @@ if __name__ == '__main__':
     # 测试数据
     test_cases = [
         ("ID: 123, Name: Alice", (0, {'id': 123, 'name': 'Alice'})),
-        ("Code: XYZ-42", (1, {'code': 'XYZ', 'num': 42})),
-        ("Score: -5", (2, {'score': -5})),
-        ("123-test-5", (3, {'id': 123, 'text': 'test', 'letters': 5}))
+        ("Code: XYZ-42.5s", (1, {'code': 'XYZ', 'num': 42.5})),
+        ("Score: -5, isTrue: false", (2, {'score': -5, 'is_true': False})),
+        ("123-test-0x24", (3, {'id': 123, 'text': 'test', 'letters': 0x24}))
     ] * case_number
 
     import time
@@ -130,3 +131,26 @@ if __name__ == '__main__':
 
     end_time = time.time()
     print(f"Time taken: {end_time - start_time} seconds")
+
+
+    logs = [
+        'printFreezingDisplayLogsopening app wtoken = AppWindowToken{9f4ef63 token=Token{a64f992 ActivityRecord{de9231d u0 com.tencent.qt.qtl/.activity.info.NewsDetailXmlActivity t761}}}, allDrawn= false, startingDisplayed =  false, startingMoved =  false, isRelaunching =  false', 
+        'acquire lock=233570404, flags=0x1, tag="View Lock", name=com.android.systemui, ws=null, uid=10037, pid=2227', 
+        'ready=true,policy=3,wakefulness=1,wksummary=0x23,uasummary=0x1,bootcompleted=true,boostinprogress=false,waitmodeenable=false,mode=false,manual=38,auto=-1,adj=0.0userId=0', 
+        'Skipping AppWindowToken{df0798e token=Token{78af589 ActivityRecord{3b04890 u0 com.tencent.qt.qtl/com.tencent.video.player.activity.PlayerActivity t761}}} -- going to hide', 
+        'visible is system.time.showampm',
+        'shouldBlockLocation  ret:false',
+        'mVisiblity.getValue is false',
+        'mVisiblity.getValue is false', 'visible is system.charge.show', 'mVisiblity.getValue is false', 'visible is system.call.count gt 0', 'mVisiblity.getValue is false']
+    
+    regex = [
+        ("opening app wtoken = %s, allDrawn= %b, startingDisplayed = %b, startingMoved = %b, isRelaunching = %b", ['wtoken', 'allDrawn', 'startingDisplayed', 'startingMoved', 'isRelaunching']),
+        ("acquire lock=%d, flags=%x, tag=\"%s\", name=%s, ws=%s, uid=%d, pid=%d", ['lock', 'flags', 'tag', 'name', 'ws', 'uid', 'pid']),
+        ("ready=%b,policy=%d,wakefulness=%d,wksummary=%x,uasummary=%x,bootcompleted=%b,boostinprogress=%b,waitmodeenable=%b,mode=%b,manual=%d,auto=%d,adj=%fuserId=%d", ['ready', 'policy', 'wakefulness', 'wksummary', 'uasummary', 'bootcompleted', 'boostinprogress', 'waitmodeenable', 'mode', 'manual', 'auto', 'adj', 'userId']),
+        ("mVisiblity.getValue is %b", ['mVisiblity', 'unknown', 'unknown']),
+        ("shouldBlockLocation ret:%b", ['ret']),
+    ]
+
+    fm = FormatMatcher(regex)
+    for log in logs:
+        print(fm.match(log))
