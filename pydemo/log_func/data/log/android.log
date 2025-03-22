@@ -1,0 +1,27 @@
+01-27 23:53:12.299   665 12258 W ratelimit: Single process limit 50/s drop 280 lines.
+01-28 00:57:25.900 28775 29267 W ActivityThread: ClassLoader.getResources: The class loader returned by Thread.getContextClassLoader() may fail for processes that host multiple applications. You should explicitly specify a context class loader. For example: Thread.setContextClassLoader(getClass().getClassLoader());
+01-28 00:58:02.741 14069 28543 E ActivityThread: Failed to find provider info for com.microsoft.intune.mam.policy
+01-28 00:59:04.676   802   802 E LoadedApk: Unable to instantiate appComponentFactory
+01-28 00:59:04.676   802   802 E LoadedApk: java.lang.ClassNotFoundException: Didn't find class "androidx.core.app.CoreComponentFactory" on path: DexPathList[[zip file "/data/app/~~fJa2U1IxbjwtlS077ikGmw==/com.vivo.aiengine-VMtWsj98AmNmfBVXwl91-A==/base.apk"],nativeLibraryDirectories=[/data/app/~~fJa2U1IxbjwtlS077ikGmw==/com.vivo.aiengine-VMtWsj98AmNmfBVXwl91-A==/lib/arm64, /data/app/~~fJa2U1IxbjwtlS077ikGmw==/com.vivo.aiengine-VMtWsj98AmNmfBVXwl91-A==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]
+01-28 00:59:04.802   802   840 E ActivityThread: Failed to find provider info for com.bbk.iqoo.logsystemes
+01-28 00:59:04.805   802   870 E ActivityThread: Failed to find provider info for com.bbk.iqoo.logsystemes
+01-28 00:59:04.809   802   840 E ActivityThread: Failed to find provider info for com.bbk.iqoo.logsystemes
+01-28 01:07:17.893 25414  7417 D Event   : No subscribers registered for event class com.tencent.qqmusic.fragment.folderalbum.folder.personalize.PersonalizeTemplateViewModel$f
+01-28 01:07:17.893 25414  7417 D Event   : No subscribers registered for event class de.greenrobot.event.f
+01-28 01:07:17.893 25414  7174 I FolderTemplate@FolderDetailResqGson: [, , 0]:[TID:6684]folderTemplateInfo convert down ， post event  done
+01-28 01:07:17.897 25414  7174 I PlayInfoViewModelDelegate: [, , 0]:[TID:2]playListChangeObserver, new play list size 772
+01-28 01:07:17.899 25414  7875 I tencent.qqmusic: EglImage dataspace changed, need recreate
+01-28 01:07:17.910 25414  7545 D Xdb@QQMusic: [RecentPlayListManager_HandlerThread][update] table=Recent_Play_Folder_table whereArgs=[Where = [folderid= 857253164 , type= 1001 ] ]
+01-28 01:07:17.911 25414  7174 I SO_LOADER: [, , 0]:[TID:6684][loadSo] soName = search
+01-28 01:07:17.912 25414  7545 I Xdb@QQMusic: [RecentPlayListManager_HandlerThread][runOnTransaction] start
+01-28 01:07:17.915 25414  7174 I SO_LOADER: [, , 0]:[TID:6684][loadAndDownloadLibrary] search: success(code=1, time=3)
+01-28 01:07:17.915 25414  7417 I X_SEARCH: readFromAssets begin...
+01-28 01:07:17.916 25414  7417 I X_SEARCH: file size : 41802
+01-28 01:07:17.916 25414  7417 I X_SEARCH: readFromAssets exit...
+01-28 01:07:17.916 25414  7417 I X_SEARCH: readFromAssets begin...
+01-28 01:07:17.917 25414  7417 I X_SEARCH: file size : 3678
+01-28 01:07:17.917 25414  7417 I X_SEARCH: numBytesRead: 3678, readFromAssets: 
+01-28 01:07:17.917 25414  7417 I X_SEARCH: readFromAssets exit...
+01-28 01:07:17.917 25414  7417 I X_SEARCH: g_vectHanZiTable allocated
+01-28 01:07:17.917 25414  7417 I X_SEARCH: g_vectPinYinTable allocated
+01-28 01:07:17.917 25414  7417 I X_SEARCH: g_vectShengMu allocated
