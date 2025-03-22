@@ -2,7 +2,7 @@
 from pylib.android.log import log
 
 import re
-import pylib.basic.re_exp.re_exp as re_exp
+import pylib.basic.re_exp.re_exp_ignore as re_exp_ignore
 
 class EventLog(log.Log):
     def __init__(self, path=None):
@@ -17,13 +17,13 @@ class EventLog(log.Log):
         pat = None
         if log.tag == 'am_proc_start':
             # am_proc_start: [0,1617,10021,com.android.deskclock,broadcast,com.android.deskclock/.AlarmInitReceiver]
-            pat = re_exp.re_exp(r'[%d,%d,%d,%s,%s,%s/%s]')
+            pat = re_exp_ignore.re_exp(r'[%d,%d,%d,%s,%s,%s/%s]')
         elif log.tag == 'am_proc_died':
             # am_proc_died: [0,1042,com.android.printspooler]
-            pat = re_exp.re_exp(r'[%d,%d,%s]')
+            pat = re_exp_ignore.re_exp(r'[%d,%d,%s]')
         elif log.tag == 'am_kill':
             # am_kill : [0,1078,com.android.provision,15,empty #17]
-            pat = re_exp.re_exp(r'[%d,%d,%s,%d,%s')
+            pat = re_exp_ignore.re_exp(r'[%d,%d,%s,%d,%s')
 
         if pat is not None:
             pat = re.compile(pat) 
