@@ -12,6 +12,7 @@ current_dir=$(dirname "$current_script")
 # HF 镜像
 export HF_ENDPOINT=https://hf-mirror.com
 
+# 设置PYTHONPATH
 export PYTHONPATH=$current_dir:$PYTHONPATH
 
 # 加载.env文件
