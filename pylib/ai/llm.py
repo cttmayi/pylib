@@ -87,7 +87,8 @@ class LLM:
         return self.__call__(prompt, chat=True)
 
     # 内容提取器
-    def content_filter(self, content):
+    @staticmethod
+    def content_filter(content):
         matches = re.findall(r'```(.*?)\n(.*?)\n```', content, re.DOTALL)
         if matches:
             results = []

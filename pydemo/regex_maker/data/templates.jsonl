@@ -1,0 +1,1433 @@
+{"EventId": "E0000", "EventTemplate": "acquire lock=%d, flags=%x, tag=\"%s\", name=%s, ws=%s, uid=%d, pid=%d", "EventArgs": ["lock", "flags", "tag", "name", "ws", "uid", "pid"]}
+{"EventId": "E0001", "EventTemplate": "ready=%b,policy=%d,wakefulness=%d,wksummary=%x,uasummary=%x,bootcompleted=%b,boostinprogress=%b,waitmodeenable=%b,mode=%b,manual=%d,auto=%d,adj=%fuserId=%d", "EventArgs": ["ready", "policy", "wakefulness", "wksummary", "uasummary", "bootcompleted", "boostinprogress", "waitmodeenable", "mode", "manual", "auto", "adj", "userId"]}
+{"EventId": "E0002", "EventTemplate": "Skipping %s -- going to hide", "EventArgs": ["tokenInfo"]}
+{"EventId": "E0003", "EventTemplate": "visible is %s", "EventArgs": ["unknown"]}
+{"EventId": "E0004", "EventTemplate": "printFreezingDisplayLogsopening app wtoken = %s, allDrawn= %b, startingDisplayed =  %b, startingMoved =  %b, isRelaunching =  %b", "EventArgs": ["wtoken", "allDrawn", "startingDisplayed", "startingMoved", "isRelaunching"]}
+{"EventId": "E0005", "EventTemplate": "mVisiblity.getValue is %b", "EventArgs": ["unknown"]}
+{"EventId": "E0006", "EventTemplate": "release:lock=%d, flg=%x, tag=\"%s\", name=%s\", ws=%s, uid=%d, pid=%d", "EventArgs": ["lock", "flg", "tag", "name", "ws", "uid", "pid"]}
+{"EventId": "E0007", "EventTemplate": "updateClipping isOverlap:%b, getTopPadding=%f, Translation=%f", "EventArgs": ["isOverlap", "getTopPadding", "Translation"]}
+{"EventId": "E0008", "EventTemplate": "updateDimmedActivatedHideSensitive overlap:%b", "EventArgs": ["overlap"]}
+{"EventId": "E0009", "EventTemplate": "getRunningAppProcesses: caller %d does not hold REAL_GET_TASKS; limiting output", "EventArgs": ["caller"]}
+{"EventId": "E0010", "EventTemplate": "setSystemUiVisibility vis=%d mask=%x oldVal=%d newVal=%d diff=%x fullscreenStackVis=%d dockedStackVis=%d, fullscreenStackBounds=Rect(%d, %d - %d, %d), dockedStackBounds=Rect(%d, %d - %d, %d)", "EventArgs": ["vis", "mask", "oldVal", "newVal", "diff", "fullscreenStackVis", "dockedStackVis", "fsBoundLeft", "fsBoundTop", "fsBoundRight", "fsBoundBottom", "dsBoundLeft", "dsBoundTop", "dsBoundRight", "dsBoundBottom"]}
+{"EventId": "E0011", "EventTemplate": "cancelAutohide", "EventArgs": []}
+{"EventId": "E0012", "EventTemplate": "notifyUiVisibilityChanged:vis=0x%x, SystemUiVisibility=0x%x", "EventArgs": ["vis", "systemUiVisibility"]}
+{"EventId": "E0013", "EventTemplate": "Destroying surface Surface(name=%s) called by %s", "EventArgs": ["surfaceName", "caller"]}
+{"EventId": "E0014", "EventTemplate": "userActivityNoUpdateLocked: eventTime=%d, event=%d, flags=%x, uid=%d", "EventArgs": ["eventTime", "event", "flags", "uid"]}
+{"EventId": "E0015", "EventTemplate": "orientation change is complete, call stopFreezingDisplayLocked", "EventArgs": []}
+{"EventId": "E0016", "EventTemplate": "Screen frozen for +%ds%dms due to Window{%x u%d %s}", "EventArgs": ["seconds", "milliseconds", "windowId", "userId", "activityName"]}
+{"EventId": "E0017", "EventTemplate": "startAnimation begin", "EventArgs": []}
+{"EventId": "E0018", "EventTemplate": "startAnimation end", "EventArgs": []}
+{"EventId": "E0019", "EventTemplate": "remove(PendingIntent{%x: PendingIntentRecord{%x %s broadcastIntent}}) changed bounds; rebatching", "EventArgs": ["unknown", "unknown", "unknown"]}
+{"EventId": "E0020", "EventTemplate": "rotationForOrientationLw(orient=%d, last=%d); user=%d %s", "EventArgs": ["orient", "last", "user", "unknown"]}
+{"EventId": "E0021", "EventTemplate": "Application requested orientation %d, got rotation %d which has compatible metrics", "EventArgs": ["requested_orientation", "rotation"]}
+{"EventId": "E0022", "EventTemplate": "shouldBlockLocation running ...", "EventArgs": []}
+{"EventId": "E0023", "EventTemplate": "shouldBlockLocation  ret:%b", "EventArgs": ["ret"]}
+{"EventId": "E0024", "EventTemplate": "getNeighboringCellInfo calling app is %s", "EventArgs": ["packageName"]}
+{"EventId": "E0025", "EventTemplate": "HBM brightnessIn =%d", "EventArgs": ["brightnessIn"]}
+{"EventId": "E0026", "EventTemplate": "HBM brightnessOut =%d", "EventArgs": ["brightnessOut"]}
+{"EventId": "E0027", "EventTemplate": "Animating brightness: target=%d, rate=%d", "EventArgs": ["targetBrightness", "animationRate"]}
+{"EventId": "E0028", "EventTemplate": "Releasing suspend blocker \"%s\".", "EventArgs": ["unknown"]}
+{"EventId": "E0029", "EventTemplate": "suspendAutohide", "EventArgs": []}
+{"EventId": "E0030", "EventTemplate": "interceptKeyTq keycode=%d interactive=%b keyguardActive=%b policyFlags=%x down %b canceled %b", "EventArgs": ["keycode", "interactive", "keyguardActive", "policyFlags", "down", "canceled"]}
+{"EventId": "E0031", "EventTemplate": "interceptKeyBeforeQueueing: key %d , result : %d", "EventArgs": ["key", "result"]}
+{"EventId": "E0032", "EventTemplate": "resumeSuspendedAutohide", "EventArgs": []}
+{"EventId": "E0033", "EventTemplate": "querySoundEffectsEnabled...", "EventArgs": []}
+{"EventId": "E0034", "EventTemplate": "Acquiring suspend blocker %s", "EventArgs": ["blockerName"]}
+{"EventId": "E0035", "EventTemplate": "Bad activity token: %s", "EventArgs": ["tokenInfo"]}
+{"EventId": "E0036", "EventTemplate": "java.lang.ClassCastException: %s cannot be cast to %s", "EventArgs": ["classFrom", "classTo"]}
+{"EventId": "E0037", "EventTemplate": "DisplayPowerStatesetColorFadeLevel: level=%f", "EventArgs": ["level"]}
+{"EventId": "E0038", "EventTemplate": "action:%s, mPermissionType:%d", "EventArgs": ["action", "mPermissionType"]}
+{"EventId": "E0039", "EventTemplate": "Animating brightness: target=%d, rate=%d", "EventArgs": ["target", "rate"]}
+{"EventId": "E0040", "EventTemplate": "DisplayPowerController updatePowerState mPendingRequestLocked=policy=%s, useProximitySensor=%b, useProximitySensorbyPhone=%b, screenBrightness=%d, screenAutoBrightnessAdjustment=%f, brightnessSetByUser=%b, useAutoBrightness=%b, blockScreenOn=%b, lowPowerMode=%b, boostScreenBrightness=%b, dozeScreenBrightness=%d, dozeScreenState=%s, useTwilight=%b, useSmartBacklight=%b, brightnessWaitMode=%b, brightnessWaitRet=%b, screenAutoBrightness=%d, userId=%d", "EventArgs": ["policy", "useProximitySensor", "useProximitySensorbyPhone", "screenBrightness", "screenAutoBrightnessAdjustment", "brightnessSetByUser", "useAutoBrightness", "blockScreenOn", "lowPowerMode", "boostScreenBrightness", "dozeScreenBrightness", "dozeScreenState", "useTwilight", "useSmartBacklight", "brightnessWaitMode", "brightnessWaitRet", "screenAutoBrightness", "userId"]}
+{"EventId": "E0041", "EventTemplate": "DisplayPowerState Updating screen state: state=%s, backlight=%d", "EventArgs": ["state", "backlight"]}
+{"EventId": "E0042", "EventTemplate": "back light level before map = %d", "EventArgs": ["backLightLevel"]}
+{"EventId": "E0043", "EventTemplate": "onScreenTurnedOn()", "EventArgs": []}
+{"EventId": "E0044", "EventTemplate": "Display ready!", "EventArgs": []}
+{"EventId": "E0045", "EventTemplate": "Finished business...", "EventArgs": []}
+{"EventId": "E0046", "EventTemplate": "%s fail", "EventArgs": ["operation"]}
+{"EventId": "E0047", "EventTemplate": "KGSvcCall %s", "EventArgs": ["event_name"]}
+{"EventId": "E0048", "EventTemplate": "notify%s", "EventArgs": ["event_name"]}
+{"EventId": "E0049", "EventTemplate": "handleNotify%s", "EventArgs": ["event_name"]}
+{"EventId": "E0050", "EventTemplate": "on%s", "EventArgs": ["event_name"]}
+{"EventId": "E0051", "EventTemplate": "getNextIndex: %d; from %d to %d; size: %d", "EventArgs": ["nextIndex", "fromIndex", "toIndex", "size"]}
+{"EventId": "E0052", "EventTemplate": "report msg is :{picture: %s}", "EventArgs": ["picturePath"]}
+{"EventId": "E0053", "EventTemplate": "Screen already turned on at: %d", "EventArgs": ["timestamp"]}
+{"EventId": "E0054", "EventTemplate": "Split enqueueing broadcast [callerApp]:ProcessRecord{%s %d:%s/%s}", "EventArgs": ["processId", "processNumber", "packageName", "serviceName"]}
+{"EventId": "E0055", "EventTemplate": "report result = %breport type:%d msg:{picture: %s, channelId: %s}", "EventArgs": ["result", "type", "picture", "channelId"]}
+{"EventId": "E0056", "EventTemplate": "EventCenter Get :%s", "EventArgs": ["event"]}
+{"EventId": "E0057", "EventTemplate": "Get no-perm notification callback %s", "EventArgs": ["callback"]}
+{"EventId": "E0058", "EventTemplate": "ScreenState %s", "EventArgs": ["state"]}
+{"EventId": "E0059", "EventTemplate": "%d|%s|%d|%f|%d", "EventArgs": ["unknown1", "function", "unknown2", "value", "unknown3"]}
+{"EventId": "E0060", "EventTemplate": "ITrafficInfo:ITrafficInfo create %dupdateBytes = %d", "EventArgs": ["unknown", "updateBytes"]}
+{"EventId": "E0061", "EventTemplate": "%d|rebuild %s", "EventArgs": ["unknown", "action"]}
+{"EventId": "E0062", "EventTemplate": "ContentChange for slot: %d", "EventArgs": ["slot"]}
+{"EventId": "E0063", "EventTemplate": "case %s, not a fingerprint unlock", "EventArgs": ["caseType"]}
+{"EventId": "E0064", "EventTemplate": "PowerManagerNotifier onWakefulnessChangeFinished mInteractiveChanging=%b, mInteractive=%b", "EventArgs": ["mInteractiveChanging", "mInteractive"]}
+{"EventId": "E0065", "EventTemplate": "APS brightness=%f,ConvertToPercentage=%f", "EventArgs": ["brightness", "ConvertToPercentage"]}
+{"EventId": "E0066", "EventTemplate": "updateSlider1 seekBarProgress:%d", "EventArgs": ["seekBarProgress"]}
+{"EventId": "E0067", "EventTemplate": "updateSlider2 seekBarProgress:%d", "EventArgs": ["seekBarProgress"]}
+{"EventId": "E0068", "EventTemplate": " getSeekBarProgress isAutoMode:%b current brightness:%d percentage:%f", "EventArgs": ["isAutoMode", "brightness", "percentage"]}
+{"EventId": "E0069", "EventTemplate": " mSeekListener onProgressChanged progress:%d fromUser:%b", "EventArgs": ["progress", "fromUser"]}
+{"EventId": "E0070", "EventTemplate": "enqueueNotificationInternal: pkg=%s id=%d notification=Notification(pri=%d contentView=%s vibrate=%s sound=%s defaults=%x flags=%x color=%x vis=%s)", "EventArgs": ["pkg", "id", "pri", "contentView", "vibrate", "sound", "defaults", "flags", "color", "vis"]}
+{"EventId": "E0071", "EventTemplate": "msg = %d received", "EventArgs": ["unknown"]}
+{"EventId": "E0072", "EventTemplate": "enqueueNotificationInternal: n.getKey = %s|%s|%s|%s|%s", "EventArgs": ["n_getKey", "package_name", "unknown1", "unknown2", "unknown3"]}
+{"EventId": "E0073", "EventTemplate": "presently, %s interface not achieved.", "EventArgs": ["interface_name"]}
+{"EventId": "E0074", "EventTemplate": "DialpadFragment mBroadcastReceiver action:%s", "EventArgs": ["action"]}
+{"EventId": "E0075", "EventTemplate": "InCallActivity - mScreenOnReceiver mCallEndOptionsDialog = %s", "EventArgs": ["mCallEndOptionsDialog"]}
+{"EventId": "E0076", "EventTemplate": "disableEffects=%s canInterrupt=%b once update: %b", "EventArgs": ["disableEffects", "canInterrupt", "unknown"]}
+{"EventId": "E0077", "EventTemplate": "updateNotification(StatusBarNotification(pkg=%s user=%s id=%d tag=%s key=%s: Notification(pri=%d contentView=%s vibrate=%s sound=%s defaults=0x%x flags=0x%x color=0x%x vis=%s)))", "EventArgs": ["pkg", "user", "id", "tag", "key", "pri", "contentView", "vibrate", "sound", "defaults", "flags", "color", "vis"]}
+{"EventId": "E0078", "EventTemplate": "Create obj success use class %s", "EventArgs": ["className"]}
+{"EventId": "E0079", "EventTemplate": "updateTint: tint=%d", "EventArgs": ["tint"]}
+{"EventId": "E0080", "EventTemplate": "No peeking: unimportant notification: %s", "EventArgs": ["notificationKey"]}
+{"EventId": "E0081", "EventTemplate": "applyInPlace=%b shouldPeek=%b alertAgain=%b", "EventArgs": ["applyInPlace", "shouldPeek", "alertAgain"]}
+{"EventId": "E0082", "EventTemplate": "reusing notification for key: %s|%s|%d|%s|%d", "EventArgs": ["unknown", "package_name", "user_id", "unknown", "notification_id"]}
+{"EventId": "E0083", "EventTemplate": "RetryTaskController:mTaskList is %s", "EventArgs": ["mTaskList_status"]}
+{"EventId": "E0084", "EventTemplate": "updateNotificationShade", "EventArgs": []}
+{"EventId": "E0085", "EventTemplate": "removeNotificationChildren", "EventArgs": []}
+{"EventId": "E0086", "EventTemplate": "showNotificationAll", "EventArgs": []}
+{"EventId": "E0087", "EventTemplate": "main{%d} %s.onStartCommand(%s:%d) %s Start by %s", "EventArgs": ["unknown", "service", "file", "line", "service_status", "trigger"]}
+{"EventId": "E0088", "EventTemplate": "uid:%d pid:%d %s:%d events:%d", "EventArgs": ["uid", "pid", "listener_type", "listener_id", "events_count"]}
+{"EventId": "E0089", "EventTemplate": "%s uid:%d", "EventArgs": ["feature", "uid"]}
+{"EventId": "E0090", "EventTemplate": "WatchThread{%d} %s(%s:%d) Login_By_Step-> shut down now connect", "EventArgs": ["thread_id", "class_method", "file_name", "line_number"]}
+{"EventId": "E0091", "EventTemplate": "WatchThread{%d} %s(%s:%d) ==================== TCP CLIENT CLEAR ALL ====================", "EventArgs": ["thread_id", "class_method", "file_name", "line_number"]}
+{"EventId": "E0092", "EventTemplate": "WatchThread{%d} %s(%s:%d) ==================== TCP CLIENT DISCONNECT ====================", "EventArgs": ["thread_id", "class_method", "file_name", "line_number"]}
+{"EventId": "E0093", "EventTemplate": "[Thermal_Hw] %s, battery : temperature is %s, invalid temperatrue is %d", "EventArgs": ["status", "temperature_validity", "invalid_temperature"]}
+{"EventId": "E0094", "EventTemplate": "[Thermal_Hw] %s: get invalid temperature, use old temp", "EventArgs": ["function_name"]}
+{"EventId": "E0095", "EventTemplate": "transferRemoteInputFocus: %d", "EventArgs": ["unknown"]}
+{"EventId": "E0096", "EventTemplate": "updateClipping isOverlap:%b", "EventArgs": ["isOverlap"]}
+{"EventId": "E0097", "EventTemplate": "[ACC]processReportInd: X: %f Y: %f Z: %f  x_offset:%f y_offset:%f z_offset:%f", "EventArgs": ["X", "Y", "Z", "x_offset", "y_offset", "z_offset"]}
+{"EventId": "E0098", "EventTemplate": "set(PendingIntent{%x: PendingIntentRecord{%x com.%s broadcastIntent}}) : type=%d triggerAtTime=%d win=%d tElapsed=%d maxElapsed=%d interval=%d flags=0x%x", "EventArgs": ["pendingIntentHash", "pendingIntentRecordHash", "packageName", "type", "triggerAtTime", "win", "tElapsed", "maxElapsed", "interval", "flags"]}
+{"EventId": "E0099", "EventTemplate": "GetAddrInfoHandler addr: %s {%d, %d, %d} %s", "EventArgs": ["addr", "unknown", "unknown", "unknown", "ip"]}
+{"EventId": "E0100", "EventTemplate": "WatchThread{%d} %s(%s:%d) disconnecting to %s:%d", "EventArgs": ["thread_id", "method", "class", "line", "host", "port"]}
+{"EventId": "E0101", "EventTemplate": "WatchThread{%d} %s(%s:%d) shutdown %s: %s", "EventArgs": ["thread_id", "method", "class", "line", "stream", "exception"]}
+{"EventId": "E0102", "EventTemplate": "tcp.recv{%d} %s(%s:%d) <<< WARN(%d) >>> %s", "EventArgs": ["thread_id", "method", "class", "line", "warn_code", "exception"]}
+{"EventId": "E0103", "EventTemplate": "WatchThread{%d} %s(%s:%d) closed socket.", "EventArgs": ["threadId", "functionName", "className", "lineNumber"]}
+{"EventId": "E0104", "EventTemplate": "%s:====>%s", "EventArgs": ["receiverName", "actionName"]}
+{"EventId": "E0105", "EventTemplate": "tcp.recv{%d} %s(%s:%d) <<< ERROR(%d) >>> socket read length failure %d", "EventArgs": ["threadId", "functionName", "className", "lineNumber", "errorCode", "readLength"]}
+{"EventId": "E0106", "EventTemplate": "tcp.recv{%d} %s(%s:%d) %s", "EventArgs": ["threadId", "functionName", "className", "lineNumber", "status"]}
+{"EventId": "E0107", "EventTemplate": "WatchThread{%d} %s(%s:%d) Connect to server  address = [%s,]  port = %d", "EventArgs": ["threadId", "functionName", "className", "lineNumber", "serverAddress", "port"]}
+{"EventId": "E0108", "EventTemplate": "connect :%b", "EventArgs": ["unknown"]}
+{"EventId": "E0109", "EventTemplate": "WatchThread{%d} TcpClient.connect(TcpClient.java:%d) ==================== TCP CLIENT CONNECT [%d] ====================", "EventArgs": ["thread_id", "line_number", "unknown"]}
+{"EventId": "E0110", "EventTemplate": "WatchThread{%d} TcpClientThread.connect(TcpClientThread.java:%d) will connect to %s:%d", "EventArgs": ["thread_id", "line_number", "host", "port"]}
+{"EventId": "E0111", "EventTemplate": "tcp.conn{%d} TcpClientThread.connectSocket(TcpClientThread.java:%d) connecting max %dms to %s:%d", "EventArgs": ["connection_id", "line_number", "timeout", "host", "port"]}
+{"EventId": "E0112", "EventTemplate": "tcp.conn{%d} TcpSocket.connect_i(TcpSocket.java:%d) connecting to ip address %s/%s", "EventArgs": ["connection_id", "line_number", "host", "ip_address"]}
+{"EventId": "E0113", "EventTemplate": "MemCPUMonitor:startTimerMonitor isCompleted = %b", "EventArgs": ["isCompleted"]}
+{"EventId": "E0114", "EventTemplate": "tcp.conn{%d} %s.connectSocket(%s.java:%d) notify user tcp connected successully at %d to %s:%d", "EventArgs": ["connId", "className", "fileName", "lineNumber", "timestamp", "host", "port"]}
+{"EventId": "E0115", "EventTemplate": "tcp.conn{%d} %s.onRecv(%s.java:%d) tcp connection event %s", "EventArgs": ["connId", "className", "fileName", "lineNumber", "event"]}
+{"EventId": "E0116", "EventTemplate": "BtChrStatisticsManager:sendScreenOnEvent %s.", "EventArgs": ["status"]}
+{"EventId": "E0117", "EventTemplate": "BtChrStatisticsManager:msg Loop is %s.", "EventArgs": ["loopStatus"]}
+{"EventId": "E0118", "EventTemplate": "%s + %s", "EventArgs": ["earliestValidTime", "debounce_interval"]}
+{"EventId": "E0119", "EventTemplate": "read Events lux: %f", "EventArgs": ["lux_value"]}
+{"EventId": "E0120", "EventTemplate": "tcp.conn{%d} %s(%s:%d) %s %d bytes [16]_%s cmdCode(%s.%s)msgType(%s.%s)msgClass(%s.%s)sender(%s.%s)crypted(%b)zipped(%b)nobase64(%b)length(%d)version(%d)sno(%s)", "EventArgs": ["conn_id", "class_name", "file_name", "line_number", "operation", "byte_count", "hex_data", "cmd_group", "cmd_code", "msg_type_group", "msg_type", "msg_class_group", "msg_class", "sender_group", "sender_code", "crypted", "zipped", "nobase64", "length", "version", "sno"]}
+{"EventId": "E0121", "EventTemplate": "ambient lux=%f,timeStamp =%s", "EventArgs": ["lux", "timestamp"]}
+{"EventId": "E0122", "EventTemplate": "ProximitySensor - ProximitySensor{keybrd=%d, dpad=%d, offhook=%d, hor=%d, ui=%d, aud=%s}", "EventArgs": ["keybrd", "dpad", "offhook", "hor", "ui", "aud"]}
+{"EventId": "E0123", "EventTemplate": "ProximitySensor - Turning on proximity sensor", "EventArgs": []}
+{"EventId": "E0124", "EventTemplate": "tcp.conn{%d} %s(%s:%d) %s", "EventArgs": ["conn_id", "method", "file", "line", "unknown"]}
+{"EventId": "E0125", "EventTemplate": "%s - %s already %s", "EventArgs": ["sensor_type", "unknown", "status"]}
+{"EventId": "E0126", "EventTemplate": "%s: %d is %s event,%d is %s event,value = %f", "EventArgs": ["sensor_type", "event_id", "event_type", "event_id", "event_type", "value"]}
+{"EventId": "E0127", "EventTemplate": "readEvents:%d: %s: %s,%s.%s =%d", "EventArgs": ["line_number", "sensor_type", "unknown", "object_name", "attribute_name", "timestamp"]}
+{"EventId": "E0128", "EventTemplate": "handle%sEvent %s:%s", "EventArgs": ["sensor_type", "attribute_name", "attribute_value"]}
+{"EventId": "E0129", "EventTemplate": "PowerManagerService goToSleepNoUpdateLocked: eventTime=%d, reason=%d, flags=%d, uid=%d", "EventArgs": ["eventTime", "reason", "flags", "uid"]}
+{"EventId": "E0130", "EventTemplate": "Going to sleep due to proximity...", "EventArgs": []}
+{"EventId": "E0131", "EventTemplate": "PowerManagerNotifier onWakefulnessChangeStarted: wakefulness=%d, reason=%d, interactive=%b, mInteractive=%b, mInteractiveChanging=%b", "EventArgs": ["wakefulness", "reason", "interactive", "mInteractive", "mInteractiveChanging"]}
+{"EventId": "E0132", "EventTemplate": "PowerManagerServiceonProximityPositivebyPhone -> updatePowerStateLocked", "EventArgs": []}
+{"EventId": "E0133", "EventTemplate": "startDreaming = %b", "EventArgs": ["startDreaming"]}
+{"EventId": "E0134", "EventTemplate": "reallyGoToSleepNoUpdateLocked: eventTime=%d, uid=%d", "EventArgs": ["eventTime", "uid"]}
+{"EventId": "E0135", "EventTemplate": "Sleeping (uid %d)...", "EventArgs": ["uid"]}
+{"EventId": "E0136", "EventTemplate": "preparePoriximityView addView", "EventArgs": []}
+{"EventId": "E0137", "EventTemplate": "do not support AFT because of no config", "EventArgs": []}
+{"EventId": "E0138", "EventTemplate": "ACTIVITY check resid: %s, size=%d", "EventArgs": ["resid", "size"]}
+{"EventId": "E0139", "EventTemplate": "updateSystemUiColorLw window=%s,EmuiStyle=%d,StatusBarColor=%x,NavigationBarColor=%x, mLastIsEmuiLightStyle=%d", "EventArgs": ["window", "EmuiStyle", "StatusBarColor", "NavigationBarColor", "mLastIsEmuiLightStyle"]}
+{"EventId": "E0140", "EventTemplate": "oldFocusWindow: %s, currentFocusWindow: %s, currentFocusApp: %s", "EventArgs": ["oldFocusWindow", "currentFocusWindow", "currentFocusApp"]}
+{"EventId": "E0141", "EventTemplate": "Transact:setSystemUIColor to status bar service", "EventArgs": []}
+{"EventId": "E0142", "EventTemplate": "updateBarBgColor", "EventArgs": []}
+{"EventId": "E0143", "EventTemplate": "restoreBackgroundColor:new=%d, old=%d", "EventArgs": ["newColor", "oldColor"]}
+{"EventId": "E0144", "EventTemplate": "total/%d/%d,%s/%d/%d,unknown:%d/%d/%d", "EventArgs": ["total", "unknown1", "packageName", "packageTotal", "packageUnknown", "unknown2", "unknown3", "unknown4"]}
+{"EventId": "E0145", "EventTemplate": "WebMonitor [mNetWorkIsSuck=%d mUIDIsSuck=]  WebSpeed [WEBSENDSEGS=%d  WEBRESENDSEGS=%d  WEBRECVSEGS=%d  WEBERRSEGS=%d  WEBOUTRSTS=%d  WEBESTABLISRST=%d  WEBRTTDURATION=%d  WEBRTTSEGS=%d  WEBSRTT=%d  WEBSNDDUPACKS=%d  SENDSEGS=%d  RESENDSEGS=%d  RECVSEGS=%d  ERRSEGS=%d  OUTRSTS=%d  ESTABLISRST=%d  RTTDURATION=%d  RTTSEGS=%d  SNDDUPACKS=%d  suckTimes=%d recovage_times=%d]", "EventArgs": ["mNetWorkIsSuck", "unknown", "WEBSENDSEGS", "WEBRESENDSEGS", "WEBRECVSEGS", "WEBERRSEGS", "WEBOUTRSTS", "WEBESTABLISRST", "WEBRTTDURATION", "WEBRTTSEGS", "WEBSRTT", "WEBSNDDUPACKS", "SENDSEGS", "RESENDSEGS", "RECVSEGS", "ERRSEGS", "OUTRSTS", "ESTABLISRST", "RTTDURATION", "RTTSEGS", "SNDDUPACKS", "suckTimes"]}
+{"EventId": "E0146", "EventTemplate": "updateBarBgColor:emuiStyle=%d,statusBarColor=%s,navigationBarColor=%s, isEmuiLight=%d", "EventArgs": ["emuiStyle", "statusBarColor", "navigationBarColor", "isEmuiLight"]}
+{"EventId": "E0147", "EventTemplate": "statusBarIconTint=%s,navigationBarIconTint=%s", "EventArgs": ["statusBarIconTint", "navigationBarIconTint"]}
+{"EventId": "E0148", "EventTemplate": "wifi_send_command: cmd:'%s'", "EventArgs": ["command"]}
+{"EventId": "E0149", "EventTemplate": "%s: Control interface command '%s'", "EventArgs": ["interface", "command"]}
+{"EventId": "E0150", "EventTemplate": "Start pausing: ActivityRecord{%x u%d %s/%s t%d}", "EventArgs": ["activity_record", "user_id", "package_name", "activity_class", "task_id"]}
+{"EventId": "E0151", "EventTemplate": "CTRL-DEBUG: global_ctrl_sock-sendto: sock=%d sndbuf=%d outq=%d send_len=%d", "EventArgs": ["sock", "sndbuf", "outq", "send_len"]}
+{"EventId": "E0152", "EventTemplate": "%s - onPause:", "EventArgs": ["fragment_name"]}
+{"EventId": "E0153", "EventTemplate": "%s - isVideoCallWorking, state is: %d", "EventArgs": ["presenter_name", "state"]}
+{"EventId": "E0154", "EventTemplate": "VideoCallPresenter - pauseVideo: Error bad state mPrimaryCall=[%s, %s, [%s], children:[%s], parent:%s, conferenceable:[%s], videoState:%s, mSessionModificationState:%d, VideoSettings:(%s)] mVideoCall=%s", "EventArgs": ["mPrimaryCall_id", "mPrimaryCall_state", "mPrimaryCall_capabilities", "mPrimaryCall_children", "mPrimaryCall_parent", "mPrimaryCall_conferenceable", "mPrimaryCall_videoState", "mSessionModificationState", "VideoSettings", "mVideoCall"]}
+{"EventId": "E0155", "EventTemplate": "InCallActivity - onPause()...", "EventArgs": []}
+{"EventId": "E0156", "EventTemplate": "updateTcpSummery mRSSI:%d  HwCHRWifiRSSIGroup [rssi_index=%d, rtt_tcp_packets=%d, rtt_tcp_duration=%d, rtt_lan_duration=%d, rtt_lan_failures=%d, rtt_lan_succ=%d, rtt_lan_max=%d, rtt_lan_min=%d,same_area_frequency=%d,adjacent_area_frequency=%d]", "EventArgs": ["mRSSI", "rssi_index", "rtt_tcp_packets", "rtt_tcp_duration", "rtt_lan_duration", "rtt_lan_failures", "rtt_lan_succ", "rtt_lan_max", "rtt_lan_min", "same_area_frequency", "adjacent_area_frequency"]}
+{"EventId": "E0157", "EventTemplate": "%s - Notifying dtmf key up.", "EventArgs": ["fragment_name"]}
+{"EventId": "E0158", "EventTemplate": "HwCHRWifiPacketCnt [mTXGood=%d, mTXbad=%d, mRXGood=%d] rssi=%d", "EventArgs": ["mTXGood", "mTXbad", "mRXGood", "rssi"]}
+{"EventId": "E0159", "EventTemplate": "CommandQueue, %s", "EventArgs": ["commandName"]}
+{"EventId": "E0160", "EventTemplate": "ContactInfoCache - Contact lookup. In memory cache hit; lookup complete", "EventArgs": []}
+{"EventId": "E0161", "EventTemplate": "running processName=%s", "EventArgs": ["processName"]}
+{"EventId": "E0162", "EventTemplate": "HwCHRWifiUIDWebSpeed [appName=%s UID=%d  WEBSENDSEGS=%d  WEBRESENDSEGS=%d  WEBRECVSEGS=%d  WEBERRSEGS=%d  WEBOUTRSTS=%d  WEBESTABLISRST=%d  WEBRTTDURATION=%d  WEBRTTSEGS=%d  WEBSNDDUPACKS=%d  suckTimes=%d recovage_times=%d]", "EventArgs": ["appName", "UID", "WEBSENDSEGS", "WEBRESENDSEGS", "WEBRECVSEGS", "WEBERRSEGS", "WEBOUTRSTS", "WEBESTABLISRST", "WEBRTTDURATION", "WEBRTTSEGS", "WEBSNDDUPACKS", "suckTimes", "recovage_times"]}
+{"EventId": "E0163", "EventTemplate": "StatusBarNotifier - Showing notification for first time.", "EventArgs": []}
+{"EventId": "E0164", "EventTemplate": "StatusBarNotifier - %s is %s", "EventArgs": ["feature", "status"]}
+{"EventId": "E0165", "EventTemplate": "StatusBarNotifier - Data changed.  Showing notification", "EventArgs": []}
+{"EventId": "E0166", "EventTemplate": "mAccessWebStatus : rx = %d, tx = %d", "EventArgs": ["rx", "tx"]}
+{"EventId": "E0167", "EventTemplate": "doCheckAccessInternet", "EventArgs": []}
+{"EventId": "E0168", "EventTemplate": "StatusBarNotifier - getNotificationBuilder", "EventArgs": []}
+{"EventId": "E0169", "EventTemplate": "StatusBarNotifier - Will show \"%s\" action in the ongoing active call Notification", "EventArgs": ["action"]}
+{"EventId": "E0170", "EventTemplate": "ret: %d", "EventArgs": ["retValue"]}
+{"EventId": "E0171", "EventTemplate": "imeVis=%b", "EventArgs": ["imeVis"]}
+{"EventId": "E0172", "EventTemplate": "StatusBarNotifier - isTopIsFullscreen = %b--isTopIsFullscreenInput()--%b", "EventArgs": ["isTopIsFullscreen", "unknown"]}
+{"EventId": "E0173", "EventTemplate": "StatusBarNotifier - buildAndSendNotification state=%d showHeadUpNotification=%b mHeadupViewShow=%b", "EventArgs": ["state", "showHeadUpNotification", "mHeadupViewShow"]}
+{"EventId": "E0174", "EventTemplate": "StatusBarNotifier - isDreaming = %b", "EventArgs": ["isDreaming"]}
+{"EventId": "E0175", "EventTemplate": "StatusBarNotifier - Notifying %s: Notification(pri=%d contentView=%s vibrate=%s sound=%s defaults=0x%x flags=0x%x color=0x%x actions=%d vis=%s publicVersion=Notification(pri=%d contentView=%s vibrate=%s sound=%s defaults=0x%x flags=0x%x color=0x%x vis=%s))", "EventArgs": ["notificationType", "priority", "contentView", "vibrate", "sound", "defaults", "flags", "color", "actions", "visibility", "publicPriority", "publicContentView", "publicVibrate", "publicSound", "publicDefaults", "publicFlags", "publicColor", "publicVisibility"]}
+{"EventId": "E0176", "EventTemplate": "checkPhoneWindowIsTop:pakcage name:%s,ClassName name:%s", "EventArgs": ["packageName", "className"]}
+{"EventId": "E0177", "EventTemplate": "set brightness to %s brightness:%d", "EventArgs": ["brightnessMode", "brightnessValue"]}
+{"EventId": "E0178", "EventTemplate": "Unfinished business...", "EventArgs": []}
+{"EventId": "E0179", "EventTemplate": "DisplayPowerStatesetScreenState: state=%d", "EventArgs": ["state"]}
+{"EventId": "E0180", "EventTemplate": "DisplayPowerState :%s", "EventArgs": ["powerState"]}
+{"EventId": "E0181", "EventTemplate": "AnswerPresenter - onUiShowing%s", "EventArgs": ["isUiShowing"]}
+{"EventId": "E0182", "EventTemplate": "GlowPadAnswerFragment - Show answer UI: %b", "EventArgs": ["showAnswerUI"]}
+{"EventId": "E0183", "EventTemplate": "DisplayPowerStatesetColorFadeLevel: level=%f", "EventArgs": ["level"]}
+{"EventId": "E0184", "EventTemplate": "action:%s, mPermissionType:%d", "EventArgs": ["action", "mPermissionType"]}
+{"EventId": "E0185", "EventTemplate": "Animating brightness: target=%d, rate=%d", "EventArgs": ["target", "rate"]}
+{"EventId": "E0186", "EventTemplate": "DisplayPowerController updatePowerState mPendingRequestLocked=policy=%s, useProximitySensor=%b, useProximitySensorbyPhone=%b, screenBrightness=%d, screenAutoBrightnessAdjustment=%f, brightnessSetByUser=%b, useAutoBrightness=%b, blockScreenOn=%b, lowPowerMode=%b, boostScreenBrightness=%b, dozeScreenBrightness=%d, dozeScreenState=%s, useTwilight=%b, useSmartBacklight=%b, brightnessWaitMode=%b, brightnessWaitRet=%b, screenAutoBrightness=%d, userId=%d", "EventArgs": ["policy", "useProximitySensor", "useProximitySensorbyPhone", "screenBrightness", "screenAutoBrightnessAdjustment", "brightnessSetByUser", "useAutoBrightness", "blockScreenOn", "lowPowerMode", "boostScreenBrightness", "dozeScreenBrightness", "dozeScreenState", "useTwilight", "useSmartBacklight", "brightnessWaitMode", "brightnessWaitRet", "screenAutoBrightness", "userId"]}
+{"EventId": "E0187", "EventTemplate": "DisplayPowerState Updating screen state: state=%s, backlight=%d", "EventArgs": ["state", "backlight"]}
+{"EventId": "E0188", "EventTemplate": "DisplayPowerStatesetColorFadeLevel: level=%f", "EventArgs": ["level"]}
+{"EventId": "E0189", "EventTemplate": "action:%s, mPermissionType:%d", "EventArgs": ["action", "mPermissionType"]}
+{"EventId": "E0190", "EventTemplate": "Animating brightness: target=%d, rate=%d", "EventArgs": ["target", "rate"]}
+{"EventId": "E0191", "EventTemplate": "DisplayPowerController updatePowerState mPendingRequestLocked=policy=%s, useProximitySensor=%b, useProximitySensorbyPhone=%b, screenBrightness=%d, screenAutoBrightnessAdjustment=%f, brightnessSetByUser=%b, useAutoBrightness=%b, blockScreenOn=%b, lowPowerMode=%b, boostScreenBrightness=%b, dozeScreenBrightness=%d, dozeScreenState=%s, useTwilight=%b, useSmartBacklight=%b, brightnessWaitMode=%b, brightnessWaitRet=%b, screenAutoBrightness=%d, userId=%d", "EventArgs": ["policy", "useProximitySensor", "useProximitySensorbyPhone", "screenBrightness", "screenAutoBrightnessAdjustment", "brightnessSetByUser", "useAutoBrightness", "blockScreenOn", "lowPowerMode", "boostScreenBrightness", "dozeScreenBrightness", "dozeScreenState", "useTwilight", "useSmartBacklight", "brightnessWaitMode", "brightnessWaitRet", "screenAutoBrightness", "userId"]}
+{"EventId": "E0192", "EventTemplate": "DisplayPowerState Updating screen state: state=%s, backlight=%d", "EventArgs": ["state", "backlight"]}
+{"EventId": "E0193", "EventTemplate": "DisplayPowerStatesetColorFadeLevel: level=%f", "EventArgs": ["level"]}
+{"EventId": "E0194", "EventTemplate": "action:%s, mPermissionType:%d", "EventArgs": ["action", "mPermissionType"]}
+{"EventId": "E0195", "EventTemplate": "Animating brightness: target=%d, rate=%d", "EventArgs": ["target", "rate"]}
+{"EventId": "E0196", "EventTemplate": "DisplayPowerController updatePowerState mPendingRequestLocked=policy=%s, useProximitySensor=%b, useProximitySensorbyPhone=%b, screenBrightness=%d, screenAutoBrightnessAdjustment=%f, brightnessSetByUser=%b, useAutoBrightness=%b, blockScreenOn=%b, lowPowerMode=%b, boostScreenBrightness=%b, dozeScreenBrightness=%d, dozeScreenState=%s, useTwilight=%b, useSmartBacklight=%b, brightnessWaitMode=%b, brightnessWaitRet=%b, screenAutoBrightness=%d, userId=%d", "EventArgs": ["policy", "useProximitySensor", "useProximitySensorbyPhone", "screenBrightness", "screenAutoBrightnessAdjustment", "brightnessSetByUser", "useAutoBrightness", "blockScreenOn", "lowPowerMode", "boostScreenBrightness", "dozeScreenBrightness", "dozeScreenState", "useTwilight", "useSmartBacklight", "brightnessWaitMode", "brightnessWaitRet", "screenAutoBrightness", "userId"]}
+{"EventId": "E0197", "EventTemplate": "DisplayPowerState Updating screen state: state=%s, backlight=%d", "EventArgs": ["state", "backlight"]}
+{"EventId": "E0198", "EventTemplate": "GlowPadWrapper - %s", "EventArgs": ["action"]}
+{"EventId": "E0199", "EventTemplate": "GlowPadAnswerFragment - showVideoAnswerButton%b%b", "EventArgs": ["unknown1", "unknown2"]}
+{"EventId": "E0200", "EventTemplate": "Moving to PAUSED: ActivityRecord{%x u%d %s/%s t%d} (%s)", "EventArgs": ["activityRecord", "userId", "package", "activityClass", "taskId", "pauseStatus"]}
+{"EventId": "E0201", "EventTemplate": "clear buffer data and algo flags", "EventArgs": []}
+{"EventId": "E0202", "EventTemplate": "[%f/%d]", "EventArgs": ["floatValue", "intValue"]}
+{"EventId": "E0203", "EventTemplate": "activate called handle:%d enable:%d", "EventArgs": ["handle", "enable"]}
+{"EventId": "E0204", "EventTemplate": "getDNSFailedCntDiff  dnsNewFailCnt =  %d, aws.getOldDnsFailedCnt() = %d, dnsDiff = %d", "EventArgs": ["dnsNewFailCnt", "oldDnsFailedCnt", "dnsDiff"]}
+{"EventId": "E0205", "EventTemplate": "bh1745-light calling driver disable", "EventArgs": []}
+{"EventId": "E0206", "EventTemplate": "LightSensor, %s, %d: en=%d", "EventArgs": ["action", "unknown", "enableValue"]}
+{"EventId": "E0207", "EventTemplate": "LightSensor, %s, %d: flags=%d", "EventArgs": ["action", "unknown", "flagsValue"]}
+{"EventId": "E0208", "EventTemplate": "%s %s, event occur num: %d", "EventArgs": ["sensorType", "operation", "eventCount"]}
+{"EventId": "E0209", "EventTemplate": "Disable %s at time:%d", "EventArgs": ["sensorType", "disableTime"]}
+{"EventId": "E0210", "EventTemplate": "mode change : autoBrightnessEnabled=%b,adjustment=%f,state=%d", "EventArgs": ["autoBrightnessEnabled", "adjustment", "state"]}
+{"EventId": "E0211", "EventTemplate": "Set power mode=%d, type=%d flinger=%x", "EventArgs": ["powerMode", "type", "flingerAddress"]}
+{"EventId": "E0212", "EventTemplate": "HWCDisplay::SetPowerMode: display = %d, mode = %d", "EventArgs": ["displayId", "powerMode"]}
+{"EventId": "E0213", "EventTemplate": "DisplayBase::SetDisplayState: Set state = %d, display %d", "EventArgs": ["state", "displayId"]}
+{"EventId": "E0214", "EventTemplate": "check dependency pid: %d is depended by pid: %d", "EventArgs": ["pid", "dependentPid"]}
+{"EventId": "E0215", "EventTemplate": "Application %s is depended by other app, delay to %s!", "EventArgs": ["appName", "delayAction"]}
+{"EventId": "E0216", "EventTemplate": "Excessive delay in setPowerMode(): %dms", "EventArgs": ["delayTime"]}
+{"EventId": "E0217", "EventTemplate": "Setting HAL interactive mode to %b", "EventArgs": ["interactiveMode"]}
+{"EventId": "E0218", "EventTemplate": "Got set_interactive hint", "EventArgs": []}
+{"EventId": "E0219", "EventTemplate": "AbaSuspend skips CABL deactivate: state was %d", "EventArgs": ["state"]}
+{"EventId": "E0220", "EventTemplate": "Invalid profile no. %d, total profiles %d only", "EventArgs": ["profileNumber", "totalProfiles"]}
+{"EventId": "E0221", "EventTemplate": "Calling %s()", "EventArgs": ["functionName"]}
+{"EventId": "E0222", "EventTemplate": "%s() finished", "EventArgs": ["functionName"]}
+{"EventId": "E0223", "EventTemplate": "Setting HAL auto-suspend mode to %b", "EventArgs": ["autoSuspendMode"]}
+{"EventId": "E0224", "EventTemplate": "Sending %s to %s", "EventArgs": ["command", "destination"]}
+{"EventId": "E0225", "EventTemplate": "Got %s response, status = %d, id = %d", "EventArgs": ["responseType", "status", "id"]}
+{"EventId": "E0226", "EventTemplate": "Access denied finding property \"%s\"", "EventArgs": ["propertyName"]}
+{"EventId": "E0227", "EventTemplate": "setSystemUiVisibility vis=%x mask=%x oldVal=%x newVal=%x diff=%x", "EventArgs": ["vis", "mask", "oldVal", "newVal", "diff"]}
+{"EventId": "E0228", "EventTemplate": "%s:false", "EventArgs": ["featureName"]}
+{"EventId": "E0229", "EventTemplate": "%sQs", "EventArgs": ["action"]}
+{"EventId": "E0230", "EventTemplate": "setScrollingEnabled: %b", "EventArgs": ["enabledState"]}
+{"EventId": "E0231", "EventTemplate": "instantCollapse", "EventArgs": []}
+{"EventId": "E0232", "EventTemplate": "collapsePanel2", "EventArgs": []}
+{"EventId": "E0233", "EventTemplate": "%s device changed state: %s, %s", "EventArgs": ["deviceType", "deviceName", "state"]}
+{"EventId": "E0234", "EventTemplate": "%s - %s:", "EventArgs": ["componentName", "lifecycleEvent"]}
+{"EventId": "E0235", "EventTemplate": "%s - %s()...", "EventArgs": ["activityName", "lifecycleEvent"]}
+{"EventId": "E0236", "EventTemplate": "%s - onActivityStopped", "EventArgs": ["componentName"]}
+{"EventId": "E0237", "EventTemplate": "%s - notifyVideoPauseController", "EventArgs": ["componentName"]}
+{"EventId": "E0238", "EventTemplate": "%s: - %s:onPause", "EventArgs": ["controllerName", "operation"]}
+{"EventId": "E0239", "EventTemplate": "%s: - %s:%s, %s...", "EventArgs": ["className", "methodName", "event", "action"]}
+{"EventId": "E0240", "EventTemplate": "%s - %s: state = 0x%x", "EventArgs": ["presenter", "function", "state"]}
+{"EventId": "E0241", "EventTemplate": "Client requesting input be hidden, pid=%d", "EventArgs": ["pid"]}
+{"EventId": "E0242", "EventTemplate": "%s window will %s input", "EventArgs": ["windowType", "operation"]}
+{"EventId": "E0243", "EventTemplate": "------------%s--------------", "EventArgs": ["logSection"]}
+{"EventId": "E0244", "EventTemplate": "manageDisableList userId=%d what=0x%x pkg=%s", "EventArgs": ["userId", "what", "packageName"]}
+{"EventId": "E0245", "EventTemplate": "%s = %b", "EventArgs": ["parameterName", "value"]}
+{"EventId": "E0246", "EventTemplate": "%s - %s is %b %s is %b %s is %b", "EventArgs": ["activityName", "featureName", "featureValue", "conditionName", "conditionValue", "stateName", "stateValue"]}
+{"EventId": "E0247", "EventTemplate": "Reading a NULL string not supported here.", "EventArgs": []}
+{"EventId": "E0248", "EventTemplate": "show_incallscreen  %d", "EventArgs": ["unknown"]}
+{"EventId": "E0249", "EventTemplate": "transitionTo: mode=%s, animate=%b", "EventArgs": ["mode", "animate"]}
+{"EventId": "E0250", "EventTemplate": "%s -> %s animate=%b", "EventArgs": ["fromMode", "toMode", "animate"]}
+{"EventId": "E0251", "EventTemplate": "%s oldMode=%s newMode=%s animate=%b", "EventArgs": ["functionName", "oldMode", "newMode", "animate"]}
+{"EventId": "E0252", "EventTemplate": "Finished going to sleep... (why=%d)", "EventArgs": ["reason"]}
+{"EventId": "E0253", "EventTemplate": "%s disabled", "EventArgs": ["componentName"]}
+{"EventId": "E0254", "EventTemplate": "batch,%d,handle %d, timeout:%d ,period_ns:%d", "EventArgs": ["unknown", "handle", "timeout", "period_ns"]}
+{"EventId": "E0255", "EventTemplate": "CallList - hasAnyLiveCall call = [%s, %s, [Capabilities: %s], children:[%s], parent:%s, conferenceable:[%s], videoState:%s, mSessionModificationState:%d, VideoSettings:(CameraDir:%d)]", "EventArgs": ["callId", "callState", "capabilities", "children", "parent", "conferenceable", "videoState", "mSessionModificationState", "cameraDir"]}
+{"EventId": "E0256", "EventTemplate": "%s - isDisplayOn: %b", "EventArgs": ["sensorName", "isDisplayOn"]}
+{"EventId": "E0257", "EventTemplate": "read from oem info: %s", "EventArgs": ["dataInfo"]}
+{"EventId": "E0258", "EventTemplate": "%x, %x, %x, %x", "EventArgs": ["byte1", "byte2", "byte3", "byte4"]}
+{"EventId": "E0259", "EventTemplate": "transitionTo:mode=%d, isEmuiStyle=%b", "EventArgs": ["mode", "isEmuiStyle"]}
+{"EventId": "E0260", "EventTemplate": "batch:sensor(%s) handle:%d flags:0x%x period_ns %d", "EventArgs": ["sensorName", "handle", "flags", "period_ns"]}
+{"EventId": "E0261", "EventTemplate": "Final value: x_offset=%f, y_offset=%f, z_offset=%f", "EventArgs": ["x_offset", "y_offset", "z_offset"]}
+{"EventId": "E0262", "EventTemplate": "batch:load_acc_oeminf_data x_offset:%f y_offset:%f z_offset:%f", "EventArgs": ["x_offset", "y_offset", "z_offset"]}
+{"EventId": "E0263", "EventTemplate": "batch:sensor(%s) sample_rate=%fHz report_rate_f=%fHz curr sample rate:%f cur rpt rate:%d max:%f min:%f", "EventArgs": ["sensorName", "sample_rate", "report_rate_f", "current_sample_rate", "current_report_rate", "max_rate", "min_rate"]}
+{"EventId": "E0264", "EventTemplate": "PowerManagerNotifier Sending go to sleep broadcast.", "EventArgs": []}
+{"EventId": "E0265", "EventTemplate": "sendMessage %d", "EventArgs": ["messageId"]}
+{"EventId": "E0266", "EventTemplate": "Enqueueing ordered broadcast[%s] BroadcastRecord{%s u%d %s}: prev had %d", "EventArgs": ["broadcastType", "recordId", "userId", "action", "previousCount"]}
+{"EventId": "E0267", "EventTemplate": "updateDisplayLocked: screenOn=%b", "EventArgs": ["screenOn"]}
+{"EventId": "E0268", "EventTemplate": "%s()", "EventArgs": ["functionName"]}
+{"EventId": "E0269", "EventTemplate": "Moved from %s to %s", "EventArgs": ["fromState", "toState"]}
+{"EventId": "E0270", "EventTemplate": "scheduleAlarmLocked(%d, %b)", "EventArgs": ["alarmTime", "unknown"]}
+{"EventId": "E0271", "EventTemplate": "dispatch ordered broadcast [%s] %s, has %d receivers", "EventArgs": ["broadcastType", "broadcastRecord", "receiverCount"]}
+{"EventId": "E0272", "EventTemplate": "set(%s) : type=%d triggerAtTime=%d win=%d tElapsed=%d maxElapsed=%d interval=%d flags=0x%x", "EventArgs": ["unknown", "type", "triggerAtTime", "win", "tElapsed", "maxElapsed", "interval", "flags"]}
+{"EventId": "E0273", "EventTemplate": "schedule%sLocked(%d)", "EventArgs": ["functionName", "timeMs"]}
+{"EventId": "E0274", "EventTemplate": "%s transport %s marquee", "EventArgs": ["operation", "unknown"]}
+{"EventId": "E0275", "EventTemplate": "FingerStat Visible: %b; Interactive: %b; Switching: %b; Bouncer:%b; GoingToSleep: %b Occluded: %b; dreaming: %b; Authenticated: %b", "EventArgs": ["isVisible", "isInteractive", "isSwitching", "isBouncer", "isGoingToSleep", "isOccluded", "isDreaming", "isAuthenticated"]}
+{"EventId": "E0276", "EventTemplate": "Dis-Feature : %d", "EventArgs": ["featureStatus"]}
+{"EventId": "E0277", "EventTemplate": "isSimPinSecure %s is null or empty", "EventArgs": ["simDataField"]}
+{"EventId": "E0278", "EventTemplate": "%s getEnrolledFingerprints", "EventArgs": ["serviceName"]}
+{"EventId": "E0279", "EventTemplate": "authenticate by %d mode!", "EventArgs": ["authMode"]}
+{"EventId": "E0280", "EventTemplate": "%s authenticate", "EventArgs": ["serviceName"]}
+{"EventId": "E0281", "EventTemplate": "%s RunningStateChanged. %d", "EventArgs": ["featureName", "state"]}
+{"EventId": "E0282", "EventTemplate": "setLivenessSwitch:start", "EventArgs": []}
+{"EventId": "E0283", "EventTemplate": "checkNeedLivenessList:start", "EventArgs": []}
+{"EventId": "E0284", "EventTemplate": "%s = %d", "EventArgs": ["constantName", "value"]}
+{"EventId": "E0285", "EventTemplate": "Handle message: %d", "EventArgs": ["messageCode"]}
+{"EventId": "E0286", "EventTemplate": "%s setVisibility. %b %b  %d", "EventArgs": ["viewComponent", "visibilityState1", "visibilityState2", "unknown"]}
+{"EventId": "E0287", "EventTemplate": "FingerprintDaemonProxyEx::onTransact, code:%d", "EventArgs": ["code"]}
+{"EventId": "E0288", "EventTemplate": "fpc_get_authenticator_id", "EventArgs": []}
+{"EventId": "E0289", "EventTemplate": "fingerprintdex--dev->need_liveness_authentication = %b;", "EventArgs": ["need_liveness_authentication"]}
+{"EventId": "E0290", "EventTemplate": "framework setLivenessSwitch is ok ---end", "EventArgs": []}
+{"EventId": "E0291", "EventTemplate": "fpc poll irq interupt", "EventArgs": []}
+{"EventId": "E0292", "EventTemplate": "wait_finger_down, took %d ms", "EventArgs": ["time_in_ms"]}
+{"EventId": "E0293", "EventTemplate": "begin", "EventArgs": []}
+{"EventId": "E0294", "EventTemplate": "batch: current sample rate, report rate & buffering are equal to requested (%f,%f,%d)", "EventArgs": ["currentSampleRate", "reportRate", "buffering"]}
+{"EventId": "E0295", "EventTemplate": "QSEECom_send_cmd return!", "EventArgs": []}
+{"EventId": "E0296", "EventTemplate": "qsc_send_cmd finish", "EventArgs": []}
+{"EventId": "E0297", "EventTemplate": "qsc_decode end", "EventArgs": []}
+{"EventId": "E0298", "EventTemplate": "worker idle", "EventArgs": []}
+{"EventId": "E0299", "EventTemplate": "APS brightness=%f,ConvertToPercentage=%s", "EventArgs": ["brightness", "ConvertToPercentage"]}
+{"EventId": "E0300", "EventTemplate": "fpc_get_authenticator_id id %s", "EventArgs": ["id"]}
+{"EventId": "E0301", "EventTemplate": "startAuthentication(%s)", "EventArgs": ["unknown"]}
+{"EventId": "E0302", "EventTemplate": "starting client %s, initiatedByClient = %b)", "EventArgs": ["clientName", "initiatedByClient"]}
+{"EventId": "E0303", "EventTemplate": "authenticate(sid=%d, gid=%d)", "EventArgs": ["sid", "gid"]}
+{"EventId": "E0304", "EventTemplate": "addNotification key=%d|%s|%d|%s|%d", "EventArgs": ["key", "unknown", "unknown", "unknown", "unknown"]}
+{"EventId": "E0305", "EventTemplate": "AwareMem_DMEServer: %s", "EventArgs": ["status"]}
+{"EventId": "E0306", "EventTemplate": "workerFunction %s", "EventArgs": ["state"]}
+{"EventId": "E0307", "EventTemplate": "client %s is authenticating...", "EventArgs": ["client_name"]}
+{"EventId": "E0308", "EventTemplate": "InactiveState%d", "EventArgs": ["state_id"]}
+{"EventId": "E0309", "EventTemplate": "Unhandled message when=%d what=%d arg1=%d arg2=%d", "EventArgs": ["when", "what", "arg1", "arg2"]}
+{"EventId": "E0310", "EventTemplate": "P2pEnabledState when=%d what=%d arg1=%d arg2=%d", "EventArgs": ["when", "what", "arg1", "arg2"]}
+{"EventId": "E0311", "EventTemplate": "DefaultState{ when=%s what=%d target=%s }", "EventArgs": ["when", "what", "target"]}
+{"EventId": "E0312", "EventTemplate": "SleepPolicy:%d", "EventArgs": ["SleepPolicy"]}
+{"EventId": "E0313", "EventTemplate": "fpc_tac_send_get_indices_cmd indices:%x, index_count:%d", "EventArgs": ["indices", "index_count"]}
+{"EventId": "E0314", "EventTemplate": " ConnectedState !CMD_SCREEN_STATE_CHANGED  rt=%s/%s %d %d", "EventArgs": ["rt1", "rt2", "unknown1", "unknown2"]}
+{"EventId": "E0315", "EventTemplate": "%s !CMD_SCREEN_STATE_CHANGED  rt=%d/%d %d %d", "EventArgs": ["state", "rt1", "rt2", "unknown1", "unknown2"]}
+{"EventId": "E0316", "EventTemplate": "mIntentReceiver begin", "EventArgs": []}
+{"EventId": "E0317", "EventTemplate": "CtrlSocket Receiver,disable: %b locked: %b action: %s mSmartKeyguardLevel: %s mStartPowerSaving: %b", "EventArgs": ["disable", "locked", "action", "mSmartKeyguardLevel", "mStartPowerSaving"]}
+{"EventId": "E0318", "EventTemplate": "receive screen off intent!", "EventArgs": []}
+{"EventId": "E0319", "EventTemplate": "wifi tethering: %b", "EventArgs": ["tethering"]}
+{"EventId": "E0320", "EventTemplate": "Usb tethering: %b", "EventArgs": ["usbTethering"]}
+{"EventId": "E0321", "EventTemplate": "bt tethering: %b", "EventArgs": ["btTethering"]}
+{"EventId": "E0322", "EventTemplate": "pluggedStatus: %d", "EventArgs": ["pluggedStatus"]}
+{"EventId": "E0323", "EventTemplate": "is charging: %b", "EventArgs": ["isCharging"]}
+{"EventId": "E0324", "EventTemplate": "remove(%s) changed bounds; rebatching", "EventArgs": ["unknown"]}
+{"EventId": "E0325", "EventTemplate": "listener cannot be found", "EventArgs": []}
+{"EventId": "E0326", "EventTemplate": " ConnectedState CMD_ENABLE_RSSI_POLL  rt=%x/%x %d %d", "EventArgs": ["rt1", "rt2", "unknown1", "unknown2"]}
+{"EventId": "E0327", "EventTemplate": " L2ConnectedState CMD_ENABLE_RSSI_POLL  rt=%x/%x %d %d", "EventArgs": ["rt1", "rt2", "unknown1", "unknown2"]}
+{"EventId": "E0328", "EventTemplate": "%s CMD_SET_SUSPEND_OPT_ENABLED  rt=%d/%d %d %d", "EventArgs": ["state", "rt1", "rt2", "unknown1", "unknown2"]}
+{"EventId": "E0329", "EventTemplate": "[PhoneIntfMgr] getDataEnabled: subId=%d phoneId=%d", "EventArgs": ["subId", "phoneId"]}
+{"EventId": "E0330", "EventTemplate": "fpc_tac_begin_identify---need_liveness_authentication: %d", "EventArgs": ["need_liveness_authentication"]}
+{"EventId": "E0331", "EventTemplate": "[PhoneIntfMgr] getDataEnabled: subId=%d retVal=%b", "EventArgs": ["subId", "retVal"]}
+{"EventId": "E0332", "EventTemplate": "mIntentReceiver-%s", "EventArgs": ["action"]}
+{"EventId": "E0333", "EventTemplate": "updateLightsLocked,mInCall =%b,mScreenOn = %b,ledNotification == null?%b", "EventArgs": ["mInCall", "mScreenOn", "unknown"]}
+{"EventId": "E0334", "EventTemplate": "updateLightsLocked,turn off notificationLight", "EventArgs": []}
+{"EventId": "E0335", "EventTemplate": "turn off notificationLight due to incall or screenon", "EventArgs": []}
+{"EventId": "E0336", "EventTemplate": "updateLight --> mIsNotificationExisting: %b ledOnMS: %d ledOffMS :%d", "EventArgs": ["mIsNotificationExisting", "ledOnMS", "ledOffMS"]}
+{"EventId": "E0337", "EventTemplate": "updateLightsLocked --> level:%d, status:%d", "EventArgs": ["level", "status"]}
+{"EventId": "E0338", "EventTemplate": "updateLightsLocked --> mBatteryLight.turnOff", "EventArgs": []}
+{"EventId": "E0339", "EventTemplate": "HDebug print the key %s", "EventArgs": ["key"]}
+{"EventId": "E0340", "EventTemplate": "adev_set_parameters: enter: screen_state=%s", "EventArgs": ["screen_state"]}
+{"EventId": "E0341", "EventTemplate": "huawei_audio huawei_choose_HandsFree_device_incall_forHWtest: test Type =%d", "EventArgs": ["testType"]}
+{"EventId": "E0342", "EventTemplate": "huawei_audio huawei_choose_Handset_device_incall_forHWtest: test Type =%d", "EventArgs": ["testType"]}
+{"EventId": "E0343", "EventTemplate": "fpc_tac_send_set_arbitrary_data_cmd:ok, response:%d", "EventArgs": ["response"]}
+{"EventId": "E0344", "EventTemplate": "get_spk_pa_type: pa is %s", "EventArgs": ["paType"]}
+{"EventId": "E0345", "EventTemplate": "huawei_common_set_parameters: exit with code(%d)", "EventArgs": ["code"]}
+{"EventId": "E0346", "EventTemplate": "huawei_cust_set_parameters: exit with code(%d)", "EventArgs": ["code"]}
+{"EventId": "E0347", "EventTemplate": "platform_set_parameters: enter: - screen_state=%s", "EventArgs": ["screen_state"]}
+{"EventId": "E0348", "EventTemplate": "platform_set_parameters: exit with code(%d)", "EventArgs": ["code"]}
+{"EventId": "E0349", "EventTemplate": "audio_extn_set_anc_parameters: anc_enabled:%d", "EventArgs": ["anc_enabled"]}
+{"EventId": "E0350", "EventTemplate": "adev_set_parameters: exit with code(%d)", "EventArgs": ["code"]}
+{"EventId": "E0351", "EventTemplate": "PFW.HwPFWService:mBroadcastReceiver action = %s", "EventArgs": ["action"]}
+{"EventId": "E0352", "EventTemplate": "PFW.HwPFWService:handle %s", "EventArgs": ["message_type"]}
+{"EventId": "E0353", "EventTemplate": "PFW.HwPFWAppRestartPolicy:receive action = %s", "EventArgs": ["action"]}
+{"EventId": "E0354", "EventTemplate": "DeviceActiveState{ when=%s what=%d target=%s }", "EventArgs": ["when", "what", "target"]}
+{"EventId": "E0355", "EventTemplate": "StaEnabledState what=%d", "EventArgs": ["what"]}
+{"EventId": "E0356", "EventTemplate": "DefaultState what=%d", "EventArgs": ["what"]}
+{"EventId": "E0357", "EventTemplate": "wifiSleepPolicy:%d", "EventArgs": ["policy"]}
+{"EventId": "E0358", "EventTemplate": "set idle timer: %d ms", "EventArgs": ["idleTimer"]}
+{"EventId": "E0359", "EventTemplate": "saveIOStatsAndLatestUids,the time interval is too shorter than the last screen off", "EventArgs": []}
+{"EventId": "E0360", "EventTemplate": "SND -> {%d bandwidth gettetherstats}", "EventArgs": ["bandwidthId"]}
+{"EventId": "E0361", "EventTemplate": "RCV <- {%d %d Tethering stats list %s}", "EventArgs": ["code", "id", "status"]}
+{"EventId": "E0362", "EventTemplate": "AutoCleanReceiveServer:receive action:%s", "EventArgs": ["action"]}
+{"EventId": "E0363", "EventTemplate": "wpa_driver_nl80211_driver_cmd %s %d len = %d, %d", "EventArgs": ["command", "mode", "len1", "len2"]}
+{"EventId": "E0364", "EventTemplate": "AutoCleanReceiveServer:telemamanger state isIdle:%b", "EventArgs": ["isIdle"]}
+{"EventId": "E0365", "EventTemplate": "AutoCleanReceiveServer:checkToStartCleanService,phone is use state,phone is use,need not start clean service", "EventArgs": []}
+{"EventId": "E0366", "EventTemplate": "mStatsXtProcUid: %s does not exist!", "EventArgs": ["filePath"]}
+{"EventId": "E0367", "EventTemplate": "mActiveIface: %s", "EventArgs": ["activeIface"]}
+{"EventId": "E0368", "EventTemplate": "receive broadcast intent, action: %s", "EventArgs": ["action"]}
+{"EventId": "E0369", "EventTemplate": "disableGps:%b  isEnabled()=%b", "EventArgs": ["disableGps", "isEnabled"]}
+{"EventId": "E0370", "EventTemplate": "C onScreenOff", "EventArgs": []}
+{"EventId": "E0371", "EventTemplate": "[Timer rat:%d level:%d] suspend", "EventArgs": ["rat", "level"]}
+{"EventId": "E0372", "EventTemplate": "[Timer serviceState:%d simReady:%b] suspend", "EventArgs": ["serviceState", "simReady"]}
+{"EventId": "E0373", "EventTemplate": "duration: %d STATUS_REPORT_TIMESPAN: %d / (1000 * 60 * 60 * 24) day STATUS_REPORT_TIMESPAN_FOR_BETA: %d / (1000 * 60 * 60 * 24) day", "EventArgs": ["duration", "STATUS_REPORT_TIMESPAN", "STATUS_REPORT_TIMESPAN_FOR_BETA"]}
+{"EventId": "E0374", "EventTemplate": "TrafficNotifyAfterLocked:mLockStartTraffic = %d;mLockStartTrafficList = %s", "EventArgs": ["mLockStartTraffic", "mLockStartTrafficList"]}
+{"EventId": "E0375", "EventTemplate": "enter addToIdleMessage(type:%d), mainloop is busy, add to idleMessage", "EventArgs": ["type"]}
+{"EventId": "E0376", "EventTemplate": "SimCardMethod:/getSimCardInfo: imsi is %s", "EventArgs": ["imsi"]}
+{"EventId": "E0377", "EventTemplate": "NormalTrafficAnalysis:alert byte = %d, so return", "EventArgs": ["byte"]}
+{"EventId": "E0378", "EventTemplate": "[HME_JPEG_DEC_Delete](%d): HME_JPEG_DEC_Delete: decoder_ctx=%s", "EventArgs": ["lineNumber", "decoder_ctx"]}
+{"EventId": "E0379", "EventTemplate": "LeisureTrafficSetting:result is %s", "EventArgs": ["resultStatus"]}
+{"EventId": "E0380", "EventTemplate": "NatTrafficNotifyService:delta byte = %d no traffic delta = %dTraffic state is %d", "EventArgs": ["deltaByte", "noTrafficDelta", "trafficState"]}
+{"EventId": "E0381", "EventTemplate": "ExtraTrafficSetting:result is %s", "EventArgs": ["resultStatus"]}
+{"EventId": "E0382", "EventTemplate": "InCallPresenter - notifyInCallScreenIsForeground: %b", "EventArgs": ["isForeground"]}
+{"EventId": "E0383", "EventTemplate": "OverscanTimeout run", "EventArgs": []}
+{"EventId": "E0384", "EventTemplate": "unclear notification ,notificationPkgName:%s key:%s", "EventArgs": ["notificationPkgName", "key"]}
+{"EventId": "E0385", "EventTemplate": "generateAddAnimation:%s, %b", "EventArgs": ["animation", "booleanParam"]}
+{"EventId": "E0386", "EventTemplate": " e id:%d type:{pkg:%s}", "EventArgs": ["id", "pkg"]}
+{"EventId": "E0387", "EventTemplate": "KGSvcFp onAuthenticationAcquired.%d", "EventArgs": ["unknown"]}
+{"EventId": "E0388", "EventTemplate": "VolumeDialogController.Callbacks onScreenOff", "EventArgs": []}
+{"EventId": "E0389", "EventTemplate": "update:rxPkts:%d,txPkts:%d,rxBytes:%d,txBytes:%d", "EventArgs": ["rxPkts", "txPkts", "rxBytes", "txBytes"]}
+{"EventId": "E0390", "EventTemplate": "start expired. level:%d", "EventArgs": ["level"]}
+{"EventId": "E0391", "EventTemplate": "gettimer:interval=%d", "EventArgs": ["interval"]}
+{"EventId": "E0392", "EventTemplate": "Change to single clock mode!", "EventArgs": []}
+{"EventId": "E0393", "EventTemplate": "simCount:%d phoneState:%d", "EventArgs": ["simCount", "phoneState"]}
+{"EventId": "E0394", "EventTemplate": "mCallingStatusReceiver:onReceive::action=%s, isForegroundActivity=%b, mPhoneState=%d", "EventArgs": ["action", "isForegroundActivity", "mPhoneState"]}
+{"EventId": "E0395", "EventTemplate": "updateCallLayout:isBackground=%b, isInteractive=%b", "EventArgs": ["isBackground", "isInteractive"]}
+{"EventId": "E0396", "EventTemplate": "mNotifyStateChangedReceiver do nothing", "EventArgs": []}
+{"EventId": "E0397", "EventTemplate": "mNotifyStateChangedReceiver::onReceive:action=%s, mBackgroundState=%b", "EventArgs": ["action", "mBackgroundState"]}
+{"EventId": "E0398", "EventTemplate": "overlapAmount:%f, previousNotificationEnd:%f, newYTranslation:%f, location:%d, i:%d, getTopPadding:%f, getLocationOnScreen():%d", "EventArgs": ["overlapAmount", "previousNotificationEnd", "newYTranslation", "location", "i", "getTopPadding", "getLocationOnScreen"]}
+{"EventId": "E0399", "EventTemplate": "start wakelock monitor.", "EventArgs": []}
+{"EventId": "E0400", "EventTemplate": "call busy and not start clean apps.", "EventArgs": []}
+{"EventId": "E0401", "EventTemplate": "ash->screen off", "EventArgs": []}
+{"EventId": "E0402", "EventTemplate": "Default InputMethod : %s", "EventArgs": ["inputMethod"]}
+{"EventId": "E0403", "EventTemplate": "screen off inputmethod, delay to hibernation", "EventArgs": []}
+{"EventId": "E0404", "EventTemplate": "handle action thermal policy:%d", "EventArgs": ["policy"]}
+{"EventId": "E0405", "EventTemplate": "I/LocTech-Label :: OSOBSERVER :: Data Items In", "EventArgs": []}
+{"EventId": "E0406", "EventTemplate": "I/LocTech-Value :: Data Item Value: IS_SCREEN_ON: %b", "EventArgs": ["IS_SCREEN_ON"]}
+{"EventId": "E0407", "EventTemplate": "Launcher receiver screen off broadcast sendmessage %b", "EventArgs": ["sendmessage"]}
+{"EventId": "E0408", "EventTemplate": "mSimSubId:%d onDataActivity: direction=%d", "EventArgs": ["mSimSubId", "direction"]}
+{"EventId": "E0409", "EventTemplate": "MemoryRecoveryDMEPlugin: receive sceen off event", "EventArgs": []}
+{"EventId": "E0410", "EventTemplate": "create: %x", "EventArgs": ["create"]}
+{"EventId": "E0411", "EventTemplate": "send: %x", "EventArgs": ["send"]}
+{"EventId": "E0412", "EventTemplate": "handle_exception_events enter", "EventArgs": []}
+{"EventId": "E0413", "EventTemplate": "process buffer and get message", "EventArgs": []}
+{"EventId": "E0414", "EventTemplate": "dropped event (cpu%x)", "EventArgs": ["unknown"]}
+{"EventId": "E0415", "EventTemplate": "setTracingEnabled:%d", "EventArgs": ["enabled"]}
+{"EventId": "E0416", "EventTemplate": "error writing to %s: %s (%d)", "EventArgs": ["filePath", "errorMessage", "errorCode"]}
+{"EventId": "E0417", "EventTemplate": "Systrace:: %s and will %s.", "EventArgs": ["bufferStatus", "action"]}
+{"EventId": "E0418", "EventTemplate": "msg.recv{%d} %s.%s(%s:%d) TCP Msg %d%s", "EventArgs": ["threadId", "className", "methodName", "filePath", "lineNumber", "msgCode", "msgStatus"]}
+{"EventId": "E0419", "EventTemplate": "msg.recv{%d} %s.%s(%s:%d) RECV %d bytes [%d]_%s cmdCode(%s.%s)msgType(%s.%d)msgClass(%s.%d)sender(%s.%d)crypted(%b)zipped(%b)nobase64(%b)length(%d)version(%d)sno(%s)", "EventArgs": ["threadId", "className", "methodName", "filePath", "lineNumber", "recvBytes", "unknown", "byteSequence", "cmdCodeClass", "cmdCodeValue", "msgTypeClass", "msgTypeValue", "msgClassClass", "msgClassValue", "senderClass", "senderValue", "crypted", "zipped", "nobase64", "length", "version", "sno"]}
+{"EventId": "E0420", "EventTemplate": "isMusicActive...", "EventArgs": []}
+{"EventId": "E0421", "EventTemplate": "isWiredHeadsetOn...", "EventArgs": []}
+{"EventId": "E0422", "EventTemplate": "Watch Thread{%d} WatchThread.onLoop(WatchThread.java:%d) watch thread onLoop...", "EventArgs": ["threadId", "lineNumber"]}
+{"EventId": "E0423", "EventTemplate": "%x|onStandStepChanged %d", "EventArgs": ["unknown", "stepCount"]}
+{"EventId": "E0424", "EventTemplate": "%d|compensate received", "EventArgs": ["code"]}
+{"EventId": "E0425", "EventTemplate": "%d|getTodayTotalSteps %d", "EventArgs": ["code", "steps"]}
+{"EventId": "E0426", "EventTemplate": "%d|before compensate: cache step_%d", "EventArgs": ["code", "cached_steps"]}
+{"EventId": "E0427", "EventTemplate": "%d|compensate %d %d", "EventArgs": ["unknown", "compensate_value1", "compensate_value2"]}
+{"EventId": "E0428", "EventTemplate": "%d|after compensate: cache step_%d", "EventArgs": ["unknown", "step"]}
+{"EventId": "E0429", "EventTemplate": "%d|REPORT : %d %d %d %d", "EventArgs": ["unknown", "report_value1", "report_value2", "report_value3", "report_value4"]}
+{"EventId": "E0430", "EventTemplate": "Cache monitor msg as %s", "EventArgs": ["monitor_msg"]}
+{"EventId": "E0431", "EventTemplate": "removeProximityView %s vp %s", "EventArgs": ["result", "unknown"]}
+{"EventId": "E0432", "EventTemplate": "Screen turned off...", "EventArgs": []}
+{"EventId": "E0433", "EventTemplate": "batch called handle:%d sample_ns:%d latency_ns:%d", "EventArgs": ["handle", "sample_ns", "latency_ns"]}
+{"EventId": "E0434", "EventTemplate": "pa2240-proximity calling driver setDelay %d ms", "EventArgs": ["delay"]}
+{"EventId": "E0435", "EventTemplate": "write %d failed", "EventArgs": ["unknown"]}
+{"EventId": "E0436", "EventTemplate": "set power status:%s=%b,%s=%b", "EventArgs": ["mPowerStatus", "powerStatus", "unknown", "unknown"]}
+{"EventId": "E0437", "EventTemplate": "PowerManagerServiceonProximityNegative -> updatePowerStateLocked", "EventArgs": []}
+{"EventId": "E0438", "EventTemplate": "PowerManagerNotifier onUserActivity: event=%d, uid=%d", "EventArgs": ["event", "uid"]}
+{"EventId": "E0439", "EventTemplate": "PowerManagerService wakeUpNoUpdateLocked: eventTime=%d, uid=%d", "EventArgs": ["eventTime", "uid"]}
+{"EventId": "E0440", "EventTemplate": "PowerManagerService Waking up from sleep (uid %d)...", "EventArgs": ["uid"]}
+{"EventId": "E0441", "EventTemplate": "PowerManagerNotifier onWakeUp: event=%s, reasonUid=%d opPackageName=%s opUid=%d", "EventArgs": ["event", "reasonUid", "opPackageName", "opUid"]}
+{"EventId": "E0442", "EventTemplate": "PowerManagerServiceonProximityNegative by %s", "EventArgs": ["device"]}
+{"EventId": "E0443", "EventTemplate": "setColorTemperatureAccordingToSetting", "EventArgs": []}
+{"EventId": "E0444", "EventTemplate": "isDisplayFeatureSupported feature:%x", "EventArgs": ["feature"]}
+{"EventId": "E0445", "EventTemplate": "hw_get_smart_display_supported: start++", "EventArgs": []}
+{"EventId": "E0446", "EventTemplate": "hw_get_smart_display_supported: end--", "EventArgs": []}
+{"EventId": "E0447", "EventTemplate": "Surport %d dimension color temperature.", "EventArgs": ["dimension"]}
+{"EventId": "E0448", "EventTemplate": "setColorTemperatureAccordingToSetting new.", "EventArgs": []}
+{"EventId": "E0449", "EventTemplate": "ColorTemperature read from old setting:%d", "EventArgs": ["colorTemperature"]}
+{"EventId": "E0450", "EventTemplate": "setColorTemperature:%d", "EventArgs": ["unknown"]}
+{"EventId": "E0451", "EventTemplate": "hw_set_colortemperature: start++", "EventArgs": []}
+{"EventId": "E0452", "EventTemplate": "Warning: hw_set_colortemperature is COLOR_TEMP_2_DIMENSION interface, not supported presently.", "EventArgs": []}
+{"EventId": "E0453", "EventTemplate": "hw_set_colortemperature: end--", "EventArgs": []}
+{"EventId": "E0454", "EventTemplate": "Setting mDismissKeyguard %b by win Window{%x u%d %s/%s}", "EventArgs": ["mDismissKeyguard", "unknown", "packageName", "activityName"]}
+{"EventId": "E0455", "EventTemplate": "DisplayPowerController Blocking screen on until initial contents have been drawn.", "EventArgs": []}
+{"EventId": "E0456", "EventTemplate": "Screen turned on for keyguard", "EventArgs": []}
+{"EventId": "E0457", "EventTemplate": "KeyguardServiceDelegate  onScreenTurnedOn(showListener = %s@%x)", "EventArgs": ["showListener", "unknown"]}
+{"EventId": "E0458", "EventTemplate": "**** SHOWN CALLED ****", "EventArgs": []}
+{"EventId": "E0459", "EventTemplate": "mKeyguardDelegate.ShowListener.onDrawn.", "EventArgs": []}
+{"EventId": "E0460", "EventTemplate": "finishKeyguardDrawn -> waitForAllWindowsDrawn", "EventArgs": []}
+{"EventId": "E0461", "EventTemplate": "bh1745-light calling driver setDelay %d ms", "EventArgs": ["delay"]}
+{"EventId": "E0462", "EventTemplate": "bh1745-light calling driver enable", "EventArgs": []}
+{"EventId": "E0463", "EventTemplate": "LightSensor, enable, %d: mEnabled=%d", "EventArgs": ["unknown", "mEnabled"]}
+{"EventId": "E0464", "EventTemplate": "Enable LightSensor at time:mLightSensorEnableTime=%d,mLightSensorEnableElapsedTimeNanos=%d", "EventArgs": ["mLightSensorEnableTime", "mLightSensorEnableElapsedTimeNanos"]}
+{"EventId": "E0465", "EventTemplate": "read Events lux:  %f", "EventArgs": ["lux"]}
+{"EventId": "E0466", "EventTemplate": "updateAmbientLux: Initializing: mAmbientLightRingBuffer=[%f / %dms], mAmbientLux=%f", "EventArgs": ["ringBufferValue", "ringBufferTime", "mAmbientLux"]}
+{"EventId": "E0467", "EventTemplate": "need to update brightness: mAmbientLux=%f", "EventArgs": ["mAmbientLux"]}
+{"EventId": "E0468", "EventTemplate": "offsetBrightness=%f,mOffsetBrightness_last%f,lux=%f,mPosBrightness=%f,mIsUserChange=%b,mDelta=%f,defaultBrightness=%f,mStartLuxDefaultBrightness=%fmLastLuxDefaultBrightness=%f", "EventArgs": ["offsetBrightness", "mOffsetBrightness_last", "lux", "mPosBrightness", "mIsUserChange", "mDelta", "defaultBrightness", "mStartLuxDefaultBrightness", "mLastLuxDefaultBrightness"]}
+{"EventId": "E0469", "EventTemplate": "write:userId=%d,mPosBrightness =%f,mOffsetBrightness_last=%f,mIsUserChange=%b,mDeltaNew=%f,mStartLuxDefaultBrightness=%fmLastLuxDefaultBrightness=%f,mAmLux=%f", "EventArgs": ["userId", "mPosBrightness", "mOffsetBrightness_last", "mIsUserChange", "mDeltaNew", "mStartLuxDefaultBrightness", "mLastLuxDefaultBrightness", "mAmLux"]}
+{"EventId": "E0470", "EventTemplate": "updateAutoBrightness: mScreenAutoBrightness=%d, newScreenAutoBrightness=%d", "EventArgs": ["mScreenAutoBrightness", "newScreenAutoBrightness"]}
+{"EventId": "E0471", "EventTemplate": "waitForAllWindowsDrawn  cover is open or null", "EventArgs": []}
+{"EventId": "E0472", "EventTemplate": "completedResumed: ActivityRecord{%s u%d %s/%s t%d}, launchTrack: outofsleep resumeTopComplete", "EventArgs": ["unknown", "userId", "unknown", "activityClass", "taskId"]}
+{"EventId": "E0473", "EventTemplate": "Started waking up...", "EventArgs": []}
+{"EventId": "E0474", "EventTemplate": "PowerManagerNotifier Sending wake up broadcast.", "EventArgs": []}
+{"EventId": "E0475", "EventTemplate": "KGSvcFp stopListeningForFingerprint(). %d", "EventArgs": ["unknown_param"]}
+{"EventId": "E0476", "EventTemplate": "FingerprintService cancelAuthentication", "EventArgs": []}
+{"EventId": "E0477", "EventTemplate": "stop client %s", "EventArgs": ["clientName"]}
+{"EventId": "E0478", "EventTemplate": "fpc_cancel", "EventArgs": []}
+{"EventId": "E0479", "EventTemplate": "capture_image failed %d", "EventArgs": ["errorCode"]}
+{"EventId": "E0480", "EventTemplate": "timeForContinueCapture id:%d", "EventArgs": ["id"]}
+{"EventId": "E0481", "EventTemplate": "getTimeTickInfo:[mMillisUntilFinished:%d, mHour:%d, mMinute:%d, mSecond:%d]", "EventArgs": ["mMillisUntilFinished", "mHour", "mMinute", "mSecond"]}
+{"EventId": "E0482", "EventTemplate": "createLockScreenView when %s", "EventArgs": ["unknown"]}
+{"EventId": "E0483", "EventTemplate": "load%s", "EventArgs": ["unknown"]}
+{"EventId": "E0484", "EventTemplate": "Incall is %s", "EventArgs": ["unknown"]}
+{"EventId": "E0485", "EventTemplate": "windowsGone(): ActivityRecord{%s u%d %s/%s t%d}", "EventArgs": ["activityRecord", "userId", "packageName", "className", "taskId"]}
+{"EventId": "E0486", "EventTemplate": "setExcludeFromRecents:pkgName=%s", "EventArgs": ["pkgName"]}
+{"EventId": "E0487", "EventTemplate": "expired arrive. level:%d", "EventArgs": ["level"]}
+{"EventId": "E0488", "EventTemplate": "do_identify failed %d", "EventArgs": ["errorCode"]}
+{"EventId": "E0489", "EventTemplate": "do_identify operation %s", "EventArgs": ["operation"]}
+{"EventId": "E0490", "EventTemplate": "do_identify took %d ms, total:%d wait:%d", "EventArgs": ["took", "total", "wait"]}
+{"EventId": "E0491", "EventTemplate": "InCallPresenter - %s", "EventArgs": ["action"]}
+{"EventId": "E0492", "EventTemplate": "VideoPauseController: - VideoPauseController:%s", "EventArgs": ["event"]}
+{"EventId": "E0493", "EventTemplate": "report result = %breport type:%d msg:", "EventArgs": ["result", "type"]}
+{"EventId": "E0494", "EventTemplate": "InCallActivity - doOrientationChanged prevOrientation=%d newOrientation=%d", "EventArgs": ["prevOrientation", "newOrientation"]}
+{"EventId": "E0495", "EventTemplate": "InCallActivity - onStart()... end", "EventArgs": []}
+{"EventId": "E0496", "EventTemplate": "setBackgroundColor:new=%d, old=%x", "EventArgs": ["newColor", "oldColor"]}
+{"EventId": "E0497", "EventTemplate": "cancelNotificationWithTag pid %d,uid = %d,tag = %s,pkg =%s,id =%d", "EventArgs": ["pid", "uid", "tag", "pkg", "id"]}
+{"EventId": "E0498", "EventTemplate": "StatusBarNotifier - updateInCallNotification: timer cleared", "EventArgs": []}
+{"EventId": "E0499", "EventTemplate": "client %s is no longer authenticating", "EventArgs": ["client"]}
+{"EventId": "E0500", "EventTemplate": "ClientMonitor destroy", "EventArgs": []}
+{"EventId": "E0501", "EventTemplate": "Done with client: %s", "EventArgs": ["client"]}
+{"EventId": "E0502", "EventTemplate": "handleError(client=%s, error = %d)", "EventArgs": ["client", "error"]}
+{"EventId": "E0503", "EventTemplate": "during_ms:%d,period_ms:%d", "EventArgs": ["during_ms", "period_ms"]}
+{"EventId": "E0504", "EventTemplate": "count:%d,rx_sum:%d,tx_sum:%d,rxBytes:%d,during_ms:%d,rx_speed:%f,tx_speed:%f,rto:%f", "EventArgs": ["count", "rx_sum", "tx_sum", "rxBytes", "during_ms", "rx_speed", "tx_speed", "rto"]}
+{"EventId": "E0505", "EventTemplate": "becomeActiveLocked, reason = %s", "EventArgs": ["reason"]}
+{"EventId": "E0506", "EventTemplate": "handleMessage(%d)", "EventArgs": ["messageType"]}
+{"EventId": "E0507", "EventTemplate": "AnswerPresenter - onCallListChange callList=%s", "EventArgs": ["callList"]}
+{"EventId": "E0508", "EventTemplate": "cancelNotification,index:%d", "EventArgs": ["index"]}
+{"EventId": "E0509", "EventTemplate": "cancelNotificationLocked:%d|%s|%d|%s|%d", "EventArgs": ["unknown", "package_name", "unknown", "unknown", "unknown"]}
+{"EventId": "E0510", "EventTemplate": "cancelNotificationLocked,remove =%s", "EventArgs": ["package_name"]}
+{"EventId": "E0511", "EventTemplate": "AwareMem_EventTracker: [%s] is abandoned for memory %d", "EventArgs": ["eventTimestamp", "memorySize"]}
+{"EventId": "E0512", "EventTemplate": "DisplayPowerStatesetColorFadeLevel: level=%f", "EventArgs": ["level"]}
+{"EventId": "E0513", "EventTemplate": "action:%s, mPermissionType:%d", "EventArgs": ["action", "mPermissionType"]}
+{"EventId": "E0514", "EventTemplate": "Animating brightness: target=%d, rate=%d", "EventArgs": ["target", "rate"]}
+{"EventId": "E0515", "EventTemplate": "DisplayPowerController updatePowerState mPendingRequestLocked=policy=%s, useProximitySensor=%b, useProximitySensorbyPhone=%b, screenBrightness=%d, screenAutoBrightnessAdjustment=%f, brightnessSetByUser=%b, useAutoBrightness=%b, blockScreenOn=%b, lowPowerMode=%b, boostScreenBrightness=%b, dozeScreenBrightness=%d, dozeScreenState=%s, useTwilight=%b, useSmartBacklight=%b, brightnessWaitMode=%b, brightnessWaitRet=%b, screenAutoBrightness=%d, userId=%d", "EventArgs": ["policy", "useProximitySensor", "useProximitySensorbyPhone", "screenBrightness", "screenAutoBrightnessAdjustment", "brightnessSetByUser", "useAutoBrightness", "blockScreenOn", "lowPowerMode", "boostScreenBrightness", "dozeScreenBrightness", "dozeScreenState", "useTwilight", "useSmartBacklight", "brightnessWaitMode", "brightnessWaitRet", "screenAutoBrightness", "userId"]}
+{"EventId": "E0516", "EventTemplate": "DisplayPowerState Updating screen state: state=%s, backlight=%d", "EventArgs": ["state", "backlight"]}
+{"EventId": "E0517", "EventTemplate": "resetPagerState", "EventArgs": []}
+{"EventId": "E0518", "EventTemplate": "fingerprintd", "EventArgs": []}
+{"EventId": "E0519", "EventTemplate": "FingerprintDaemonProxyEx::setLivenessSwitch", "EventArgs": []}
+{"EventId": "E0520", "EventTemplate": "DisplayPowerStatesetColorFadeLevel: level=%f", "EventArgs": ["level"]}
+{"EventId": "E0521", "EventTemplate": "action:%s, mPermissionType:%d", "EventArgs": ["action", "mPermissionType"]}
+{"EventId": "E0522", "EventTemplate": "Animating brightness: target=%d, rate=%d", "EventArgs": ["target", "rate"]}
+{"EventId": "E0523", "EventTemplate": "DisplayPowerController updatePowerState mPendingRequestLocked=policy=%s, useProximitySensor=%b, useProximitySensorbyPhone=%b, screenBrightness=%d, screenAutoBrightnessAdjustment=%f, brightnessSetByUser=%b, useAutoBrightness=%b, blockScreenOn=%b, lowPowerMode=%b, boostScreenBrightness=%b, dozeScreenBrightness=%d, dozeScreenState=%s, useTwilight=%b, useSmartBacklight=%b, brightnessWaitMode=%b, brightnessWaitRet=%b, screenAutoBrightness=%d, userId=%d", "EventArgs": ["policy", "useProximitySensor", "useProximitySensorbyPhone", "screenBrightness", "screenAutoBrightnessAdjustment", "brightnessSetByUser", "useAutoBrightness", "blockScreenOn", "lowPowerMode", "boostScreenBrightness", "dozeScreenBrightness", "dozeScreenState", "useTwilight", "useSmartBacklight", "brightnessWaitMode", "brightnessWaitRet", "screenAutoBrightness", "userId"]}
+{"EventId": "E0524", "EventTemplate": "DisplayPowerState Updating screen state: state=%s, backlight=%d", "EventArgs": ["state", "backlight"]}
+{"EventId": "E0525", "EventTemplate": "back light level before map = %d", "EventArgs": ["level"]}
+{"EventId": "E0526", "EventTemplate": "onScreenTurnedOn()", "EventArgs": []}
+{"EventId": "E0527", "EventTemplate": "Display ready!", "EventArgs": []}
+{"EventId": "E0528", "EventTemplate": "Finished business...", "EventArgs": []}
+{"EventId": "E0529", "EventTemplate": "Caller checkPermission fail", "EventArgs": []}
+{"EventId": "E0530", "EventTemplate": "KGSvcCall onScreenTurnedOn.", "EventArgs": []}
+{"EventId": "E0531", "EventTemplate": "notifyScreenTurnedOn", "EventArgs": []}
+{"EventId": "E0532", "EventTemplate": "handleNotifyScreenTurnedOn", "EventArgs": []}
+{"EventId": "E0533", "EventTemplate": "getNextIndex: %d; from %d to %d; size: %d", "EventArgs": ["index", "from", "to", "size"]}
+{"EventId": "E0534", "EventTemplate": "report msg is :{picture: %s}", "EventArgs": ["picture"]}
+{"EventId": "E0535", "EventTemplate": "Screen already turned on at: %d", "EventArgs": ["timestamp"]}
+{"EventId": "E0536", "EventTemplate": "Split enqueueing broadcast [callerApp]:%s", "EventArgs": ["callerApp"]}
+{"EventId": "E0537", "EventTemplate": "EventCenter Get :%s", "EventArgs": ["event"]}
+{"EventId": "E0538", "EventTemplate": "Get no-perm notification callback %s", "EventArgs": ["callback"]}
+{"EventId": "E0539", "EventTemplate": "ITrafficInfo:ITrafficInfo create %dupdateBytes = %d", "EventArgs": ["id", "updateBytes"]}
+{"EventId": "E0540", "EventTemplate": "ContentChange for slot: %d", "EventArgs": ["slot"]}
+{"EventId": "E0541", "EventTemplate": "onChange selfChange:%b uri.toString():%s mIsObserveAutoBrightnessChange:%b", "EventArgs": ["selfChange", "uri", "mIsObserveAutoBrightnessChange"]}
+{"EventId": "E0542", "EventTemplate": "case %s, not a fingerprint unlock", "EventArgs": ["case"]}
+{"EventId": "E0543", "EventTemplate": "ready=%b,policy=%d,wakefulness=%d,wksummary=%x,uasummary=%x,bootcompleted=%b,boostinprogress=%b,waitmodeenable=%b,mode=%b,manual=%d,auto=%d,adj=%fuserId=%d", "EventArgs": ["ready", "policy", "wakefulness", "wksummary", "uasummary", "bootcompleted", "boostinprogress", "waitmodeenable", "mode", "manual", "auto", "adj", "userId"]}
+{"EventId": "E0544", "EventTemplate": "PowerManagerNotifier onWakefulnessChangeFinished mInteractiveChanging=%b, mInteractive=%b", "EventArgs": ["mInteractiveChanging", "mInteractive"]}
+{"EventId": "E0545", "EventTemplate": "APS brightness=%f,ConvertToPercentage=%f", "EventArgs": ["brightness", "percentage"]}
+{"EventId": "E0546", "EventTemplate": "updateSlider%d seekBarProgress:%d", "EventArgs": ["slider", "progress"]}
+{"EventId": "E0547", "EventTemplate": "msg = %d received", "EventArgs": ["msg"]}
+{"EventId": "E0548", "EventTemplate": "enqueueNotificationInternal: pkg=%s id=%d notification=%s", "EventArgs": ["pkg", "id", "notification"]}
+{"EventId": "E0549", "EventTemplate": "enqueueNotificationInternal: n.getKey = %s", "EventArgs": ["key"]}
+{"EventId": "E0550", "EventTemplate": "presently, %s interface not achieved.", "EventArgs": ["interface"]}
+{"EventId": "E0551", "EventTemplate": "DialpadFragment mBroadcastReceiver action:%s", "EventArgs": ["action"]}
+{"EventId": "E0552", "EventTemplate": "InCallActivity - mScreenOnReceiver mCallEndOptionsDialog = %s", "EventArgs": ["dialog"]}
+{"EventId": "E0553", "EventTemplate": "disableEffects=%s canInterrupt=%b once update: %b", "EventArgs": ["effects", "canInterrupt", "onceUpdate"]}
+{"EventId": "E0554", "EventTemplate": "onNotificationPosted: %s important=%d, post=%d, when=%d, vis=%d, userid=%d", "EventArgs": ["notification", "important", "post", "when", "vis", "userid"]}
+{"EventId": "E0555", "EventTemplate": "updateNotification(%s)", "EventArgs": ["notification"]}
+{"EventId": "E0556", "EventTemplate": "Create obj success use class %s", "EventArgs": ["className"]}
+{"EventId": "E0557", "EventTemplate": "updateTint: tint=%d", "EventArgs": ["tint"]}
+{"EventId": "E0558", "EventTemplate": "No peeking: unimportant notification: %s", "EventArgs": ["notificationKey"]}
+{"EventId": "E0559", "EventTemplate": "applyInPlace=%b shouldPeek=%b alertAgain=%b", "EventArgs": ["applyInPlace", "shouldPeek", "alertAgain"]}
+{"EventId": "E0560", "EventTemplate": "onEntryUpdated:%s", "EventArgs": ["entry"]}
+{"EventId": "E0561", "EventTemplate": "onEntryAdded:%s, group=%s", "EventArgs": ["entry", "group"]}
+{"EventId": "E0562", "EventTemplate": "reusing notification for key: %s", "EventArgs": ["key"]}
+{"EventId": "E0563", "EventTemplate": "RetryTaskController:mTaskList is %s", "EventArgs": ["taskList"]}
+{"EventId": "E0564", "EventTemplate": "updateNotificationShade", "EventArgs": []}
+{"EventId": "E0565", "EventTemplate": "removeNotificationChildren", "EventArgs": []}
+{"EventId": "E0566", "EventTemplate": "showNotificationAll", "EventArgs": []}
+{"EventId": "E0567", "EventTemplate": "uid:%d pid:%d %s:%d events:%d", "EventArgs": ["uid", "pid", "listener", "id", "events"]}
+{"EventId": "E0568", "EventTemplate": "%s uid:%d", "EventArgs": ["listener", "uid"]}
+{"EventId": "E0569", "EventTemplate": "%s ==================== %s CLEAR ALL ====================", "EventArgs": ["thread", "client"]}
+{"EventId": "E0570", "EventTemplate": "%s ==================== %s DISCONNECT ====================", "EventArgs": ["thread", "client"]}
+{"EventId": "E0571", "EventTemplate": "[Thermal_Hw] temperature_valid, battery : temperature is invalid, invalid temperatrue is %d", "EventArgs": ["temperature"]}
+{"EventId": "E0572", "EventTemplate": "[Thermal_Hw] temperature_filter: get invalid temperature, use old temp", "EventArgs": []}
+{"EventId": "E0573", "EventTemplate": "transferRemoteInputFocus: %d", "EventArgs": ["focus"]}
+{"EventId": "E0574", "EventTemplate": "updateClipping isOverlap:%b", "EventArgs": ["isOverlap"]}
+{"EventId": "E0575", "EventTemplate": "updateDimmedActivatedHideSensitive overlap:%b", "EventArgs": ["overlap"]}
+{"EventId": "E0576", "EventTemplate": "[ACC]processReportInd: X: %f Y: %f Z: %f  x_offset:%f y_offset:%f z_offset:%f", "EventArgs": ["X", "Y", "Z", "x_offset", "y_offset", "z_offset"]}
+{"EventId": "E0577", "EventTemplate": "remove(%s) changed bounds; rebatching", "EventArgs": ["pendingIntent"]}
+{"EventId": "E0578", "EventTemplate": "set(%s) : type=%d triggerAtTime=%d win=%d tElapsed=%d maxElapsed=%d interval=%d flags=%x", "EventArgs": ["pendingIntent", "type", "triggerAtTime", "win", "tElapsed", "maxElapsed", "interval", "flags"]}
+{"EventId": "E0579", "EventTemplate": "GetAddrInfoHandler addr: %s {%d, %d, %d} %s", "EventArgs": ["addr", "info1", "info2", "info3", "ip"]}
+{"EventId": "E0580", "EventTemplate": "%s disconnecting to %s:%d", "EventArgs": ["thread", "host", "port"]}
+{"EventId": "E0581", "EventTemplate": "%s shutdown output: %s", "EventArgs": ["thread", "exception"]}
+{"EventId": "E0582", "EventTemplate": "%s shutdown input: %s", "EventArgs": ["thread", "exception"]}
+{"EventId": "E0583", "EventTemplate": "tcp.recv{%d} %s <<< WARN(%d) >>> %s", "EventArgs": ["thread", "class", "warnCode", "exception"]}
+{"EventId": "E0584", "EventTemplate": "%s closed socket.", "EventArgs": ["thread"]}
+{"EventId": "E0585", "EventTemplate": "release:lock=%d, flg=%x, tag=\"%s\", name=%s\", ws=%s, uid=%d, pid=%d", "EventArgs": ["lock", "flg", "tag", "name", "ws", "uid", "pid"]}
+{"EventId": "E0586", "EventTemplate": "MagicLink2-BroadcastReceiver:====>%s", "EventArgs": ["action"]}
+{"EventId": "E0587", "EventTemplate": "Releasing suspend blocker \"%s\".", "EventArgs": ["blocker"]}
+{"EventId": "E0588", "EventTemplate": "tcp.recv{%d} %s <<< ERROR(%d) >>> %s", "EventArgs": ["thread", "class", "errorCode", "message"]}
+{"EventId": "E0589", "EventTemplate": "tcp.recv{%d} %s disconnected", "EventArgs": ["thread", "class"]}
+{"EventId": "E0590", "EventTemplate": "shouldBlockLocation running ...", "EventArgs": []}
+{"EventId": "E0591", "EventTemplate": "shouldBlockLocation  ret:%b", "EventArgs": ["ret"]}
+{"EventId": "E0592", "EventTemplate": "%s Connect to server  address = [%s,]  port = %d", "EventArgs": ["thread", "address", "port"]}
+{"EventId": "E0593", "EventTemplate": "connect :%b", "EventArgs": ["success"]}
+{"EventId": "E0594", "EventTemplate": "%s ==================== %s CONNECT [%d] ====================", "EventArgs": ["thread", "client", "connectionId"]}
+{"EventId": "E0595", "EventTemplate": "%s will connect to %s:%d", "EventArgs": ["thread", "host", "port"]}
+{"EventId": "E0596", "EventTemplate": "tcp.conn{%d} %s connecting max %dms to %s:%d", "EventArgs": ["thread", "class", "timeout", "host", "port"]}
+{"EventId": "E0597", "EventTemplate": "tcp.conn{%d} %s connecting to ip address %s/%s", "EventArgs": ["thread", "class", "host", "ip"]}
+{"EventId": "E0598", "EventTemplate": "MemCPUMonitor:startTimerMonitor isCompleted = %b", "EventArgs": ["isCompleted"]}
+{"EventId": "E0599", "EventTemplate": "t=%d,BT=%d,DT=%d,BT1=%d,DT1=%d,Bn=%b,Dn=%b,lx=[%f/%d],mLx=%f,s=%f,ss=%f,AuIntervened=%b,mProximityState=%b,bLux=%f,dLux=%f,bLux1=%f,dLux1=%f", "EventArgs": ["t", "BT", "DT", "BT1", "DT1", "Bn", "Dn", "lx_value", "lx_time", "mLx", "s", "ss", "AuIntervened", "mProximityState", "bLux", "dLux", "bLux1", "dLux1"]}
+{"EventId": "E0600", "EventTemplate": "cancel alarm.", "EventArgs": []}
+{"EventId": "E0601", "EventTemplate": "Unrecognized alarm listener %s", "EventArgs": ["listener"]}
+{"EventId": "E0602", "EventTemplate": "handleScanCounterChanged,reason: %d, mHwSingleScanCounter: %d", "EventArgs": ["reason", "mHwSingleScanCounter"]}
+{"EventId": "E0603", "EventTemplate": "KGSvcFp onAuthenticationError.%d", "EventArgs": ["errorCode"]}
+{"EventId": "E0604", "EventTemplate": "Apply window Height %d", "EventArgs": ["height"]}
+{"EventId": "E0605", "EventTemplate": "apply skiped :%d", "EventArgs": ["skipCount"]}
+{"EventId": "E0606", "EventTemplate": "CtrlSocket receive screen on intent!", "EventArgs": []}
+{"EventId": "E0607", "EventTemplate": "CtrlSocket restoreScrOnStatus", "EventArgs": []}
+{"EventId": "E0608", "EventTemplate": "pid=%d, cmd=%d, param=%d", "EventArgs": ["pid", "cmd", "param"]}
+{"EventId": "E0609", "EventTemplate": "mFilterMsgFlag: %d,msg.arg1: %d", "EventArgs": ["mFilterMsgFlag", "msg_arg1"]}
+{"EventId": "E0610", "EventTemplate": "handleFilterMsg action: %dmFilterMsgFlag%d", "EventArgs": ["action", "mFilterMsgFlag"]}
+{"EventId": "E0611", "EventTemplate": "[tiger]setBastetFilterInfo action %dpid %d", "EventArgs": ["action", "pid"]}
+{"EventId": "E0612", "EventTemplate": "removeNotification:%d|%s|%d|%s|%d", "EventArgs": ["id", "package", "type", "unknown", "uid"]}
+{"EventId": "E0613", "EventTemplate": "removeNotificationViews:%d|%s|%d|%s|%d", "EventArgs": ["id", "package", "type", "unknown", "uid"]}
+{"EventId": "E0614", "EventTemplate": "summary = %s", "EventArgs": ["summary"]}
+{"EventId": "E0615", "EventTemplate": "RSSI=%d;LINKSPEED=%d;NOISE=%d;FREQUENCY=%d;", "EventArgs": ["RSSI", "LINKSPEED", "NOISE", "FREQUENCY"]}
+{"EventId": "E0616", "EventTemplate": "updateConfiguration freq=%d BSSID=%s RSSI=%d %s", "EventArgs": ["freq", "BSSID", "RSSI", "ssid"]}
+{"EventId": "E0617", "EventTemplate": "Change in state from: connected=%b,enabled=%b,level=%d,inetCondition=%d,iconGroup=%s,activityIn=%b,activityOut=%b,rssi=%d,lastModified=%s,isChaged:%b,wifiNoInternet=%b,ssid=\"%s\"", "EventArgs": ["connected", "enabled", "level", "inetCondition", "iconGroup", "activityIn", "activityOut", "rssi", "lastModified", "isChaged", "wifiNoInternet", "ssid"]}
+{"EventId": "E0618", "EventTemplate": "mVSimCurCardType is %d", "EventArgs": ["mVSimCurCardType"]}
+{"EventId": "E0619", "EventTemplate": "apply hwPhoneState.mSubId:%d anyMobileVisible:%b mIsAirplaneMode:%b, mobileGroupVisible=%b", "EventArgs": ["mSubId", "anyMobileVisible", "mIsAirplaneMode", "mobileGroupVisible"]}
+{"EventId": "E0620", "EventTemplate": "nl80211: Event message available", "EventArgs": []}
+{"EventId": "E0621", "EventTemplate": "nl80211: Drv Event %d (NL80211_CMD_SET_REKEY_OFFLOAD) received for %s", "EventArgs": ["eventCode", "interface"]}
+{"EventId": "E0622", "EventTemplate": "nl80211: Rekey offload event for BSSID %s", "EventArgs": ["BSSID"]}
+{"EventId": "E0623", "EventTemplate": "nl80211: Rekey offload - Replay Counter - hexdump(len=%d): %s", "EventArgs": ["len", "hexdump"]}
+{"EventId": "E0624", "EventTemplate": "%s: Event %s (%d) received", "EventArgs": ["interface", "eventName", "eventId"]}
+{"EventId": "E0625", "EventTemplate": "inlineAddCurrentApInfo mInfos.size()=%d", "EventArgs": ["size"]}
+{"EventId": "E0626", "EventTemplate": "handledataswitchchanged", "EventArgs": []}
+{"EventId": "E0627", "EventTemplate": "updateLowPowerMode,isPowerSaveMode:%bisInteractive:%b", "EventArgs": ["isPowerSaveMode", "isInteractive"]}
+{"EventId": "E0628", "EventTemplate": "TrafficNotifyAfterLocked:screen notification will not notify", "EventArgs": []}
+{"EventId": "E0629", "EventTemplate": "Reporting idle of %s finished=%b", "EventArgs": ["activityRecord", "finished"]}
+{"EventId": "E0630", "EventTemplate": "Returning system default Launcher", "EventArgs": []}
+{"EventId": "E0631", "EventTemplate": "screen off: %ds, awake: %ds wakeups: %d, battery changed: %d", "EventArgs": ["offTime", "awakeTime", "wakeups", "batteryChanges"]}
+{"EventId": "E0632", "EventTemplate": "isInMultiWindowMode ret: %d", "EventArgs": ["ret"]}
+{"EventId": "E0633", "EventTemplate": "ash->screen on", "EventArgs": []}
+{"EventId": "E0634", "EventTemplate": "I/int ulp_msg_process_system_update(const UlpSystemEvent): systemEvent:%d", "EventArgs": ["systemEvent"]}
+{"EventId": "E0635", "EventTemplate": "ash->screen unlock", "EventArgs": []}
+{"EventId": "E0636", "EventTemplate": "windowsVisibleLocked(): %s idle: %b", "EventArgs": ["activityRecord", "idle"]}
+{"EventId": "E0637", "EventTemplate": "All windows ready for display!", "EventArgs": []}
+{"EventId": "E0638", "EventTemplate": "WindowOrientationListener enabled", "EventArgs": []}
+{"EventId": "E0639", "EventTemplate": "%s|logicalDealBroadcastEvent : Intent { act=%s flg=%x }", "EventArgs": ["timestamp", "action", "flags"]}
+{"EventId": "E0640", "EventTemplate": "%s| ## MSG_DEAL_SYSTEM_EVENT %s", "EventArgs": ["timestamp", "event"]}
+{"EventId": "E0641", "EventTemplate": "%s|flush sensor data", "EventArgs": ["timestamp"]}
+{"EventId": "E0642", "EventTemplate": "DisplayPowerController Unblocked screen on after %d ms", "EventArgs": ["duration"]}
+{"EventId": "E0643", "EventTemplate": "CtrlSocket restoreScrOnStatus reset", "EventArgs": []}
+{"EventId": "E0644", "EventTemplate": "new ScenarioAction sPoolSize: %d", "EventArgs": ["sPoolSize"]}
+{"EventId": "E0645", "EventTemplate": "get AllImpl object = %s", "EventArgs": ["object"]}
+{"EventId": "E0646", "EventTemplate": "VideoCallPresenter - resumeVideo: Error bad state mPrimaryCall=%s mVideoCall=%s", "EventArgs": ["mPrimaryCall", "mVideoCall"]}
+{"EventId": "E0647", "EventTemplate": "VTCallButtonFragment - --- onResume ---", "EventArgs": []}
+{"EventId": "E0648", "EventTemplate": "Resuming ActivityRecord{%s} with isForward=%b,forwardBitChanged=%b onlyLocalRequest=%b", "EventArgs": ["activityRecord", "isForward", "forwardBitChanged", "onlyLocalRequest"]}
+{"EventId": "E0649", "EventTemplate": "flush,%d,handle %d", "EventArgs": ["value", "handle"]}
+{"EventId": "E0650", "EventTemplate": "startWifiRouteCheck", "EventArgs": []}
+{"EventId": "E0651", "EventTemplate": "applyIconTint ignore", "EventArgs": []}
+{"EventId": "E0652", "EventTemplate": "sendScreenOnEvent enter.", "EventArgs": []}
+{"EventId": "E0653", "EventTemplate": "msg Loop is running.", "EventArgs": []}
+{"EventId": "E0654", "EventTemplate": "device screen on,but isScreenOffMonitor is %b", "EventArgs": ["isScreenOffMonitor"]}
+{"EventId": "E0655", "EventTemplate": "SupplicantState = %s", "EventArgs": ["SupplicantState"]}
+{"EventId": "E0656", "EventTemplate": "getCurrentCellid type type = %s", "EventArgs": ["type"]}
+{"EventId": "E0657", "EventTemplate": "getCurrentCellid type is %s", "EventArgs": ["type"]}
+{"EventId": "E0658", "EventTemplate": "updataApInfo cellid =%d", "EventArgs": ["cellid"]}
+{"EventId": "E0659", "EventTemplate": "addCurrentApInfo cellid =%d", "EventArgs": ["cellid"]}
+{"EventId": "E0660", "EventTemplate": "can't adjust backlight when app launch from other scene.", "EventArgs": []}
+{"EventId": "E0661", "EventTemplate": "MemoryRecoveryDMEPlugin: receive sceen on event", "EventArgs": []}
+{"EventId": "E0662", "EventTemplate": "MemoryRecoveryDMEPlugin: the message is still in the messagequeue, remove it", "EventArgs": []}
+{"EventId": "E0663", "EventTemplate": "received cell-signal:%d", "EventArgs": ["signal"]}
+{"EventId": "E0664", "EventTemplate": "updateSignalStrength: signalStrength=SignalStrength: %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %b %s|%s", "EventArgs": ["ss1", "ss2", "ss3", "ss4", "ss5", "ss6", "ss7", "ss8", "ss9", "ss10", "ss11", "ss12", "ss13", "ss14", "ss15", "gw", "lte"]}
+{"EventId": "E0665", "EventTemplate": "netmask =%x", "EventArgs": ["netmask"]}
+{"EventId": "E0666", "EventTemplate": "subId:%d phoneType:%d networktype:%d targetClass:%d masterLevel:%d slaveLevel:%d", "EventArgs": ["subId", "phoneType", "networktype", "targetClass", "masterLevel", "slaveLevel"]}
+{"EventId": "E0667", "EventTemplate": "LM mrssi=%d", "EventArgs": ["mrssi"]}
+{"EventId": "E0668", "EventTemplate": "######### GET RTT:%d ########", "EventArgs": ["rttCount"]}
+{"EventId": "E0669", "EventTemplate": "send_cmd_kernel: cmd=%d", "EventArgs": ["cmd"]}
+{"EventId": "E0670", "EventTemplate": "Received kernel message payload: event %d", "EventArgs": ["event"]}
+{"EventId": "E0671", "EventTemplate": "spd good count:%d, add sc:%f, rate:%f", "EventArgs": ["count", "sc", "rate"]}
+{"EventId": "E0672", "EventTemplate": "current mHighDataFlowRate = %f", "EventArgs": ["mHighDataFlowRate"]}
+{"EventId": "E0673", "EventTemplate": "postEventFromNative: msg=%d,arg1=%d,arg2=%d", "EventArgs": ["msg", "arg1", "arg2"]}
+{"EventId": "E0674", "EventTemplate": "poll before: g_monitor_fd =%d", "EventArgs": ["g_monitor_fd"]}
+{"EventId": "E0675", "EventTemplate": "setSampleRtt: unvalid rtt", "EventArgs": []}
+{"EventId": "E0676", "EventTemplate": "rtt=%d,tcp_tx_pkts=%d,tcp_rx_pkts=%d", "EventArgs": ["rtt", "tcp_tx_pkts", "tcp_rx_pkts"]}
+{"EventId": "E0677", "EventTemplate": "QOS_level:%d(%d),%s;use level-%d", "EventArgs": ["QOS_level", "levelDetail", "status", "useLevel"]}
+{"EventId": "E0678", "EventTemplate": "mAmbientLuxValid= %b,sensor is not ready", "EventArgs": ["mAmbientLuxValid"]}
+{"EventId": "E0679", "EventTemplate": "mWakeupFromSleep= %b,currentTime=%d,mLightSensorEnableTime=%d", "EventArgs": ["mWakeupFromSleep", "currentTime", "mLightSensorEnableTime"]}
+{"EventId": "E0680", "EventTemplate": "mAmbientLuxValid=%b,mWakeupFromSleep= %b", "EventArgs": ["mAmbientLuxValid", "mWakeupFromSleep"]}
+{"EventId": "E0681", "EventTemplate": "%s CMD_SCREEN_STATE_CHANGED  rt=%d/%d %d %d", "EventArgs": ["state", "rt1", "rt2", "param1", "param2"]}
+{"EventId": "E0682", "EventTemplate": "flush,%d handle %d", "EventArgs": ["flushParam", "handle"]}
+{"EventId": "E0683", "EventTemplate": "CallCardFragment - onGlobalLayout", "EventArgs": []}
+{"EventId": "E0684", "EventTemplate": "addCurrentApInfo info is already there", "EventArgs": []}
+{"EventId": "E0685", "EventTemplate": "m1: %b", "EventArgs": ["m1"]}
+{"EventId": "E0686", "EventTemplate": "m2: %b, m3: %b", "EventArgs": ["m2", "m3"]}
+{"EventId": "E0687", "EventTemplate": "c: %b, w: %b, t: %b, l: %b", "EventArgs": ["c", "w", "t", "l"]}
+{"EventId": "E0688", "EventTemplate": "[%f/%d, %f/%d, %f/%d, %f/%d]", "EventArgs": ["value1", "time1", "value2", "time2", "value3", "time3", "value4", "time4"]}
+{"EventId": "E0689", "EventTemplate": "dumpTcpResult: len=%d,rtt=%d,rttPkt=%d,rttWn=%d,cgt=%d,cgtWn=%d", "EventArgs": ["len", "rtt", "rttPkt", "rttWn", "cgt", "cgtWn"]}
+{"EventId": "E0690", "EventTemplate": "PTcp RTT:%d, rtt pkt=%d, tcp_rx=%d, tcp_tx=%d, tcp_reTran=%d, rtRate=%d", "EventArgs": ["rtt", "rttPkt", "tcpRx", "tcpTx", "tcpReTran", "rtRate"]}
+{"EventId": "E0691", "EventTemplate": "mRssiBadCount =%d, RSSI not bad.", "EventArgs": ["mRssiBadCount"]}
+{"EventId": "E0692", "EventTemplate": "rs ota tcp lr rttvb bad: %b, %b, %b, %b, %b; rsth:%d", "EventArgs": ["rsOta", "tcpLr", "rttVb", "bad1", "bad2", "rsth"]}
+{"EventId": "E0693", "EventTemplate": "GSC:%d, GSR:%f, RSR:%f, RTH:%d", "EventArgs": ["gsc", "gsr", "rsr", "rth"]}
+{"EventId": "E0694", "EventTemplate": "bqeLevel = %d rtt=%d,rtt_pkts=%d speed=%d rssi=%d", "EventArgs": ["bqeLevel", "rtt", "rttPkts", "speed", "rssi"]}
+{"EventId": "E0695", "EventTemplate": "handleScreenStateChanged: allow send scan results broadcast.", "EventArgs": []}
+{"EventId": "E0696", "EventTemplate": "reportArpDetail: %s  %s   %d   %s", "EventArgs": ["ipAddress", "macAddress", "arpIndex", "interfaceName"]}
+{"EventId": "E0697", "EventTemplate": "setGateWay %s", "EventArgs": ["gateway"]}
+{"EventId": "E0698", "EventTemplate": "RetryTaskController:Screen is off or Network is unable", "EventArgs": []}
+{"EventId": "E0699", "EventTemplate": "flush:sensor(%s) handle:%d", "EventArgs": ["sensorName", "handle"]}
+{"EventId": "E0700", "EventTemplate": "### mPktChkBadCnt=%d", "EventArgs": ["mPktChkBadCnt"]}
+{"EventId": "E0701", "EventTemplate": "[pa_0] temp_new :%d  temp_old :%d", "EventArgs": ["temp_new", "temp_old"]}
+{"EventId": "E0702", "EventTemplate": "Report temperature: [pa_0] temp :%d  report_threshold:%d", "EventArgs": ["temp", "report_threshold"]}
+{"EventId": "E0703", "EventTemplate": "check_wifi_state_mode = %d mCheckStateToken=%d token%d", "EventArgs": ["mode", "mCheckStateToken", "token"]}
+{"EventId": "E0704", "EventTemplate": "There are %d mac address for gateway", "EventArgs": ["macCount"]}
+{"EventId": "E0705", "EventTemplate": "from HEART_CHECK transmit to state:HEART_CHECK", "EventArgs": []}
+{"EventId": "E0706", "EventTemplate": "msg what=%d arg1(token)=%d arg2(mode)=%d delay=%d", "EventArgs": ["what", "arg1", "arg2", "delay"]}
+{"EventId": "E0707", "EventTemplate": "%d binder call %d", "EventArgs": ["binder1", "binder2"]}
+{"EventId": "E0708", "EventTemplate": "speed: rxpkt:%d, rxSpd:%dB/s, txpkt:%d, txSpd:%d", "EventArgs": ["rxpkt", "rxSpd", "txpkt", "txSpd"]}
+{"EventId": "E0709", "EventTemplate": "Ignore update FP: %d %b", "EventArgs": ["unknown1", "unknown2"]}
+{"EventId": "E0710", "EventTemplate": "in updateCallTime, mCallConnectedTimeMills=%d", "EventArgs": ["mCallConnectedTimeMills"]}
+{"EventId": "E0711", "EventTemplate": "Alarm triggering (type %d or %d): [%s]", "EventArgs": ["type1", "type2", "alarmInfo"]}
+{"EventId": "E0712", "EventTemplate": "sending alarm %s,repeatInterval = %d,listenerTag =%s", "EventArgs": ["alarmInfo", "repeatInterval", "listenerTag"]}
+{"EventId": "E0713", "EventTemplate": " ConnectedState !CMD_ENABLE_RSSI_POLL  rt=%d/%d %d %d", "EventArgs": ["rt1", "rt2", "unknown1", "unknown2"]}
+{"EventId": "E0714", "EventTemplate": " L2ConnectedState !CMD_ENABLE_RSSI_POLL  rt=%d/%d %d %d", "EventArgs": ["rt1", "rt2", "unknown1", "unknown2"]}
+{"EventId": "E0715", "EventTemplate": " ConnectedState !CMD_SET_SUSPEND_OPT_ENABLED  rt=%d/%d %d %d", "EventArgs": ["rt1", "rt2", "unknown1", "unknown2"]}
+{"EventId": "E0716", "EventTemplate": " L2ConnectedState !CMD_SET_SUSPEND_OPT_ENABLED  rt=%d/%d %d %d", "EventArgs": ["rt1", "rt2", "unknown1", "unknown2"]}
+{"EventId": "E0717", "EventTemplate": " ConnectModeState !CMD_SET_SUSPEND_OPT_ENABLED  rt=%d/%d %d %d", "EventArgs": ["rt1", "rt2", "unknown1", "unknown2"]}
+{"EventId": "E0718", "EventTemplate": " DriverStartedState !CMD_SET_SUSPEND_OPT_ENABLED  rt=%d/%d %d %d", "EventArgs": ["rt1", "rt2", "unknown1", "unknown2"]}
+{"EventId": "E0719", "EventTemplate": "VideoCallFragment - onResume: Surface exist, resume videos", "EventArgs": []}
+{"EventId": "E0720", "EventTemplate": "Finished screen turning on...", "EventArgs": []}
+{"EventId": "E0721", "EventTemplate": "Watch Thread{%d} LoginC.doWatch(LoginC.java:%d) Login_By_Step-> watch count =  %d", "EventArgs": ["threadId", "lineNumber", "watchCount"]}
+{"EventId": "E0722", "EventTemplate": "updatArpSummery mRSSI:%d  HwCHRWifiRSSIGroup [rssi_index=%d, rtt_tcp_packets=%d, rtt_tcp_duration=%d, rtt_lan_duration=%d, rtt_lan_failures=%d, rtt_lan_succ=%d, rtt_lan_max=%d, rtt_lan_min=%d,same_area_frequency=%d,adjacent_area_frequency=%d]", "EventArgs": ["mRSSI", "rssi_index", "rtt_tcp_packets", "rtt_tcp_duration", "rtt_lan_duration", "rtt_lan_failures", "rtt_lan_succ", "rtt_lan_max", "rtt_lan_min", "same_area_frequency", "adjacent_area_frequency"]}
+{"EventId": "E0723", "EventTemplate": "mIsScreenOn is: %b, WAKEUP alarm talarm.operation == null,package name is: %s listenerTag is: %s Schedule Periodic Scan Timer creator uid is: %d", "EventArgs": ["mIsScreenOn", "packageName", "listenerTag", "creatorUid"]}
+{"EventId": "E0724", "EventTemplate": "periodicScanTimerHandler mScreenOn %b", "EventArgs": ["mScreenOn"]}
+{"EventId": "E0725", "EventTemplate": "isWifiScanSpecialChannels is %b,mWifiState : %d", "EventArgs": ["isWifiScanSpecialChannels", "mWifiState"]}
+{"EventId": "E0726", "EventTemplate": "wlan0: Setting scan request: %f sec", "EventArgs": ["scanRequestTime"]}
+{"EventId": "E0727", "EventTemplate": "wlan0: Starting AP scan for wildcard SSID", "EventArgs": []}
+{"EventId": "E0728", "EventTemplate": "OKC-Native: Append OKC IE!", "EventArgs": []}
+{"EventId": "E0729", "EventTemplate": "OKC-Native: Append done!", "EventArgs": []}
+{"EventId": "E0730", "EventTemplate": "wlan0: Add radio work 'scan'@%s", "EventArgs": ["radioWorkAddress"]}
+{"EventId": "E0731", "EventTemplate": "wlan0: First radio work item in the queue - schedule start immediately", "EventArgs": []}
+{"EventId": "E0732", "EventTemplate": "wlan0: Starting radio work 'scan'@%s after %f second wait", "EventArgs": ["radioWorkAddress", "waitTime"]}
+{"EventId": "E0733", "EventTemplate": "nl80211: Scan SSID - hexdump(len=%d): [NULL]", "EventArgs": ["ssidLength"]}
+{"EventId": "E0734", "EventTemplate": "nl80211: Scan extra IEs - hexdump(len=%d): %s", "EventArgs": ["extraIeLength", "extraIeData"]}
+{"EventId": "E0735", "EventTemplate": "Scan requested (ret=%d) - scan timeout %d seconds", "EventArgs": ["scanRequestResult", "scanTimeout"]}
+{"EventId": "E0736", "EventTemplate": "nl80211: Drv Event %d (%s) received for wlan0", "EventArgs": ["drvEventCode", "drvEventName"]}
+{"EventId": "E0737", "EventTemplate": "wlan0: nl80211: Scan trigger", "EventArgs": []}
+{"EventId": "E0738", "EventTemplate": "wlan0: Own scan request started a scan in %f seconds", "EventArgs": ["scanStartTime"]}
+{"EventId": "E0739", "EventTemplate": "CTRL-DEBUG: ctrl_sock-sendmsg: sock=%d sndbuf=%d outq=%d send_len=%d", "EventArgs": ["sock", "sndbuf", "outq", "send_len"]}
+{"EventId": "E0740", "EventTemplate": "CTRL_IFACE monitor sent successfully to %s", "EventArgs": ["socketPath"]}
+{"EventId": "E0741", "EventTemplate": "Dispatching event to interface: %s", "EventArgs": ["interface"]}
+{"EventId": "E0742", "EventTemplate": "WifiMonitor:%s cnt=%d dispatchEvent: %s", "EventArgs": ["monitorType", "count", "event"]}
+{"EventId": "E0743", "EventTemplate": "%s freq=%d qual=%d noise=%d~ level=%d snr=%d* flags=%x age=%d est=%d", "EventArgs": ["macAddress", "freq", "qual", "noise", "level", "snr", "flags", "age", "est"]}
+{"EventId": "E0744", "EventTemplate": "IEs - hexdump(len=%d): %s", "EventArgs": ["ieLength", "ieData"]}
+{"EventId": "E0745", "EventTemplate": "Beacon IEs - hexdump(len=%d): %s", "EventArgs": ["beaconIeLength", "beaconIeData"]}
+{"EventId": "E0746", "EventTemplate": "wlan0: nl80211: scan request", "EventArgs": []}
+{"EventId": "E0747", "EventTemplate": "wlan0: nl80211: New scan results available", "EventArgs": []}
+{"EventId": "E0748", "EventTemplate": "nl80211: Scan included frequencies: %s", "EventArgs": ["frequencies"]}
+{"EventId": "E0749", "EventTemplate": "nl80211: Associated on %d MHz", "EventArgs": ["frequency"]}
+{"EventId": "E0750", "EventTemplate": "nl80211: Associated with %s", "EventArgs": ["macAddress"]}
+{"EventId": "E0751", "EventTemplate": "nl80211: Received scan results (%d BSSes)", "EventArgs": ["bssCount"]}
+{"EventId": "E0752", "EventTemplate": "%s freq=%d qual=%d noise=%s~ level=%d snr=%d flags=%x age=%d est=%d", "EventArgs": ["macAddress", "freq", "qual", "noise", "level", "snr", "flags", "age", "est"]}
+{"EventId": "E0753", "EventTemplate": "wlan0: BSS: Add new id %d BSSID %s SSID '%s' freq %d", "EventArgs": ["id", "bssid", "ssid", "freq"]}
+{"EventId": "E0754", "EventTemplate": "wlan0: BSS: Remove id %d BSSID %s SSID '%s' due to no match in scan", "EventArgs": ["id", "bssid", "ssid"]}
+{"EventId": "E0755", "EventTemplate": "BSS: last_scan_res_used=%d/%d", "EventArgs": ["used", "total"]}
+{"EventId": "E0756", "EventTemplate": "wlan0: Scan completed in %f seconds", "EventArgs": ["scanDuration"]}
+{"EventId": "E0757", "EventTemplate": "nl80211: Scan results indicate BSS status with %s as associated", "EventArgs": ["BSSAddress"]}
+{"EventId": "E0758", "EventTemplate": "Add randomness: count=%d entropy=%d", "EventArgs": ["count", "entropy"]}
+{"EventId": "E0759", "EventTemplate": "random pool - hexdump(len=%d): [REMOVED]", "EventArgs": ["length"]}
+{"EventId": "E0760", "EventTemplate": "random_mix_pool - hexdump(len=%d): [REMOVED]", "EventArgs": ["length"]}
+{"EventId": "E0761", "EventTemplate": "wlan0: BSS: Start scan result update %d", "EventArgs": ["scanResultUpdate"]}
+{"EventId": "E0762", "EventTemplate": "wlan0: Scan-only results received", "EventArgs": []}
+{"EventId": "E0763", "EventTemplate": "wlan0: Radio work 'scan'@%x done in %f seconds", "EventArgs": ["radioWorkAddress", "scanDuration"]}
+{"EventId": "E0764", "EventTemplate": "mThermalService is %s!", "EventArgs": ["mThermalServiceStatus"]}
+{"EventId": "E0765", "EventTemplate": "wait_finger_down: operation cancled", "EventArgs": []}
+{"EventId": "E0766", "EventTemplate": "Sorted scan results", "EventArgs": []}
+{"EventId": "E0767", "EventTemplate": "bssid=%s;freq=%d;level=%d;flags=%d;ssid=%s;", "EventArgs": ["bssid", "freq", "level", "flags", "ssid"]}
+{"EventId": "E0768", "EventTemplate": "interpolate:mPosBrightness=%f%s%f,%s=%b,%s=%b,%s=%f", "EventArgs": ["mPosBrightness", "lux", "mDelta", "mIsReboot", "mIsUserChange", "unknown"]}
+{"EventId": "E0769", "EventTemplate": "InCallActivity - %s is %b%s is %b", "EventArgs": ["activity", "bgCallTwinkingSwitch", "mIsForegroundActivity"]}
+{"EventId": "E0770", "EventTemplate": "mWifiVisible is:%b%s is:%d%s is:%s", "EventArgs": ["mWifiVisible", "mWifiStrengthId", "mWifiDescription"]}
+{"EventId": "E0771", "EventTemplate": "<%s> [%s] SDK: UE-SeC %s Level[%s] magic[%s %d]:s(%d, %d),r(%d, %d)%s", "EventArgs": ["timestamp", "level", "magic", "s", "r", "additionalInfo"]}
+{"EventId": "E0772", "EventTemplate": "getTempInfo error: %s, %d", "EventArgs": ["error", "unknown"]}
+{"EventId": "E0773", "EventTemplate": "mSendService %s", "EventArgs": ["status"]}
+{"EventId": "E0774", "EventTemplate": "%s { running duration=%d } transition to: %s reason:", "EventArgs": ["app_name", "running_duration", "transition_state"]}
+{"EventId": "E0775", "EventTemplate": "doze package: %s, visible: %b", "EventArgs": ["doze_package", "visible"]}
+{"EventId": "E0776", "EventTemplate": "MemoryRecoveryDMEPlugin: handle message %s", "EventArgs": ["message_type"]}
+{"EventId": "E0777", "EventTemplate": "sensor doesn't report lux in %dms", "EventArgs": ["lux_timeout"]}
+{"EventId": "E0778", "EventTemplate": "AutoMode=%b,Target=%d,Current=%d,amount=%f,duration=%f", "EventArgs": ["auto_mode", "target", "current", "amount", "duration"]}
+{"EventId": "E0779", "EventTemplate": "bright trace:%s", "EventArgs": ["bright_trace"]}
+{"EventId": "E0780", "EventTemplate": "high data flow scenario: %d --> %d rx bytes =%sKB", "EventArgs": ["start_scenario", "end_scenario", "rx_bytes"]}
+{"EventId": "E0781", "EventTemplate": "collectReceiverComponents, callerApp: ProcessRecord{%s %d:%s/%d}, intent:%s, receiver size:%d, flags: %x", "EventArgs": ["processId", "uid", "packageName", "flags", "intent", "receiverSize"]}
+{"EventId": "E0782", "EventTemplate": "attemptAutoConnect: %b", "EventArgs": ["autoConnect"]}
+{"EventId": "E0783", "EventTemplate": "Report temperature: [ap] temp :%d  report_threshold:%d", "EventArgs": ["temperature", "threshold"]}
+{"EventId": "E0784", "EventTemplate": "screen off and not process front pkg:%s", "EventArgs": ["packageName"]}
+{"EventId": "E0785", "EventTemplate": "setBackgroundColor:new=%d, old=%d", "EventArgs": ["newColor", "oldColor"]}
+{"EventId": "E0786", "EventTemplate": "InCallActivity - onResume()... end", "EventArgs": []}
+{"EventId": "E0787", "EventTemplate": "VideoCallFragment - onResume", "EventArgs": []}
+{"EventId": "E0788", "EventTemplate": "PowerManagerService Waking up from dozing (uid %d)...", "EventArgs": ["uid"]}
+{"EventId": "E0789", "EventTemplate": "begin of formatChinaDateRange chinaDate:%s", "EventArgs": ["chinaDate"]}
+{"EventId": "E0790", "EventTemplate": "[%f/%d, %f/%d]", "EventArgs": ["value1", "timestamp1", "value2", "timestamp2"]}
+{"EventId": "E0791", "EventTemplate": "act:%s  flag:%d FLAG_IS_FIRST_POWER_OFF_ALARM=%b android.intent.extra.ALARM_COUNT=%d", "EventArgs": ["action", "flag", "first_power_off_alarm", "alarm_count"]}
+{"EventId": "E0792", "EventTemplate": "formatChinaDateTime, change to China normalTime:%s", "EventArgs": ["normal_time"]}
+{"EventId": "E0793", "EventTemplate": "chinaDateTime:%s", "EventArgs": ["china_date_time"]}
+{"EventId": "E0794", "EventTemplate": "Failure getting entry for 0x%x (t=%d e=%d) (error %d)", "EventArgs": ["entry", "type", "element", "error_code"]}
+{"EventId": "E0795", "EventTemplate": "mDateString is: %s", "EventArgs": ["date_string"]}
+{"EventId": "E0796", "EventTemplate": "received broadcast %s", "EventArgs": ["broadcast_action"]}
+{"EventId": "E0797", "EventTemplate": "handleTimeUpdate", "EventArgs": []}
+{"EventId": "E0798", "EventTemplate": "Model  onReceive intent=%s", "EventArgs": ["intent_info"]}
+{"EventId": "E0799", "EventTemplate": "Model  onReceive user=%s", "EventArgs": ["user_info"]}
+{"EventId": "E0800", "EventTemplate": "t=%d,BT=%d,DT=%d,BT1=%d,DT1=%d,Bn=%b,Dn=%b,lx=[%s],mLx=%f,s=%f,ss=%f,AuIntervened=%b,mProximityState=%b,bLux=%f,dLux=%f,bLux1=%f,dLux1=%f", "EventArgs": ["t", "BT", "DT", "BT1", "DT1", "Bn", "Dn", "lx", "mLx", "s", "ss", "AuIntervened", "mProximityState", "bLux", "dLux", "bLux1", "dLux1"]}
+{"EventId": "E0801", "EventTemplate": "Skipping unknown process pid %d", "EventArgs": ["pid"]}
+{"EventId": "E0802", "EventTemplate": "I/===> int ulp_brain_turn_onoff_dr_provider() line %d", "EventArgs": ["line_number"]}
+{"EventId": "E0803", "EventTemplate": "I/===> int ulp_dr_stop_engine() line %d", "EventArgs": ["line_number"]}
+{"EventId": "E0804", "EventTemplate": "I/---> locClientSendReq line %d %s", "EventArgs": ["line_number", "request_type"]}
+{"EventId": "E0805", "EventTemplate": "I/<--- void globalRespCb(locClientHandleType, uint32_t, const locClientRespIndUnionType, uint32_t, void *) line %d %s", "EventArgs": ["line_number", "response_type"]}
+{"EventId": "E0806", "EventTemplate": "Received TIME_TICK alarm; rescheduling", "EventArgs": []}
+{"EventId": "E0807", "EventTemplate": "%s|logicalDealBroadcastEvent : Intent { act=%s flg=%s (has extras) }", "EventArgs": ["log_id", "action", "flags"]}
+{"EventId": "E0808", "EventTemplate": "%s| getTodayTotalDetailSteps from Prefence success and todaySendorSteps= %s##%d##%d##%d##%d##%d", "EventArgs": ["log_id", "timestamp", "value1", "value2", "value3", "value4", "value5"]}
+{"EventId": "E0809", "EventTemplate": "%s|setTodayTotalDetailSteps to Prefence todaySendorSteps=%s##%d##%d##%d##%d##%d", "EventArgs": ["log_id", "timestamp", "value1", "value2", "value3", "value4", "value5"]}
+{"EventId": "E0810", "EventTemplate": "%s|calculateCaloriesWithCache datas.size=%d", "EventArgs": ["log_id", "data_size"]}
+{"EventId": "E0811", "EventTemplate": "%s|calculateCaloriesWithCache totalCalories=%d", "EventArgs": ["log_id", "total_calories"]}
+{"EventId": "E0812", "EventTemplate": "%s|calculateAltitudeWithCache datas.size=%d", "EventArgs": ["log_id", "data_size"]}
+{"EventId": "E0813", "EventTemplate": "%s|calculateAltitudeWithCache totalAltitude=%d", "EventArgs": ["log_id", "total_altitude"]}
+{"EventId": "E0814", "EventTemplate": "total/%d/%d,unknown:%d/%d/%d,%s/%d/%d", "EventArgs": ["total", "subTotal", "unknown1", "unknown2", "unknown3", "appPackage", "appCount1", "appCount2"]}
+{"EventId": "E0815", "EventTemplate": "%s|MSG_RECORD_DATA_TO_FILE_DELAY,mCache %s", "EventArgs": ["eventId", "cacheInfo"]}
+{"EventId": "E0816", "EventTemplate": "[%s]", "EventArgs": ["unknown_list"]}
+{"EventId": "E0817", "EventTemplate": "######### CMD_QUERY_PKTS ########", "EventArgs": []}
+{"EventId": "E0818", "EventTemplate": "skip-low-Level:%d(%d),%s;use level-%d", "EventArgs": ["lowLevel", "unknown", "condition", "level"]}
+{"EventId": "E0819", "EventTemplate": "updateIsPoweredLocked: wasPowered=%b, mIsPowered=%b, oldPlugType=%d, mPlugType=%d, mBatteryLevel=%d", "EventArgs": ["wasPowered", "mIsPowered", "oldPlugType", "mPlugType", "mBatteryLevel"]}
+{"EventId": "E0820", "EventTemplate": "handleDreamLocked", "EventArgs": []}
+{"EventId": "E0821", "EventTemplate": "updateChargingLocked: charging=%b", "EventArgs": ["charging"]}
+{"EventId": "E0822", "EventTemplate": "ACTION_BATTERY_CHANGED pluggedType: %d", "EventArgs": ["pluggedType"]}
+{"EventId": "E0823", "EventTemplate": "battery changed pluggedType: %d", "EventArgs": ["pluggedType"]}
+{"EventId": "E0824", "EventTemplate": "ACTION_BATTERY_CHANGED AMP: %d; Volt: %d", "EventArgs": ["AMP", "Volt"]}
+{"EventId": "E0825", "EventTemplate": "RefreshBatteryInfo isBatteryLow: %d", "EventArgs": ["isBatteryLow"]}
+{"EventId": "E0826", "EventTemplate": "ChargingSpeed  Wattage: %d ST: %d --> %d", "EventArgs": ["Wattage", "ST1", "ST2"]}
+{"EventId": "E0827", "EventTemplate": "BatteryInfo updated:  %dlpc-%d", "EventArgs": ["lpc", "unknown"]}
+{"EventId": "E0828", "EventTemplate": "sendMessage with obj%d", "EventArgs": ["obj"]}
+{"EventId": "E0829", "EventTemplate": "handleBatteryUpdate", "EventArgs": []}
+{"EventId": "E0830", "EventTemplate": "BatteryIntent received: android.intent.action.BATTERY_CHANGED", "EventArgs": []}
+{"EventId": "E0831", "EventTemplate": "getImsPhoneId failed. Exception = %s", "EventArgs": ["Exception"]}
+{"EventId": "E0832", "EventTemplate": "getConfigForPhoneId phoneId is invalid", "EventArgs": []}
+{"EventId": "E0833", "EventTemplate": "isCarrierConfigEnabled bundle is null", "EventArgs": []}
+{"EventId": "E0834", "EventTemplate": "Error reading charge file", "EventArgs": []}
+{"EventId": "E0835", "EventTemplate": "java.io.FileNotFoundException: %s (No such file or directory)", "EventArgs": ["filePath"]}
+{"EventId": "E0836", "EventTemplate": "|CORE| CNE received unexpected action: %s", "EventArgs": ["action"]}
+{"EventId": "E0837", "EventTemplate": "refreshBatteryInfo: %s", "EventArgs": ["info"]}
+{"EventId": "E0838", "EventTemplate": "buckets   .....%d .. %d .. %dlevel          %d --> %dstatus         %d --> %dplugType       %d --> %dinvalidCharger %d --> %dbucket         %d --> %dplugged        %b --> %b", "EventArgs": ["bucket1", "bucket2", "bucket3", "level1", "level2", "status1", "status2", "plugType1", "plugType2", "invalidCharger1", "invalidCharger2", "bucketFinal1", "bucketFinal2", "plugged1", "plugged2"]}
+{"EventId": "E0839", "EventTemplate": "Action: %s", "EventArgs": ["actionType"]}
+{"EventId": "E0840", "EventTemplate": "processLowerBatteryLevel plugged:%b batteryLevel:%d intent:act:%s  flag:%d technology=%s icon-small=%d max_charging_voltage=%d health=%d max_charging_current=%d status=%d plugged=%d present=%b charge_counter=%d level=%d scale=%d temperature=%d voltage=%d invalid_charger=%d", "EventArgs": ["plugged", "batteryLevel", "intentAct", "flag", "technology", "iconSmall", "maxChargingVoltage", "health", "maxChargingCurrent", "status", "plugged", "present", "chargeCounter", "level", "scale", "temperature", "voltage", "invalidCharger"]}
+{"EventId": "E0841", "EventTemplate": "doTemperatueWarning, health:%d", "EventArgs": ["health"]}
+{"EventId": "E0842", "EventTemplate": "%s|standStepCounter report %d steps,write %s", "EventArgs": ["deviceID", "steps", "write"]}
+{"EventId": "E0843", "EventTemplate": "%s|MSG_RECORD_DATA_TO_FILE", "EventArgs": ["deviceID"]}
+{"EventId": "E0844", "EventTemplate": "%s|MSG_RECORD_DATA_TO_FILE datas.size()=%d", "EventArgs": ["deviceID", "datasSize"]}
+{"EventId": "E0845", "EventTemplate": "no controller energy info supplied", "EventArgs": []}
+{"EventId": "E0846", "EventTemplate": "MemoryRecoveryDMEPlugin: %s", "EventArgs": ["action"]}
+{"EventId": "E0847", "EventTemplate": "[ap] temp_new :%d  temp_old :%d", "EventArgs": ["tempNew", "tempOld"]}
+{"EventId": "E0848", "EventTemplate": "queryIntentActivitiesAsUser size results:%d, for package:%s", "EventArgs": ["sizeResults", "package"]}
+{"EventId": "E0849", "EventTemplate": "%s { doze duration=%d } transition to: %s reason:", "EventArgs": ["app", "dozeDuration", "transition"]}
+{"EventId": "E0850", "EventTemplate": "perform hibernation actions!", "EventArgs": []}
+{"EventId": "E0851", "EventTemplate": "setAlarmsPending ...", "EventArgs": []}
+{"EventId": "E0852", "EventTemplate": "Pending %s alarm OK !", "EventArgs": ["app"]}
+{"EventId": "E0853", "EventTemplate": "proxyBroadcast:[%s] proxy:%b", "EventArgs": ["app", "proxy"]}
+{"EventId": "E0854", "EventTemplate": "proxy %s broadcast OK !", "EventArgs": ["app"]}
+{"EventId": "E0855", "EventTemplate": "addFreezeProcess pkg:%s", "EventArgs": ["pkg"]}
+{"EventId": "E0856", "EventTemplate": "setRequest ProviderRequest[%s]", "EventArgs": ["state"]}
+{"EventId": "E0857", "EventTemplate": "stopNavigating, mStarted=%b", "EventArgs": ["mStarted"]}
+{"EventId": "E0858", "EventTemplate": "proxy app:%s,uid:%d,result:%b", "EventArgs": ["app", "uid", "result"]}
+{"EventId": "E0859", "EventTemplate": "frz ok, pid: [%d, %d]", "EventArgs": ["pid1", "pid2"]}
+{"EventId": "E0860", "EventTemplate": "report state:%d event type:%d pid:%d uid:%d pkg:%s to pid: %d", "EventArgs": ["state", "eventType", "pid", "uid", "pkg", "toPid"]}
+{"EventId": "E0861", "EventTemplate": "permit restrict net app: %s", "EventArgs": ["app"]}
+{"EventId": "E0862", "EventTemplate": "SND -> {%d firewall set_uid_rule %s %d %s}", "EventArgs": ["code", "rule", "uid", "action"]}
+{"EventId": "E0863", "EventTemplate": "RCV <- {%d %d Firewall command succeeded}", "EventArgs": ["code1", "code2"]}
+{"EventId": "E0864", "EventTemplate": "setAppNetworkRestrict >> %s, uids : [%d]", "EventArgs": ["app", "uid"]}
+{"EventId": "E0865", "EventTemplate": "monitor check touch devices", "EventArgs": []}
+{"EventId": "E0866", "EventTemplate": "EventHub monitor: no key events in the past %ds, no motion events in the past %ds", "EventArgs": ["keyEvents", "motionEvents"]}
+{"EventId": "E0867", "EventTemplate": "InputDispatcher::monitor frozen check!", "EventArgs": []}
+{"EventId": "E0868", "EventTemplate": "frozenCheckLocked mDispatchFrozen=%d mNextUnblockedEvent=%d", "EventArgs": ["mDispatchFrozen", "mNextUnblockedEvent"]}
+{"EventId": "E0869", "EventTemplate": "trim and enqueue foreground Parallel:(%d) Ordered:(%d)(%s)", "EventArgs": ["parallel", "ordered", "record"]}
+{"EventId": "E0870", "EventTemplate": "RCV <- {%d %s %s %d %d}", "EventArgs": ["unknown", "iface_class", "state", "unknown", "timestamp"]}
+{"EventId": "E0871", "EventTemplate": "RCV unsolicited event from native daemon, event = %d %s %s %d %d", "EventArgs": ["event_code", "iface_class", "state", "unknown", "timestamp"]}
+{"EventId": "E0872", "EventTemplate": "%s: radio_work_free('%s'@%s: num_active_works --> %d", "EventArgs": ["interface", "work_name", "address", "num_active_works"]}
+{"EventId": "E0873", "EventTemplate": "Freeze %s OK !", "EventArgs": ["app_name"]}
+{"EventId": "E0874", "EventTemplate": "AppHiber_Task: %s", "EventArgs": ["task_description"]}
+{"EventId": "E0875", "EventTemplate": "proxyWakeLockByPidUid, pid: %d, uid: %d, proxy: %b", "EventArgs": ["pid", "uid", "proxy"]}
+{"EventId": "E0876", "EventTemplate": "orderd foreground broadcast:(%s) should be proxyed, target:(%s)", "EventArgs": ["broadcast_record", "target"]}
+{"EventId": "E0877", "EventTemplate": "android send broadcast:%s notify package: %s, pid: %d", "EventArgs": ["broadcast_action", "package_name", "pid"]}
+{"EventId": "E0878", "EventTemplate": "%s broadcast notify, H to R!", "EventArgs": ["package_name"]}
+{"EventId": "E0879", "EventTemplate": "%s { hibernation duration=%d } transition to: %s reason:%s", "EventArgs": ["package_name", "hibernation_duration", "transition_state", "reason"]}
+{"EventId": "E0880", "EventTemplate": "clear hibernation actions!", "EventArgs": []}
+{"EventId": "E0881", "EventTemplate": "remove pxy wl, pid: %d, uid: %d from pxy process list.", "EventArgs": ["pid", "uid"]}
+{"EventId": "E0882", "EventTemplate": "unfrz ok, pid: [%s]", "EventArgs": ["pid_list"]}
+{"EventId": "E0883", "EventTemplate": "Unfreeze %s OK !", "EventArgs": ["app_name"]}
+{"EventId": "E0884", "EventTemplate": "unproxy %s broadcast OK !", "EventArgs": ["app_name"]}
+{"EventId": "E0885", "EventTemplate": "Unpending %s alarm OK !", "EventArgs": ["app_name"]}
+{"EventId": "E0886", "EventTemplate": "removeFreezeProcess pkg:%s", "EventArgs": ["package_name"]}
+{"EventId": "E0887", "EventTemplate": "unproxy app:%s,uid:%d,result:%b", "EventArgs": ["app_name", "uid", "result"]}
+{"EventId": "E0888", "EventTemplate": "removeAppNetworkRestrict >> %s, uids : [%s]", "EventArgs": ["app_name", "uid_list"]}
+{"EventId": "E0889", "EventTemplate": "perform running actions!", "EventArgs": []}
+{"EventId": "E0890", "EventTemplate": "running package: %s, visible: %b", "EventArgs": ["package_name", "is_visible"]}
+{"EventId": "E0891", "EventTemplate": "setAlarmsAdjust ...", "EventArgs": []}
+{"EventId": "E0892", "EventTemplate": "%s is unified heartbeat(ms): %d reason: %s", "EventArgs": ["app_name", "heartbeat_interval", "reason"]}
+{"EventId": "E0893", "EventTemplate": "Proc: %d utime:%d", "EventArgs": ["pid", "utime"]}
+{"EventId": "E0894", "EventTemplate": "perform hibernation actions delay: %d", "EventArgs": ["delay_time"]}
+{"EventId": "E0895", "EventTemplate": "frz ok, pid: [%s]", "EventArgs": ["pid_list"]}
+{"EventId": "E0896", "EventTemplate": "Listener network packet by uids: [%s]", "EventArgs": ["uid_list"]}
+{"EventId": "E0897", "EventTemplate": "add listener %s net packet OK !,uid:%d", "EventArgs": ["app_name", "uid"]}
+{"EventId": "E0898", "EventTemplate": "open file error", "EventArgs": []}
+{"EventId": "E0899", "EventTemplate": "trim and enqueue background Parallel:(%d) Ordered:(%d)(%s)", "EventArgs": ["parallel_count", "ordered_count", "broadcast_record"]}
+{"EventId": "E0900", "EventTemplate": "there are no wakeup alarms and the screen is off, we can delay what we have so far until the future", "EventArgs": []}
+{"EventId": "E0901", "EventTemplate": "%s: %s", "EventArgs": ["unknownKey", "unknownValue"]}
+{"EventId": "E0902", "EventTemplate": "performPollAndLog:", "EventArgs": []}
+{"EventId": "E0903", "EventTemplate": "collectReceiverComponents, callerApp: %s, intent:%s, receiver size:%d, flags: %x", "EventArgs": ["callerApp", "intent", "receiverSize", "flags"]}
+{"EventId": "E0904", "EventTemplate": "keyAppBroadcastQueueForIntent intent Intent { %s } on bgkeyapp queue", "EventArgs": ["intentInfo"]}
+{"EventId": "E0905", "EventTemplate": "getRingerMode...", "EventArgs": []}
+{"EventId": "E0906", "EventTemplate": "CallBack is Overload  id=%d OverloadNumber=%d threshold=%d", "EventArgs": ["id", "OverloadNumber", "threshold"]}
+{"EventId": "E0907", "EventTemplate": "uploadBigDataLog: arg1:%s__%s arg2:%d", "EventArgs": ["arg1", "resourceName", "arg2"]}
+{"EventId": "E0908", "EventTemplate": "setDataSource(%d, %d, %d)", "EventArgs": ["fd", "offset", "length"]}
+{"EventId": "E0909", "EventTemplate": "MediaPlayerService::Client::setDataSource local file://?FileDescriptor=%d&Offset=%d&Length=%d&Path=%s", "EventArgs": ["fd", "offset", "length", "path"]}
+{"EventId": "E0910", "EventTemplate": "getStreamVolume  treamType: %d", "EventArgs": ["streamType"]}
+{"EventId": "E0911", "EventTemplate": "isHwSoundAllow pkg=%s, userId=%d, cfg=%d", "EventArgs": ["packageName", "userId", "cfg"]}
+{"EventId": "E0912", "EventTemplate": "isHwVibrateAllow pkg=%s, userId=%d, cfg=%d", "EventArgs": ["packageName", "userId", "cfg"]}
+{"EventId": "E0913", "EventTemplate": "text not in xml format", "EventArgs": []}
+{"EventId": "E0914", "EventTemplate": "codec of %s is disabled!", "EventArgs": ["codec_name"]}
+{"EventId": "E0915", "EventTemplate": "hw %s is disabled!", "EventArgs": ["feature"]}
+{"EventId": "E0916", "EventTemplate": "panelExpansionChanged %f, %b", "EventArgs": ["expansion", "is_expanded"]}
+{"EventId": "E0917", "EventTemplate": "setBackgroundAlpha:alpha=%f", "EventArgs": ["alpha"]}
+{"EventId": "E0918", "EventTemplate": "startScrimAnimation %f @ %s", "EventArgs": ["alpha", "view_info"]}
+{"EventId": "E0919", "EventTemplate": "Marking notification as seen %s|%s|%d|%s|%d", "EventArgs": ["id", "package_name", "unknown", "unknown", "user_id"]}
+{"EventId": "E0920", "EventTemplate": "state.clipTopAmount:%d, i:%d", "EventArgs": ["clip_top_amount", "index"]}
+{"EventId": "E0921", "EventTemplate": "Launcher.LauncherProvider  launcher call - method:%s arg:%s extras:[%s][%s][%s] uid =%d pid =%d", "EventArgs": ["method", "arg", "extra1", "extra2", "extra3", "uid", "pid"]}
+{"EventId": "E0922", "EventTemplate": "Launcher.LauncherProvider  launcher-restore query - uri:%s", "EventArgs": ["uri"]}
+{"EventId": "E0923", "EventTemplate": "Launcher.IconCache, cacheLocked  Utilities.createIconBitmap entry.title = %s ComponentName:%s user:UserHandle{%d}", "EventArgs": ["title", "component_name", "user_id"]}
+{"EventId": "E0924", "EventTemplate": "Workspace  The same unread count.", "EventArgs": []}
+{"EventId": "E0925", "EventTemplate": "Workspace updateCustomizeShortcuts view invalidate ShortcutInfo(title=%s)", "EventArgs": ["title"]}
+{"EventId": "E0926", "EventTemplate": "######### RESET RTT:%d ########", "EventArgs": ["reset_count"]}
+{"EventId": "E0927", "EventTemplate": " pkt chk not bad, reset sc to %d.", "EventArgs": ["reset_sc"]}
+{"EventId": "E0928", "EventTemplate": "HoldService:checkBeforeShowDialogWithPid, current value:%d, type:%d, pkg:%s", "EventArgs": ["value", "type", "package_name"]}
+{"EventId": "E0929", "EventTemplate": "PermissionDbVisitor:insertHistoryRecord:HistoryRecord[packageName:%s,permissionType:%d,action:%d,dateStartTime:%d,timestamp:%d]", "EventArgs": ["package_name", "permission_type", "action", "date_start_time", "timestamp"]}
+{"EventId": "E0930", "EventTemplate": "showTraffic", "EventArgs": []}
+{"EventId": "E0931", "EventTemplate": "hide:x=%d, y=%d, isShown=%b", "EventArgs": ["x", "y", "is_shown"]}
+{"EventId": "E0932", "EventTemplate": "Sending non-protected broadcast %s from system %d:%s pkg %s", "EventArgs": ["action", "uid", "process", "package"]}
+{"EventId": "E0933", "EventTemplate": "eventAction :class %s", "EventArgs": ["class_name"]}
+{"EventId": "E0934", "EventTemplate": "doAction not pull down return", "EventArgs": []}
+{"EventId": "E0935", "EventTemplate": "%s com.android.systemui.%s{%s %s %s %s}", "EventArgs": ["color", "view_class", "view_id", "flags", "bounds", "resource_id"]}
+{"EventId": "E0936", "EventTemplate": "HwCHRWifiBcmIncrCounterLst [%s]", "EventArgs": ["counter_list"]}
+{"EventId": "E0937", "EventTemplate": "total/%d/%d", "EventArgs": ["count1", "count2"]}
+{"EventId": "E0938", "EventTemplate": "\tat %s.%s(%s)", "EventArgs": ["class_name", "method_name", "file_info"]}
+{"EventId": "E0939", "EventTemplate": " formatChinaDateTime equals.", "EventArgs": []}
+{"EventId": "E0940", "EventTemplate": "20002302|MSG_RECORD_DATA_TO_FILE_DELAY datas.size()=%d", "EventArgs": ["datas_size"]}
+{"EventId": "E0941", "EventTemplate": "Stop listener network packet!", "EventArgs": []}
+{"EventId": "E0942", "EventTemplate": "****monitorNetworkPacket num is too larger,num is %d***", "EventArgs": ["packet_num"]}
+{"EventId": "E0943", "EventTemplate": "No config file found for:%s", "EventArgs": ["config_path"]}
+{"EventId": "E0944", "EventTemplate": "%s current RTT[%d]=%d, volume=%d", "EventArgs": ["mac_address", "rtt_index", "rtt_value", "volume"]}
+{"EventId": "E0945", "EventTemplate": "%s history RTT[%d]=%d, volume=%d", "EventArgs": ["mac_address", "rtt_index", "rtt_value", "volume"]}
+{"EventId": "E0946", "EventTemplate": "Rcvd UNSOL response with %d bytes data for SUB%d", "EventArgs": ["data_size", "sub_id"]}
+{"EventId": "E0947", "EventTemplate": "Response ID %d is not served in this process.", "EventArgs": ["response_id"]}
+{"EventId": "E0948", "EventTemplate": "To broadcast an Intent via the notifier to external apps", "EventArgs": []}
+{"EventId": "E0949", "EventTemplate": "update_call_states is_call_active:%d in_call:%d, mode:%d", "EventArgs": ["is_call_active", "in_call", "mode"]}
+{"EventId": "E0950", "EventTemplate": "unable to find path '%s'", "EventArgs": ["path_name"]}
+{"EventId": "E0951", "EventTemplate": "isCardAbsent slot:%d slotState:%d", "EventArgs": ["slot", "slot_state"]}
+{"EventId": "E0952", "EventTemplate": "getTypeIcon type:%d", "EventArgs": ["type"]}
+{"EventId": "E0953", "EventTemplate": "ProximitySensor - %s proximity sensor", "EventArgs": ["action"]}
+{"EventId": "E0954", "EventTemplate": "setCallState callState= %s", "EventArgs": ["call_state"]}
+{"EventId": "E0955", "EventTemplate": "selectOutput() commonFlags for output %d, %s", "EventArgs": ["output_id", "flags"]}
+{"EventId": "E0956", "EventTemplate": "getOutputForDevice() returns output %d", "EventArgs": ["output_id"]}
+{"EventId": "E0957", "EventTemplate": "CallList - no active call on sub %d", "EventArgs": ["sub_id"]}
+{"EventId": "E0958", "EventTemplate": "Setting mHideLockScreen to %b by win Window{%s}", "EventArgs": ["hide_lock_screen", "window_info"]}
+{"EventId": "E0959", "EventTemplate": "setPhoneState() state %d->%d", "EventArgs": ["old_state", "new_state"]}
+{"EventId": "E0960", "EventTemplate": "checkOutputForStrategy() getDeviceForStrategy strategy=%d newDevice=%d oldDevice=%d", "EventArgs": ["strategy", "new_device", "old_device"]}
+{"EventId": "E0961", "EventTemplate": "ServiceStateChanged use pkgName = %s", "EventArgs": ["pkg_name"]}
+{"EventId": "E0962", "EventTemplate": "setSimCardReady %d", "EventArgs": ["sim_card_ready"]}
+{"EventId": "E0963", "EventTemplate": "setRegistedNetwork %s", "EventArgs": ["network_id"]}
+{"EventId": "E0964", "EventTemplate": "mSubId=%d,voiceState:%d,dataState:%d", "EventArgs": ["sub_id", "voice_state", "data_state"]}
+{"EventId": "E0965", "EventTemplate": "action android.intent.action.SERVICE_STATE serviceState=%s subId=%d", "EventArgs": ["service_state", "sub_id"]}
+{"EventId": "E0966", "EventTemplate": "roaming ------> %b", "EventArgs": ["roaming_status"]}
+{"EventId": "E0967", "EventTemplate": "auto download without roaming -> %b", "EventArgs": ["auto_download_without_roaming"]}
+{"EventId": "E0968", "EventTemplate": "auto download during roaming -> %b", "EventArgs": ["auto_download_during_roaming"]}
+{"EventId": "E0969", "EventTemplate": "mAutoDownload ------> %b", "EventArgs": ["m_auto_download"]}
+{"EventId": "E0970", "EventTemplate": "isChineseSimCard datasub %d, %s", "EventArgs": ["data_sub", "country_code"]}
+{"EventId": "E0971", "EventTemplate": "writeEvent level_changed STREAM_%s %d", "EventArgs": ["stream_type", "level"]}
+{"EventId": "E0972", "EventTemplate": "isMicrophoneMute...", "EventArgs": []}
+{"EventId": "E0973", "EventTemplate": "pa2240-proximity calling driver %s", "EventArgs": ["action"]}
+{"EventId": "E0974", "EventTemplate": "isAdjustVolumeEnable,mEnableAdjustVolume:%b", "EventArgs": ["enable_adjust_volume"]}
+{"EventId": "E0975", "EventTemplate": "Canceling vibration.", "EventArgs": []}
+{"EventId": "E0976", "EventTemplate": "traceUIHide", "EventArgs": []}
+{"EventId": "E0977", "EventTemplate": "traceCoverHideAfterDisconnect", "EventArgs": []}
+{"EventId": "E0978", "EventTemplate": "Apply window Height %s", "EventArgs": ["windowHeight"]}
+{"EventId": "E0979", "EventTemplate": "Heartbeat timer.timers{%d} XmlMsg.encodeBuf(XmlMsg.java:%d) SEND %d bytes [%d]_00_00_00_%s_%s_%s_%s_%s_%s_%s_%s_%s_%s cmdCode(CC_Heartbeat.0x%s)msgType(MT_ARG.%d)msgClass(MC_InstanceMessage.%d)sender(ST_Mobile.%d)crypted(%b)zipped(%b)nobase64(%b)length(%d)version(%d)sno(%d)", "EventArgs": ["timerId", "fileLine", "sendBytes", "unknown", "cmdCode", "msgType", "msgClass", "sender", "crypted", "zipped", "nobase64", "length", "version", "sno"]}
+{"EventId": "E0980", "EventTemplate": "Broadcasting intent %s", "EventArgs": ["intentAction"]}
+{"EventId": "E0981", "EventTemplate": "Received Broadcast Intent %s", "EventArgs": ["broadcastIntent"]}
+{"EventId": "E0982", "EventTemplate": "Oem ID in QCRILHOOK UNSOL RESP is %s", "EventArgs": ["oemId"]}
+{"EventId": "E0983", "EventTemplate": "PreciseCallStateChanged---> mSubId:%d,mNewRingingCallState:%d,getRingingCallState:%d,getForegroundCallState:%d,getBackgroundCallState:%d", "EventArgs": ["mSubId", "mNewRingingCallState", "getRingingCallState", "getForegroundCallState", "getBackgroundCallState"]}
+{"EventId": "E0984", "EventTemplate": "mSimSubId:%d state:%d", "EventArgs": ["mSimSubId", "state"]}
+{"EventId": "E0985", "EventTemplate": "Success!!! ---->>>> %d", "EventArgs": ["successCode"]}
+{"EventId": "E0986", "EventTemplate": "getOrInflateState subId:%d", "EventArgs": ["subId"]}
+{"EventId": "E0987", "EventTemplate": "SignalInfoTonePlayer.run(toneId = %d)...", "EventArgs": ["toneId"]}
+{"EventId": "E0988", "EventTemplate": "report eventID(%d) msg(%s) %b", "EventArgs": ["eventID", "message", "status"]}
+{"EventId": "E0989", "EventTemplate": "VideoCallPresenter - onStateChange oldState%s newState=%s isVideoMode=%b", "EventArgs": ["oldState", "newState", "isVideoMode"]}
+{"EventId": "E0990", "EventTemplate": "setStreamVolumeIndex() stream %d, device 0x%x, index %d", "EventArgs": ["stream", "device", "index"]}
+{"EventId": "E0991", "EventTemplate": "C onStateChanged state = {%s}", "EventArgs": ["stateInfo"]}
+{"EventId": "E0992", "EventTemplate": "VolumeDialogController.Callbacks onStateChanged", "EventArgs": []}
+{"EventId": "E0993", "EventTemplate": "PhoneStateListener %d, mDataSub %d", "EventArgs": ["listenerId", "dataSub"]}
+{"EventId": "E0994", "EventTemplate": "handleServiceStateChange(subId=%d, serviceState=%s", "EventArgs": ["subId", "serviceState"]}
+{"EventId": "E0995", "EventTemplate": "isChineseSimCard %b , dataSub %d", "EventArgs": ["isChineseSimCard", "dataSub"]}
+{"EventId": "E0996", "EventTemplate": "full network is %b old serivce state is %d new service state is %d subid is %d hasNotification is %b", "EventArgs": ["fullNetwork", "oldServiceState", "newServiceState", "subId", "hasNotification"]}
+{"EventId": "E0997", "EventTemplate": "wifi connected. do nothing.", "EventArgs": []}
+{"EventId": "E0998", "EventTemplate": "AllIdleAppsList  updatePackage  isCloneApp =  %b", "EventArgs": ["isCloneApp"]}
+{"EventId": "E0999", "EventTemplate": "Transact:getHwAdminCachedValue to device policy manager service.", "EventArgs": []}
+{"EventId": "E1000", "EventTemplate": "CallStateChanged---> callDuration:%d", "EventArgs": ["callDuration"]}
+{"EventId": "E1001", "EventTemplate": "Call drop, need to notifyCallDuration:%d", "EventArgs": ["callDuration"]}
+{"EventId": "E1002", "EventTemplate": "getActiveCallDisconnectScene, callDur:%d, iDisconnectCause:%d", "EventArgs": ["callDuration", "disconnectCause"]}
+{"EventId": "E1003", "EventTemplate": "isFailCall:%b, mCallReasonFromAP:%d", "EventArgs": ["isFailCall", "callReasonFromAP"]}
+{"EventId": "E1004", "EventTemplate": "updateOtherSubState() simSubId=%d isNotifyListeners=%b isRefresh=%b", "EventArgs": ["simSubId", "isNotifyListeners", "isRefresh"]}
+{"EventId": "E1005", "EventTemplate": "moveTaskToTop mTaskChanged:%b", "EventArgs": ["mTaskChanged"]}
+{"EventId": "E1006", "EventTemplate": "Sdcard free size is %d B. InitialState is %d", "EventArgs": ["freeSize", "initialState"]}
+{"EventId": "E1007", "EventTemplate": "query() sql:%s", "EventArgs": ["sqlQuery"]}
+{"EventId": "E1008", "EventTemplate": "insert() the  broadcast  Data has inserted", "EventArgs": []}
+{"EventId": "E1009", "EventTemplate": "update() the  broadcast  Data has updated", "EventArgs": []}
+{"EventId": "E1010", "EventTemplate": "eventUpate  CHREvent Total count  has updated", "EventArgs": []}
+{"EventId": "E1011", "EventTemplate": "db.close()  has closed", "EventArgs": []}
+{"EventId": "E1012", "EventTemplate": "dont Save surface because FLAG_DESTORY_SURFACE", "EventArgs": []}
+{"EventId": "E1013", "EventTemplate": "sendEvent:action=%d, flag=%d", "EventArgs": ["action", "flag"]}
+{"EventId": "E1014", "EventTemplate": "obtain, mHwFlags=%d", "EventArgs": ["mHwFlags"]}
+{"EventId": "E1015", "EventTemplate": "moveTaskToBack, resuming home stack", "EventArgs": []}
+{"EventId": "E1016", "EventTemplate": "disconnectCauseReason:%s, %s", "EventArgs": ["reason", "unknown"]}
+{"EventId": "E1017", "EventTemplate": "cause :%d", "EventArgs": ["causeCode"]}
+{"EventId": "E1018", "EventTemplate": "NumTracks(%d)", "EventArgs": ["numTracks"]}
+{"EventId": "E1019", "EventTemplate": "setMode mode:%d", "EventArgs": ["mode"]}
+{"EventId": "E1020", "EventTemplate": "rotationForOrientationLw(orient=%d, last=%d); user=%d", "EventArgs": ["orientation", "lastOrientation", "user"]}
+{"EventId": "E1021", "EventTemplate": "Taking screenshot from Surface with crop:[Rect(%d, %d - %d, %d)], width:[%d], height:[%d], minLayer:[%d], maxLayer:[%d], inRotation:[%b], rot:[%d]", "EventArgs": ["rectLeft", "rectTop", "rectRight", "rectBottom", "width", "height", "minLayer", "maxLayer", "inRotation", "rotation"]}
+{"EventId": "E1022", "EventTemplate": "|SERVICE| If apn type is %s ->%s", "EventArgs": ["apnTypeOld", "apnTypeNew"]}
+{"EventId": "E1023", "EventTemplate": "getMobileDataEnabled()+ subId=%d", "EventArgs": ["subId"]}
+{"EventId": "E1024", "EventTemplate": "getMobileDataEnabled()- subId=%d retVal=%b", "EventArgs": ["subId", "enabled"]}
+{"EventId": "E1025", "EventTemplate": "handleTouchEvent:MotionEvent { action=%s, actionButton=%d, id[0]=%d, x[0]=%f, y[0]=%f, toolType[0]=%s, buttonState=%d, metaState=%d, flags=0x%x, edgeFlags=0x%x, pointerCount=%d, historySize=%d, eventTime=%d, downTime=%d, deviceId=%d, source=0x%x }", "EventArgs": ["action", "actionButton", "id", "x", "y", "toolType", "buttonState", "metaState", "flags", "edgeFlags", "pointerCount", "historySize", "eventTime", "downTime", "deviceId", "source"]}
+{"EventId": "E1026", "EventTemplate": "mFirstValidAuto=%b,mAutoIntervened=%bmfastAnimtionFlag=%b", "EventArgs": ["mFirstValidAuto", "mAutoIntervened", "mfastAnimtionFlag"]}
+{"EventId": "E1027", "EventTemplate": "stepAtomic", "EventArgs": []}
+{"EventId": "E1028", "EventTemplate": "CHR Info, clearParaInfo.", "EventArgs": []}
+{"EventId": "E1029", "EventTemplate": "Failed to find provider info for %s", "EventArgs": ["provider"]}
+{"EventId": "E1030", "EventTemplate": "Trying to get current content resolver...", "EventArgs": []}
+{"EventId": "E1031", "EventTemplate": "ProximitySensor - Releasing proximity wake lock", "EventArgs": []}
+{"EventId": "E1032", "EventTemplate": "myUser=%dcurrentUser=%d", "EventArgs": ["myUser", "currentUser"]}
+{"EventId": "E1033", "EventTemplate": "CallButtonPresenter - onStateChangeInCallButton InCallState:%s callList:%s", "EventArgs": ["inCallState", "callList"]}
+{"EventId": "E1034", "EventTemplate": "Pid:%d ToneGenerator destructor", "EventArgs": ["pid"]}
+{"EventId": "E1035", "EventTemplate": "CallButtonFragment - updateAudioButtons - speaker toggle mode", "EventArgs": []}
+{"EventId": "E1036", "EventTemplate": "CallButtonFragment - updateAudioButtons - disableSupport", "EventArgs": []}
+{"EventId": "E1037", "EventTemplate": "CallCardPresenter - onStateChange() %s", "EventArgs": ["state"]}
+{"EventId": "E1038", "EventTemplate": "CallCardFragment - showEncryptCallButton show =%b", "EventArgs": ["showEncryptCallButton"]}
+{"EventId": "E1039", "EventTemplate": "CallCardFragment - setEncryptCallButtonEnabled enabled =%b", "EventArgs": ["encryptCallButtonEnabled"]}
+{"EventId": "E1040", "EventTemplate": "CallCardFragment - setmEncryptIconVisibility mEncryptIcon = %s", "EventArgs": ["encryptIconVisibility"]}
+{"EventId": "E1041", "EventTemplate": "CallCardPresenter - isPredefinedNumber is %b", "EventArgs": ["isPredefinedNumber"]}
+{"EventId": "E1042", "EventTemplate": "Vibrating for %d ms.", "EventArgs": ["vibrationDuration"]}
+{"EventId": "E1043", "EventTemplate": "Turning vibrator on for %d ms.", "EventArgs": ["vibrationDuration"]}
+{"EventId": "E1044", "EventTemplate": " AudioFocus  requestAudioFocus() from uid/pid %d/%d clientId=%s req=%d flags=0x%x", "EventArgs": ["uid", "pid", "clientId", "req", "flags"]}
+{"EventId": "E1045", "EventTemplate": "getOutput() device %d, stream %d, samplingRate %d, format %d, channelMask %d, flags %d", "EventArgs": ["device", "stream", "samplingRate", "format", "channelMask", "flags"]}
+{"EventId": "E1046", "EventTemplate": "getOutputForAttr() usage=%d, content=%d, tag=%s flags=%s session %d selectedDeviceId %d", "EventArgs": ["usage", "content", "tag", "flags", "session", "selectedDeviceId"]}
+{"EventId": "E1047", "EventTemplate": "getOutputForAttr() device 0x%x, samplingRate %d, format %d, channelMask %d, flags %d", "EventArgs": ["device", "samplingRate", "format", "channelMask", "flags"]}
+{"EventId": "E1048", "EventTemplate": "setBeaconMute(%d) mBeaconMuteRefCount=%d mBeaconPlayingRefCount=%d", "EventArgs": ["mute", "muteRefCount", "playingRefCount"]}
+{"EventId": "E1049", "EventTemplate": "setOutputDevice() device 0x%x delayMs %d force %d", "EventArgs": ["device", "delayMs", "force"]}
+{"EventId": "E1050", "EventTemplate": "setOutputDevice() prevDevice 0x%x", "EventArgs": ["prevDevice"]}
+{"EventId": "E1051", "EventTemplate": "setOutputDevice() changing to device 0x%x , muteWaitMs %d", "EventArgs": ["newDevice", "muteWaitMs"]}
+{"EventId": "E1052", "EventTemplate": "checkAndSetVolume:setVoiceVolume volume %f, delay %d", "EventArgs": ["volume", "delay"]}
+{"EventId": "E1053", "EventTemplate": "checkAndSetVolume() cannot set stream %d volume with force use = %d for comm", "EventArgs": ["stream", "forceUse"]}
+{"EventId": "E1054", "EventTemplate": "state is %s", "EventArgs": ["state"]}
+{"EventId": "E1055", "EventTemplate": "updateVolte::volteState=%s", "EventArgs": ["volteState"]}
+{"EventId": "E1056", "EventTemplate": "applyIconTint", "EventArgs": []}
+{"EventId": "E1057", "EventTemplate": "getDefaultPhone phone = %s", "EventArgs": ["phone"]}
+{"EventId": "E1058", "EventTemplate": "listAudioPorts() got %d ports needed %d", "EventArgs": ["gotPorts", "neededPorts"]}
+{"EventId": "E1059", "EventTemplate": "updateRotationUnchecked(alwaysSendConfiguration=%b)", "EventArgs": ["alwaysSendConfiguration"]}
+{"EventId": "E1060", "EventTemplate": "serviceState %d", "EventArgs": ["serviceState"]}
+{"EventId": "E1061", "EventTemplate": "in service, start TransactionService", "EventArgs": []}
+{"EventId": "E1062", "EventTemplate": "CubicBezierInterpolator  mControlPoint1x = %f, mControlPoint1y = %f, mControlPoint2x = %f, mControlPoint2y = %f", "EventArgs": ["controlPoint1x", "controlPoint1y", "controlPoint2x", "controlPoint2y"]}
+{"EventId": "E1063", "EventTemplate": "search", "EventArgs": []}
+{"EventId": "E1064", "EventTemplate": "playingUids:", "EventArgs": []}
+{"EventId": "E1065", "EventTemplate": "get the task from ActivityManager size is %d AMS:getRecentTasksForUser,args:numTasksToQuery=%d,flags=%d,userId=%d", "EventArgs": ["taskSize", "numTasksToQuery", "flags", "userId"]}
+{"EventId": "E1066", "EventTemplate": "to show tasks size is %d", "EventArgs": ["tasksToShow"]}
+{"EventId": "E1067", "EventTemplate": "cellid has changed", "EventArgs": []}
+{"EventId": "E1068", "EventTemplate": "mCurrentCellId has Changed,try update", "EventArgs": []}
+{"EventId": "E1069", "EventTemplate": "WifiScanGenie handleWiFiConnected, cellIdChanged:%b", "EventArgs": ["cellIdChanged"]}
+{"EventId": "E1070", "EventTemplate": "Window asks to hide input", "EventArgs": []}
+{"EventId": "E1071", "EventTemplate": "|SERVICE| DPM received %s", "EventArgs": ["event"]}
+{"EventId": "E1072", "EventTemplate": "Enter updateLostResumeNetTypeFlag !", "EventArgs": []}
+{"EventId": "E1073", "EventTemplate": "Leaving updateLostResumeNetTypeFlag!mLostNetworkType=%d mResumeNetworkType=%d mCacheLostNetworkType=%d", "EventArgs": ["lostNetworkType", "resumeNetworkType", "cacheLostNetworkType"]}
+{"EventId": "E1074", "EventTemplate": "handleMessage{ when=%d what=%d arg2=%d obj=%d target=%s }", "EventArgs": ["when", "what", "arg2", "obj", "target"]}
+{"EventId": "E1075", "EventTemplate": "come into oem_qmi_common_stream_from_modem_len --->modem", "EventArgs": []}
+{"EventId": "E1076", "EventTemplate": "Lib:oem_qmi_cmd:Build socket connection success. And retry:%d", "EventArgs": ["retryCount"]}
+{"EventId": "E1077", "EventTemplate": "psFaultID= %d", "EventArgs": ["faultID"]}
+{"EventId": "E1078", "EventTemplate": "CHR Info, EVENT_GET_MODEM_INFO_DONE, iFaultID:%d, iNewFaultID:%d, subId:%d", "EventArgs": ["iFaultID", "iNewFaultID", "subId"]}
+{"EventId": "E1079", "EventTemplate": "CHR Info, handleMessage, Error, INVALID FaultID.", "EventArgs": []}
+{"EventId": "E1080", "EventTemplate": "get modem info done", "EventArgs": []}
+{"EventId": "E1081", "EventTemplate": "write chr success", "EventArgs": []}
+{"EventId": "E1082", "EventTemplate": "getDBOptId() return id %d", "EventArgs": ["dbOptId"]}
+{"EventId": "E1083", "EventTemplate": "the log(event) is exist.", "EventArgs": []}
+{"EventId": "E1084", "EventTemplate": "Launcher dynamicIconsRegister", "EventArgs": []}
+{"EventId": "E1085", "EventTemplate": "DynamicUpdater registerReceiver", "EventArgs": []}
+{"EventId": "E1086", "EventTemplate": "DynamicUpdater call updateFolder", "EventArgs": []}
+{"EventId": "E1087", "EventTemplate": "DynamicIcon onResume  isvisible = %b   mAttachedToWindow:%b    mWindowVisible:%b%s", "EventArgs": ["isVisible", "attachedToWindow", "windowVisible", "packageName"]}
+{"EventId": "E1088", "EventTemplate": "SettingsEx , no such field.", "EventArgs": []}
+{"EventId": "E1089", "EventTemplate": "Clock getDataFormat the getSystemString failed.", "EventArgs": []}
+{"EventId": "E1090", "EventTemplate": "WeatherDynamicUpdater positiveUpdate at WeatherDynamicUpdater", "EventArgs": []}
+{"EventId": "E1091", "EventTemplate": "Launcher  Launcher.onStart() cost %d ms", "EventArgs": ["startCost"]}
+{"EventId": "E1092", "EventTemplate": "Launcher  Launcher hot start cost %d ms", "EventArgs": ["hotStartCost"]}
+{"EventId": "E1093", "EventTemplate": "TaskController:add this task to mTaskList:%s", "EventArgs": ["task"]}
+{"EventId": "E1094", "EventTemplate": "TaskController:handleTask citycode= %sstate= %d", "EventArgs": ["cityCode", "state"]}
+{"EventId": "E1095", "EventTemplate": "vel=%f, MinimumFlingVelocity=%d", "EventArgs": ["velocity", "minFlingVelocity"]}
+{"EventId": "E1096", "EventTemplate": "Initialized EGL, version %s", "EventArgs": ["eglVersion"]}
+{"EventId": "E1097", "EventTemplate": "Swap behavior %d", "EventArgs": ["swapBehavior"]}
+{"EventId": "E1098", "EventTemplate": "BaiduLocation:start baidu locate.", "EventArgs": []}
+{"EventId": "E1099", "EventTemplate": "WeatherDynamicUpdater receive action = %s", "EventArgs": ["action"]}
+{"EventId": "E1100", "EventTemplate": "WeatherDynamicUpdater receiver data is int[] = [%s] ; stringArray[] = [%s] ; dynamic_gravity = %s", "EventArgs": ["intArray", "stringArray", "dynamicGravity"]}
+{"EventId": "E1101", "EventTemplate": "updateBluetooth:::setBluetoothBatteryEnable %b.", "EventArgs": ["bluetoothBatteryEnable"]}
+{"EventId": "E1102", "EventTemplate": "updateBluetooth::bluetoothEnabled:%b, bluetoothConnected=%b, bluetoothTransfering=%b", "EventArgs": ["bluetoothEnabled", "bluetoothConnected", "bluetoothTransfering"]}
+{"EventId": "E1103", "EventTemplate": "WidgetDataManager:my location is %s", "EventArgs": ["location"]}
+{"EventId": "E1104", "EventTemplate": "Start proc %d:%s for service %s", "EventArgs": ["pid", "processName", "serviceName"]}
+{"EventId": "E1105", "EventTemplate": "power log dlsym ok", "EventArgs": []}
+{"EventId": "E1106", "EventTemplate": "mExtDataOld:ExtData [mMasterNetWorkType=%d, mSlaveNetWorkType=%d, mMasterNetWorkLevel=%d, mSlaveNetWorkLevel=%d, mDataState=%d, mDataActivity=%d, mDataNetType=%d] mExtData:ExtData [mMasterNetWorkType=%d, mSlaveNetWorkType=%d, mMasterNetWorkLevel=%d, mSlaveNetWorkLevel=%d, mDataState=%d, mDataActivity=%d, mDataNetType=%d]", "EventArgs": ["master_network_type_old", "slave_network_type_old", "master_network_level_old", "slave_network_level_old", "data_state_old", "data_activity_old", "data_net_type_old", "master_network_type_new", "slave_network_type_new", "master_network_level_new", "slave_network_level_new", "data_state_new", "data_activity_new", "data_net_type_new"]}
+{"EventId": "E1107", "EventTemplate": "GetAsdivWorkState() mResult = %d, output[0] =%d, output[4] =%d, output_len =%d.", "EventArgs": ["result", "output_0", "output_4", "output_len"]}
+{"EventId": "E1108", "EventTemplate": "total/%d/%d,%s/%d/%d", "EventArgs": ["total_memory", "total_swap", "package_name", "package_memory", "package_swap"]}
+{"EventId": "E1109", "EventTemplate": "Good NetWork Traffic , so mOnAppSuckTime, mUnModifyCount reset %d", "EventArgs": ["reset_value"]}
+{"EventId": "E1110", "EventTemplate": "updateQoeLevel current level equal to mLastDetectLevel, return", "EventArgs": []}
+{"EventId": "E1111", "EventTemplate": "isWifiProEvaluatingAP, connectedConfig = %s, selectedConfig = %s", "EventArgs": ["connected_config", "selected_config"]}
+{"EventId": "E1112", "EventTemplate": "[charger_ic] temp_new :%d  temp_old :%d", "EventArgs": ["temp_new", "temp_old"]}
+{"EventId": "E1113", "EventTemplate": "csr", "EventArgs": []}
+{"EventId": "E1114", "EventTemplate": "wsr", "EventArgs": []}
+{"EventId": "E1115", "EventTemplate": "kWhatSetAudioSink", "EventArgs": []}
+{"EventId": "E1116", "EventTemplate": "kWhatSetDataSource", "EventArgs": []}
+{"EventId": "E1117", "EventTemplate": "[LogCapReceiver.startSendSocketService]Receive action:%s", "EventArgs": ["action"]}
+{"EventId": "E1118", "EventTemplate": "releaseOutput() %d", "EventArgs": ["output"]}
+{"EventId": "E1119", "EventTemplate": "getNewOutputDevice() selected device %d", "EventArgs": ["device"]}
+{"EventId": "E1120", "EventTemplate": "Failed to fetch the lookup information of the device %s", "EventArgs": ["device_id"]}
+{"EventId": "E1121", "EventTemplate": "listAudioPorts() role %d type %d num_ports %d ports %s", "EventArgs": ["role", "type", "num_ports", "ports"]}
+{"EventId": "E1122", "EventTemplate": "listAudioPorts AudioSystem::listAudioPorts numPorts %d generation %d generation1 %d", "EventArgs": ["num_ports", "generation", "generation1"]}
+{"EventId": "E1123", "EventTemplate": "[LogCapService.onHandleIntent]Phone IDLE", "EventArgs": []}
+{"EventId": "E1124", "EventTemplate": "%d %d voice %s data %s %s %s %s %s %s %s CSS %s %s %s RoamInd=%d DefRoamInd=%d EmergOnly=%s IsDataRoamingFromRegistration=%s", "EventArgs": ["unknown1", "unknown2", "voice_status", "data_status", "provider1", "provider2", "code1", "provider3", "provider4", "code2", "css_status", "unknown3", "unknown4", "roam_ind", "def_roam_ind", "emerg_only", "data_roaming"]}
+{"EventId": "E1125", "EventTemplate": "######### NOTIFY_MCC:%s ########", "EventArgs": ["mcc_code"]}
+{"EventId": "E1126", "EventTemplate": "stopOutput() output %d, stream %d, session %d", "EventArgs": ["output", "stream", "session"]}
+{"EventId": "E1127", "EventTemplate": "setOutputDevice() setting same device 0x%x or null device", "EventArgs": ["device"]}
+{"EventId": "E1128", "EventTemplate": "scheduleCheckFreezeScreen sendMessageDelayed", "EventArgs": []}
+{"EventId": "E1129", "EventTemplate": "handle_logfile_events, Object Path:%s, mask=%s", "EventArgs": ["path", "mask"]}
+{"EventId": "E1130", "EventTemplate": "process_one_event, event->len=%d, name=%s", "EventArgs": ["length", "name"]}
+{"EventId": "E1131", "EventTemplate": "need to force refresh view", "EventArgs": []}
+{"EventId": "E1132", "EventTemplate": "DcTrackerBse setAnyDataEnabledFalseReason,flag=%s,%s,%s,%s", "EventArgs": ["flag1", "flag2", "flag3", "flag4"]}
+{"EventId": "E1133", "EventTemplate": "GetAsdivWorkState error", "EventArgs": []}
+{"EventId": "E1134", "EventTemplate": "getAntPosition antWorkState is %d", "EventArgs": ["ant_work_state"]}
+{"EventId": "E1135", "EventTemplate": "getAntPosition Phone success antPos=%d", "EventArgs": ["ant_pos"]}
+{"EventId": "E1136", "EventTemplate": "setNetLostEvent", "EventArgs": []}
+{"EventId": "E1137", "EventTemplate": "iMonitor version, packing logs call the same interface", "EventArgs": []}
+{"EventId": "E1138", "EventTemplate": "setChrInfo2Db begin", "EventArgs": []}
+{"EventId": "E1139", "EventTemplate": "ActivityThread,attachApplication", "EventArgs": []}
+{"EventId": "E1140", "EventTemplate": "New app record %s thread=%s pid=%d procname=%s", "EventArgs": ["app_record", "thread", "pid", "proc_name"]}
+{"EventId": "E1141", "EventTemplate": "baidu location service start1 ...%d", "EventArgs": ["pid"]}
+{"EventId": "E1142", "EventTemplate": "baidu location connected ...", "EventArgs": []}
+{"EventId": "E1143", "EventTemplate": "HwLocationManager:onLocationChanged.ThirdLocation", "EventArgs": []}
+{"EventId": "E1144", "EventTemplate": "TaskController:onLocationSuccess", "EventArgs": []}
+{"EventId": "E1145", "EventTemplate": "HwLocationManager:stopLocation.", "EventArgs": []}
+{"EventId": "E1146", "EventTemplate": "WeatherParserFactorys:type is %d", "EventArgs": ["type"]}
+{"EventId": "E1147", "EventTemplate": "galaxy lib host missing meta-data,make sure you know the right way to integrate galaxy", "EventArgs": []}
+{"EventId": "E1148", "EventTemplate": "Failed to open database '%s'.", "EventArgs": ["database_path"]}
+{"EventId": "E1149", "EventTemplate": "baidu location service has stoped ...", "EventArgs": []}
+{"EventId": "E1150", "EventTemplate": "Process %s (pid %d) has died", "EventArgs": ["process_name", "pid"]}
+{"EventId": "E1151", "EventTemplate": "stopWifiDisplayScanLocked record.mWifiDisplayScanRequested=%s", "EventArgs": ["scan_requested"]}
+{"EventId": "E1152", "EventTemplate": "stopWifiDisplayScanLocked mWifiDisplayScanRequestCount=%d", "EventArgs": ["request_count"]}
+{"EventId": "E1153", "EventTemplate": "cleanUpApplicationRecord -- %d", "EventArgs": ["pid"]}
+{"EventId": "E1154", "EventTemplate": "Launcher onBackPressed zoomEnable=%s", "EventArgs": ["zoom_enable"]}
+{"EventId": "E1155", "EventTemplate": "DropSearchView  hide() Already hidden.", "EventArgs": []}
+{"EventId": "E1156", "EventTemplate": "JAccuWeatherParser:initCityCodeByGeoPos", "EventArgs": []}
+{"EventId": "E1157", "EventTemplate": "JsonWeatherParser:has no alarm", "EventArgs": []}
+{"EventId": "E1158", "EventTemplate": "TaskController:notifyTaskSuccess cityCode= %s", "EventArgs": ["city_code"]}
+{"EventId": "E1159", "EventTemplate": "@@@@@@@@@@@@ uid :%d download :%s", "EventArgs": ["uid", "download_status"]}
+{"EventId": "E1160", "EventTemplate": "getLastLocCityWeather jsonString %s", "EventArgs": ["json_string"]}
+{"EventId": "E1161", "EventTemplate": "RetryTaskController:preRemovedTask is %s", "EventArgs": ["task"]}
+{"EventId": "E1162", "EventTemplate": "RetryTaskController:paraMap is empty", "EventArgs": []}
+{"EventId": "E1163", "EventTemplate": "homeWeatherInfo = %s", "EventArgs": ["weather_info"]}
+{"EventId": "E1164", "EventTemplate": "Launcher onclick begin %s", "EventArgs": ["view_info"]}
+{"EventId": "E1165", "EventTemplate": "Transact:getHwAdminCachedListto device policy manager service.", "EventArgs": []}
+{"EventId": "E1166", "EventTemplate": "START u0 {%s} from uid %d on display %d", "EventArgs": ["intent", "uid", "display_id"]}
+{"EventId": "E1167", "EventTemplate": "check perfhub service fail!", "EventArgs": []}
+{"EventId": "E1168", "EventTemplate": "finishComposingText on inactive InputConnection", "EventArgs": []}
+{"EventId": "E1169", "EventTemplate": "RecentLogic{%d} RecentLogic.addConversationEntity(RecentLogic.java:%d) add chat recent!", "EventArgs": ["pid", "line_number"]}
+{"EventId": "E1170", "EventTemplate": "UnreadContentObserver  handle update icon message", "EventArgs": []}
+{"EventId": "E1171", "EventTemplate": "UnreadContentObserver newUnreadCount:%d,oldUnreadCount:%d className :%s", "EventArgs": ["new_unread_count", "old_unread_count", "class_name"]}
+{"EventId": "E1172", "EventTemplate": "handleUserActivityTimeout", "EventArgs": []}
+{"EventId": "E1173", "EventTemplate": "The Dim state", "EventArgs": []}
+{"EventId": "E1174", "EventTemplate": "handleIncallSonification() stream %d starting %d device 0x%x stateChange %d", "EventArgs": ["stream", "starting", "device", "stateChange"]}
+{"EventId": "E1175", "EventTemplate": "setMuteMusicBySetPhoneState state:%d on:%d mMutedByUsbVoice:%d", "EventArgs": ["state", "on", "muted_by_usb_voice"]}
+{"EventId": "E1176", "EventTemplate": "Going to sleep due to screen timeout (uid %d)...", "EventArgs": ["uid"]}
+{"EventId": "E1177", "EventTemplate": "set_speaker_light_locked mode %d, colorRGB=%s, onMS=%d, offMS=%d", "EventArgs": ["mode", "color_rgb", "on_ms", "off_ms"]}
+{"EventId": "E1178", "EventTemplate": "send modem leds order success.", "EventArgs": []}
+{"EventId": "E1179", "EventTemplate": "set flash ledARGB=%s, ledOn:%d, ledOff:%d", "EventArgs": ["led_argb", "led_on", "led_off"]}
+{"EventId": "E1180", "EventTemplate": "AutoCleanReceiveServer:checkToStartCleanService, current is not charging, need not start clean service", "EventArgs": []}
+{"EventId": "E1181", "EventTemplate": "BatteryStatisticsHelper:deleteBatteryInfo2DaysAgo  twoDaysMillseconds=%d whereTimes =%d", "EventArgs": ["two_days_milliseconds", "where_times"]}
+{"EventId": "E1182", "EventTemplate": "DialpadFragment sim_one is presence -> updateSingleCardButton", "EventArgs": []}
+{"EventId": "E1183", "EventTemplate": "AudioException do not check.now is not communication state!", "EventArgs": []}
+{"EventId": "E1184", "EventTemplate": "setOutputDevice() createAudioPatch returned %d patchHandle %d num_sources %d num_sinks %d", "EventArgs": ["return_code", "patch_handle", "num_sources", "num_sinks"]}
+{"EventId": "E1185", "EventTemplate": "checkAndSetVolume() stream %d muted count %d", "EventArgs": ["stream", "muted_count"]}
+{"EventId": "E1186", "EventTemplate": "select_devices for use case (%s)", "EventArgs": ["use_case"]}
+{"EventId": "E1187", "EventTemplate": "ACDB -> %s", "EventArgs": ["command"]}
+{"EventId": "E1188", "EventTemplate": "isSecondaryUser() %s", "EventArgs": ["status"]}
+{"EventId": "E1189", "EventTemplate": "removeCallbacksAndMessages %s", "EventArgs": ["status"]}
+{"EventId": "E1190", "EventTemplate": "startService %s", "EventArgs": ["status"]}
+{"EventId": "E1191", "EventTemplate": "stopMotionAppsRecoAsUser not recognition motionApps %d", "EventArgs": ["motion_app_id"]}
+{"EventId": "E1192", "EventTemplate": "ProximitySensor - unregister DisplayListener", "EventArgs": []}
+{"EventId": "E1193", "EventTemplate": "CallList - no active call", "EventArgs": []}
+{"EventId": "E1194", "EventTemplate": "TelecomAdapter - setHoldClick%b", "EventArgs": ["hold_click_status"]}
+{"EventId": "E1195", "EventTemplate": "getCallPullInfo mDialogIds %s", "EventArgs": ["dialog_ids"]}
+{"EventId": "E1196", "EventTemplate": "fddn EVENT_GET_AD_DONE FDN_PS_CHECK:%b ,FDN_PRELOAD_CACHE:%b", "EventArgs": ["fdn_ps_check", "fdn_preload_cache"]}
+{"EventId": "E1197", "EventTemplate": "ClockDynamicUpdater clock update folder at ClockDynamicUpdater", "EventArgs": []}
+{"EventId": "E1198", "EventTemplate": "DynamicUpdater updateBitmap end and send update message", "EventArgs": []}
+{"EventId": "E1199", "EventTemplate": "HwLocationManager:startLocation", "EventArgs": []}
+{"EventId": "E1200", "EventTemplate": "ThirdLocation:Third locaiton is enable", "EventArgs": []}
+{"EventId": "E1201", "EventTemplate": "baidu location service stop ...", "EventArgs": []}
+{"EventId": "E1202", "EventTemplate": "(%d) cannot open file at line %d of [%s]", "EventArgs": ["error_code", "line_number", "file_hash"]}
+{"EventId": "E1203", "EventTemplate": "Launcher onBackPressed end", "EventArgs": []}
+{"EventId": "E1204", "EventTemplate": "Launcher this view's parent is not SearchGridView , so no need to reportRecentApp.", "EventArgs": []}
+{"EventId": "E1205", "EventTemplate": "Launcher onclick end", "EventArgs": []}
+{"EventId": "E1206", "EventTemplate": "stopMotionAppsReco not recognition motionApps %d", "EventArgs": ["motion_app_id"]}
+{"EventId": "E1207", "EventTemplate": "setLcdRatio ratio:%d autoAdjust:%b", "EventArgs": ["ratio", "auto_adjust"]}
+{"EventId": "E1208", "EventTemplate": "Window asks to hide input going forward", "EventArgs": []}
+{"EventId": "E1209", "EventTemplate": "[resume] net alarms", "EventArgs": []}
+{"EventId": "E1210", "EventTemplate": "hasStrictRequiredPermissions run %b", "EventArgs": ["result"]}
+{"EventId": "E1211", "EventTemplate": "Creating TransactionService", "EventArgs": []}
+{"EventId": "E1212", "EventTemplate": "Destroying TransactionService", "EventArgs": []}
+{"EventId": "E1213", "EventTemplate": "handleMessage CHECK_FREEZE_SCREEN_MSG", "EventArgs": []}
+{"EventId": "E1214", "EventTemplate": "call onScreenTurnedOff(%d)", "EventArgs": ["screen_turned_off_code"]}
+{"EventId": "E1215", "EventTemplate": "RGB565toARGB888 create bmp = %dx%d", "EventArgs": ["width", "height"]}
+{"EventId": "E1216", "EventTemplate": "get Index for key %d to %d", "EventArgs": ["key", "index"]}
+{"EventId": "E1217", "EventTemplate": "java.lang.Exception", "EventArgs": []}
+{"EventId": "E1218", "EventTemplate": "update Wallpaper and block update ui; color %s", "EventArgs": ["color_info"]}
+{"EventId": "E1219", "EventTemplate": "getNextListIndex indexChecked after:%d", "EventArgs": ["index_checked"]}
+{"EventId": "E1220", "EventTemplate": "enable,%d:handle is %d, en is %d", "EventArgs": ["unknown1", "handle", "en"]}
+{"EventId": "E1221", "EventTemplate": "Failed to get bastet service", "EventArgs": []}
+{"EventId": "E1222", "EventTemplate": "CallStateChanged--->the Call Disconnect--->%s", "EventArgs": ["call_state"]}
+{"EventId": "E1223", "EventTemplate": "isEncryptEnabled not %s phone!", "EventArgs": ["phone_type"]}
+{"EventId": "E1224", "EventTemplate": "mSignalInfoToneGenerator created already, hence skipping", "EventArgs": []}
+{"EventId": "E1225", "EventTemplate": "InCallActivity - dismiss redial dialog", "EventArgs": []}
+{"EventId": "E1226", "EventTemplate": "InCallActivity - maybeShowErrorDialogOnDisconnect", "EventArgs": []}
+{"EventId": "E1227", "EventTemplate": "isAddContactsOverride", "EventArgs": []}
+{"EventId": "E1228", "EventTemplate": "CallCardPresenter - onStateChangeInCallCard InCallState:%s", "EventArgs": ["call_state"]}
+{"EventId": "E1229", "EventTemplate": "CallCardPresenter - setCallCardTypeVisible %b", "EventArgs": ["visibility"]}
+{"EventId": "E1230", "EventTemplate": "VideoCallPresenter - exitVideoMode", "EventArgs": []}
+{"EventId": "E1231", "EventTemplate": "Pid:%d ToneGenerator constructor", "EventArgs": ["pid"]}
+{"EventId": "E1232", "EventTemplate": "VideoCallFragment - inflateVideoUi %b", "EventArgs": ["inflate_status"]}
+{"EventId": "E1233", "EventTemplate": "VideoCallPresenter - no incoming call recoverView", "EventArgs": []}
+{"EventId": "E1234", "EventTemplate": "VideoCallFragment - cleanupSurfaces", "EventArgs": []}
+{"EventId": "E1235", "EventTemplate": "VideoCallFragment - sCleanupSurfaces", "EventArgs": []}
+{"EventId": "E1236", "EventTemplate": "VideoCallPresenter - onStateChange primaryChanged=%b", "EventArgs": ["primary_changed"]}
+{"EventId": "E1237", "EventTemplate": "VideoCallPresenter - onStateChange primary= %s", "EventArgs": ["primary"]}
+{"EventId": "E1238", "EventTemplate": "VideoCallPresenter - update mVideoCall", "EventArgs": []}
+{"EventId": "E1239", "EventTemplate": "DialpadPresenter - DialpadPresenter mCall = %s", "EventArgs": ["call_status"]}
+{"EventId": "E1240", "EventTemplate": "getOutputForAttr() returns output %d stream %d", "EventArgs": ["output_id", "stream_id"]}
+{"EventId": "E1241", "EventTemplate": "InCallActivity - showCurrentOperatorInfo", "EventArgs": []}
+{"EventId": "E1242", "EventTemplate": "AutoStartupDataMgr:retrieveStartupSettings type %d of %s is %d", "EventArgs": ["type", "package_name", "value"]}
+{"EventId": "E1243", "EventTemplate": "AppAutoStartupPolicy:prevent start receiver of package %s for action %s", "EventArgs": ["package_name", "action"]}
+{"EventId": "E1244", "EventTemplate": "PLog CallLogFragment refreshData", "EventArgs": []}
+{"EventId": "E1245", "EventTemplate": "Trying to connect...", "EventArgs": []}
+{"EventId": "E1246", "EventTemplate": "StartupResidentService:InnerHandler Message:%d", "EventArgs": ["message_id"]}
+{"EventId": "E1247", "EventTemplate": "ldh not found setvalue=%d", "EventArgs": ["setvalue"]}
+{"EventId": "E1248", "EventTemplate": "ldh run_socket_server() str=%d", "EventArgs": ["str_value"]}
+{"EventId": "E1249", "EventTemplate": "mPhoneStatusReceiver:onReceive::mPhoneState=%d", "EventArgs": ["phone_state"]}
+{"EventId": "E1250", "EventTemplate": "handlePhoneStateChanged(%s)", "EventArgs": ["state"]}
+{"EventId": "E1251", "EventTemplate": "<\u901a\u8bdd\u7ba1\u7406>[\u901a\u8bdd\u7ba1\u7406][com.android.server.telecom]:[addEntryAndRemoveExpiredEntries] \u4fee\u6539\u901a\u8bdd\u8bb0\u5f55..", "EventArgs": []}
+{"EventId": "E1252", "EventTemplate": "VTCallButtonPresenter - onDetailsChanged callId=%s callState=%d", "EventArgs": ["call_id", "call_state"]}
+{"EventId": "E1253", "EventTemplate": "[query] Query CallLog", "EventArgs": []}
+{"EventId": "E1254", "EventTemplate": "CallList - Removing call not previously disconnected %s", "EventArgs": ["call_id"]}
+{"EventId": "E1255", "EventTemplate": "platform_sound_trigger_usecase_needs_event:usecase_id[%d] no need to raise event.", "EventArgs": ["usecase_id"]}
+{"EventId": "E1256", "EventTemplate": "[delete] Delete CallLog", "EventArgs": []}
+{"EventId": "E1257", "EventTemplate": "Pid:%d deleteTrackName(%d)", "EventArgs": ["pid", "track_id"]}
+{"EventId": "E1258", "EventTemplate": "Pid:%d add track (%d)", "EventArgs": ["pid", "track_id"]}
+{"EventId": "E1259", "EventTemplate": "stopVAssistant...", "EventArgs": []}
+{"EventId": "E1260", "EventTemplate": "destroyMotionRecognition ...", "EventArgs": []}
+{"EventId": "E1261", "EventTemplate": "abandonAudioFocusForCall...", "EventArgs": []}
+{"EventId": "E1262", "EventTemplate": "soundtrigger is now disable or not support, pls enable it first from setting", "EventArgs": []}
+{"EventId": "E1263", "EventTemplate": "NoAppTrafficAnalysis:subscription not changed", "EventArgs": []}
+{"EventId": "E1264", "EventTemplate": "NatTrafficNotifyService:default mobile sub change", "EventArgs": []}
+{"EventId": "E1265", "EventTemplate": "ProximitySensorr readEvents mHasPendingEvent is %d", "EventArgs": ["pending_event"]}
+{"EventId": "E1266", "EventTemplate": "setBarState:%d", "EventArgs": ["bar_state"]}
+{"EventId": "E1267", "EventTemplate": "Fingerprint timeout", "EventArgs": []}
+{"EventId": "E1268", "EventTemplate": "SystemUI may crashed at earlier time. %d", "EventArgs": ["timestamp"]}
+{"EventId": "E1269", "EventTemplate": "getRemainingChance %d", "EventArgs": ["remaining_chance"]}
+{"EventId": "E1270", "EventTemplate": "template id:%d", "EventArgs": ["template_id"]}
+{"EventId": "E1271", "EventTemplate": "fingerprint authenticated result:%b", "EventArgs": ["result"]}
+{"EventId": "E1272", "EventTemplate": "KGSvcFp Finger onAuthenticationSucceeded result= %s", "EventArgs": ["auth_result"]}
+{"EventId": "E1273", "EventTemplate": "currentUid = %d userId=%d", "EventArgs": ["current_uid", "user_id"]}
+{"EventId": "E1274", "EventTemplate": "handleKeyguardDone", "EventArgs": []}
+{"EventId": "E1275", "EventTemplate": "handleHide", "EventArgs": []}
+{"EventId": "E1276", "EventTemplate": "exit lock mode:%d", "EventArgs": ["lock_mode"]}
+{"EventId": "E1277", "EventTemplate": "refreshState=%s, %s", "EventArgs": ["state_type", "state_info"]}
+{"EventId": "E1278", "EventTemplate": "%s %s", "EventArgs": ["unknown1", "unknown2"]}
+{"EventId": "E1279", "EventTemplate": "audio_extn_utils_send_app_type_cfg %s app_type %d, acdb_dev_id %d, sample_rate %d", "EventArgs": ["playbackType", "appType", "acdbDevId", "sampleRate"]}
+{"EventId": "E1280", "EventTemplate": "getMode...", "EventArgs": []}
+{"EventId": "E1281", "EventTemplate": "isSpeakerphoneOn...", "EventArgs": []}
+{"EventId": "E1282", "EventTemplate": "isBluetoothScoOn...", "EventArgs": []}
+{"EventId": "E1283", "EventTemplate": "showLocked", "EventArgs": []}
+{"EventId": "E1284", "EventTemplate": "handleShow", "EventArgs": []}
+{"EventId": "E1285", "EventTemplate": "show", "EventArgs": []}
+{"EventId": "E1286", "EventTemplate": "showPrimarySecurityScreen(turningOff=%b)", "EventArgs": ["turningOff"]}
+{"EventId": "E1287", "EventTemplate": "showSecurityScreen(%s)", "EventArgs": ["securityType"]}
+{"EventId": "E1288", "EventTemplate": "Reset", "EventArgs": []}
+{"EventId": "E1289", "EventTemplate": "hideTraffic", "EventArgs": []}
+{"EventId": "E1290", "EventTemplate": "collapseAllGroups:", "EventArgs": []}
+{"EventId": "E1291", "EventTemplate": "setKeyguardWallpaperAVGColor:%d", "EventArgs": ["wallpaperAvgColor"]}
+{"EventId": "E1292", "EventTemplate": "resetCommute", "EventArgs": []}
+{"EventId": "E1293", "EventTemplate": "[ReceiverDispatcher-%d]resetBastet(%s/%s:%d)", "EventArgs": ["dispatcherId", "packageName", "unknown", "errorCode"]}
+{"EventId": "E1294", "EventTemplate": "addSensor,mHandles:{%d=%d}", "EventArgs": ["sensorHandleKey", "sensorHandleValue"]}
+{"EventId": "E1295", "EventTemplate": "keyguardDone(%b)", "EventArgs": ["keyguardDone"]}
+{"EventId": "E1296", "EventTemplate": "remove:%s", "EventArgs": ["removeItem"]}
+{"EventId": "E1297", "EventTemplate": "removeSensor,mHandles:{%s}", "EventArgs": ["removeSensorHandles"]}
+{"EventId": "E1298", "EventTemplate": "[UserPresentReceiver.onReceive]Start!", "EventArgs": []}
+{"EventId": "E1299", "EventTemplate": "[SdcardManager.isMounted]Path:%s", "EventArgs": ["mountPath"]}
+{"EventId": "E1300", "EventTemplate": "[LoginActivity.isLoggedIn]isLoggedIn:%b", "EventArgs": ["isLoggedIn"]}
+{"EventId": "E1301", "EventTemplate": "[ReceiverUtils.launchNotificationPollService]Start", "EventArgs": []}
+{"EventId": "E1302", "EventTemplate": "[SdcardManager.isMounted]Mounted:%s:%b", "EventArgs": ["mountedPath", "isMounted"]}
+{"EventId": "E1303", "EventTemplate": "[PollingService.onStartCommand]Start", "EventArgs": []}
+{"EventId": "E1304", "EventTemplate": "[LogSendProgressReceiver.onReceive]Start!", "EventArgs": []}
+{"EventId": "E1305", "EventTemplate": "[PullNotificationBase.onPollNotification]Start", "EventArgs": []}
+{"EventId": "E1306", "EventTemplate": "[NotificationLoadTask.doInBackground]LoadType/isDropDown:%d/%b", "EventArgs": ["loadType", "isDropDown"]}
+{"EventId": "E1307", "EventTemplate": "[HistoryUtils.startScanUploadTask]Start", "EventArgs": []}
+{"EventId": "E1308", "EventTemplate": "[UploadProgressUtils.queryProcessUploadItems]start", "EventArgs": []}
+{"EventId": "E1309", "EventTemplate": "handleTimeOut", "EventArgs": []}
+{"EventId": "E1310", "EventTemplate": "handleActiveUploadEvent", "EventArgs": []}
+{"EventId": "E1311", "EventTemplate": "checkPackageLogState", "EventArgs": []}
+{"EventId": "E1312", "EventTemplate": "moveToDoneDir", "EventArgs": []}
+{"EventId": "E1313", "EventTemplate": "packAllLogInDoneDir", "EventArgs": []}
+{"EventId": "E1314", "EventTemplate": "isBetaStrategy", "EventArgs": []}
+{"EventId": "E1315", "EventTemplate": "path:%s", "EventArgs": ["filePath"]}
+{"EventId": "E1316", "EventTemplate": "upload%d", "EventArgs": ["uploadIndex"]}
+{"EventId": "E1317", "EventTemplate": "fileName%s_%s-log_%s_%s_ALL.zip", "EventArgs": ["deviceModel", "logType", "hash", "timestamp"]}
+{"EventId": "E1318", "EventTemplate": "mLogUploadInfo.getUserType():%d", "EventArgs": ["userType"]}
+{"EventId": "E1319", "EventTemplate": "mLogUploadInfo.getZipTime():%s", "EventArgs": ["zipTime"]}
+{"EventId": "E1320", "EventTemplate": "mLogUploadInfo.getLogDetailInfo():%s", "EventArgs": ["logDetailInfo"]}
+{"EventId": "E1321", "EventTemplate": "statusLine%s", "EventArgs": ["statusLine"]}
+{"EventId": "E1322", "EventTemplate": "contentRange%s", "EventArgs": ["contentRange"]}
+{"EventId": "E1323", "EventTemplate": "dealWithLargeFileResult%d", "EventArgs": ["largeFileResult"]}
+{"EventId": "E1324", "EventTemplate": "range:%s", "EventArgs": ["range"]}
+{"EventId": "E1325", "EventTemplate": "skip%d", "EventArgs": ["skipBytes"]}
+{"EventId": "E1326", "EventTemplate": "CommonUtils.closeDataOutputStream", "EventArgs": []}
+{"EventId": "E1327", "EventTemplate": "reportMmEvent", "EventArgs": []}
+{"EventId": "E1328", "EventTemplate": "java.lang.reflect.InvocationTargetException", "EventArgs": []}
+{"EventId": "E1329", "EventTemplate": "handleLteCaStatusChange", "EventArgs": []}
+{"EventId": "E1330", "EventTemplate": "enableTrigger", "EventArgs": []}
+{"EventId": "E1331", "EventTemplate": "enableTriggerMethod", "EventArgs": []}
+{"EventId": "E1332", "EventTemplate": "generateMetricStatistics", "EventArgs": []}
+{"EventId": "E1333", "EventTemplate": "ActivityThread,callActivityOnCreate", "EventArgs": []}
+{"EventId": "E1334", "EventTemplate": "getBuddyInfoLines:buddyinfo:", "EventArgs": []}
+{"EventId": "E1335", "EventTemplate": "clearData", "EventArgs": []}
+{"EventId": "E1336", "EventTemplate": "resetDailyCount", "EventArgs": []}
+{"EventId": "E1337", "EventTemplate": "NetworkInfo.State.%s", "EventArgs": ["networkState"]}
+{"EventId": "E1338", "EventTemplate": "receive:%s", "EventArgs": ["receiveEvent"]}
+{"EventId": "E1339", "EventTemplate": "enableMonitor:%b,type=%d", "EventArgs": ["enableMonitor", "monitorType"]}
+{"EventId": "E1340", "EventTemplate": "currentTimeMillis!%d", "EventArgs": ["currentTimeMillis"]}
+{"EventId": "E1341", "EventTemplate": "beforeTimeMillis!%d", "EventArgs": ["beforeTimeMillis"]}
+{"EventId": "E1342", "EventTemplate": "setTenMinAutoCheckTime!", "EventArgs": []}
+{"EventId": "E1343", "EventTemplate": "deleteOverTimeLog", "EventArgs": []}
+{"EventId": "E1344", "EventTemplate": "isHighVersion_%d", "EventArgs": ["highVersionCode"]}
+{"EventId": "E1345", "EventTemplate": "autohasloglist%d", "EventArgs": ["autoHasLogList"]}
+{"EventId": "E1346", "EventTemplate": "wpa_driver_nl80211_disconnect(reason_code=%d)", "EventArgs": ["disconnectReasonCode"]}
+{"EventId": "E1347", "EventTemplate": "upstreamIfaceTypes.add:%d", "EventArgs": ["upstreamIfaceType"]}
+{"EventId": "E1348", "EventTemplate": "reSetWifiInternetState", "EventArgs": []}
+{"EventId": "E1349", "EventTemplate": "stopALLMonitor", "EventArgs": []}
+{"EventId": "E1350", "EventTemplate": "resetMonitorStatus", "EventArgs": []}
+{"EventId": "E1351", "EventTemplate": "clearTetheredNotification", "EventArgs": []}
+{"EventId": "E1352", "EventTemplate": "state_smg", "EventArgs": []}
+{"EventId": "E1353", "EventTemplate": "CONFIGURED_NETWORKS_CHANGED_ACTION", "EventArgs": []}
+{"EventId": "E1354", "EventTemplate": "mContext:%scode:%d", "EventArgs": ["mContext", "code"]}
+{"EventId": "E1355", "EventTemplate": "%s%d", "EventArgs": ["unknown", "unknown"]}
+{"EventId": "E1356", "EventTemplate": "%s%s%s", "EventArgs": ["filePath", "fileSize", "actionUrl"]}
+{"EventId": "E1357", "EventTemplate": "sendKeyguardReset", "EventArgs": []}
+{"EventId": "E1358", "EventTemplate": "isBluetoothA2dpOn...", "EventArgs": []}
+{"EventId": "E1359", "EventTemplate": "ACTION_PFW_WAKEUP_TIMER", "EventArgs": []}
+{"EventId": "E1360", "EventTemplate": "hide", "EventArgs": []}
+{"EventId": "E1361", "EventTemplate": "[ReceiverUtils.resumeLogUpload]resumeSendNow", "EventArgs": []}
+{"EventId": "E1362", "EventTemplate": "\"workday\":%s", "EventArgs": ["workday"]}
+{"EventId": "E1363", "EventTemplate": "checkLogListWithQuota", "EventArgs": []}
+{"EventId": "E1364", "EventTemplate": "[ReceiverDispatcher-%d]areNotificationsEnabledForPackage:%b(%s/%s:-1)", "EventArgs": ["threadId", "notificationsEnabled", "package", "unknown"]}
+{"EventId": "E1365", "EventTemplate": "moveToUploaingDir", "EventArgs": []}
+{"EventId": "E1366", "EventTemplate": "UploadFile.addEndField(dos)", "EventArgs": []}
+{"EventId": "E1367", "EventTemplate": "Uploader", "EventArgs": []}
+{"EventId": "E1368", "EventTemplate": "nspFileSize%d", "EventArgs": ["fileSize"]}
+{"EventId": "E1369", "EventTemplate": "actionUrl:%s", "EventArgs": ["actionUrl"]}
+{"EventId": "E1370", "EventTemplate": "nspCallback%s", "EventArgs": ["callbackUrl"]}
+{"EventId": "E1371", "EventTemplate": "nspTs%d", "EventArgs": ["timestamp"]}
+{"EventId": "E1372", "EventTemplate": "type%d", "EventArgs": ["type"]}
+{"EventId": "E1373", "EventTemplate": "nspFileMd5%s", "EventArgs": ["fileMd5"]}
+{"EventId": "E1374", "EventTemplate": "nsp_sig%s", "EventArgs": ["signature"]}
+{"EventId": "E1375", "EventTemplate": "parserContentRange", "EventArgs": []}
+{"EventId": "E1376", "EventTemplate": "endPos%d", "EventArgs": ["endPosition"]}
+{"EventId": "E1377", "EventTemplate": "startPos%d", "EventArgs": ["startPosition"]}
+{"EventId": "E1378", "EventTemplate": "transfLength%d", "EventArgs": ["transferLength"]}
+{"EventId": "E1379", "EventTemplate": "nspContentRange%s", "EventArgs": ["contentRange"]}
+{"EventId": "E1380", "EventTemplate": "getOutputStream", "EventArgs": []}
+{"EventId": "E1381", "EventTemplate": "rangeArray.length()%d", "EventArgs": ["rangeLength"]}
+{"EventId": "E1382", "EventTemplate": "submitFlag%d", "EventArgs": ["submitFlag"]}
+{"EventId": "E1383", "EventTemplate": "resultFlag%d", "EventArgs": ["resultFlag"]}
+{"EventId": "E1384", "EventTemplate": "mLogUploadInfo.getUploadErrCode():", "EventArgs": []}
+{"EventId": "E1385", "EventTemplate": "handleNetworkDisconnect,resetWifiProManualConnect", "EventArgs": []}
+{"EventId": "E1386", "EventTemplate": "doQuit", "EventArgs": []}
+{"EventId": "E1387", "EventTemplate": "stopMonitor", "EventArgs": []}
+{"EventId": "E1388", "EventTemplate": "scheduleWatchdogTimer", "EventArgs": []}
+{"EventId": "E1389", "EventTemplate": "netType%d", "EventArgs": ["networkType"]}
+{"EventId": "E1390", "EventTemplate": "configureNeighborDiscoveryOffload(%b)", "EventArgs": ["enabled"]}
+{"EventId": "E1391", "EventTemplate": "saveDhcpResultsInfotoDB", "EventArgs": []}
+{"EventId": "E1392", "EventTemplate": "updateLeaseTime:%d", "EventArgs": ["leaseTime"]}
+{"EventId": "E1393", "EventTemplate": "ConnectedState", "EventArgs": []}
+{"EventId": "E1394", "EventTemplate": "stopConnectTimer", "EventArgs": []}
+{"EventId": "E1395", "EventTemplate": "handleWiFiConnectedByScanGenie", "EventArgs": []}
+{"EventId": "E1396", "EventTemplate": "mWifiScanGenieController.handleWiFiConnected", "EventArgs": []}
+{"EventId": "E1397", "EventTemplate": "HsmWifiDetectManager:clearSecureWarningNotification", "EventArgs": []}
+{"EventId": "E1398", "EventTemplate": "triggerUpdateAPInfo", "EventArgs": []}
+{"EventId": "E1399", "EventTemplate": "updateDNS:%s", "EventArgs": ["dnsServers"]}
+{"EventId": "E1400", "EventTemplate": "initDualBandhanoverCHR", "EventArgs": []}
+{"EventId": "E1401", "EventTemplate": "HilinkService-onCreate", "EventArgs": []}
+{"EventId": "E1402", "EventTemplate": "HilinkService-start", "EventArgs": []}
+{"EventId": "E1403", "EventTemplate": "scwe", "EventArgs": []}
+{"EventId": "E1404", "EventTemplate": "lockCreate", "EventArgs": []}
+{"EventId": "E1405", "EventTemplate": "HilinkService-onDestroy", "EventArgs": []}
+{"EventId": "E1406", "EventTemplate": "null", "EventArgs": []}
+{"EventId": "E1407", "EventTemplate": "Location=%s", "EventArgs": ["locationUrl"]}
+{"EventId": "E1408", "EventTemplate": "getStaticIpStatus:%d", "EventArgs": ["staticIpStatus"]}
+{"EventId": "E1409", "EventTemplate": "Connected.", "EventArgs": []}
+{"EventId": "E1410", "EventTemplate": "QSEECom_dealloc_memory", "EventArgs": []}
+{"EventId": "E1411", "EventTemplate": "end", "EventArgs": []}
+{"EventId": "E1412", "EventTemplate": "doRequest", "EventArgs": []}
+{"EventId": "E1413", "EventTemplate": "WeatherManager:isNetAvaialble=%b", "EventArgs": ["isNetworkAvailable"]}
+{"EventId": "E1414", "EventTemplate": "startBqeService", "EventArgs": []}
+{"EventId": "E1415", "EventTemplate": "refresh", "EventArgs": []}
+{"EventId": "E1416", "EventTemplate": "getRingtonePlayer...", "EventArgs": []}
+{"EventId": "E1417", "EventTemplate": "adjustTrafficMeal", "EventArgs": []}
+{"EventId": "E1418", "EventTemplate": "updateApVendorInfo:facturer=%s,mname=%s,mnum=%s,dname=%s", "EventArgs": ["manufacturer", "model", "number", "deviceName"]}
+{"EventId": "E1419", "EventTemplate": "setWiFiProScanResultList", "EventArgs": []}
+{"EventId": "E1420", "EventTemplate": "P2pDisablingState%d", "EventArgs": ["stateId"]}
+{"EventId": "E1421", "EventTemplate": "P2pDisabledState", "EventArgs": []}
+{"EventId": "E1422", "EventTemplate": "isCurrentBySim()=%b", "EventArgs": ["isCurrentBySim"]}
+{"EventId": "E1423", "EventTemplate": "resetDualBandhanoverCHR", "EventArgs": []}
+{"EventId": "E1424", "EventTemplate": "WIFI_STATE_DISABLED", "EventArgs": []}
+{"EventId": "E1425", "EventTemplate": "DisabledState", "EventArgs": []}
+{"EventId": "E1426", "EventTemplate": "wifi_unload_driver", "EventArgs": []}
+{"EventId": "E1427", "EventTemplate": "collapsePanel:%b", "EventArgs": ["collapsePanel"]}
+{"EventId": "E1428", "EventTemplate": "collapsePanel%d", "EventArgs": ["panelId"]}
+{"EventId": "E1429", "EventTemplate": "forcestopBqeService", "EventArgs": []}
+{"EventId": "E1430", "EventTemplate": "resetBqeState", "EventArgs": []}
+{"EventId": "E1431", "EventTemplate": "JNI_OnLoad", "EventArgs": []}
+{"EventId": "E1432", "EventTemplate": "mIsEffect:%b", "EventArgs": ["isEffect"]}

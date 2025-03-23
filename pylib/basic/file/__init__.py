@@ -23,11 +23,11 @@ def csv_write(data_path, data, header=None):
         csv_writer = csv.writer(file)
 
         if header is None:
-            headers = data[0].keys()
-        csv_writer.writerow(headers)
+            header = data[0].keys()
+        csv_writer.writerow(header)
 
         for row in data:
-            row = [row[key] for key in headers]
+            row = [row[key] for key in header]
             csv_writer.writerow(row)
 
 
