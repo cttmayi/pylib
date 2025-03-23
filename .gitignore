@@ -134,3 +134,6 @@ work_dir/
 
 *.db
 .vscode
+
+*.csv
+pydemo/log_transformer/output/
