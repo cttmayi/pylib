@@ -198,9 +198,9 @@ class CodeVilidator(Agent):
                 
 
 if __name__ == '__main__':
-    log_path = 'data/2k.log'
+    log_path = 'data/android/2k.log'
     log_size = None
-    template_path = 'data/templates.jsonl'
+    template_path = 'data/android/templates.jsonl'
 
     router = Router(verbose=True)
     user = User(log_path, log_size, template_path=template_path)

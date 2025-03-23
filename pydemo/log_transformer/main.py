@@ -1,4 +1,4 @@
-import src.utils.env
+import pylib.env
 import os
 import matplotlib.pyplot as plt
 from itertools import chain
@@ -18,8 +18,8 @@ from src.dataset import create_dataset
 from src.model import create_model
 
 
-train_dataset_path = "data/android/1M.log_structured.csv"
-eval_dataset_path = "data/android/2k.log_structured.csv"
+train_dataset_path = "data/android/1M.jsonl"
+eval_dataset_path = "data/android/2k.jsonl"
 model_path = "models/Qwen2.5-0.5B-Instruct"
 output_path = "output"
 
@@ -32,16 +32,16 @@ training_args = TrainingArguments(
     learning_rate=1e-4,
     warmup_ratio=0.1,
     lr_scheduler_type="cosine",
-    num_train_epochs=100_000,
-    per_device_train_batch_size=2,
-    gradient_accumulation_steps=4,
+    num_train_epochs=1_000,
+    per_device_train_batch_size=4,
+    gradient_accumulation_steps=2,
     per_device_eval_batch_size=2,
     eval_strategy="steps",
     save_strategy="steps",
     eval_steps=100,
-    save_steps=1_000,  # 保存中间模型
+    save_steps=100,  # 保存中间模型
     save_total_limit=10,
-    use_cpu=True,
+    use_cpu=False,
     # bf16=True,
     # save_only_model=True,
     logging_steps=20,
