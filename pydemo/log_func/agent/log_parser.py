@@ -4,6 +4,9 @@ from qwen_agent.tools.base import register_tool
 from lparser.agent.code_helper import PluginAgentHelper
 
 
+_DEBUG_LOG_FILE = str(Path(__file__).absolute().parent / 'resources' / 'data' / 'simple.log')
+_ANDROID_LOG_FILE = str(Path(__file__).absolute().parent / 'resources' / 'data' / 'android.log')
+
 @register_tool('log_parser')
 class PluginAgent(PluginAgentHelper):
     description = 'looper函数的python执行环境'
@@ -11,15 +14,14 @@ class PluginAgent(PluginAgentHelper):
 
     RUN_CODE_FILE = str(Path(__file__).absolute().parent / 'resources' / 'log_parser_run_code.py')
     SYSTEM_INSTRUCTION_FILE = str(Path(__file__).absolute().parent / 'resources' / 'log_parser_system_instruction.txt')
-    LOG_FILE = str(Path(__file__).absolute().parent / 'resources' / 'data' / 'simple.log')
-    COPY_DIRS = ['lparser', 'runtime']
 
+    COPY_DIRS = ['lparser', 'runtime']
     AGENT_NAME = '日志分析助手'
     AGENT_DESCRIPTION = '我是一个AI日志分析助手。'
-    PROMPT_SUGGESTIONS =[{
-                            'text': '检查 TE，不应该大于16ms',
-                            'files': [LOG_FILE],
-                        }]
+    PROMPT_SUGGESTIONS =[
+        { 'text': '检查 TE，不应该大于16ms', 'files': [_DEBUG_LOG_FILE],},
+        {'text': '', 'files': [_ANDROID_LOG_FILE],}
+    ]
 
     def __init__(self, cfg: Optional[Dict] = None):
         cfg = cfg or {}

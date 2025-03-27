@@ -2,15 +2,15 @@ import pandas as pd
 import logging
 import re
 import lparser.utils.re_exp2 as re_exp
-from lparser.parser.android import main_parser, debug_parser, PAESER_MAIN_REGEX
+from lparser.parser.android import android_parser, debug_parser, PAESER_MAIN_REGEX
 from runtime.op import STATUS_MAP, get_op_func, get_op_name, get_op_func_init, get_op_arguments, get_op_pattern
 
 PARSER_FORMAT = ['type', 'date', 'time', 'timestamp', 'pid', 'tid', 'level', 'tag', 'msg']
 
 
 PARSER_MAP = {
-    'debug': (debug_parser, PAESER_MAIN_REGEX),
-    'main':  (main_parser, PAESER_MAIN_REGEX),
+    # 'debug': (debug_parser, PAESER_MAIN_REGEX),
+    'android':  (android_parser, PAESER_MAIN_REGEX),
 }
 
 class LogParser():
@@ -151,6 +151,7 @@ class LogParser():
     def op_execute_looper(self, op_df:pd.DataFrame):
         logging.debug('====== op_execute looper ======')
         for _, row in op_df.iterrows():
+            print('-')
             op = row['op']
             name = row['opname']
             args = row['args']

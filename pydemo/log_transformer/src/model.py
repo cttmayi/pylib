@@ -15,6 +15,10 @@ def create_model(base_model_path, **kwargs):
     config.num_key_value_heads = kwargs.get('num_key_value_heads', 2) # 2
     config.hidden_size = kwargs.get('hidden_size', 128) # 896
     config.num_hidden_layers = kwargs.get('num_hidden_layers', 6) # 24
+    config.vocab_size = kwargs.get('vocab_size', 32000) # 151936
+    print('Config:')
+    print(config)
+
 
     model:Qwen2ForCausalLM = AutoModelForCausalLM.from_config(config)
 

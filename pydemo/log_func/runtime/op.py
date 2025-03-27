@@ -1,4 +1,5 @@
 import os
+from pylib.basic.file import file_read
 from runtime.ops.g import STATUS as g
 from runtime.ops.d import STATUS as d
 from lparser.status import Status, OP, ARG
@@ -11,23 +12,37 @@ STATUS_MAP = {
 
 # =========================================================================
 # NAME, FUNC_INIT, FUNC, ARGUMENTS, PATTERN
-OP_MAP_DEBUG = [
-    OP('MODE', 'MODE %d %d', info='mode change',
-       func_init=g.MODE_INIT, func=g.MODE, args=['last', 'mode']),
-    OP('TE', 'TE', info='表示屏幕TE信号，无参数' ,
-       func = d.TE),
-    OP('DQ', 'DQ BUFFER %d', info='dequeue buffer',
-       func = d.DQ, args=[ARG('id', 'buffer id')]),
-    OP('Q', 'Q BUFFER %d', info='enqueue buffer',
-       func = d.Q, args=[ARG('id', 'buffer id')]),
-    OP('DUMP', 'DUMP CMDS',
-       func = d.DUMP),
-    OP('DUMP', 'REG %d %d %d %d',
-       func = None, args=['v1']), # 同名会自动合并命令， 为保证正确性，必须保证写在一起，且不能有FUNC参数
-]
+# OP_MAP_DEBUG = [
+#     OP('MODE', 'MODE %d %d', info='mode change',
+#        func_init=g.MODE_INIT, func=g.MODE, args=['last', 'mode']),
+#     OP('TE', 'TE', info='表示屏幕TE信号，无参数' ,
+#        func = d.TE),
+#     OP('DQ', 'DQ BUFFER %d', info='dequeue buffer',
+#        func = d.DQ, args=[ARG('id', 'buffer id')]),
+#     OP('Q', 'Q BUFFER %d', info='enqueue buffer',
+#        func = d.Q, args=[ARG('id', 'buffer id')]),
+#     OP('DUMP', 'DUMP CMDS',
+#        func = d.DUMP),
+#     OP('DUMP', 'REG %d %d %d %d',
+#        func = None, args=['v1']), # 同名会自动合并命令， 为保证正确性，必须保证写在一起，且不能有FUNC参数
+# ]
+
+
+regex_full_list_android = file_read('data/android/templates.jsonl')
+
+OP_MAP_ANDROID = []
+for regex_full in regex_full_list_android:
+    args_ARG = []
+    for k, v in regex_full[2].items():
+        args_ARG.append(ARG(k, v))
+    OP_MAP_ANDROID.append(
+        OP(regex_full[0], regex_full[0], info=regex_full[1],
+            args=regex_full[2]))
+
 
 OP_MAPS = {
-    'debug': OP_MAP_DEBUG,
+    # 'debug': OP_MAP_DEBUG,
+    'android': OP_MAP_ANDROID
 }
 
 

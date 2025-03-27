@@ -1,9 +1,9 @@
 import pylib.env
 from pylib.basic.re_exp.re_exp2 import FormatMatcher
-from pylib.basic.file import log_read, jsonl_read, jsonl_write
+from pylib.basic.file import log_read, jsonl_read, jsonl_write, gzip_write
+from src.encoder import ID_EVENT_OFFSET, ID_TAG, init, close
 
-
-
+init('data/android/tag')
 
 
 def load_template(template_path):
@@ -23,6 +23,7 @@ def transfer_log_data(fm, log_path, log_structured_path, template_rows):
     print('Total lines: ', len(log_rows))
     # LineId,Date,Time,Pid,Tid,Level,Component,Content,EventId,EventTemplate,EventArgs
     logs = []
+    simple_logs = []
     error_line_num = 0
     for line_id, row in enumerate(log_rows):
         event_id, args = fm.match(row['msg'])
@@ -40,6 +41,9 @@ def transfer_log_data(fm, log_path, log_structured_path, template_rows):
             log['EventTemplate'] = template_rows[event_id]['EventTemplate']
             log['EventArgs'] = args
             logs.append(log)
+            simple_logs.append(
+                (ID_TAG(row['tag']), event_id + ID_EVENT_OFFSET)
+            )
         else:
             error_line_num += 1
 
@@ -47,6 +51,7 @@ def transfer_log_data(fm, log_path, log_structured_path, template_rows):
     print('Matched lines: ', len(logs))
 
     jsonl_write(log_structured_path, logs)
+    gzip_write(log_structured_path, simple_logs)
 
 
 if __name__ == '__main__':
@@ -55,6 +60,8 @@ if __name__ == '__main__':
     log_structured_path = log_path + '_structured.jsonl'
 
     fm, template_rows = load_template(template_path)
-    transfer_log_data(fm, 'data/android/2k.log', 'data/android/2k.jsonl', template_rows)
-    transfer_log_data(fm, 'data/android/1M.log', 'data/android/1M.jsonl', template_rows)
+    # transfer_log_data(fm, 'data/android/2k.log', 'data/android/2k', template_rows)
+    # transfer_log_data(fm, 'data/android/1M.log', 'data/android/1M', template_rows)
+    transfer_log_data(fm, 'data/android/1k.log', 'data/android/1k', template_rows)
     print('Done!')
+    close()

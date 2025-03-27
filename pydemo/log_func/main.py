@@ -8,6 +8,9 @@ def config():
     if conf.DEBUG:
         path = 'data/log/simple.log'
         type = None
+        path = 'data/android/2k.log'
+        type = None
+
         looper = True
     else:
         import argparse

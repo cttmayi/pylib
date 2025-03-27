@@ -8,8 +8,8 @@ os.environ['QWEN_AGENT_DEFAULT_WORKSPACE'] = 'work_dir'
 # os.environ['QWEN_AGENT_DEBUG'] = '1'
 
 from qwen_agent.gui import WebUI
-from agent.log_regex import PluginAgent
-# from agent.log_parser import PluginAgent
+# from agent.log_regex import PluginAgent
+from agent.log_parser import PluginAgent
 
 
 # 配置您所使用的 LLM。

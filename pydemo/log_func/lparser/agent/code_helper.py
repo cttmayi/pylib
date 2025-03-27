@@ -104,7 +104,7 @@ class PluginAgentHelper(BaseToolWithFileAccess):
             system_instruction = f.read()
             system_instruction = system_instruction.replace('### OP_INFOS ###', '\n'.join(get_op_infos()))
 
-        bot = Assistant(llm=llm_cfg,
+        bot = FnCallAgent(llm=llm_cfg,
             name=cls.AGENT_NAME,
             system_message=system_instruction,
             function_list=[cls.name],
