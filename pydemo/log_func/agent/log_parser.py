@@ -15,7 +15,7 @@ class PluginAgent(PluginAgentHelper):
     RUN_CODE_FILE = str(Path(__file__).absolute().parent / 'resources' / 'log_parser_run_code.py')
     SYSTEM_INSTRUCTION_FILE = str(Path(__file__).absolute().parent / 'resources' / 'log_parser_system_instruction.txt')
 
-    COPY_DIRS = ['lparser', 'runtime']
+    COPY_DIRS = ['lparser', 'runtime', 'data']
     AGENT_NAME = '日志分析助手'
     AGENT_DESCRIPTION = '我是一个AI日志分析助手。'
     PROMPT_SUGGESTIONS =[

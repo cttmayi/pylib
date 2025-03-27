@@ -72,10 +72,10 @@ class LogParser():
             pattern = get_op_pattern(opid, op_map)
             arguments = get_op_arguments(opid, op_map)
 
-            if name in names and not name == last_name:
-                raise Exception(f'OP_MAP NAME 重复: {name}')
-            names.add(name)
-            last_name = name
+            #if name in names and not name == last_name:
+            #    raise Exception(f'OP_MAP NAME 重复: {name}')
+            # names.add(name)
+            # last_name = name
 
             if pattern in patterns:
                 raise Exception(f'OP_MAP PATTERN 重复: {pattern}' )
@@ -151,7 +151,6 @@ class LogParser():
     def op_execute_looper(self, op_df:pd.DataFrame):
         logging.debug('====== op_execute looper ======')
         for _, row in op_df.iterrows():
-            print('-')
             op = row['op']
             name = row['opname']
             args = row['args']

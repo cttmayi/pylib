@@ -31,13 +31,13 @@ STATUS_MAP = {
 regex_full_list_android = file_read('data/android/templates.jsonl')
 
 OP_MAP_ANDROID = []
-for regex_full in regex_full_list_android:
+for name, pattern, info, args in regex_full_list_android:
     args_ARG = []
-    for k, v in regex_full[2].items():
+    for k, v in args.items():
         args_ARG.append(ARG(k, v))
     OP_MAP_ANDROID.append(
-        OP(regex_full[0], regex_full[0], info=regex_full[1],
-            args=regex_full[2]))
+        OP(name, pattern, info=info,
+            args=args))
 
 
 OP_MAPS = {

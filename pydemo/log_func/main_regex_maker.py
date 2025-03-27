@@ -31,7 +31,7 @@ def code_exec(code):
 
 def regex_translate(regex_full_list):
     regex_list = []
-    for pattern, info, args in regex_full_list:
+    for _, pattern, _, args in regex_full_list:
         regex_list.append((pattern, args.keys()))
     return regex_list
 
@@ -103,9 +103,10 @@ class User(Agent):
     def new_task_prompt(self, log_msg_list):
         log_msg = '\n'.join(log_msg_list)
         prompt = f'''请根据以下日志信息生成代码，请使用%d、%s、%b、%f、%x等格式化符号，并根据日志猜测参数名（如无法猜测， 使用p1, p2 等占位符），请严格按照空格个数匹配，不要使用正则表达式的转义字符
-第一个元素为匹配日志的字符，
-第二个元素为对日志含义的解释
-第三个元素为参数的字典，key为参数名，value为参数解释
+第一个元素为名称，给予该日志一个名称，用于编程判断， 要求简洁易懂， 用英文
+第二个元素为匹配日志的字符，
+第三个元素为对日志含义的解释
+第四个元素为参数的字典，key为参数名，value为参数解释
 
 例如，
 日志信息：
@@ -113,7 +114,7 @@ manufacture: MK isGUI: false, true
 生成代码：
 ···python
 {REGEX_NAME} = [
-    ("manufacture: %s isGUI: %b, %b“, '手机信息'， {{'manufacture': ‘厂商’ 'isGUI': '是否支持GUI' 'p1': 'unknown'}}),
+    ("phone_info", "manufacture: %s isGUI: %b, %b“, '手机信息'， {{'manufacture': ‘厂商’ 'isGUI': '是否支持GUI' 'p1': 'unknown'}}),
     ]
 ···
 

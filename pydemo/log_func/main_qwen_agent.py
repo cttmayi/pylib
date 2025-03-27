@@ -5,7 +5,7 @@ from pathlib import Path
 from qwen_agent.llm.schema import USER, ContentItem, Message
 
 os.environ['QWEN_AGENT_DEFAULT_WORKSPACE'] = 'work_dir'
-# os.environ['QWEN_AGENT_DEBUG'] = '1'
+os.environ['QWEN_AGENT_DEBUG'] = '1'
 
 from qwen_agent.gui import WebUI
 # from agent.log_regex import PluginAgent
