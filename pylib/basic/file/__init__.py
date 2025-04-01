@@ -1,7 +1,7 @@
 import csv
 import json
 import gzip
-from pylib.basic.file.log_parser import auto_parser
+from pylib.basic.file.log_parser import auto_parser, set_auto_parser
 
 
 def file_name_extension(file_name, extension):
@@ -82,6 +82,10 @@ def log_read(data_path):
         data, type = auto_parser(lines)
         return data, type
     return None, None
+
+
+def log_set_auto_parser(type, regex, parser, header=None):
+    set_auto_parser(type, regex, parser, header)
 
 
 def json_read(data_path):
