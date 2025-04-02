@@ -84,8 +84,8 @@ def log_read(data_path):
     return None, None
 
 
-def log_set_auto_parser(type, regex, parser, header=None):
-    set_auto_parser(type, regex, parser, header)
+def log_set_auto_parser(type, regex, parser_or_header):
+    set_auto_parser(type, regex, parser_or_header)
 
 
 def json_read(data_path):
