@@ -76,12 +76,12 @@ class Node(_BaseNode):
         return nxt
 
     def run(self, shared={}, params={}):
-        curr_node:_BaseNode = copy.copy(self)
-        while curr_node:
-            curr_node.set_params(params)
-            c = curr_node._run(shared)
-            yield curr_node, c
-            curr_node = copy.copy(self._get_next_node(curr_node, c))
+        current_node:_BaseNode = copy.copy(self)
+        while current_node:
+            current_node.set_params(params)
+            next_action = current_node._run(shared)
+            yield current_node, next_action
+            current_node = copy.copy(self._get_next_node(current_node, next_action))
 
 
 END = Node(name="END")
