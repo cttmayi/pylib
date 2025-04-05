@@ -41,26 +41,15 @@ class _BaseNode:
     def is_end(self): 
         return len(self.successors) == 0
 
-    def execute(self, shared, params): pass
-    def conditional(self, shared, exec_res): pass
+    def execute(self, shared, params): return params
+    def if_cond(self, shared, params): pass
 
-    def node_message(self, shared, exec_res):
-        if isinstance(exec_res, dict):
-            return NodeMessage(curr_node=self, **exec_res)
-        return NodeMessage(curr_node=self)
-
-    def _exec(self, shared, params): 
-        return self.execute(shared, params)
-
-    def _run(self,shared, params):
-        exec_iter = self._exec(shared, params)
-        if exec_iter is not None:
-            if isinstance(exec_iter, types.GeneratorType):
-                for exec_ret in exec_iter: 
-                    yield exec_ret
-            else: 
-                exec_ret = exec_iter
-                yield exec_ret
+    def _node_message(self, exec_yield):
+        if isinstance(exec_yield, dict):
+            return NodeMessage(curr_node=self, **exec_yield)
+        elif exec_yield is None:
+            return NodeMessage(curr_node=self)
+        return NodeMessage(curr_node=self, content=str(exec_yield))
 
     def __rshift__(self, other): 
         return self.add_successor(other)
@@ -87,24 +76,6 @@ class Node(_BaseNode):
     def __init__(self, name=None, verbose=False): 
         super().__init__(name)
         self.verbose = verbose
-        self.set_retries(1, 0)
-
-    def set_retries(self, max_retries, wait=0):
-        self.max_retries, self.wait = max_retries, wait
-        self.curr_retry = 0
-
-    def exec_fallback(self, exc): 
-        raise exc
-
-    def _exec(self, shared, params):
-        for self.curr_retry in range(self.max_retries):
-            try: 
-                return self.execute(shared, params)
-            except Exception as e:
-                if self.curr_retry == self.max_retries - 1: 
-                    return self.exec_fallback(e)
-                if self.wait > 0: 
-                    time.sleep(self.wait)
 
 
 class StartNode(_BaseNode):
@@ -117,35 +88,39 @@ class StartNode(_BaseNode):
             warnings.warn(f"Flow ends: '{action}' not found in {list(curr.successors)}")
         return nxt
 
+    def _get_exec_ret(self, exec_ret):
+        if isinstance(exec_ret, tuple) and len(exec_ret) == 2:
+            return exec_ret[0], exec_ret[1]
+        return None, exec_ret
+
     def run(self, shared={}, params=None):
         curr_node:_BaseNode = None
         next_node:_BaseNode = copy.copy(self)
         while next_node:
             curr_node = next_node
-            iter = curr_node._run(shared, params)
+            iter = curr_node.execute(shared, params)
             start = True
-            try:
-                while True:
-                    exec_ret = next(iter)
-                    message:NodeMessage = curr_node.node_message(shared, exec_ret)
-                    message.set(curr_node=curr_node, start=start)
-                    start = False
-                    yield message
-            except StopIteration as e:
-                exec_ret = e.value
+            exec_item = None
+            if isinstance(iter, types.GeneratorType):
+                try:
+                    while True:
+                        exec_item = next(iter)
+                        message:NodeMessage = curr_node._node_message(exec_item)
+                        message.set(curr_node=curr_node, start=start)
+                        start = False
+                        yield message
+                except StopIteration as e:
+                    next_action, exec_ret = self._get_exec_ret(e.value)
+            else:
+                next_action, exec_ret = self._get_exec_ret(iter)
 
-            # for exec_ret in iter:
-            #     message:NodeMessage = self.node_message(shared, exec_ret)
-            #     message.set(curr_node=curr_node, start=start)
-            #     start = False
-            #     yield message
+            next_action = next_action or curr_node.if_cond(shared, params)
 
-            # next step
-            next_action = curr_node.conditional(shared, exec_ret)
             next_node = copy.copy(self._get_next_node(curr_node, next_action))
             params = exec_ret
 
-            message:NodeMessage = self.node_message(shared, exec_ret)
+            exec_item = exec_item or exec_ret
+            message:NodeMessage = curr_node._node_message(exec_item)
             message.set(curr_node=curr_node, next_action=next_action, next_node=next_node, start=start, end=True)
             yield message
 
@@ -158,21 +133,47 @@ class EndNode(_BaseNode):
         yield params
 
 
-
-
-
-def message_thinking_answer(node_message_iter):
-    content = ""
+def message_to_gradio_markdown(node_message_iter):
+    content = "# Flow\n"
     for node_message in node_message_iter:
         message = node_message.message
         if node_message.start:
-            content += f"\n\n{node_message.curr_node.name}:"
+            content += f"{message['role']}: "
         if node_message.start == False and node_message.end == False:
-            content += f"\n{node_message.curr_node.name}: {message['content']}"
-
+            content += "... "
         if node_message.end:
-            content += f"\n{node_message.curr_node.name}: {message['content']}"
+            content += f"{message['content']}\n" if message['content'] is not None else "\n"
         yield content
+
+def message_to_gradio_chatmessage(node_message_iter):
+    from gradio import ChatMessage
+    start_time = time.time()
+    response = ChatMessage(
+        role="assistant",
+        content="",
+        metadata={"title": "Thinking step-by-step", "id": 0, "status": "pending"}
+    )
+    yield response
+
+    accumulated_thoughts = ""
+    for node_message in node_message_iter:
+        thought = node_message.message['content']
+        accumulated_thoughts += f"- {thought}\n\n"
+        response.content = accumulated_thoughts.strip()
+        yield response
+
+    response.metadata["status"] = "done"
+    response.metadata["duration"] = time.time() - start_time
+    yield response
+
+    response = [
+        response,
+        ChatMessage(
+            role="assistant",
+            content= node_message.message['content']
+        )
+    ]
+    yield response
 
 
 if __name__ == '__main__':
@@ -182,7 +183,8 @@ if __name__ == '__main__':
             self.number = number
 
         def execute(self, shared, params):
-            shared['current'] = self.number
+            shared['current'] = params or self.number
+            return shared['current']
 
     class AddNode(Node):
         def __init__(self, number):
@@ -191,20 +193,14 @@ if __name__ == '__main__':
 
         def execute(self, shared, params):
             current = shared['current']
-            if self.number > 0:
-                for _ in range(self.number):
-                    current += 1
-                    yield current
-                    time.sleep(1)
-            elif self.number < 0:
-                for _ in range(abs(self.number)):
-                    current -= 1
-                    yield current
-                    time.sleep(1)
-            else:
+            v = 1 if self.number >= 0 else -1
+            for _ in range(abs(self.number)):
+                current += v
                 yield current
+                time.sleep(0.1)
             
             shared['current'] = current
+            return shared['current']
 
     class MultiplyNode(Node):
         def __init__(self, number):
@@ -213,10 +209,10 @@ if __name__ == '__main__':
 
         def execute(self, shared, params):
             shared['current'] *= self.number
-            yield shared['current']
+            return shared['current']
 
     class CheckPositiveNode(Node):
-        def conditional(self, shared, exec_res):
+        def if_cond(self, shared, params):
             if shared['current'] >= 0:
                 return 'positive'
             else:
@@ -233,9 +229,10 @@ if __name__ == '__main__':
 
     iter_= START.run(shared_storage)
 
-    if True:
+    if False:
+        iter_= START.run(shared_storage)
         pos = 0
-        for message in message_thinking_answer(iter_):
+        for message in message_to_graido_string(iter_):
             print(message[pos:], end='', flush=True)
             pos = len(message)
 
@@ -244,12 +241,17 @@ if __name__ == '__main__':
     else:
         import gradio as gr
         def echo(message, history):
-            for msg in message_thinking_answer(iter_):
+            text = message['text']
+            file = message.get('file')
+            iter_= START.run(shared_storage, params=len(text))
+            for msg in message_to_gradio_chatmessage(iter_):
                 yield msg
 
         with gr.Blocks(fill_height=True) as demo:
             gr.ChatInterface(
                 fn=echo, 
                 type="messages",
+                multimodal=True,
+                textbox=gr.MultimodalTextbox(file_count="multiple"),
             )
         demo.launch()
