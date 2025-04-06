@@ -42,23 +42,6 @@ class LLM:
                 self._api_key = self._api_key if self._api_key else compatible['api_key']
                 self._client = OpenAI(api_key=self._api_key, base_url=self._api_base)
 
-
-    # def _completion(self, model, prompt, hashable_messages):
-    #     messages = self.messages.copy()
-    #     messages.append({ "content": prompt,"role": "user"})
-    #     if self._client is not None:
-    #         response = self._client.chat.completions.create(
-    #             model=self._model,
-    #             messages=messages,
-    #             stream=False,
-    #         )
-    #         content = response.choices[0].message.content
-    #         assistant = response.choices[0].message.role
-    #     else:
-    #         raise Exception("no compatible model")
-
-    #     return content, assistant
-
     def _completion(self, message_or_prompt, stream=False, delta=False):
         def simplify_iter(response):
             content = ''

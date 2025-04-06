@@ -2,26 +2,27 @@ import warnings, copy, time, types
 
 
 class NodeMessage:
-    def __init__(self, role=None, content=None, tool_calls=None, **kwargs):
-        self.message = {'content': content, 'role': role, 'tool_calls': tool_calls}
+    def __init__(self, **kwargs):
+        self.content = None
         self.start = False
         self.end = False
         self.next_action = None
         self.next_node = None
         self.data = None
         self.curr_node = None
+        self.order = 0
         self.set(**kwargs)
 
     def set(self, **kwargs):
         for k,v in kwargs.items():
-            if k in self.message:
-                self.message[k] = v
-            elif k == 'curr_node':
-                self.curr_node = v
-                if self.message['role'] is None:
-                    self.message['role'] = v.name
-            elif hasattr(self, k):
+            if hasattr(self, k):
                 setattr(self, k,v)
+
+    def to_dict(self):
+        ret = {}
+        ret['role'] = self.curr_node.name
+        ret['content'] = self.content
+        return ret
 
 
 class _BaseNode:
@@ -38,16 +39,11 @@ class _BaseNode:
             self.successors[action] = node
         return node
 
-    def is_end(self): 
-        return len(self.successors) == 0
-
     def execute(self, shared, params): return params
     def if_cond(self, shared, params): pass
 
     def _node_message(self, exec_yield):
-        if isinstance(exec_yield, dict):
-            return NodeMessage(curr_node=self, **exec_yield)
-        elif exec_yield is None:
+        if exec_yield is None:
             return NodeMessage(curr_node=self)
         return NodeMessage(curr_node=self, content=str(exec_yield))
 
@@ -73,14 +69,18 @@ class _ConditionalTransition:
 
 
 class Node(_BaseNode):
-    def __init__(self, name=None, verbose=False): 
+    def __init__(self, name=None): 
         super().__init__(name)
-        self.verbose = verbose
 
 
-class StartNode(_BaseNode):
-    def __init__(self):
-        super().__init__(name='START')
+class Flow(_BaseNode):
+    def __init__(self, name='assistant'):
+        super().__init__(name='Start')
+        self.role = name
+
+    def execute(self, shared, params):
+        yield str(params)
+        return params
 
     def _get_next_node(self, curr:_BaseNode, action:str):
         nxt = curr.successors.get(action or "default")
@@ -96,6 +96,8 @@ class StartNode(_BaseNode):
     def run(self, shared={}, params=None):
         curr_node:_BaseNode = None
         next_node:_BaseNode = copy.copy(self)
+        order = 0
+        messages = []
         while next_node:
             curr_node = next_node
             iter = curr_node.execute(shared, params)
@@ -106,9 +108,11 @@ class StartNode(_BaseNode):
                     while True:
                         exec_item = next(iter)
                         message:NodeMessage = curr_node._node_message(exec_item)
-                        message.set(curr_node=curr_node, start=start)
+                        message.set(curr_node=curr_node, start=start, order=order)
                         start = False
-                        yield message
+                        ret = yield messages + [message.to_dict()]
+                        if ret is not None:
+                            iter.send(ret)
                 except StopIteration as e:
                     next_action, exec_ret = self._get_exec_ret(e.value)
             else:
@@ -119,67 +123,42 @@ class StartNode(_BaseNode):
             next_node = copy.copy(self._get_next_node(curr_node, next_action))
             params = exec_ret
 
-            exec_item = exec_item or exec_ret
             message:NodeMessage = curr_node._node_message(exec_item)
-            message.set(curr_node=curr_node, next_action=next_action, next_node=next_node, start=start, end=True)
-            yield message
+            message.set(curr_node=curr_node, next_action=next_action, next_node=next_node, start=start, end=True, order=order)
+            messages += [message.to_dict()]
+            yield messages
+            order += 1
 
 
-class EndNode(_BaseNode):
-    def __init__(self):
-        super().__init__(name='END')
+class HumanNode(_BaseNode):
+    def __init__(self): 
+        super().__init__(name='Human')
 
     def execute(self, shared, params):
-        yield params
+        text = yield ''
+        yield text
+        yield text
+        return {'text': text, 'params': params}
+
+class _EndNode(_BaseNode):
+    def __init__(self):
+        super().__init__(name='End')
+
+    def execute(self, shared, params):
+        yield str(params)
+        return params
+
+    def add_successor(self, node, action="default"):
+        raise Exception(f"{self.name} can't add successor '{node.__class__.__name__}' for action '{action}'")
 
 
-def message_to_gradio_markdown(node_message_iter):
-    content = "# Flow\n"
-    for node_message in node_message_iter:
-        message = node_message.message
-        if node_message.start:
-            content += f"{message['role']}: "
-        if node_message.start == False and node_message.end == False:
-            content += "... "
-        if node_message.end:
-            content += f"{message['content']}\n" if message['content'] is not None else "\n"
-        yield content
-
-def message_to_gradio_chatmessage(node_message_iter):
-    from gradio import ChatMessage
-    start_time = time.time()
-    response = ChatMessage(
-        role="assistant",
-        content="",
-        metadata={"title": "Thinking step-by-step", "id": 0, "status": "pending"}
-    )
-    yield response
-
-    accumulated_thoughts = ""
-    for node_message in node_message_iter:
-        thought = node_message.message['content']
-        accumulated_thoughts += f"- {thought}\n\n"
-        response.content = accumulated_thoughts.strip()
-        yield response
-
-    response.metadata["status"] = "done"
-    response.metadata["duration"] = time.time() - start_time
-    yield response
-
-    response = [
-        response,
-        ChatMessage(
-            role="assistant",
-            content= node_message.message['content']
-        )
-    ]
-    yield response
+END = _EndNode()
 
 
 if __name__ == '__main__':
     class NumberNode(Node):
         def __init__(self, number):
-            super().__init__(verbose=True)
+            super().__init__()
             self.number = number
 
         def execute(self, shared, params):
@@ -219,39 +198,39 @@ if __name__ == '__main__':
                 return 'negative'
 
     shared_storage = {}
-    START = StartNode()
-    END = EndNode()
+    START = Flow()
+    HUMAN = HumanNode()
+
     n1 = NumberNode(10)
     check = CheckPositiveNode()
     subtract3 = AddNode(-3)
 
-    START >> n1 >> check('positive') >> subtract3 >> check('negative')  >> END
+    START >> n1 >> check('positive') >> subtract3 >> check('negative')  >> HUMAN >> END
 
     iter_= START.run(shared_storage)
 
-    if False:
-        iter_= START.run(shared_storage)
-        pos = 0
-        for message in message_to_graido_string(iter_):
-            print(message[pos:], end='', flush=True)
-            pos = len(message)
 
-        # final result should be -2: (10 -> 7 -> 4 -> 1 -> -2)
-        assert shared_storage['current'] == -2, f"Expected -2, got {shared_storage['current']}"
-    else:
-        import gradio as gr
-        def echo(message, history):
-            text = message['text']
-            file = message.get('file')
-            iter_= START.run(shared_storage, params=len(text))
-            for msg in message_to_gradio_chatmessage(iter_):
-                yield msg
+    pos = 0
+    while(True):
+        try:
+            messages = next(iter_)
+            pr = []
+            for message in messages:
+                text = f"{message['role']}: {message['content'] or ''}"
+                pr.append(text)
+            # pr_text = '\n'.join(pr)
+            # print(pr_text[pos:], end='', flush=True)
+            print(pr[-1])
+            pos = len(pr)
+            # print(message)
+            interrupt = message['role'] == 'Human' and message['content'] == ''
+            if interrupt:
+                humun_input = input(message['role'] + ':')
+                iter_.send(humun_input)
+        except StopIteration as e:
+            break
 
-        with gr.Blocks(fill_height=True) as demo:
-            gr.ChatInterface(
-                fn=echo, 
-                type="messages",
-                multimodal=True,
-                textbox=gr.MultimodalTextbox(file_count="multiple"),
-            )
-        demo.launch()
+    print()
+
+    # final result should be -2: (10 -> 7 -> 4 -> 1 -> -2)
+    assert shared_storage['current'] == -2, f"Expected -2, got {shared_storage['current']}"
