@@ -59,7 +59,7 @@ class LLM:
                     yield {'content': content, 'role': role}
 
         if isinstance(message_or_prompt, str):
-            message = { "content": prompt,"role": "user"}
+            message = { "content": message_or_prompt,"role": "user"}
             messages = [message]
         elif isinstance(message_or_prompt, dict):
             message = message_or_prompt

@@ -79,7 +79,12 @@ class Flow(_BaseNode):
         self.role = name
 
     def execute(self, shared, params):
-        yield str(params)
+        if isinstance(params, dict):
+            text = params.get("content") or params.get("text")
+        else:
+            text = str(params)
+        if text is not None:
+            yield text
         return params
 
     def _get_next_node(self, curr:_BaseNode, action:str):
