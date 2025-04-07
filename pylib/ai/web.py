@@ -3,39 +3,69 @@ import gradio as gr
 from pylib.ai.flow import Flow
 
 class webUI:
-    def __init__(self, start:Flow):
+    def __init__(self, start:Flow, **kwargs):
         self.start = start
+        # self.title = kwargs.get("title", "AI Robot"),
+        # self.description = kwargs.get("description", "Ask AI Robot any question"),
+        # self.theme = kwargs.get('theme', "ocean"),
+        # self.examples = # ["Hello", "Am I cool?", "Are tomatoes vegetables?"],
         self.message_transformer = message_to_chatmessage
 
     def set_message_transformer(self, message_transformer):
         self.message_transformer = message_transformer
 
-    def echo(self, message, history):
-        response = []
-
+    def response(self, message, history, state):
+        responses = []
         if not isinstance(message, dict):
             message = {'text': message}
-
         message['history'] = history
 
-        files = message.get('files')
-        for file in files:
-            response.append(gr.File(value=file))
+        # files = message.get('files')
+        # for file in files:
+        #     print('file', file)
+        #     responses.append(gr.File(value=file))
 
-        shared_storage = {}
-        iter_= self.start.run(shared_storage, params=message)
-        for msg in self.message_transformer(iter_):
-            if not isinstance(msg, list):
-                msg = [msg]
-            yield response + msg
+        message_iter = state.get('message_iter', None)
+
+        if message_iter is not None:
+            try:
+                shared_storage = state.get('shared_storage', {})
+                message_iter.send(message['text'])
+            except StopIteration:
+                shared_storage = {}
+                message_iter = self.start.run(shared_storage, params=message)
+        else:
+            shared_storage = {}
+            message_iter = self.start.run(shared_storage, params=message)
+
+
+        state['message_iter'] = message_iter
+        state['shared_storage'] = shared_storage
+
+        response_iter = self.message_transformer(message_iter)
+
+        while True:
+            try:
+                response = next(response_iter)
+                if not isinstance(response, list):
+                    response = [response]
+                yield responses + response
+            except StopIteration:
+                break
 
     def launch(self):
         with gr.Blocks(fill_height=True) as demo:
             gr.ChatInterface(
-                fn=self.echo, 
+                fn=self.response, 
                 type="messages",
                 multimodal=True,
                 textbox=gr.MultimodalTextbox(file_count="multiple"),
+                # title=self.title,
+                # description=self.description,
+                # theme=self.theme,
+                additional_inputs=[
+                    gr.State({}),
+                ],
             )
         demo.launch()
 
@@ -77,6 +107,8 @@ def message_to_chatmessage(messages_iter):
                 content += f"- {thought_role}: {thought_content}\n"
         response.content = content
         yield response
+        if message['interrupt']:
+            break
 
     response.metadata["status"] = "done"
     response.metadata["duration"] = time.time() - start_time
@@ -95,7 +127,7 @@ def message_to_chatmessage(messages_iter):
 
 
 if __name__ == '__main__':
-    from pylib.ai.flow import Flow, Node, END
+    from pylib.ai.flow import Flow, Node, END, HumanNode
 
     class WebTransformerNode(Node):
         def execute(self, shared, params):
@@ -108,7 +140,7 @@ if __name__ == '__main__':
 
     class NumberNode(Node):
         def __init__(self, number):
-            super().__init__(verbose=True)
+            super().__init__()
             self.number = number
 
         def execute(self, shared, params):
@@ -153,8 +185,9 @@ if __name__ == '__main__':
     n1 = NumberNode(10)
     check = CheckPositiveNode()
     subtract3 = AddNode(-3)
+    human = HumanNode(verify_args=['1', '2'])
 
-    START >> web >> n1 >> check('positive') >> subtract3 >> check('negative')  >> END
+    START >> web >> n1 >> check('positive') >> subtract3 >> check('negative') >> human >> END
 
     web = webUI(START)
     # web.set_message_transformer(message_to_markdown)
