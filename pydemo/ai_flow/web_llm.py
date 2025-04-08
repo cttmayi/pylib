@@ -1,6 +1,6 @@
 import time
 from pylib.ai.flow import Flow, Node, END
-from pylib.ai.web import webUI
+from pylib.ai.flow.web import webUI
 from pylib.ai.llmv2 import LLM
 
 
