@@ -20,13 +20,7 @@ class webUI:
             message = {'text': message}
         message['history'] = history
 
-        # files = message.get('files')
-        # for file in files:
-        #     print('file', file)
-        #     responses.append(gr.File(value=file))
-
         message_iter = state.get('message_iter', None)
-
         if message_iter is not None:
             try:
                 shared_storage = state.get('shared_storage', {})
@@ -91,38 +85,55 @@ def message_to_markdown_with_thinking(messages_iter):
 def message_to_chatmessage(messages_iter):
     from gradio import ChatMessage
     start_time = time.time()
-    response = ChatMessage(
+    response_thinking = ChatMessage(
         role="assistant",
         content="",
-        metadata={"title": "正进行推理 ...", "id": 0, "status": "pending"}
+        metadata={"title": "正进行推理 ...", "id": 0, "status": "pending"},
     )
-    yield response
+    response_answer = ChatMessage(
+        role="assistant",
+        content= '',
+    )
 
     for messages in messages_iter:
-        content = ''
+        response_thinking.content = ''
+        response_answer.content = ''
         for message in messages:
             thought_role = message['role']
             thought_content = message['content']
+            thought_interrupt = message['interrupt']
+            is_thought = not message['answer']
+            is_input_message = message['category'] == 'start'
+
+            if is_input_message:
+                continue
+
             if thought_content is not None:
-                content += f"- {thought_role}: {thought_content}\n"
-        response.content = content
-        yield response
-        if message['interrupt']:
+                if not is_thought:
+                    response_answer.content += f"{thought_content}\n"
+                    response_thinking.metadata["status"] = "done"
+                    response_thinking.metadata["duration"] = time.time() - start_time
+                    response_thinking.metadata["title"] = "已完成推理"
+                    break
+                elif thought_interrupt:
+                    response_answer.content += f"{thought_content}\n"
+                    response_thinking.metadata["status"] = "done"
+                    response_thinking.metadata["duration"] = time.time() - start_time
+                    response_thinking.metadata["title"] = "推理被中断"
+                else:
+                    response_thinking.content += f"- {thought_role}: {thought_content}\n"
+                    response_thinking.metadata["duration"] = time.time() - start_time
+
+        responses = []
+        if response_thinking.content != '':
+            responses.append(response_thinking)
+        if response_answer.content != '':
+            responses.append(response_answer)
+        if len(responses) > 0:
+            yield responses
+
+        if thought_interrupt:
             break
-
-    response.metadata["status"] = "done"
-    response.metadata["duration"] = time.time() - start_time
-    response.metadata["title"] = "已完成推理"
-    yield response
-
-    response = [
-        response,
-        ChatMessage(
-            role="assistant",
-            content= message['content']
-        )
-    ]
-    yield response
 
 
 

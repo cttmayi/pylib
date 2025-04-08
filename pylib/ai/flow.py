@@ -23,14 +23,21 @@ class NodeMessage:
         ret['role'] = self.curr_node.name
         ret['content'] = self.content
         ret['interrupt'] = self.curr_node.interrupt
+        ret['answer'] = self.curr_node.category == _BaseNode.END
+        ret['category'] = self.curr_node.category
         return ret
 
 
 class _BaseNode:
-    def __init__(self, name): 
+    START = "start"
+    END = "end"
+    HUMAN = "human"
+
+    def __init__(self, name, category=None): 
         self.name = name or self.__class__.__name__
         self.successors = {}
         self.interrupt = False
+        self.category = category
 
     def add_successor(self, node, action="default"):
         if action in self.successors: 
@@ -39,8 +46,13 @@ class _BaseNode:
             self.successors[action] = node.src
         else:
             self.successors[action] = node
+
+        if self.successors[action].category == _BaseNode.END:
+            if self.category is None:
+                self.category = _BaseNode.END
         return node
 
+    # for Customer
     def execute(self, shared, content, params): return params
     def if_cond(self, shared, content, params): pass
 
@@ -91,7 +103,7 @@ class Node(_BaseNode):
 
 class Flow(_BaseNode):
     def __init__(self, name='assistant'):
-        super().__init__(name='Start')
+        super().__init__(name='Start', category=_BaseNode.START)
         self.role = name
 
     def execute(self, shared, params):
@@ -155,7 +167,7 @@ class Flow(_BaseNode):
 
 class HumanNode(_BaseNode):
     def __init__(self, name='Human', content=None, verify_args=None): 
-        super().__init__(name=name)
+        super().__init__(name=name, category=_BaseNode.HUMAN)
         self.content = content
 
         if verify_args is not None:
@@ -188,7 +200,7 @@ class HumanNode(_BaseNode):
 
 class _EndNode(_BaseNode):
     def __init__(self):
-        super().__init__(name='End')
+        super().__init__(name='End', category=_BaseNode.END)
 
     def execute(self, shared, params):
         yield str(params)
@@ -254,7 +266,6 @@ if __name__ == '__main__':
     START >> n1 >> check('positive') >> subtract3 >> check('negative')  >> HUMAN >> END
 
     iter_= START.run(shared_storage)
-
 
     pos = 0
     while(True):
