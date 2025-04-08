@@ -121,7 +121,7 @@ def message_to_chatmessage(messages_iter):
                     response_thinking.metadata["duration"] = time.time() - start_time
                     response_thinking.metadata["title"] = "推理被中断"
                 else:
-                    response_thinking.content += f"- {thought_role}: {thought_content}\n"
+                    response_thinking.content += f"- **{thought_role}**:\n{thought_content}\n"
                     response_thinking.metadata["duration"] = time.time() - start_time
 
         responses = []
@@ -136,12 +136,11 @@ def message_to_chatmessage(messages_iter):
             break
 
 
-
 if __name__ == '__main__':
     from pylib.ai.flow import Flow, Node, END, HumanNode
 
     class WebTransformerNode(Node):
-        def execute(self, shared, params):
+        def execute(self, params):
             text = params['text']
             try :
                 number = int(text)

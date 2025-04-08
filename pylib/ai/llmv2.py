@@ -27,12 +27,10 @@ class LLM:
         self.system_prompt = systmem_prompt
         self.reset()
 
-
     def reset(self):
         self.messages = []
         if self.system_prompt is not None:
             self.messages.append({ "content": self.system_prompt,"role": "system"})
-
 
     def _compatible_openai_model(self):
         for compatible in _OPENAI_COMPATIBLIE_MODELS:
@@ -83,7 +81,6 @@ class LLM:
 
         return response
 
-
     def __call__(self, message_or_prompt):
         response = self._completion(message_or_prompt, False)
         return response
@@ -92,8 +89,6 @@ class LLM:
         response = self._completion(message_or_prompt, True, delta)
         return response
 
-
-    # 内容提取器
     @staticmethod
     def content_filter(content):
         matches = re.findall(r'```(.*?)\n(.*?)\n```', content, re.DOTALL)

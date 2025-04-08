@@ -1,33 +1,15 @@
 import time
 from pylib.ai.flow import Flow, Node, END
 from pylib.ai.flow.web import webUI
-from pylib.ai.llmv2 import LLM
-
-
-class llmNode(Node):
-    def __init__(self, model="qwen-max"):
-        super().__init__()
-        self.llm = LLM(model)
-
-    def execute(self, shared, params):
-        history = params.get('history', [])
-        messages = []
-        for message in history:
-            if message.get('metadata') is None:
-                messages.append(message) 
-        messages.append({"role": "user", "content": params['text']})
-        # print(messages)
-        messages = self.llm.stream(messages)
-        for message in messages:
-            yield message['content']
-        return message['content']
-
+from pylib.ai.flow.nodes import ExtractCodeNode, ExecuteCodeNode, llmNode
 
 shared_storage = {}
 START = Flow()
-llm = llmNode()
+llm = llmNode(model='qwen-max', system_prompt='请你根据客户提问，用python代码回答，并print打印出结果')
+coder = ExtractCodeNode()
+executor = ExecuteCodeNode()
 
-START >> llm >> END
+START >> llm >> coder >> executor >> END
 
 web = webUI(START)
 # web.set_message_transformer(message_to_markdown)
