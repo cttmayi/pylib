@@ -5,7 +5,7 @@ from pylib.ai.flow.nodes import ExtractCodeNode, ExecuteCodeNode, llmNode
 
 shared_storage = {}
 START = Flow()
-llm = llmNode(model='qwen-max', system_prompt='请你根据客户提问，用python代码回答，并print打印出结果')
+llm = llmNode(model='qwen-max', system_prompt='请你根据客户提问，用python代码回答，最后print打印出结果', with_history=True)
 coder = ExtractCodeNode()
 executor = ExecuteCodeNode()
 
