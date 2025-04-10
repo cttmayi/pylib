@@ -1,6 +1,9 @@
 import time
 import gradio as gr
 from pylib.ai.flow import Flow
+from pylib.ai.flow.const import *
+
+
 
 class webUI:
     def __init__(self, start:Flow, **kwargs):
@@ -9,27 +12,30 @@ class webUI:
         # self.description = kwargs.get("description", "Ask AI Robot any question"),
         # self.theme = kwargs.get('theme', "ocean"),
         # self.examples = # ["Hello", "Am I cool?", "Are tomatoes vegetables?"],
-        self.message_transformer = message_to_chatmessage
+        self.message_transformer = message_to_chatmessage_with_thinking
 
     def set_message_transformer(self, message_transformer):
         self.message_transformer = message_transformer
 
-    def response(self, message, history, state):
+    def response(self, message, history, state, request: gr.Request):
         responses = []
         if not isinstance(message, dict):
             message = {'text': message}
         message['history'] = history
+        # message['request'] = request
+
+        # print('ip: ', request.client.host)
 
         message_iter = state.get('message_iter', None)
         if message_iter is not None:
             try:
-                shared_storage = state.get('shared_storage', {})
+                shared_storage = state.get('shared_storage', {SHARE_REQUEST: request})
                 message_iter.send(message['text'])
             except StopIteration:
-                shared_storage = {}
+                shared_storage = {SHARE_REQUEST: request}
                 message_iter = self.start.run(shared_storage, params=message)
         else:
-            shared_storage = {}
+            shared_storage = {SHARE_REQUEST: request}
             message_iter = self.start.run(shared_storage, params=message)
 
 
@@ -82,7 +88,7 @@ def message_to_markdown_with_thinking(messages_iter):
     content += f"{message['content']}\n"
     yield content
 
-def message_to_chatmessage(messages_iter):
+def message_to_chatmessage_with_thinking(messages_iter):
     from gradio import ChatMessage
     start_time = time.time()
     response_thinking = ChatMessage(

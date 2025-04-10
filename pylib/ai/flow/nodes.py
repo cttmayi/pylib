@@ -1,74 +1,44 @@
 import re
 import io, sys
 
+
+from pylib.ai.flow.const import *
 from pylib.ai.flow import Node
 from pylib.ai.llmv2 import LLM
 
 
-def extract_code_from_markdown(markdown_text):
-    """
-    从Markdown文本中提取代码块和行内代码。
-    参数:
-        markdown_text (str): Markdown格式的文本。
-    返回:
-        dict: 包含代码块和行内代码的列表。
-    """
-    # 匹配代码块（包括语言标识和代码内容）
-    block_pattern = r"```(\w+)?\n([\s\S]+?)\n```"
-    # 匹配行内代码
-    inline_pattern = r"`([^`\n]+)`"
-
-    result = {}
-    # 先匹配代码块
-    for match in re.finditer(block_pattern, markdown_text):
-        language = match.group(1) if match.group(1) else "plaintext"
-        code = match.group(2).strip()
-        if language not in result:
-            result[language] = []
-        result[language].append(code)
-
-    # 再匹配行内代码
-    for match in re.finditer(inline_pattern, markdown_text):
-        if language not in result:
-            result[language] = []
-        result[language].append(code)
-
-    return result
-
-def is_python_code(code_str):
-    try:
-        compile(code_str, '<string>', 'exec')
-        return True
-    except SyntaxError:
-        return False
-
 class ExtractCodeNode(Node):
     def execute(self, params):
+        from pylib.ai.utils.executor.extract import extract_code_from_markdown
         codes = extract_code_from_markdown(params)
         python_code = codes.get('python') or codes.get('inline') 
         if python_code:
             return python_code[0]
-        if is_python_code(params):
-            return params
         return None
-
-
-def replace_print_with_assignment(code):
-    code = code.strip()
-    if code.startswith('print(') and code.endswith(')'):
-        new_code = code[6:-1]
-        return new_code
-    else:
-        return code  # 如果不符合格式，返回原字符串
 
 
 class ExecuteCodeNode(Node):
     def execute(self, params):
-        from pylib.ai.utils.executor import CodeExecutor
+        from pylib.ai.utils.executor.local import CodeExecutor
         code = params
         executor = CodeExecutor()
         result = executor.call(code)
 
+        yield result
+        return result
+
+
+class ExecuteRemoteCodeNode(Node):
+    def __init__(self, name=None, port: int = 8860):
+        super().__init__(name)
+        self.port = port
+
+    def execute(self, shared, params):
+        from pylib.ai.utils.executor.client import send_code_to_server
+        request = shared[SHARE_REQUEST]
+        host = request.client.host
+        code = params
+        result = send_code_to_server(code, host, self.port)
         yield result
         return result
 
@@ -114,6 +84,6 @@ def calculate_24(nums):
 print(calculate_24(0))
 """
     if is_python_code(code):
-        print(run_python_code(code))
+        print("Yes")
 
     

@@ -1,13 +1,14 @@
 import time
 from pylib.ai.flow import Flow, Node, END
 from pylib.ai.flow.web import webUI
-from pylib.ai.flow.nodes import ExtractCodeNode, ExecuteCodeNode, llmNode
+from pylib.ai.flow.nodes import ExtractCodeNode, ExecuteCodeNode, llmNode, ExecuteRemoteCodeNode
 
 shared_storage = {}
 START = Flow()
 llm = llmNode(model='qwen-max', system_prompt='请你根据客户提问，用python代码回答，最后print打印出结果', with_history=True)
 coder = ExtractCodeNode()
-executor = ExecuteCodeNode()
+# executor = ExecuteCodeNode()
+executor = ExecuteRemoteCodeNode()
 
 START >> llm >> coder >> executor >> END
 
