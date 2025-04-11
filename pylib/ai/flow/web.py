@@ -21,21 +21,29 @@ class webUI:
         responses = []
         if not isinstance(message, dict):
             message = {'text': message}
-        message['history'] = history
+        # message['history'] = history
         # message['request'] = request
 
         # print('ip: ', request.client.host)
 
+
+        default_shared_storage = {
+            SHARE_REQUEST: request,
+            SHARE_TEXT: message['text'],
+            SHARE_FILES: message.get('files', []),
+            SHARE_HISTORY: history,
+        }
+
         message_iter = state.get('message_iter', None)
         if message_iter is not None:
             try:
-                shared_storage = state.get('shared_storage', {SHARE_REQUEST: request})
+                shared_storage = state.get('shared_storage', default_shared_storage)
                 message_iter.send(message['text'])
             except StopIteration:
-                shared_storage = {SHARE_REQUEST: request}
+                shared_storage = default_shared_storage
                 message_iter = self.start.run(shared_storage, params=message)
         else:
-            shared_storage = {SHARE_REQUEST: request}
+            shared_storage = default_shared_storage
             message_iter = self.start.run(shared_storage, params=message)
 
 
@@ -127,7 +135,7 @@ def message_to_chatmessage_with_thinking(messages_iter):
                     response_thinking.metadata["duration"] = time.time() - start_time
                     response_thinking.metadata["title"] = "推理被中断"
                 else:
-                    response_thinking.content += f"- **{thought_role}**:\n{thought_content}\n"
+                    response_thinking.content += f"# {thought_role}:\n{thought_content}\n"
                     response_thinking.metadata["duration"] = time.time() - start_time
 
         responses = []

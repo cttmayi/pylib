@@ -1,8 +1,9 @@
 
 import requests
+from pylib.ai.utils.executor.server import DEFAULT_PORT
 
-
-def send_code_to_server(code: str, host: str = "127.0.0.1", port: int = 8860):
+# 返回结果 示例 ： {'stdout': '5050\n', 'stderr': ''}
+def send_code_to_server(code: str, host: str = "127.0.0.1", port: int = DEFAULT_PORT):
     url = f"http://{host}:{port}/execute"
     payload = {"code": code}
     response = requests.post(url, json=payload)
@@ -11,10 +12,10 @@ def send_code_to_server(code: str, host: str = "127.0.0.1", port: int = 8860):
     if response.status_code == 200:
         # print("代码执行成功，返回结果：")
         # print(response.json())
-        result['result'] = response.json()
+        result['stdout'] = response.json()
     else:
         print(f"代码执行失败，错误信息：{response.text}")
-        result['error'] = response.text
+        result['stderr'] = response.text
     return result
 
 if __name__ == "__main__":

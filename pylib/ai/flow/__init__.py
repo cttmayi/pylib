@@ -152,11 +152,14 @@ class Flow(_BaseNode):
             else:
                 next_action, exec_ret = self._get_exec_ret(iter)
 
+            params = exec_ret
+            content = exec_item
+
             next_action = next_action or curr_node._if_cond(shared=shared, content=content, params=params)
 
             next_node = copy.copy(self._get_next_node(curr_node, next_action))
-            params = exec_ret
-            content = exec_item
+            # params = exec_ret
+            # content = exec_item
 
             message:NodeMessage = curr_node._node_message(exec_item)
             message.set(curr_node=curr_node, next_action=next_action, next_node=next_node, start=start, end=True, order=order)
