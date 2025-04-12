@@ -13,7 +13,7 @@ START = Flow()
 llm = llmGenCode()
 code = ExtractCodeNode()
 gen_code = GenCode()
-execute_remote = ExecuteRemoteCodeNode()
+execute_remote = ExecuteRemoteCodeNode('log_parser')
 summary = Summary()
 
 START >> llm >> code >> gen_code >> execute_remote >> summary >> END
