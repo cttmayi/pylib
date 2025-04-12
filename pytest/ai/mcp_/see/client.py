@@ -22,6 +22,7 @@ class MCPClient:
     async def connect_to_sse_server(self, server_url: str):
         """Connect to an MCP server running with SSE transport"""
         # Store the context managers so they stay alive
+        print('url', server_url)
         self._streams_context = sse_client(url=server_url)
         streams = await self._streams_context.__aenter__()
 
@@ -66,7 +67,7 @@ class MCPClient:
 
         # Initial OpenAI API call
         response = await self.client.chat.completions.create(
-            model="qwen/qwen-plus",
+            model="qwen-plus",
             messages=messages,
             tools=available_tools
         )
@@ -111,7 +112,7 @@ class MCPClient:
 
             # Get next response from OpenAI
             response = await self.client.chat.completions.create(
-                model="qwen/qwen-plus",
+                model="qwen-plus",
                 messages=messages,
                 tools=available_tools
             )
@@ -138,13 +139,11 @@ class MCPClient:
                 print(f"\nError: {str(e)}")
 
 async def main():
-    if len(sys.argv) < 2:
-        print("Usage: uv run client.py <URL of SSE MCP server (i.e. http://localhost:8080/sse)>")
-        sys.exit(1)
-        
+    server_url = 'http://127.0.0.1:8080/sse'
+
     client = MCPClient()
     try:
-        await client.connect_to_sse_server(server_url=sys.argv[1])
+        await client.connect_to_sse_server(server_url=server_url)
         await client.chat_loop()
     finally:
         await client.cleanup()
