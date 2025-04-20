@@ -1,6 +1,7 @@
 import pandas as pd
 import logging
 import re
+import inspect
 import lparser.utils.re_exp2 as re_exp
 from lparser.parser.android import android_parser, debug_parser, PAESER_MAIN_REGEX
 from runtime.op import get_op_func, get_op_name, get_op_func_init, get_op_arguments, get_op_pattern
@@ -20,7 +21,6 @@ class LogParser():
         self.op_maps = op_maps
         self.logs:pd.DataFrame = None
         self.op_result = []
-        # self.status_list = STATUS_MAP.keys()
         self.matchers = {}
         self._parser = { k: p[0] for k, p in PARSER_MAP.items() }
         self._parser_regex = { k: p[1] for k, p in PARSER_MAP.items() }
@@ -72,11 +72,6 @@ class LogParser():
             pattern = get_op_pattern(opid, op_map)
             arguments = get_op_arguments(opid, op_map)
 
-            #if name in names and not name == last_name:
-            #    raise Exception(f'OP_MAP NAME 重复: {name}')
-            # names.add(name)
-            # last_name = name
-
             if pattern in patterns:
                 raise Exception(f'OP_MAP PATTERN 重复: {pattern}' )
             patterns.add(pattern)
@@ -123,8 +118,10 @@ class LogParser():
             op = r[0]
             args = r[1]
             tid = log.tid
+            tag = log.tag
+            msg = log.msg
 
-            op_f = {'type': type, 'line': line, 'timestamp': timestamp, 'tid': tid,  'opname': name, 'op': op, 'args': args, 'n': 1}
+            op_f = {'type': type, 'line': line, 'timestamp': timestamp, 'tid': tid, 'tag': tag, 'msg': msg, 'opname': name, 'op': op, 'args': args, 'n': 1}
 
             # 通过op_by_tid来缓存的op_f， 延迟放入op_result
             op_f_last = self.op_by_tid.get(tid)
@@ -148,6 +145,13 @@ class LogParser():
         df = pd.DataFrame(self.op_result)
         return df
 
+
+    def _call_func(self, func, **kwargs):
+        signature = inspect.signature(func)
+        parameters = signature.parameters.keys()
+        filtered_kwargs = {key: value for key, value in kwargs.items() if key in parameters}
+        return func(**filtered_kwargs)
+
     def op_execute_looper(self, op_df:pd.DataFrame):
         logging.debug('====== op_execute looper ======')
         for _, row in op_df.iterrows():
@@ -157,8 +161,12 @@ class LogParser():
             type = row['type']
             line = row['line']
             timestamp = row['timestamp']
+            tag = row['tag']
+            tid = row['tid']
+            msg = row['msg']
             for looper in self.loopers:
-                looper(name, args, timestamp, line)
+                self._call_func(looper, name=name, args=args, timestamp=timestamp, line=line, type=type, tag=tag, tid=tid, msg=msg)
+                # looper(name, args, timestamp, line)
 
     def op_execute(self, op_df: pd.DataFrame):
         execute_method = self.op_execute_looper

@@ -44,13 +44,6 @@ def looper(name, args, timestamp, line):
 
 
 # 库函数说明
-looper 函数中, name 和 args 的参数输入说明:
-
-- MODE: mode change
-- TE: 表示屏幕TE信号，无参数
-- DQ: dequeue buffer
-    - id: buffer id
-- Q: enqueue buffer
-    - id: buffer id
+looper 函数中, name 和 args 的参数输入说明，请参考 data/android/templates.jsonl
 
 

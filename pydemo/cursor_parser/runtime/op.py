@@ -1,5 +1,5 @@
 import os
-# from pylib.basic.file import file_read
+from lparser.basic.file import file_read
 from lparser.status import Status, OP, ARG
 from lparser.utils.utils import get_modules, import_module
 
@@ -10,31 +10,30 @@ from lparser.utils.utils import get_modules, import_module
 
 # =========================================================================
 # NAME, FUNC_INIT, FUNC, ARGUMENTS, PATTERN
-OP_MAP_DEBUG = [
-    OP('MODE', 'MODE %d %d', info='mode change', args=['last', 'mode']),
-    OP('TE', 'TE', info='表示屏幕TE信号, 无参数'),
-    OP('DQ', 'DQ BUFFER %d', info='dequeue buffer', args=[ARG('id', 'buffer id')]),
-    OP('Q', 'Q BUFFER %d', info='enqueue buffer', args=[ARG('id', 'buffer id')]),
-    OP('DUMP', 'DUMP CMDS'),
-]
+# OP_MAP_DEBUG = [
+#     OP('MODE', 'MODE %d %d', info='mode change', args=['last', 'mode']),
+#     OP('TE', 'TE', info='表示屏幕TE信号, 无参数'),
+#     OP('DQ', 'DQ BUFFER %d', info='dequeue buffer', args=[ARG('id', 'buffer id')]),
+#     OP('Q', 'Q BUFFER %d', info='enqueue buffer', args=[ARG('id', 'buffer id')]),
+#     OP('DUMP', 'DUMP CMDS'),
+# ]
 
 
-# regex_full_list_android = file_read('data/android/templates.jsonl')
+regex_full_list_android = file_read('data/android/templates.jsonl')
 
-# OP_MAP_ANDROID = []
-# for name, pattern
-# , info, args in regex_full_list_android:
-#     args_ARG = []
-#     for k, v in args.items():
-#         args_ARG.append(ARG(k, v))
-#     OP_MAP_ANDROID.append(
-#         OP(name, pattern, info=info,
-#             args=args))
+OP_MAP_ANDROID = []
+for name, pattern, info, args in regex_full_list_android:
+    args_ARG = []
+    for k, v in args.items():
+        args_ARG.append(ARG(k, v))
+    OP_MAP_ANDROID.append(
+        OP(name, pattern, info=info,
+            args=args))
 
 
 OP_MAPS = {
-    'android': OP_MAP_DEBUG,
-    # 'android': OP_MAP_ANDROID
+    # 'android': OP_MAP_DEBUG,
+    'android': OP_MAP_ANDROID
 }
 
 
