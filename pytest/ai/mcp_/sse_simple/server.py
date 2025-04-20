@@ -1,4 +1,3 @@
-
 from mcp.server.fastmcp import FastMCP
 
 # 初始化 FastMCP server
@@ -22,4 +21,4 @@ async def get_info(name: str) -> str:
 
 if __name__ == "__main__":
     # 初始化并运行 server
-    mcp.run(transport='stdio')
+    mcp.run(transport='sse')

@@ -18,7 +18,7 @@ class GenCode(Node):
 
     def execute(self, shared, params):
         code = params
-        files = shared[SHARE_FILES] or ['simple.log']
+        files = shared.get(SHARE_FILES) or ['simple.log']
         with open(RUN_CODE_FILE, encoding='utf-8') as fin:
             run_code = fin.read()
             run_code = run_code.replace('### <FILES> ###', 'files = ' + str(files))
@@ -42,7 +42,7 @@ class Summary(llmNode):
     def input(self, shared, params):
         user_input = f''' 
 用户问题： 
-{shared[SHARE_TEXT]}
+{shared.get(SHARE_TEXT, '')}
 程序输出：
 {params}
         '''

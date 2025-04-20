@@ -1,5 +1,6 @@
 import time
 import gradio as gr
+from gradio import ChatMessage
 from pylib.ai.flow import Flow
 from pylib.ai.flow.const import *
 
@@ -12,7 +13,7 @@ class webUI:
         # self.description = kwargs.get("description", "Ask AI Robot any question"),
         # self.theme = kwargs.get('theme', "ocean"),
         # self.examples = # ["Hello", "Am I cool?", "Are tomatoes vegetables?"],
-        self.message_transformer = message_to_chatmessage_with_thinking
+        self.message_transformer = message_to_chatmessage
 
     def set_message_transformer(self, message_transformer):
         self.message_transformer = message_transformer
@@ -85,6 +86,33 @@ def message_to_markdown(messages_iter):
             content = message['content']
             yield content
 
+def message_to_chatmessage(messages_iter):
+    for messages in messages_iter:
+        responses = []
+        for message in messages:
+            role = message['role']
+            content = message['content']
+            interrupt = message['interrupt']
+            is_thought = not message['answer']
+            is_input_message = message['category'] == 'start'
+
+            if is_input_message:
+                continue
+
+            if content is not None:
+                response = ChatMessage(
+                    role="assistant",
+                    content=content,
+                )
+                responses.append(response)
+        if len(responses) > 0:
+            yield responses
+
+        if interrupt:
+            break
+
+
+
 def message_to_markdown_with_thinking(messages_iter):
     for messages in messages_iter:
         content = "## 思考\n"
@@ -97,7 +125,6 @@ def message_to_markdown_with_thinking(messages_iter):
     yield content
 
 def message_to_chatmessage_with_thinking(messages_iter):
-    from gradio import ChatMessage
     start_time = time.time()
     response_thinking = ChatMessage(
         role="assistant",

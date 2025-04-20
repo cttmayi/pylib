@@ -1,11 +1,8 @@
-import re
-import io, sys
-
 
 from pylib.ai.flow.const import *
 from pylib.ai.flow import Node
 from pylib.ai.llmv2 import LLM
-
+from pylib.ai.utils.mcp_client import ClientSync
 
 class ExtractCodeNode(Node):
     def __init__(self, name=None, yield_result=False):
@@ -102,21 +99,30 @@ class llmNode(Node):
         return message['content']
     
 
+class MCPNode(Node):
+    def __init__(self, name=None, host='127.0.0.1', port=8000, tool_name=None, yield_result=False):
+        super().__init__(name)
+        self.yield_result = yield_result
+        self.client = ClientSync(host, port)
+        self.tool_name = tool_name
+
+    def execute(self, params):
+        code = params
+
+        if self.yield_result:
+            show = f'正在执行 {self.tool_name} 工具，请稍候 ...'
+            yield show
+
+        result = self.client.call_tool(self.tool_name, code=code)
+        if self.yield_result:
+            yield result
+        return result
+
+
 if __name__ == '__main__':
-    code = """
-from sympy import symbols, Eq, solve
-x = symbols('x')
-equation = Eq(x + 1, 2*x)
-solution = solve(equation, x)
-
-solution[0]
-
-def calculate_24(nums):
-    return 0
-
-print(calculate_24(0))
-"""
-    if is_python_code(code):
-        print("Yes")
+    node = MCPNode(tool_name='execute_code', yield_result=True)
+    iter_ = node.execute(params='print("Hello, World!")\n') 
+    for r in iter_:
+        print(r)
 
     
